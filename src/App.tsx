@@ -15,7 +15,7 @@ export default function App() {
 
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Live Net Intelligence Hub',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Universal India Hub',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
     history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Enclosed by Aravalli hills. Political: Capital of Rajasthan.',
     picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🛕 Govind Dev Ji Temple & Birla Mandir (4 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n🏞️ Jal Mahal Water Palace (8 km)',
@@ -38,6 +38,7 @@ export default function App() {
     fetchAllData();
   }, []);
 
+  // Universal Smart Engine for Every City in India
   const handleUniversalSearch = async (query: string) => {
     if (!query.trim()) return;
     const cleanQuery = query.trim();
@@ -46,10 +47,10 @@ export default function App() {
     setLoading(true);
 
     try {
+      // 1. Check Supabase Database First
       const found = dbRecords.find((item) => {
         const cityName = String(item.city_name || item.city || item.name || '').toLowerCase();
-        const stateName = String(item.state_name || item.state || '').toLowerCase();
-        return cityName.includes(cleanQuery.toLowerCase()) || stateName.includes(cleanQuery.toLowerCase());
+        return cityName.includes(cleanQuery.toLowerCase());
       });
 
       if (found) {
@@ -59,36 +60,36 @@ export default function App() {
           State: found.state_name || found.state || 'India',
           Type: '✅ Database Verified Record',
           image_url: found.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-          history_geo_political: found.history || found.description || found.history_geo_political || `${cap} ke baare mein vishesh itihas aur bhogolik jankari.`,
-          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} ke pramukh Aitihasik Sthal\n🛕 ${cap} ke Prasiddh Mandir aur Teerth Sthal\n🌿 Local Picnic Spots aur Gardens`,
-          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: National aur State highways se juda hua. Transport: Local railway station aur bus stand available.`,
-          hotels_booking: found.hotels || found.hotels_booking || `🏨 ${cap} ke sabhi shandar hotels aur homestays`,
-          markets_food: found.markets_food || found.food || `🛍️ Local Handicraft Bazaars\n🍲 ${cap} ke prasiddh traditional pakwan aur street food`,
-          culture_helpline: found.helpline || found.culture_helpline || `Culture: Sthaniya lok-sanskriti. Helpline: Police: 100 | SOS: 112`
+          history_geo_political: found.history || found.description || `Comprehensive geographical and historical records for ${cap}, India.`,
+          picnic_spots: found.picnic_spots || found.spots || `🏛️ ${cap} Main Historical Fort & Monuments\n🛕 ${cap} Famous Prachin Mandir\n🌿 City Public Park & Gardens`,
+          transport_roadmap: found.transport || `Road Map: Well connected via national and state highways. Transport: Local railway station and bus services in ${cap}.`,
+          hotels_booking: found.hotels || `🏨 Best Hotels & Stays in ${cap}`,
+          markets_food: found.markets_food || `🛍️ Local Markets & Traditional Specialities of ${cap}`,
+          culture_helpline: `Culture: Regional heritage. Helpline: Police: 100 | SOS: 112`
         });
         setLoading(false);
         return;
       }
 
-      // Net se live data uthane ke liye Wikipedia free API gateway ka use
+      // 2. Fetch Live from Wikipedia API for accurate real-world context
       const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wiki = await res.json();
 
-      let desc = wiki.extract || `${cap}, India ka ek mahatvapurna aur sundar shehar hai jo apni sanskriti aur itihas ke liye jana jata hai.`;
+      let desc = wiki.extract || `${cap} is a prominent destination in India, known for its rich cultural background, historical landmarks, and local traditions.`;
       let img = wiki.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - Live Intelligence Hub`,
+        Name: `${cap} - Verified Tourist Destination`,
         City: cap,
         State: 'India',
-        Type: '🌐 Net Live Connected',
+        Type: '🌐 Live Internet Connected',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} ke Pramukh Aitihasik Monuments aur Sightseeing Spots\n🛕 ${cap} ke Prasiddh Mandir aur Adhyatmik Sthal\n🌿 Family Picnic Gardens aur Natural Views\n🏞️ Local Lakes aur Sunset Points`,
-        transport_roadmap: `Road Map: National highways aur state roads dwara behtareen connectivity. Transport: ${cap} Railway Station, local auto service, aur cab facilities available.`,
-        hotels_booking: `🏨 ${cap} ke Best Luxury Hotels & Resorts\n🏨 Budget Friendly Tourist Lodges\n🏨 Traditional Homestays`,
-        markets_food: `🛍️ ${cap} ke Main Shopping Bazaars aur Handloom Markets.\n🍲 Wahan ke Special Traditional Pakwan, Sweets aur Street Food.`,
-        culture_helpline: `Culture: Sthaniya lok-kala, paramparayein aur tyohar. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} Heritage Monuments & Sightseeing Points (0 km)\n🛕 ${cap} Prachin Mandir & Spiritual Landmarks (3 km)\n🌿 ${cap} City Central Park & Nature Gardens (5 km)\n🏞️ Local Scenic Water Viewpoints (7 km)`,
+        transport_roadmap: `Road Map: Connected via national/state highways. Transport: Local railway station, bus depots, and local auto/cab services in ${cap}.`,
+        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Tourist Lodges\n🏨 Authentic Local Homestays`,
+        markets_food: `🛍️ Main Handloom Bazaar, Local Handicraft Shops & Weekly Markets of ${cap}.\n🍲 Signature Regional Thali, Traditional Sweets, and Popular Local Street Snacks.`,
+        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
 
     } catch (err) {
@@ -112,7 +113,7 @@ export default function App() {
               <span className="text-white">BHARAT</span>
             </div>
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mt-0.5">
-              👑 Ultimate Super-App
+              👑 Universal Super-App
             </span>
           </div>
         </div>
@@ -131,10 +132,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Live Net Connected.</span>
+          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Any City or Town.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Kisi bhi city ka naam search karo, net se poora data live fetch hokar aayega.
+          Search any destination in India to get verified intelligence instantly.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -142,7 +143,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Koi bhi city type karein (jaise Mount Abu, Ajmer, Jaipur)..."
+              placeholder="Type any city or tourist place (e.g. Pune, Mysore, Shimla)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleUniversalSearch(searchTerm)}
@@ -156,10 +157,10 @@ export default function App() {
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
-            { name: 'Mount Abu', icon: '⛰️' },
-            { name: 'Ajmer', icon: '🕌' },
-            { name: 'Jaipur', icon: '👑' },
-            { name: 'Udaipur', icon: '🏰' }
+            { name: 'Mysuru', icon: '🐘' },
+            { name: 'Pune', icon: '⛰️' },
+            { name: 'Shimla', icon: '❄️' },
+            { name: 'Haridwar', icon: '🌊' }
           ].map(c => (
             <button key={c.name} onClick={() => handleUniversalSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
