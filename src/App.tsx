@@ -394,4 +394,164 @@ export default function App() {
                     </p>
                     
                     {/* Booking Revenue Panel */}
-                    <div className="bg-gradient-to-r from-amber-7
+                    <div className="bg-gradient-to-r from-amber-700 to-orange-700 text-white p-5 rounded-2xl mb-6 shadow-md space-y-3">
+                      <h4 className="font-bold text-base flex items-center gap-2">
+                        <span>⚡</span> Instant Yatra Booking & Services
+                      </h4>
+                      <p className="text-xs text-amber-100">Book everything required for this trip in 1 click and get instant cashback/commission.</p>
+                      
+                      <div className="grid grid-cols-2 gap-2 pt-1">
+                        <button 
+                          onClick={() => handleFullBooking("Hotel Stay", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🏨</span> Book Hotel
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Train Ticket", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🚆</span> Book Train
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Taxi / Cab", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🚕</span> Hire Taxi
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Prasad & Puja", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🎁</span> Order Prasad
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4 text-sm text-slate-700">
+                      
+                      <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                        <h4 className="font-bold text-amber-900 mb-2 text-sm flex items-center gap-1">
+                          <span>🗺️</span> Custom Route & Transit Planner
+                        </h4>
+                        <div className="flex gap-2 mb-2">
+                          <input 
+                            type="text" 
+                            placeholder="Enter starting city (e.g., Delhi, Jaipur)" 
+                            value={startCity}
+                            onChange={(e) => setStartCity(e.target.value)}
+                            className="flex-1 bg-white border border-amber-300 rounded-xl px-3 py-2 text-xs text-slate-800"
+                          />
+                          <button 
+                            onClick={() => handleGenerateCompleteTrip(shrine.Name)}
+                            className="bg-amber-700 text-white font-semibold px-3 py-2 rounded-xl text-xs"
+                          >
+                            Plan Route
+                          </button>
+                        </div>
+                        {yatraPlan && (
+                          <div className="bg-white p-3 rounded-xl border border-amber-200 text-xs text-slate-700 mt-2">
+                            <p className="font-bold text-amber-900">{yatraPlan.title}</p>
+                            <p>{yatraPlan.desc}</p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🏛️</span> History & Significance:</strong>
+                        <p className="text-slate-600">{shrine.history_geo_political}</p>
+                      </div>
+
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🌿</span> Sightseeing Spots:</strong>
+                        <p className="whitespace-pre-line text-slate-600">{shrine.picnic_spots}</p>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                          <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🌤️</span> Weather:</strong>
+                          <p className="text-slate-600">{shrine.weather}</p>
+                        </div>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                          <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>💰</span> Est. Budget:</strong>
+                          <p className="text-slate-600">{shrine.budget}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🚗</span> Transport Roadmap:</strong>
+                        <p className="text-slate-600">{shrine.transport_roadmap}</p>
+                      </div>
+
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🏨</span> Hotel & Stay Recommendations:</strong>
+                        <p className="whitespace-pre-line text-xs text-slate-700">{shrine.hotels_booking}</p>
+                      </div>
+
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🛍️</span> Local Food & Markets:</strong>
+                        <p className="whitespace-pre-line text-slate-600">{shrine.markets_food}</p>
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => setSelectedShrine(null)}
+                      className="mt-6 w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-3 px-4 rounded-xl transition-colors text-sm shadow-md"
+                    >
+                      Close Guide
+                    </button>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
+      </main>
+
+      {/* FIXED BOTTOM NAVIGATION BAR */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-amber-200 shadow-xl z-40 py-2.5 px-4">
+        <div className="max-w-md mx-auto flex justify-between items-center text-xs font-semibold text-slate-600">
+          <button 
+            onClick={() => setActiveTab('home')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'home' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">🛕</span>
+            <span>Teerth</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('planner')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'planner' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">🚆</span>
+            <span>Transit & Book</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('addspot')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'addspot' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">➕</span>
+            <span>Add Spot</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('business')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'business' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">💼</span>
+            <span>Revenue</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('profile')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'profile' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">👤</span>
+            <span>Profile</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  );
+}
