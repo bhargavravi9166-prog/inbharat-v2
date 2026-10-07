@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://xyknkghkndyryfpybqqo.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5a25rZ2hrbmR5cnlmcHlicXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzg2NjYsImV4cCI6MjA1NjgxNDY2Nn0';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const CITIES_DB: Record<string, any> = {
   jaipur: {
@@ -31,6 +36,20 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
+  const [supabaseData, setSupabaseData] = useState<any[]>([]);
+
+  // Supabase data fetch integration using useEffect
+  useEffect(() => {
+    async function loadData() {
+      const { data, error } = await supabase.from('india_directory').select('*');
+      if (error) {
+        console.error('Supabase error:', error);
+      } else if (data) {
+        setSupabaseData(data);
+      }
+    }
+    loadData();
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchTerm(query);
@@ -42,7 +61,6 @@ export default function App() {
     } else {
       const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
       
-      // UNIQUE DYNAMIC GENERATOR FOR ANY RANDOM CITY IN INDIA
       setCityData({
         Name: `${cap} - Heritage & Culture Hub`,
         City: cap,
@@ -287,18 +305,3 @@ export default function App() {
     </div>
   );
 }
-// update
-
-// Apne component ke andar is tarah se likhein:
-useEffect(() => {
-  async function loadData() {
-    const { data, error } = await supabase.from('india_directory').select('*');
-    if (error) {
-      console.error(error);
-    } else {
-      setPlaces(data); // ya jo bhi aapka state variable ho
-    }
-  }
-  loadData();
-}, []);
-
