@@ -53,5 +53,3 @@ export default function App() {
         <button onClick={() => setTab('business')} className={tab === 'business' ? 'text-amber-700' : 'text-slate-600'}>💼 Revenue: ₹14,800</button>
       </div>
     </div>
-  );
-}
