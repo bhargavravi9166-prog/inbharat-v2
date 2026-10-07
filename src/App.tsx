@@ -615,6 +615,75 @@ const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, any> = {
     hotels_booking: "🏨 Hotel Balaji Darshan\n🏨 Pilgrim Guest Houses",
     markets_food: "🛍️ Balaji Chowk Market.\n🍲 Simple North Indian Sattvic Food, Boondi Prasad.",
     culture_helpline: "Culture: Faith-based spiritual customs. Helpline: Police: 100 | SOS: 112"
+  },  "dwarka": {
+    Name: "Dwarkadhish Temple - Kingdom of Lord Krishna",
+    City: "Dwarka", State: "Gujarat", Type: "🛕 Char Dham & Ancient Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C (Coastal Breeze)", bestTime: "October to March",
+    packing: "🧳 Light cotton clothing, traditional temple attire, sunglasses.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Ancient coastal city believed to be the legendary capital kingdom of Lord Krishna. One of the sacred Char Dhams.",
+    picnic_spots: "🛕 Dwarkadhish Temple (Jagat Mandir)\n🏛️ Sudama Setu & Gomti Ghat\n🌿 Nageshwar Jyotirlinga (Nearby)\n🏞️ Bet Dwarka Island & Marine National Park",
+    transport_roadmap: "Road Map: Connected via NH-51. Transport: Dwarka Railway Station & Jamnagar Airport (130 km).",
+    hotels_booking: "🏨 Goverdhan Green Resort Dwarka\n🏨 Hotel Lord's Inn Dwarka\n🏨 Hotel Vraj Inn",
+    markets_food: "🛍️ Dwarka Market, Bhadra Chowk.\n🍲 Gujarati Thali, Fafda Jalebi, Dwarkadhish Sukhdi Prasad.",
+    culture_helpline: "Culture: Pushtimarg & Krishna devotion. Helpline: Police: 100 | SOS: 112"
+  },
+  "akshardham_gandhinagar": {
+    Name: "Akshardham Gandhinagar - Architectural Marvel",
+    City: "Gandhinagar", State: "Gujarat", Type: "🛕 Cultural & Spiritual Complex",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 28°C to 38°C", bestTime: "October to March",
+    packing: "🧳 Decent modest clothing, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,000 / day",
+    history_geo_political: "History: Grand spiritual-cultural monument built by BAPS Swaminarayan Sanstha, showcasing traditional Indian art and values.",
+    picnic_spots: "🛕 Akshardham Mandir Main Monument\n🏛️ Sat-Chit-Anand Water Show (Evening fountain show)\n🌿 Abhishek Mandap & Garden walks\n🏞️ Indroda Nature Park (Nearby)",
+    transport_roadmap: "Road Map: Connected via Sarkhej-Gandhinagar Highway. Transport: Ahmedabad Railway Station & Sardar Vallabhbhai Patel International Airport (AMD, 20 km).",
+    hotels_booking: "🏨 The Leela Gandhinagar\n🏨 GIFT City Club - Members Only / Hotel\n🏨 Hotel Sentosa",
+    markets_food: "🛍️ Premvati Food Parlour inside complex.\n🍲 Swaminarayan Sattvic Thali, Dhokla, Gujarati Farsan.",
+    culture_helpline: "Culture: Swaminarayan spiritual heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "ambaji": {
+    Name: "Ambaji Temple - Premier Shakti Peeth",
+    City: "Ambaji", State: "Gujarat", Type: "🛕 Holy Shakti Peeth",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 24°C to 34°C", bestTime: "September to March (Bhadra Purnima Mela is huge)",
+    packing: "🧳 Traditional or comfortable cotton wear, light jacket for evenings.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: One of the 51 Shakti Peeths of Goddess Amba. Notably, the main shrine contains no physical idol, only a sacred Shri Yantra.",
+    picnic_spots: "🛕 Ambaji Temple Main Shrine\n🏛️ Gabbar Hill (Original seat of Goddess via ropeway or steps)\n🌿 Mansarovar Lake\n🏞️ Kamakshi Mandir",
+    transport_roadmap: "Road Map: Connected via Palanpur-Ambaji road. Transport: Abu Road Railway Station (20 km) & Ahmedabad Airport (180 km).",
+    hotels_booking: "🏨 Hotel Ambaji International\n🏨 Toran Tourist Bungalow Ambaji\n🏨 Hotel Sheetal",
+    markets_food: "🛍️ Ambaji Temple Market Street.\n🍲 Gujarati Thali, Khaman, Mohanthal Prasad.",
+    culture_helpline: "Culture: Devi worship traditions. Helpline: Police: 100 | SOS: 112"
+  },
+  "modhera_sun": {
+    Name: "Modhera Sun Temple - Ancient Solanki Architecture",
+    City: "Modhera", State: "Gujarat", Type: "🛕 Historical Sun Temple",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 31°C (Warm)", bestTime: "October to March (Annual Modhera Dance Festival in Jan)",
+    packing: "🧳 Light clothing, sunglasses, hat, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,000 / day",
+    history_geo_political: "History: Magnificent 11th-century temple dedicated to the Sun God, built by King Bhimdev I of the Solanki dynasty on the Pushpavati river.",
+    picnic_spots: "🛕 Modhera Sun Temple Complex\n🏛️ Surya Kund (Stepped water tank with 108 miniature shrines)\n🌿 Sabhamandap (Hall with 52 intricately carved pillars)\n🏞️ Archaeological Museum",
+    transport_roadmap: "Road Map: Located 25 km from Mehsana via SH-41. Transport: Mehsana Railway Station & Ahmedabad Airport (100 km).",
+    hotels_booking: "🏨 The Palms Resort Mehsana\n🏨 Local Heritage Hotels",
+    markets_food: "🛍️ Modhera Town Stalls.\n🍲 Traditional Gujarati Snacks, Ganthiya, Tea.",
+    culture_helpline: "Culture: Solanki architectural heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "dakor": {
+    Name: "Dakor (Ranchhodji Temple) - Holy Krishna Shrine",
+    City: "Dakor", State: "Gujarat", Type: "🛕 Renowned Vaishnav Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 32°C (Warm)", bestTime: "October to March (Purnima days have huge gatherings)",
+    packing: "🧳 Simple traditional clothing, comfortable footwear.",
+    budget: "💰 Est. Budget: ₹1,200 - ₹2,800 / day",
+    history_geo_political: "History: Famous temple dedicated to Ranchhodji (a form of Lord Krishna), highly revered by devotees across Gujarat.",
+    picnic_spots: "🛕 Ranchhodji Maharaj Temple Complex\n🏛️ Gomti Lake Ghats and Boating\n🌿 Dakor Town Bazaar\n🏞️ Laxminarayan Temple",
+    transport_roadmap: "Road Map: Connected via Nadiad-Modasa road. Transport: Dakor Railway Station & Vadodara Airport (55 km).",
+    hotels_booking: "🏨 Hotel Krishna Palace Dakor\n🏨 Pilgrim Dharamshalas",
+    markets_food: "🛍️ Dakor Temple Road Market.\n🍲 Famous Dakor Gota, Sev Mamra, Peda Prasad.",
+    culture_helpline: "Culture: Bhakti movement heritage. Helpline: Police: 100 | SOS: 112"
   }
 };
 
