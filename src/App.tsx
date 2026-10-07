@@ -288,3 +288,5 @@ export default function App() {
   );
 }
 // update
+const { data, error } = await supabase.from('india_ directory').select('*');
+
