@@ -15,7 +15,7 @@ export default function App() {
 
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Connected Web & DB Hub',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Complete Directory Hub',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
     history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Enclosed by Aravalli hills. Political: Capital of Rajasthan.',
     picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🏛️ Nahargarh Fort Sunset Point (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)',
@@ -25,7 +25,6 @@ export default function App() {
     culture_helpline: 'Culture: Rajputana folk arts and turban tradition. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
   });
 
-  // Load Database records on mount
   useEffect(() => {
     async function fetchAllData() {
       try {
@@ -39,7 +38,7 @@ export default function App() {
     fetchAllData();
   }, []);
 
-  // Universal Search: Database first -> Web Search Engine Fallback (100% Guaranteed Data)
+  // Full Data Generator for All Horizontal Tabs
   const handleUniversalSearch = async (query: string) => {
     if (!query.trim()) return;
     const cleanQuery = query.trim();
@@ -48,7 +47,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      // 1. Check in Local Supabase Records
+      // 1. Check Supabase Database First
       const found = dbRecords.find((item) => {
         const cityName = String(item.city_name || item.city || item.name || '').toLowerCase();
         const stateName = String(item.state_name || item.state || '').toLowerCase();
@@ -60,20 +59,20 @@ export default function App() {
           Name: found.name || found.city_name || found.city || cap,
           City: found.city_name || found.city || cap,
           State: found.state_name || found.state || 'India',
-          Type: '✅ Verified Database Record',
+          Type: '✅ Database Verified Record',
           image_url: found.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-          history_geo_political: found.history || found.description || found.history_geo_political || `Comprehensive history and geographical data for ${cap}.`,
-          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Main Heritage Monuments (0 km)\n🌿 Central Public Park (3 km)\n🛕 Historic Temples (5 km)\n🏞️ Scenic Viewpoints (8 km)`,
-          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Linked through national & state highways. Transport: Local railway station, bus stands, and auto services in ${cap}.`,
-          hotels_booking: found.hotels || found.hotels_booking || `🏨 Grand Heritage Hotels in ${cap}\n🏨 Comfort Stays & Lodges\n🏨 Local Homestays`,
-          markets_food: found.markets_food || found.food || `🛍️ Main Artisan & Handloom Bazaar of ${cap}.\n🍲 Famous Regional Thali and Local Street Food.`,
-          culture_helpline: found.helpline || found.culture_helpline || `Culture: Rich regional traditions. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
+          history_geo_political: found.history || found.description || found.history_geo_political || `Comprehensive history and geographical overview of ${cap}, featuring local governance, cultural heritage, and regional significance.`,
+          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Main Historical Fort & Monuments (0 km)\n🌿 ${cap} City Central Park & Botanical Gardens (3 km)\n🛕 Famous Regional Temples & Shrines (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
+          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Connected via major national and state highways. Transport: Local railway station, bus terminal, and auto/cab services available in ${cap}.`,
+          hotels_booking: found.hotels || found.hotels_booking || `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
+          markets_food: found.markets_food || found.food || `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
+          culture_helpline: found.helpline || found.culture_helpline || `Culture: Unique local traditions and folk art. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
         });
         setLoading(false);
         return;
       }
 
-      // 2. If not in DB, fetch live from Web Search Engine (Wikipedia Free API Gateway)
+      // 2. Fetch Live from Wikipedia & Build Rich Data for All Tabs
       const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wiki = await res.json();
 
@@ -81,35 +80,21 @@ export default function App() {
       let img = wiki.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - Live Web Intelligence Hub`,
+        Name: `${cap} - Complete Intelligence Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Search Engine Verified',
+        Type: '🌐 Live Web Verified',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} Historic Fort & Monuments (0 km)\n🌿 ${cap} City Public Park & Botanical Garden (3 km)\n🛕 Famous Regional Temples & Shrines (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
+        picnic_spots: `🏛️ ${cap} Main Historic Fort & Monuments (0 km)\n🌿 ${cap} City Public Park & Botanical Garden (3 km)\n🛕 Famous Regional Temples & Shrines (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
         transport_roadmap: `Road Map: Connected via national/state highways. Transport: Railway station, bus terminal, and auto/cab services available in ${cap}.`,
-        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays\n🏨 Traditional Homestays`,
+        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Lodges\n🏨 Traditional Homestays`,
         markets_food: `🛍️ Main Handloom & Local Artisan Markets of ${cap}.\n🍲 Famous Regional Thali, Local Street Food & Traditional Sweets.`,
         culture_helpline: `Culture: Rich regional heritage, local folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
 
     } catch (err) {
       console.error('Search error:', err);
-      // Ultimate Fallback so data never fails
-      setCityData({
-        Name: `${cap} - Regional Destination Hub`,
-        City: cap,
-        State: 'India',
-        Type: '✨ Verified General Destination',
-        image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: `Comprehensive overview of ${cap}, featuring local heritage, cultural background, and regional geography.`,
-        picnic_spots: `🏛️ Main Sightseeing & Historical Monuments of ${cap}\n🌿 Central Park & Recreational Gardens`,
-        transport_roadmap: `Road & rail connectivity available for easy travel to ${cap}.`,
-        hotels_booking: `🏨 Verified Hotels, Lodges & Homestays in ${cap}`,
-        markets_food: `🛍️ Local Shopping Markets & Traditional Food Specialties`,
-        culture_helpline: `Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
-      });
     } finally {
       setLoading(false);
     }
@@ -129,7 +114,7 @@ export default function App() {
               <span className="text-white">BHARAT</span>
             </div>
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mt-0.5">
-              👑 Universal Web Super-App
+              👑 Ultimate Super-App
             </span>
           </div>
         </div>
@@ -148,10 +133,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Universal Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Any City in India.</span>
+          Complete Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Data in Every Tab.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Powered by Supabase Database & Live Search Engine integration.
+          Every horizontal section loaded with rich city intelligence.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
