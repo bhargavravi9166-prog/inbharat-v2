@@ -161,4 +161,269 @@ export default function App() {
         </div>
       </header>
 
-      <section className="px-4 pt-
+      <section className="px-4 pt-10 pb-8 max-w-2xl mx-auto w-full text-center relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none blur-3xl"></div>
+        
+        <span className="inline-flex items-center gap-1.5 bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4 shadow-inner">
+          ✨ India's Ultimate Local & Tourism Ecosystem
+        </span>
+        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+          Explore Any City, <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">Instantly.</span>
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-8 font-medium">
+          Get verified history, sightseeing spots, local food, transport, and emergency SOS in one clean dashboard.
+        </p>
+
+        <form onSubmit={(e) => handleSearch(undefined, e)} className="relative z-10 max-w-xl mx-auto">
+          <div className="flex bg-slate-800/90 rounded-2xl p-2 border border-slate-700 focus-within:border-orange-500 transition shadow-2xl backdrop-blur-md">
+            <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
+            <input
+              type="text"
+              placeholder="Search city, town or monument (e.g. Jaipur, Ujjain)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-400 outline-none font-semibold"
+            />
+            <button 
+              type="submit" 
+              disabled={loading} 
+              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-orange-500/25 disabled:opacity-50 active:scale-95"
+            >
+              {loading ? 'Searching...' : 'Explore'}
+            </button>
+          </div>
+        </form>
+
+        <div className="flex gap-2 overflow-x-auto mt-5 no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
+          {['Jaipur', 'Ujjain', 'Varanasi', 'Agra', 'Tonk', 'Mount Abu'].map(city => (
+            <button
+              key={city}
+              type="button"
+              onClick={() => handleSearch(city)}
+              className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition shadow-sm active:scale-95 flex items-center gap-1"
+            >
+              <span>📍</span> <span>{city}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <main className="px-4 max-w-xl mx-auto w-full flex-1 space-y-6 relative z-10">
+        {loading && (
+          <div className="text-center py-20 bg-slate-800/50 backdrop-blur-md rounded-3xl border border-slate-700 shadow-xl">
+            <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+            <p className="text-xs text-slate-300 font-bold tracking-wider">Assembling Structured Intelligence...</p>
+          </div>
+        )}
+
+        {!loading && results.map((item, idx) => (
+          <div key={idx} className="bg-slate-800/90 border border-slate-700 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
+            
+            <div className="relative h-56 bg-slate-950 overflow-hidden">
+              <img 
+                src={item.image_url || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80'} 
+                alt={item.Name} 
+                className="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+              
+              <div className="absolute top-3 left-3">
+                <span className="bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
+                  ⭐ {item.Type || 'Verified Destination'}
+                </span>
+              </div>
+
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-2xl font-black text-white tracking-tight drop-shadow-md">{item.Name}</h3>
+                <p className="text-xs text-amber-300 font-bold mt-0.5 flex items-center gap-1">
+                  <span>📍</span> {item.City}, {item.State}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex border-b border-slate-700 bg-slate-900/80 text-[11px] font-bold text-slate-300 overflow-x-auto no-scrollbar">
+              {[
+                { key: 'overview', label: 'History', icon: '📜' },
+                { key: 'spots', label: 'Attractions', icon: '🏛️' },
+                { key: 'marketfood', label: 'Food & Market', icon: '🍲' },
+                { key: 'transit', label: 'Transit', icon: '🚌' },
+                { key: 'sos', label: 'SOS Help', icon: '🚨' },
+              ].map(tab => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 py-3 px-3 whitespace-nowrap border-b-2 transition flex items-center justify-center gap-1.5 ${
+                    activeTab === tab.key
+                      ? 'border-orange-500 text-orange-400 bg-slate-800 font-black shadow-sm'
+                      : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-sm">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="p-5 space-y-4 text-xs text-slate-200">
+              {activeTab === 'overview' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-amber-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>📜</span> Heritage & History Overview
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.history || item.geography_politics}</p>
+                </div>
+              )}
+
+              {activeTab === 'spots' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-orange-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>🏛️</span> Key Sightseeing & Monuments
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1 whitespace-pre-line">{item.temples_and_spots}</p>
+                </div>
+              )}
+
+              {activeTab === 'marketfood' && (
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
+                    <span className="text-emerald-400 font-black block mb-1 flex items-center gap-1.5">
+                      <span>🛍️</span> Famous Local Markets
+                    </span>
+                    <p className="text-slate-300 font-medium">{item.famous_markets}</p>
+                  </div>
+                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
+                    <span className="text-rose-400 font-black block mb-1 flex items-center gap-1.5">
+                      <span>🍲</span> Famous Food & Delicacies
+                    </span>
+                    <p className="text-slate-300 font-medium">{item.famous_food}</p>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'transit' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-sky-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>🚌</span> Bus, Taxi & Route Connectivity
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.route_transport}</p>
+                </div>
+              )}
+
+              {activeTab === 'sos' && (
+                <div className="bg-red-950/30 p-4 rounded-2xl border border-red-900/50 shadow-inner space-y-1.5">
+                  <span className="text-red-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>🚨</span> Emergency & Police SOS Hub
+                  </span>
+                  <p className="text-slate-100 font-bold pt-1 text-sm">{item.emergency_services}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </main>
+
+      {/* Vendor Modal */}
+      {showVendorModal && (
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md p-6 text-xs text-slate-100 shadow-2xl">
+            <h3 className="font-black text-white mb-4 text-base flex items-center gap-2">
+              <span>💼</span> List Your Business on InBharat
+            </h3>
+            <form onSubmit={handleVendorSubmit} className="space-y-3">
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Business Name *</label>
+                <input type="text" required placeholder="e.g. Royal Stay & Resort" value={vendorData.businessName} onChange={(e) => setVendorData({...vendorData, businessName: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-emerald-500 font-semibold text-white" />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Owner Name *</label>
+                  <input type="text" required placeholder="Ravi Bharggav" value={vendorData.ownerName} onChange={(e) => setVendorData({...vendorData, ownerName: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-emerald-500 font-semibold text-white" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Phone Number *</label>
+                  <input type="tel" required placeholder="9166xxxxxx" value={vendorData.phone} onChange={(e) => setVendorData({...vendorData, phone: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-emerald-500 font-semibold text-white" />
+                </div>
+              </div>
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">City / Town *</label>
+                <input type="text" required placeholder="Jaipur / Tonk" value={vendorData.city} onChange={(e) => setVendorData({...vendorData, city: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-emerald-500 font-semibold text-white" />
+              </div>
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Category</label>
+                <select value={vendorData.category} onChange={(e) => setVendorData({...vendorData, category: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-emerald-500 font-semibold text-white">
+                  <option>Hotel / Homestay</option>
+                  <option>Local Artisan / Handicrafts</option>
+                  <option>Restaurant / Food Joint</option>
+                  <option>Taxi / Cab Service</option>
+                </select>
+              </div>
+              <button type="submit" className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-xl mt-3 shadow-lg shadow-emerald-500/20">
+                Register Business
+              </button>
+              <button type="button" onClick={() => setShowVendorModal(false)} className="w-full text-slate-400 hover:text-white py-2 font-semibold">
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add Spot Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md p-6 text-xs text-slate-100 shadow-2xl">
+            <h3 className="font-black text-white mb-4 text-base flex items-center gap-2">
+              <span>🏰</span> Contribute Spot to InBharat
+            </h3>
+            <form onSubmit={handleAddSubmit} className="space-y-3">
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Spot Name *</label>
+                <input type="text" required placeholder="e.g. Nahargarh Fort" value={formData.Name} onChange={(e) => setFormData({...formData, Name: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-orange-500 font-semibold text-white" />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">City *</label>
+                  <input type="text" required placeholder="Jaipur" value={formData.City} onChange={(e) => setFormData({...formData, City: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-orange-500 font-semibold text-white" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">State *</label>
+                  <input type="text" required placeholder="Rajasthan" value={formData.State} onChange={(e) => setFormData({...formData, State: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-orange-500 font-semibold text-white" />
+                </div>
+              </div>
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">Image URL (Unsplash) *</label>
+                <input type="url" required placeholder="https://images.unsplash.com/..." value={formData.image_url} onChange={(e) => setFormData({...formData, image_url: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-orange-500 font-semibold text-white" />
+              </div>
+              <div>
+                <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider block mb-1">History & Details *</label>
+                <textarea required placeholder="Write history..." value={formData.history} onChange={(e) => setFormData({...formData, history: e.target.value})} className="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 outline-none focus:border-orange-500 font-semibold h-20 resize-none text-white"></textarea>
+              </div>
+              <button type="submit" disabled={submitting} className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black py-3 rounded-xl mt-2 shadow-lg shadow-orange-500/20">
+                {submitting ? 'Saving...' : 'Publish to InBharat'}
+              </button>
+              <button type="button" onClick={() => setShowAddModal(false)} className="w-full text-slate-400 hover:text-white py-2 font-semibold">
+                Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <nav className="fixed bottom-3 left-4 right-4 max-w-md mx-auto bg-slate-800/95 backdrop-blur-2xl border border-slate-700 flex justify-around py-3 z-40 rounded-2xl shadow-2xl text-[11px] font-extrabold text-slate-300">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-400">
+          <span className="text-base">🔍</span>
+          <span>Explore</span>
+        </button>
+        <button onClick={() => setShowVendorModal(true)} className="flex flex-col items-center gap-0.5 text-emerald-400 hover:text-emerald-300">
+          <span className="text-base">💼</span>
+          <span>List Biz</span>
+        </button>
+        <button onClick={() => setShowAddModal(true)} className="flex flex-col items-center gap-0.5 hover:text-white">
+          <span className="text-base">➕</span>
+          <span>Add Spot</span>
+        </button>
+      </nav>
+
+    </div>
+  );
+}
