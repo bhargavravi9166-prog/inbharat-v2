@@ -32,6 +32,15 @@ export default function App() {
   const [vendorData, setVendorData] = useState({ businessName: '', ownerName: '', phone: '', city: '' });
   const [govtData, setGovtData] = useState({ repName: '', designation: '', villageCity: '', phone: '' });
 
+  // Smart Name Normalizer (Removes 'city', 'district', 'rajasthan' to avoid duplicates)
+  const normalizeKey = (name: string) => {
+    if (!name) return '';
+    let lower = name.toLowerCase().trim();
+    // Remove extra administrative words so "Jaipur City" and "Jaipur" match as same
+    lower = lower.replace(/\b(city|district|town|village|rajasthan|india|bharat)\b/g, '').trim();
+    return lower.replace(/\s+/g, '');
+  };
+
   useEffect(() => {
     loadDefaultData();
   }, []);
@@ -41,12 +50,17 @@ export default function App() {
     const { data } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .limit(10);
+      .limit(15);
 
     if (data && data.length > 0) {
-      // Remove duplicates by Name using Map
-      const uniqueData = Array.from(new Map(data.map(item => [item.Name?.toLowerCase(), item])).values());
-      setResults(uniqueData);
+      const uniqueMap = new Map();
+      data.forEach(item => {
+        const key = normalizeKey(item.Name || item.City);
+        if (key && !uniqueMap.has(key)) {
+          uniqueMap.set(key, item);
+        }
+      });
+      setResults(Array.from(uniqueMap.values()).slice(0, 5));
     }
     setLoading(false);
   };
@@ -119,7 +133,8 @@ export default function App() {
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .or(`Name.ilike.%${cleanQuery}%,State.ilike.%${cleanQuery}%,City.ilike.%${cleanQuery}%,temples_and_spots.ilike.%${cleanQuery}%,famous_markets.ilike.%${cleanQuery}%`);
+      .ilike('Name', `%${cleanQuery}%`)
+      .limit(5);
 
     if (!error && data && data.length > 0) {
       combinedResults = [...data];
@@ -131,12 +146,16 @@ export default function App() {
       combinedResults.push(apiResult);
     }
 
-    // 3. Deduplicate results by Name so nothing shows double/triple
-    const uniqueResults = Array.from(
-      new Map(combinedResults.map(item => [item.Name?.trim().toLowerCase(), item])).values()
-    );
+    // 3. Smart Normalized Deduplication (Treats "Jaipur" and "Jaipur City" as exact same)
+    const finalUniqueMap = new Map();
+    combinedResults.forEach(item => {
+      const key = normalizeKey(item.Name || item.City);
+      if (key && !finalUniqueMap.has(key)) {
+        finalUniqueMap.set(key, item);
+      }
+    });
 
-    setResults(uniqueResults);
+    setResults(Array.from(finalUniqueMap.values()));
     setLoading(false);
   };
 
@@ -203,7 +222,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Search city or tourist destination (e.g. Jaipur, Ujjain, Tonk)..."
+              placeholder="Search city or tourist destination (e.g. Jaipur, Jaipur City)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
