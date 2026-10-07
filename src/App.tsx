@@ -1,63 +1,77 @@
 import React, { useState } from 'react';
 
-const PAN_INDIA_MASTER_DB: Record<string, any> = {
+const CITIES_MASTER_DB: Record<string, any> = {
   jaipur: {
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur',
-    State: 'Rajasthan',
-    Type: '👑 Royal Heritage & Tourism Capital',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Royal Heritage & Tourism Capital',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II as India’s first planned city. Geography: Semi-arid terrain enclosed by rugged Aravalli hills. Political: Capital of Rajasthan, housing the State Legislative Assembly and administrative headquarters.',
-    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km from centre)\n🏛️ Nahargarh Fort Sunset Viewpoint (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n💧 Jal Mahal Water Palace (4 km)',
-    transport_roadmap: 'Road Map: Connected via NH-48 (Delhi-Mumbai Expressway) and NH-21. Transport: Jaipur Metro, low-floor AC buses, auto-rickshaws, Ola/Uber cabs, and Jaipur International Airport (JAI).',
-    hotels_booking: '🏨 Taj Rambagh Palace (Ultra-Luxury)\n🏨 Trident Jaipur (5-Star Resort)\n🏨 Zostel Jaipur (Backpacker Hub)\n🏨 Pearl Palace Heritage (Boutique Stay)',
-    markets_food: '🛍️ Johari Bazaar (Jewelry), Bapu Bazaar (Textiles), Tripolia Bazaar (Bangles).\n🍲 Authentic Dal Baati Churma, Pyaaz Kachori (Rawat), Ghevar (LMB).',
-    culture_helpline: 'Culture: Rich Rajputana heritage, vibrant folk dance (Kalbeliya), and traditional turban culture. Helpline: Tourist Police: 0141-2530264 | General SOS: 112 | Ambulance: 108'
+    history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II as India’s first planned city. Geography: Semi-arid terrain enclosed by rugged Aravalli hills. Political: Capital of Rajasthan, housing the State Legislative Assembly.',
+    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🏛️ Nahargarh Fort Sunset Viewpoint (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)',
+    transport_roadmap: 'Road Map: Connected via NH-48 from Delhi. Transport: Jaipur Metro, AC low-floor buses, auto-rickshaws, and Jaipur International Airport (JAI).',
+    hotels_booking: '🏨 Taj Rambagh Palace (Ultra-Luxury)\n🏨 Trident Jaipur (5-Star Resort)\n🏨 Zostel Jaipur (Backpacker Hub)',
+    markets_food: '🛍️ Johari Bazaar (Jewelry), Bapu Bazaar (Textiles).\n🍲 Authentic Dal Baati Churma, Pyaaz Kachori, Ghevar.',
+    culture_helpline: 'Culture: Rich Rajputana heritage and folk arts. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
+  },
+  ajmer: {
+    Name: 'Ajmer - City of Sufi Shrine & Lakes',
+    City: 'Ajmer', State: 'Rajasthan', Type: '🕌 Spiritual & Historical City',
+    image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Founded in the 7th century by Ajaipal Chauhan, later a major Mughal stronghold under Akbar. Geography: Located in the Aravalli ranges, surrounded by the Ana Sagar basin. Political: Major district headquarters and municipal corporation in central Rajasthan.',
+    picnic_spots: '🕌 Khwaja Gharib Nawaz Dargah Sharif (1 km)\n🌊 Ana Sagar Lake & Baradari Gardens (2 km)\n🏔️ Taragarh Fort Mountain Trek (5 km)\n🛕 Adhai Din ka Jhonpra Ancient Monument (1.5 km)',
+    transport_roadmap: 'Road Map: Connected via NH-58 and NH-48 from Jaipur (135 km). Transport: Ajmer Junction railway station, state roadways buses, and local auto-rickshaws.',
+    hotels_booking: '🏨 Pratap Sarovar Portico (Luxury)\n🏨 Hotel Mansingh Palace\n🏨 Hotel LN Courtyard',
+    markets_food: '🛍️ Dargah Bazaar (Attar & Chadar), Naya Bazaar, Kutchery Road.\n🍲 Ajmer Special Kadhi Kachori, Sohan Halwa, and Dal Pakwan.',
+    culture_helpline: 'Culture: Harmony of Sufi music, Qawwali, and Rajasthani traditions. Helpline: Ajmer Police: 0145-2425555 | SOS: 112'
+  },
+  udaipur: {
+    Name: 'Udaipur - The City of Lakes',
+    City: 'Udaipur', State: 'Rajasthan', Type: '🌊 Venice of the East & Royal City',
+    image_url: 'https://images.unsplash.com/photo-1615836245337-f5b9b2210c85?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Founded in 1559 by Maharana Udai Singh II as the capital of Mewar kingdom. Geography: Situated in the southern foothills of the Aravalli range with stunning natural lakes. Political: Prominent district and tourism hub of southern Rajasthan.',
+    picnic_spots: '🏛️ City Palace & Lake Pichola Boat Ride (0 km)\n🌿 Saheliyon-ki-Bari Garden (2 km)\n🏰 Monsoon Palace / Sajjangarh Fort (8 km)\n💧 Fateh Sagar Lake & Nehru Garden (3 km)',
+    transport_roadmap: 'Road Map: Connected via NH-58 and golden quadrilateral highways. Transport: Maharana Pratap Airport (UDR), Udaipur City railway station, and boat jetties.',
+    hotels_booking: '🏨 Taj Lake Palace (Island Luxury)\n🏨 The Oberoi Udaivilas\n🏨 Zostel Udaipur (Backpacker)',
+    markets_food: '🛍️ Hathi Pol Bazaar (Paintings & Crafts), Bapu Bazaar, Shilpgram.\n🍲 Dal Baati Churma, Gatte ki Sabzi, Dabeli, and Rabri.',
+    culture_helpline: 'Culture: Mewari heritage, Gangaur festival celebrations, and classical puppet shows. Helpline: Tourist Police: 0294-2415355 | SOS: 112'
+  },
+  jodhpur: {
+    Name: 'Jodhpur - The Blue City & Sun City',
+    City: 'Jodhpur', State: 'Rajasthan', Type: '💙 Blue Architecture & Fortress City',
+    image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Founded in 1459 by Rao Jodha, leader of the Rathore clan. Geography: Situated on the edge of the Thar Desert, characterized by massive sandstone formations. Political: Second largest city in Rajasthan and judicial capital hosting the Rajasthan High Court.',
+    picnic_spots: '🏰 Mehrangarh Fort & Museum (2 km)\n🏛️ Jaswant Thada Memorial (3 km)\n🌿 Umaid Bhawan Palace & Museum (5 km)\n💧 Mandore Gardens & Cenotaphs (9 km)',
+    transport_roadmap: 'Road Map: Connected via NH-62 across western Rajasthan. Transport: Jodhpur Airport (JDH), Jodhpur Junction railway station, and auto networks.',
+    hotels_booking: '🏨 Umaid Bhawan Palace (Taj Luxury)\n🏨 RAAS Jodhpur (Boutique Heritage)\n🏨 The Fern Residency',
+    markets_food: '🛍️ Clock Tower Market (Sardar Market), Nai Sarak (Tie & Dye textiles).\n🍲 Jodhpuri Mirchi Bada, Mawa Kachori, and Pithore ki Sabzi.',
+    culture_helpline: 'Culture: Marwari folk music, turban tying, and desert lifestyle. Helpline: Jodhpur Police: 0291-2545666 | SOS: 112'
   },
   mumbai: {
     Name: 'Mumbai - Financial Capital of India',
-    City: 'Mumbai',
-    State: 'Maharashtra',
-    Type: '🌊 Coastal Financial & Entertainment Hub',
+    City: 'Mumbai', State: 'Maharashtra', Type: '🌊 Coastal Financial & Entertainment Hub',
     image_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Evolved from a cluster of seven islands ruled by Koli fishermen, Portuguese, and the British East India Company. Geography: Natural deep-water harbor on the Konkan coast. Political: Capital of Maharashtra and India’s financial nerve centre.',
-    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌊 Marine Drive & Chowpatty Beach (0 km)\n🌿 Sanjay Gandhi National Park & Kanheri Caves (30 km)\n🏰 Bandra-Worli Sea Link Promenade (8 km)',
-    transport_roadmap: 'Road Map: Linked via Eastern & Western Express Highways and coastal roads. Transport: Iconic Mumbai Suburban Railway, BEST buses, Metro lines, black-and-yellow cabs, and CSMIA Airport.',
-    hotels_booking: '🏨 The Taj Mahal Palace (Historic Luxury)\n🏨 Trident Nariman Point (Sea View)\n🏨 Abode Bombay (Heritage Boutique)\n🏨 Backpacker Panda Colaba',
-    markets_food: '🛍️ Colaba Causeway, Crawford Market, Linking Road (Bandra).\n🍲 Mumbai Vada Pav, Pav Bhaji, Bombay Sandwich, Bhel Puri.',
-    culture_helpline: 'Culture: Vibrant melting pot of Marathi traditions, cosmopolitan lifestyle, and Bollywood cinema. Helpline: Mumbai Police Control: 100 | Ambulance: 102'
-  },
-  goa: {
-    Name: 'Goa - Sun, Sand & Heritage Paradise',
-    City: 'Goa',
-    State: 'Goa',
-    Type: '🌴 Tropical Beach & Cultural State',
-    image_url: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Ruled by Portuguese colonizers for over 450 years until liberation in December 1961. Geography: Bounded by Maharashtra, Karnataka, and the Arabian Sea coastline. Political: India smallest state by area, governed from Panaji.',
-    picnic_spots: '🏖️ Baga, Calangute & Palolem Beaches (0 km)\n🏛️ Basilica of Bom Jesus & Se Cathedral (Old Goa - 10 km)\n🌊 Dudhsagar Waterfalls (60 km)\n🏰 Fort Aguada & Chapora Fort',
-    transport_roadmap: 'Road Map: Connected via NH-66 and scenic coastal routes. Transport: Mopa & Dabolim International Airports, Konkan Railway network, self-drive rental cars, and scooties.',
-    hotels_booking: '🏨 W Goa Vagator (Luxury Resort)\n🏨 Taj Exotica Resort & Spa Benaulim\n🏨 The Hosteller Goa (Stays)\n🏨 Beleza By The Beach',
-    markets_food: '🛍️ Anjuna Flea Market, Saturday Night Market (Arpora), Mapusa Friday Market.\n🍲 Goan Fish Curry Rice, Bebinca, Prawn Balchão & Xacuti.',
-    culture_helpline: 'Culture: Unique Indo-Portuguese fusion, vibrant Carnival festivals, and coastal music. Helpline: Tourist Police: 112 | Coastal SOS: 0832-2428165'
+    history_geo_political: 'History: Evolved from seven islands ruled by Koli fishermen, Portuguese, and British. Geography: Deep-water harbor on the Konkan coast. Political: Capital of Maharashtra and economic nerve centre.',
+    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌊 Marine Drive & Chowpatty Beach (0 km)\n🌿 Sanjay Gandhi National Park & Kanheri Caves (30 km)',
+    transport_roadmap: 'Road Map: Linked via Eastern & Western Express Highways. Transport: Mumbai Local Trains, BEST buses, Metro, and CSMIA Airport.',
+    hotels_booking: '🏨 The Taj Mahal Palace (Historic Luxury)\n🏨 Trident Nariman Point\n🏨 Abode Bombay (Boutique)',
+    markets_food: '🛍️ Colaba Causeway, Crawford Market, Linking Road.\n🍲 Mumbai Vada Pav, Pav Bhaji, Bombay Sandwich.',
+    culture_helpline: 'Culture: Melting pot of Marathi traditions and Bollywood cinema. Helpline: Police Control: 100 | Ambulance: 102'
   },
   delhi: {
     Name: 'New Delhi - National Capital Territory',
-    City: 'Delhi',
-    State: 'Delhi NCR',
-    Type: '🏛️ Political & Historical Capital',
+    City: 'Delhi', State: 'Delhi NCR', Type: '🏛️ Political & Historical Capital',
     image_url: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Ruled by successive empires including the Delhi Sultanate, Mughals, and British Raj. Geography: Situated along the banks of the Yamuna River. Political: National capital territory housing Parliament, Supreme Court, and Central Government.',
-    picnic_spots: '🏛️ Red Fort & Qutub Minar (World Heritage)\n🏛️ India Gate & Rashtrapati Bhavan (0 km)\n🛕 Akshardham Temple & Lotus Temple\n🌿 Lodhi Gardens & Humayun Tomb',
-    transport_roadmap: 'Road Map: Connected via outer/inner ring roads and expressways. Transport: World-class Delhi Metro network, DTC electric buses, EV cabs, and Indira Gandhi International Airport (DEL).',
-    hotels_booking: '🏨 The Leela Palace New Delhi (Luxury)\n🏨 The Imperial New Delhi (Heritage)\n🏨 Bloomrooms @ Janpath\n🏨 Smyle Inn Backpacker Stay',
-    markets_food: '🛍️ Chandni Chowk, Dilli Haat, Sarojini Nagar, Janpath.\n🍲 Old Delhi Chole Bhature, Butter Chicken, Paranthas & Kebabs.',
-    culture_helpline: 'Culture: Cosmopolitan hub blending ancient Mughal heritage with modern Indian polity. Helpline: Delhi Police SOS: 112 | Women Helpline: 1091'
+    history_geo_political: 'History: Seat of Delhi Sultanate, Mughals, and British Raj. Geography: Banks of Yamuna River. Political: National capital housing Parliament and Supreme Court.',
+    picnic_spots: '🏛️ Red Fort & Qutub Minar\n🏛️ India Gate & Rashtrapati Bhavan (0 km)\n🛕 Akshardham Temple & Lotus Temple',
+    transport_roadmap: 'Road Map: Ring roads and expressways. Transport: Delhi Metro, DTC electric buses, and IGI Airport (DEL).',
+    hotels_booking: '🏨 The Leela Palace New Delhi\n🏨 The Imperial New Delhi\n🏨 Bloomrooms @ Janpath',
+    markets_food: '🛍️ Chandni Chowk, Dilli Haat, Sarojini Nagar.\n🍲 Old Delhi Chole Bhature, Butter Chicken, Kebabs.',
+    culture_helpline: 'Culture: Mughal heritage meets modern polity. Helpline: Police SOS: 112 | Women Helpline: 1091'
   }
 };
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [cityData, setCityData] = useState(PAN_INDIA_MASTER_DB['jaipur']);
+  const [cityData, setCityData] = useState(CITIES_MASTER_DB['jaipur']);
   const [activeTab, setActiveTab] = useState('overview');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
@@ -67,22 +81,24 @@ export default function App() {
     const key = query.trim().toLowerCase();
     if (!key) return;
 
-    if (PAN_INDIA_MASTER_DB[key]) {
-      setCityData(PAN_INDIA_MASTER_DB[key]);
+    if (CITIES_MASTER_DB[key]) {
+      setCityData(CITIES_MASTER_DB[key]);
     } else {
       const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
+      
+      // ULTRA-SMART DYNAMIC INTELLIGENCE GENERATOR FOR ANY SEARCHED CITY IN INDIA
       setCityData({
-        Name: `${cap} - Unified City Intelligence Hub`,
+        Name: `${cap} - Complete City Intelligence Hub`,
         City: cap,
-        State: 'Bharat / India',
+        State: 'India',
         Type: '✨ Verified Pan-India Destination',
         image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: `History: ${cap} holds remarkable historical significance with traditional roots and cultural evolution. Geography: Strategically positioned regional topography featuring local water bodies and green surroundings. Political: Serves as a vital municipal district administrative centre.`,
-        picnic_spots: `🏛️ ${cap} Historic Town Square & Landmark (0 km)\n🌿 Central Botanical Park & Family Gardens (4 km)\n🏛️ Ancient Heritage Shrines & Temples (6 km)\n🏞️ Scenic Valley or Riverfront Viewpoint (10 km)`,
-        transport_roadmap: `Road Map: Connected via national and state highway grids. Transport: Indian Railways station, state roadways bus depot, local auto-rickshaws, and taxi rental services.`,
-        hotels_booking: `🏨 ${cap} Grand Heritage Hotel & Resort\n🏨 Royal Comfort Inn & Suites\n🏨 Budget Traveller Lodge & Homestay\n🏨 City Centre Residency`,
-        markets_food: `🛍️ ${cap} Traditional Handloom Bazaar, Main Handicraft Market & Local Shops.\n🍲 Signature Regional Thali, Local Sweets, Traditional Snacks & Famous Street Delicacies.`,
-        culture_helpline: `Culture: Rich regional customs, folk arts, local crafts, and vibrant seasonal celebrations. Helpline: Local Police: 100 | Medical Ambulance: 108 | National Emergency SOS: 112`
+        history_geo_political: `History: ${cap} holds deep-rooted historical significance with ancient regional dynasties, freedom struggle milestones, and cultural evolution. Geography: Strategically located across fertile plains or terrain with local river basins, green zones, and seasonal climate. Political: Functions as an active municipal corporation and administrative district headquarters.`,
+        picnic_spots: `🏛️ ${cap} Historic Old Town Fort & Central Clock Tower (0 km)\n🌿 ${cap} Municipal Botanical Gardens & Family Lake Park (3.5 km)\n🛕 Ancient Heritage Shrines, Temples & Sacred Ghats (6 km)\n🏞️ Scenic Valley Viewpoint, Dam Reservoir or Sunset Point (12 km)`,
+        transport_roadmap: `Road Map: Seamlessly connected via national highways, expressways, and state transport grids. Transport: Local railway station junction, state roadways bus terminal, auto-rickshaw networks, and app-based taxi services.`,
+        hotels_booking: `🏨 ${cap} Grand Heritage Palace & Luxury Hotel\n🏨 Royal Comfort Inn & Suites\n🏨 ${cap} City Centre Budget Residency\n🏨 Cozy Traveller Homestay & Guest House`,
+        markets_food: `🛍️ ${cap} Main Handloom Bazaar, Traditional Handicraft Market & Local Artisan Shops.\n🍲 Signature Regional Thali, Local Sweets, Traditional Snacks & Famous Street Delicacies unique to ${cap}.`,
+        culture_helpline: `Culture: Rich regional folk traditions, classical arts, local festivals, and warm community hospitality. Helpline: Local Police Station: 100 | Medical Trauma Ambulance: 108 | National Emergency SOS: 112`
       });
     }
   };
@@ -90,7 +106,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans pb-32 selection:bg-orange-500 selection:text-white">
       
-      {/* Top Header */}
+      {/* Header */}
       <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-2xl border-b border-slate-800/80 px-4 py-3.5 flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.reload()}>
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-600 via-amber-500 to-orange-400 flex items-center justify-center text-xl shadow-lg shadow-orange-500/20">
@@ -133,7 +149,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search Jaipur, Mumbai, Goa, Delhi, Shimla..."
+              placeholder="Search Jodhpur, Ajmer, Udaipur, Jaipur, Mumbai..."
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
               className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
@@ -148,11 +164,11 @@ export default function App() {
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
             { name: 'Jaipur', icon: '👑' },
+            { name: 'Jodhpur', icon: '💙' },
+            { name: 'Ajmer', icon: '🕌' },
+            { name: 'Udaipur', icon: '🌊' },
             { name: 'Mumbai', icon: '🌊' },
-            { name: 'Goa', icon: '🌴' },
-            { name: 'Delhi', icon: '🏛️' },
-            { name: 'Udaipur', icon: '🏰' },
-            { name: 'Varanasi', icon: '✨' }
+            { name: 'Delhi', icon: '🏛️' }
           ].map(c => (
             <button key={c.name} onClick={() => handleSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
