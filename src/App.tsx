@@ -546,6 +546,75 @@ const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, any> = {
     hotels_booking: "🏨 Sun-n-Sand Shirdi\n🏨 St. Laurn The Temple Hotel\n🏨 Hotel Sai Leela",
     markets_food: "🛍️ Temple Road Market, Palki Stalls.\n🍲 Shirdi Prasad Bhojnalaya Meals, North/South Thali.",
     culture_helpline: "Culture: Universal devotion & harmony. Helpline: Police: 100 | SOS: 112"
+  },  "khatushyam": {
+    Name: "Khatu Shyam Ji - Abode of Shyam Baba",
+    City: "Khatu", State: "Rajasthan", Type: "🛕 Devotional Shrine",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C to 40°C (Warm & Dry)", bestTime: "October to March (Falgun Mela is grand)",
+    packing: "🧳 Traditional or comfortable cotton clothes, woolen stoles in winter.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Highly revered shrine dedicated to Barbarika (Shyam Baba), who is worshipped as an avatar of Krishna in Kaliyuga.",
+    picnic_spots: "🛕 Khatu Shyam Ji Main Temple\n🏛️ Shyam Kund (Sacred pond)\n🌿 Shyam Vatika & Suraj Kund\n🏞️ Ringas Local Market",
+    transport_roadmap: "Road Map: Connected via Jaipur-Bikaner highway. Transport: Ringas Junction (17 km) & Jaipur Airport (80 km).",
+    hotels_booking: "🏨 Hotel Shyam Residency\n🏨 Shri Shyam Sarovar\n🏨 Local Pilgrim Dharamshalas",
+    markets_food: "🛍️ Temple Street Bazaar.\n🍲 Rajasthani Dal Baati Churma, Peda Prasad, Mirchi Bada.",
+    culture_helpline: "Culture: Marwari devotional traditions. Helpline: Police: 100 | SOS: 112"
+  },
+  "salasar": {
+    Name: "Salasar Balaji - Shrine of Lord Hanuman",
+    City: "Salasar", State: "Rajasthan", Type: "🛕 Sacred Hanuman Temple",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 32°C (Dry & Warm)", bestTime: "October to March",
+    packing: "🧳 Simple traditional clothing, comfortable footwear.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,000 / day",
+    history_geo_political: "History: One of the most famous temples dedicated to Lord Hanuman, featuring a unique idol with a beard and mustache.",
+    picnic_spots: "🛕 Salasar Balaji Main Temple\n🏛️ Anjani Mata Temple (Mother of Hanuman)\n🌿 Mohan Dham\n🏞️ Local Salasar Town Bazaar",
+    transport_roadmap: "Road Map: Connected via Sujangarh-Salasar road. Transport: Sujangarh Railway Station (25 km).",
+    hotels_booking: "🏨 Hotel Anjani\n🏨 Bhawani Niketan\n🏨 Local Dharamshalas",
+    markets_food: "🛍️ Salasar Market.\n🍲 Besan Ke Gatte, Traditional Rajasthani Thali, Churma.",
+    culture_helpline: "Culture: Rajasthani folk devotion. Helpline: Police: 100 | SOS: 112"
+  },
+  "pushkar_brahma": {
+    Name: "Brahma Temple Pushkar - Unique Creator Shrine",
+    City: "Pushkar", State: "Rajasthan", Type: "🛕 Rare Brahma Temple",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 25°C to 35°C", bestTime: "October to March (Pushkar Camel Fair time)",
+    packing: "🧳 Light cottons, comfortable slip-on shoes for temple ghats.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: One of the very few existing temples dedicated to Lord Brahma in the world, situated beside the holy Pushkar Lake.",
+    picnic_spots: "🛕 Brahma Temple Pushkar\n🏛️ Pushkar Lake & Varaha Ghat (Evening Aarti)\n🌿 Savitri Temple (On Ratnagiri hill top)\n🏞️ Rangji Temple",
+    transport_roadmap: "Road Map: Connected via Ajmer-Pushkar road. Transport: Ajmer Junction (15 km) & Kishangarh Airport (40 km).",
+    hotels_booking: "🏨 The Westin Pushkar Resort & Spa\n🏨 Hotel Brahma Horizon\n🏨 Pushkar Bagh",
+    markets_food: "🛍️ Brahma Temple Road Bazaar, Main Market.\n🍲 Malpua of Pushkar, Falooda, Cafe vegan food, Dal Baati.",
+    culture_helpline: "Culture: Spiritual temple town vibe. Helpline: Police: 100 | SOS: 112"
+  },
+  "eklingji": {
+    Name: "Eklingji Temple - Historic Deity of Mewar",
+    City: "Kailashnagar (Udaipur)", State: "Rajasthan", Type: "🛕 Historic Shiva Temple",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 26°C to 36°C", bestTime: "September to March",
+    packing: "🧳 Decent traditional clothing required inside the temple premises.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Double-storied magnificent temple complex built in 734 AD by Bappa Rawal, dedicated to Lord Shiva (Eklingji), the ruling deity of Mewar rulers.",
+    picnic_spots: "🛕 Eklingji Temple Complex (108 temples inside)\n🏛️ Sas-Bahu Temples Nagda (Ancient ruins nearby)\n🌿 Baghela Lake view\n🏞️ Nagda Ancient Village",
+    transport_roadmap: "Road Map: Located 22 km north of Udaipur on NH-8. Transport: Udaipur City Station & Maharana Pratap Airport (UDR).",
+    hotels_booking: "🏨 Raffles Udaipur (Nearby)\n🏨 Aurika Udaipur\n🏨 Local Heritage Stays",
+    markets_food: "🛍️ Nagda Road Stalls.\n🍲 Mewari Dal Baati, Mirchi Bada, Traditional Sweets.",
+    culture_helpline: "Culture: Royal Mewar heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "mehandipur": {
+    Name: "Mehandipur Balaji - Mystical Healing Shrine",
+    City: "Mehandipur", State: "Rajasthan", Type: "🛕 Spiritual Exorcism & Faith Shrine",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff00c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 32°C (Warm)", bestTime: "October to March",
+    packing: "🧳 Simple traditional clothes, strict rules regarding prasad and temple rituals.",
+    budget: "💰 Est. Budget: ₹1,200 - ₹3,000 / day",
+    history_geo_political: "History: Prominent temple dedicated to Lord Hanuman, widely visited for spiritual healing and faith-based rituals.",
+    picnic_spots: "🛕 Mehandipur Balaji Main Temple\n🏛️ Pret Raj Sarkar Temple\n🌿 Bhairav Ji Temple\n🏞️ Local Town Market",
+    transport_roadmap: "Road Map: Situated on Jaipur-Agra National Highway-21. Transport: Bandikui Junction (35 km) & Jaipur Airport (95 km).",
+    hotels_booking: "🏨 Hotel Balaji Darshan\n🏨 Pilgrim Guest Houses",
+    markets_food: "🛍️ Balaji Chowk Market.\n🍲 Simple North Indian Sattvic Food, Boondi Prasad.",
+    culture_helpline: "Culture: Faith-based spiritual customs. Helpline: Police: 100 | SOS: 112"
   }
 };
 
