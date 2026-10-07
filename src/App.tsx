@@ -446,6 +446,106 @@ const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, any> = {
     hotels_booking: "🏨 Radisson Blu Hotel Guwahati\n🏨 Vivanta Guwahati\n🏨 Hotel Brahmaputra Ashok",
     markets_food: "🛍️ Fancy Bazaar, Paltan Bazaar.\n🍲 Assamese Thali, Masor Tenga, Kamrupi Pitha.",
     culture_helpline: "Culture: Assamese traditions. Helpline: Police: 100 | SOS: 112"
+  },  // --- UTTARAKHAND CHAR DHAM & SACRED SHRINES ---
+  "kedarnath": {
+    Name: "Kedarnath - Sacred Abode of Lord Shiva",
+    City: "Kedarnath", State: "Uttarakhand", Type: "🏔️ Jyotirlinga & Char Dham",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "❄️ 02°C to 12°C (Very Cold)", bestTime: "May to June & September to October",
+    packing: "🧳 Heavy woolens, thermal innerwear, heavy jacket, trekking shoes, rain gear, walking stick, medicines.",
+    budget: "💰 Est. Budget: ₹3,000 - ₹6,000 / day",
+    history_geo_political: "History: One of the 12 Jyotirlingas of Lord Shiva and part of Uttarakhand Char Dham. Situated near Mandakini river in Himalayas.",
+    picnic_spots: "🛕 Kedarnath Main Temple (Ancient stone structure built by Adi Shankaracharya)\n🏛️ Bhairavnath Temple (Guardian deity shrine)\n🌿 Gandhi Saragarh Lake (Trek from temple)\n🏞️ Chorabari Glacier Viewpoint",
+    transport_roadmap: "Road Map: Accessible via Gaurikund trek (16 km trek from Gaurikund). Transport: Jolly Grant Airport Dehradun & Rishikesh Station.",
+    hotels_booking: "🏨 GMVN Tourist Rest House Kedarnath\n🏨 Kedar Camp Resorts\n🏨 Private Lodges & Tents at Kedarnath Base",
+    markets_food: "🛍️ Kedarnath Base Market Stalls.\n🍲 Hot Khichdi, Tea, Simple Sattvic Vegetarian Food.",
+    culture_helpline: "Culture: Himalayan spiritual heritage. Helpline: Police: 100 | Disaster Helpline: 1070 | SOS: 112"
+  },
+  "badrinath": {
+    Name: "Badrinath - Sacred Abode of Lord Vishnu",
+    City: "Badrinath", State: "Uttarakhand", Type: "🛕 Holy Char Dham Shrine",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "⛅ 08°C to 18°C (Chilly)", bestTime: "May to June & September to November",
+    packing: "🧳 Heavy woolens, windproof jacket, comfortable trekking shoes, moisturizer.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Prominent Char Dham pilgrimage site located along Alaknanda River, dedicated to Lord Badrinarayan.",
+    picnic_spots: "🛕 Badrinath Temple (Sacred black stone deity shrine)\n🏛️ Tapt Kund (Natural thermal sulfur spring)\n🌿 Mana Village (Last village of India) & Vyas Gufa\n🏞️ Vasudhara Falls (Trek from Mana)",
+    transport_roadmap: "Road Map: Connected via NH-7 motorable road right up to the temple town. Transport: Haridwar/Rishikesh bus and cab services.",
+    hotels_booking: "🏨 GMVN Badrinath Dham\n🏨 Hotel Sarovar Portico\n🏨 Hotel Narayan Palace",
+    markets_food: "🛍️ Badrinath Market Bazaar.\n🍲 North Indian Thali, Prasad Sweets, Hot Tea.",
+    culture_helpline: "Culture: Vedic traditions. Helpline: Police: 100 | SOS: 112"
+  },
+  "gangotri": {
+    Name: "Gangotri - Origin of River Ganges",
+    City: "Gangotri", State: "Uttarakhand", Type: "🌊 Sacred River Origin Dham",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "❄️ 05°C to 15°C (Cold Mountain Weather)", bestTime: "May to June & September to October",
+    packing: "🧳 Woolens, thermal wear, sturdy walking shoes, raincoat.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Origin point of the holy river Bhagirathi (Ganges). Part of the sacred Char Dham Yatra.",
+    picnic_spots: "🛕 Gangotri Temple (Dedicated to Goddess Ganga where King Bhagirath prayed)\n🏛️ Bhagirath Shila (Sacred rock)\n🌿 Subandhu & Pandava Cave\n🏞️ Gaumukh Glacier Trek (18 km trek from Gangotri)",
+    transport_roadmap: "Road Map: Connected via NH-34 from Rishikesh/Dehradun. Transport: Dehradun Jolly Grant Airport.",
+    hotels_booking: "🏨 GMVN Gangotri Rest House\n🏨 Hotel Himalayan Heritage\n🏨 Local Pilgrim Lodges",
+    markets_food: "🛍️ Gangotri Dham Market.\n🍲 Pure Vegetarian Sattvic Food, Local Pahari Dal.",
+    culture_helpline: "Culture: Ganga river worship traditions. Helpline: Police: 100 | SOS: 112"
+  },
+  "yamunotri": {
+    Name: "Yamunotri - Origin of River Yamuna",
+    City: "Yamunotri", State: "Uttarakhand", Type: "🌊 Sacred River Shrine",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 06°C to 16°C (Mountain Cool)", bestTime: "May to June & September to October",
+    packing: "🧳 Warm woolen clothes, walking stick, trekking shoes, water bottle.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: The westernmost shrine of Uttarakhand Char Dham, originating source of River Yamuna.",
+    picnic_spots: "🛕 Yamunotri Temple (Dedicated to Goddess Yamuna)\n🏛️ Surya Kund (Thermal hot water spring used to boil rice prasad)\n🌿 Divya Shila (Rock pillar worshipped before entering temple)\n🏞️ Saptarshi Kund Trek",
+    transport_roadmap: "Road Map: Accessible via Jankichatti trek (5 km trek to shrine). Transport: Dehradun Airport.",
+    hotels_booking: "🏨 GMVN Yamunotri\n🏨 Hotel Yamuna Classic\n🏨 Pilgrim Guest Houses at Jankichatti",
+    markets_food: "🛍️ Jankichatti & Yamunotri Path Stalls.\n🍲 Freshly boiled rice prasad, local vegetarian meals.",
+    culture_helpline: "Culture: River goddess heritage. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- MAJOR JYOTIRLINGAS & SHRINES ---
+  "somnath": {
+    Name: "Somnath - First Among 12 Jyotirlingas",
+    City: "Somnath", State: "Gujarat", Type: "🛕 Ancient Jyotirlinga Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 31°C (Warm Coastal Air)", bestTime: "October to March",
+    packing: "🧳 Light cotton clothing, traditional temple wear, sunglasses.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: First of the 12 sacred Jyotirlinga shrines of Lord Shiva. Rebuilt several times over centuries on the shore of Arabian Sea.",
+    picnic_spots: "🛕 Somnath Temple & Evening Light and Sound Show\n🏛️ Bhalka Tirth (Where Lord Krishna took his last journey)\n🌿 Triveni Sangam (Confluence of Hiran, Kapila and Saraswati rivers)\n🏞️ Somnath Beach Promenade",
+    transport_roadmap: "Road Map: Connected via NH-51. Transport: Veraval Railway Station (6 km) & Diu Airport (55 km).",
+    hotels_booking: "🏨 The Fern Residency Somnath\n🏨 Lords Inn Somnath\n🏨 Hotel Somnath Sagar",
+    markets_food: "🛍️ Somnath Temple Market Road.\n🍲 Gujarati Thali, Kathiyawadi Khichdi, Ghatiya.",
+    culture_helpline: "Culture: Saurashtra cultural heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "mahakaleshwar": {
+    Name: "Ujjain (Mahakaleshwar) - City of Mahakal",
+    City: "Ujjain", State: "Madhya Pradesh", Type: "🛕 Famous Jyotirlinga & Bhasma Aarti",
+    image_url: "https://images.unsplash.com/photo-1588416936002-3163fc68997b?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C (Warm)", bestTime: "October to March (Mahashivratri is grand)",
+    packing: "🧳 Traditional dhoti/kurta (mandatory for sacred Bhasma Aarti inner sanctum entry), modest clothing.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Ancient historic city situated on the banks of Kshipra River. Home to the legendary Mahakaleshwar Jyotirlinga.",
+    picnic_spots: "🛕 Mahakaleshwar Jyotirlinga Temple & Kal Bhairav Temple\n🏛️ Ram Ghat Kshipra River Aarti & Harsiddhi Temple\n🌿 Mangalnath Temple (Known as center of the earth)\n🏞️ Jantar Mantar Observatory Ujjain",
+    transport_roadmap: "Road Map: Connected via NH-52. Transport: Ujjain Junction & Indore Airport (55 km).",
+    hotels_booking: "🏨 Hotel Imperial Executive\n🏨 Anjushree Ujjain\n🏨 Hotel Mittal Paradise",
+    markets_food: "🛍️ Freeganj Market, Mahakal Lok Bazaar.\n🍲 Ujjaini Poha, Bhutte ka Kees, Malpua.",
+    culture_helpline: "Culture: Malwa spiritual traditions. Helpline: Police: 100 | SOS: 112"
+  },
+  "shirdi": {
+    Name: "Shirdi - Sacred Abode of Sai Baba",
+    City: "Shirdi", State: "Maharashtra", Type: "🕊️ Saint Shrine & Pilgrimage",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 31°C (Warm)", bestTime: "October to March",
+    packing: "🧳 Simple modest clothing, comfortable footwear for temple queues.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Town sacred to the 19th-century spiritual master Shri Sai Baba who preached 'Sabka Malik Ek'.",
+    picnic_spots: "🛕 Shri Saibaba Sansthan Temple & Samadhi Mandir\n🏛️ Dwarkamai Mosque & Chavadi\n🌿 Sai Heritage Village & Gurusthan\n🏞️ Wet N Joy Water Park Shirdi",
+    transport_roadmap: "Road Map: Connected via Ahmednagar-Manmad highway. Transport: Sainagar Shirdi Railway Station & Shirdi Airport (SAG).",
+    hotels_booking: "🏨 Sun-n-Sand Shirdi\n🏨 St. Laurn The Temple Hotel\n🏨 Hotel Sai Leela",
+    markets_food: "🛍️ Temple Road Market, Palki Stalls.\n🍲 Shirdi Prasad Bhojnalaya Meals, North/South Thali.",
+    culture_helpline: "Culture: Universal devotion & harmony. Helpline: Police: 100 | SOS: 112"
   }
 };
 
