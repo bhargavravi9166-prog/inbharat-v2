@@ -13,13 +13,11 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
   const [activeTab, setActiveTab] = useState<Record<number, string>>({});
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showVendorModal, setShowVendorModal] = useState(false);
   const [showGovtModal, setShowGovtModal] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     Name: '', State: '', City: '', Type: '', Zone: '',
@@ -32,15 +30,6 @@ export default function App() {
   const [vendorData, setVendorData] = useState({ businessName: '', ownerName: '', phone: '', city: '' });
   const [govtData, setGovtData] = useState({ repName: '', designation: '', villageCity: '', phone: '' });
 
-  // Smart Name Normalizer (Removes 'city', 'district', 'rajasthan' to avoid duplicates)
-  const normalizeKey = (name: string) => {
-    if (!name) return '';
-    let lower = name.toLowerCase().trim();
-    // Remove extra administrative words so "Jaipur City" and "Jaipur" match as same
-    lower = lower.replace(/\b(city|district|town|village|rajasthan|india|bharat)\b/g, '').trim();
-    return lower.replace(/\s+/g, '');
-  };
-
   useEffect(() => {
     loadDefaultData();
   }, []);
@@ -50,17 +39,17 @@ export default function App() {
     const { data } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .limit(15);
+      .limit(10);
 
     if (data && data.length > 0) {
       const uniqueMap = new Map();
       data.forEach(item => {
-        const key = normalizeKey(item.Name || item.City);
+        const key = (item.Name || item.City || '').trim().toLowerCase();
         if (key && !uniqueMap.has(key)) {
           uniqueMap.set(key, item);
         }
       });
-      setResults(Array.from(uniqueMap.values()).slice(0, 5));
+      setResults(Array.from(uniqueMap.values()).slice(0, 3));
     }
     setLoading(false);
   };
@@ -90,6 +79,18 @@ export default function App() {
       const realImg = wikiData.thumbnail?.source || wikiData.originalimage?.source || null;
       const extractText = wikiData.extract || '';
 
+      // Standard context-aware nearby spots generator
+      let nearbySpots = `1. Main City Heritage Center & Monuments\n2. Historic Ancient Temple & Landmarks\n3. Local Cultural Museum & Gardens\n4. Popular Scenic Viewpoints`;
+      
+      const lowerTitle = targetTitle.toLowerCase();
+      if (lowerTitle.includes('jaipur')) {
+        nearbySpots = `1. Amer Fort & Palace (11 km)\n2. Hawa Mahal (0.5 km)\n3. City Palace (1 km)\n4. Jantar Mantar (1 km)\n5. Nahargarh Fort (6 km)`;
+      } else if (lowerTitle.includes('abu') || lowerTitle.includes('dilwara')) {
+        nearbySpots = `1. Nakki Lake (0.5 km)\n2. Guru Shikhar Peak (15 km)\n3. Dilwara Jain Temples (2.5 km)\n4. Achalgarh Fort (8 km)\n5. Sunset Point (2 km)`;
+      } else if (lowerTitle.includes('ujjain')) {
+        nearbySpots = `1. Mahakaleshwar Jyotirlinga (1 km)\n2. Ram Ghat (1.5 km)\n3. Kal Bhairav Temple (4 km)\n4. Ujjain Kumbha Mela Ground (2 km)`;
+      }
+
       return {
         Name: wikiData.title,
         City: wikiData.title,
@@ -99,13 +100,13 @@ export default function App() {
         image_url: realImg,
         geography_politics: extractText,
         history: extractText,
-        temples_and_spots: `Top Nearby Spots around ${wikiData.title}: 1. Main Heritage Fort & Palace 2. Historic Ancient Temple 3. Local Cultural Museum 4. Scenic Viewpoint & Lake Gardens.`,
-        famous_markets: `${wikiData.title} Handloom Bazaar, Traditional Handicrafts & Street Food Hub.`,
-        famous_food: `Authentic Regional Thali, Local Sweets & Famous Street Snacks of ${wikiData.title}.`,
-        route_transport: `Well connected via State Highways, Taxi Services, Railway Station & Local Buses.`,
-        panchayat_sarpanch: `Local Tourism Help Desk & Municipal Office (${wikiData.title}).`,
-        emergency_services: `Tourist Police Helpline, District Hospital (108) & Police Station (100).`,
-        public_utilities: `ATM, Fuel Stations, EV Charging & E-Mitra Tourism Kiosk.`
+        temples_and_spots: nearbySpots,
+        famous_markets: `${wikiData.title} Handloom Bazaar, Traditional Handicrafts & Local Craft Shops.`,
+        famous_food: `Authentic Regional Thali, Local Sweets & Famous Street Delicacies of ${wikiData.title}.`,
+        route_transport: `Well connected via State Highways, Taxi Cabs, Railway Station & Bus Terminal.`,
+        panchayat_sarpanch: `Local Tourism Help Desk & Municipal Corporation Office (${wikiData.title}).`,
+        emergency_services: `Tourist Police Helpline, District Civil Hospital (108) & Main Police Station (100).`,
+        public_utilities: `ATM Kiosks, Fuel Stations, EV Charging Points & E-Mitra Services.`
       };
     } catch (e) {
       console.error('Tourism API Error:', e);
@@ -125,37 +126,38 @@ export default function App() {
     const cleanQuery = query.trim();
     setSearchTerm(cleanQuery);
     setLoading(true);
-    setSearched(true);
 
-    let combinedResults: any[] = [];
+    let foundItems: any[] = [];
 
-    // 1. Fetch from Supabase
+    // 1. Check Supabase DB first
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
       .ilike('Name', `%${cleanQuery}%`)
-      .limit(5);
+      .limit(3);
 
     if (!error && data && data.length > 0) {
-      combinedResults = [...data];
+      foundItems = [...data];
     }
 
-    // 2. Fetch from Wikipedia Net API
-    const apiResult = await fetchTourismAndLocationData(cleanQuery);
-    if (apiResult) {
-      combinedResults.push(apiResult);
+    // 2. Fetch Net API if DB doesn't have exact match
+    if (foundItems.length === 0) {
+      const apiResult = await fetchTourismAndLocationData(cleanQuery);
+      if (apiResult) {
+        foundItems.push(apiResult);
+      }
     }
 
-    // 3. Smart Normalized Deduplication (Treats "Jaipur" and "Jaipur City" as exact same)
-    const finalUniqueMap = new Map();
-    combinedResults.forEach(item => {
-      const key = normalizeKey(item.Name || item.City);
-      if (key && !finalUniqueMap.has(key)) {
-        finalUniqueMap.set(key, item);
+    // 3. Strict Single Unique Map to prevent duplicate double cards
+    const uniqueMap = new Map();
+    foundItems.forEach(item => {
+      const uniqueKey = (item.Name || item.City || '').trim().toLowerCase();
+      if (uniqueKey && !uniqueMap.has(uniqueKey)) {
+        uniqueMap.set(uniqueKey, item);
       }
     });
 
-    setResults(Array.from(finalUniqueMap.values()));
+    setResults(Array.from(uniqueMap.values()));
     setLoading(false);
   };
 
@@ -222,7 +224,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Search city or tourist destination (e.g. Jaipur, Jaipur City)..."
+              placeholder="Search city or tourist destination (e.g. Jaipur, Mount Abu)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
@@ -234,7 +236,7 @@ export default function App() {
         </form>
 
         <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-[11px] justify-start sm:justify-center relative z-10">
-          {['Jaipur', 'Ujjain', 'Tonk', 'Varanasi', 'Agra', 'Jodhpur', 'Udaipur'].map(city => (
+          {['Jaipur', 'Mount Abu', 'Ujjain', 'Varanasi', 'Agra', 'Udaipur'].map(city => (
             <button
               key={city}
               type="button"
@@ -350,7 +352,7 @@ export default function App() {
                     {currentTab === 'emergency' && (
                       <div className="space-y-3">
                         <div className="bg-rose-50 p-3.5 rounded-2xl border border-rose-200">
-                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Tourist Helplines & Emergency:</strong>
+                          <strong className="text-rose-900 block font-bold">🚑 Tourist Helplines & Emergency:</strong>
                           <p className="leading-relaxed text-slate-800">{item.emergency_services}</p>
                         </div>
                       </div>
@@ -364,21 +366,4 @@ export default function App() {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 flex justify-around py-2 z-40 text-[10px] font-extrabold text-slate-500 shadow-xl">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-500">
-          <span className="text-lg">🔍</span>
-          <span>Explore</span>
-        </button>
-        <button onClick={() => setShowGovtModal(true)} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900">
-          <span className="text-lg">🏛️</span>
-          <span>Update Info</span>
-        </button>
-        <button onClick={() => setShowVendorModal(true)} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900">
-          <span className="text-lg">💼</span>
-          <span>List Business</span>
-        </button>
-      </nav>
-
-    </div>
-  );
-}
+      <nav className="fixed bottom-0 left-0 right-0 bg
