@@ -684,6 +684,75 @@ const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, any> = {
     hotels_booking: "🏨 Hotel Krishna Palace Dakor\n🏨 Pilgrim Dharamshalas",
     markets_food: "🛍️ Dakor Temple Road Market.\n🍲 Famous Dakor Gota, Sev Mamra, Peda Prasad.",
     culture_helpline: "Culture: Bhakti movement heritage. Helpline: Police: 100 | SOS: 112"
+  },  "siddhivinayak": {
+    Name: "Shree Siddhivinayak Temple - Revered Ganesha Shrine",
+    City: "Mumbai", State: "Maharashtra", Type: "🛕 Famous Ganesha Temple",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌴 30°C (Coastal Humid)", bestTime: "November to February",
+    packing: "🧳 Light cotton clothing, traditional temple wear, comfortable footwear for queues.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: One of the richest and most famous Ganesha temples in India, built in the late 18th century in Mumbai.",
+    picnic_spots: "🛕 Siddhivinayak Ganpati Temple\n🏛️ Prabhadevi Beach & Worli Sea Face\n🌿 Shivaji Park Promenade\n🏞️ Dadar Chowpatty",
+    transport_roadmap: "Road Map: Well connected via city local trains and cabs. Transport: Dadar Railway Station & Chhatrapati Shivaji Maharaj International Airport (BOM).",
+    hotels_booking: "🏨 The St. Regis Mumbai\n🏨 Four Seasons Hotel Mumbai\n🏨 Hotel City Point",
+    markets_food: "🛍️ Dadar West Market, Flower Market.\n🍲 Mumbai Street Food, Vada Pav, Modak, South Indian Snacks.",
+    culture_helpline: "Culture: Vibrant Maharashtrian cultural hub. Helpline: Police: 100 | SOS: 112"
+  },
+  "trimbakeshwar": {
+    Name: "Trimbakeshwar Shiva Temple - Source of Godavari",
+    City: "Trimbak (Nashik)", State: "Maharashtra", Type: "🛕 Ancient Jyotirlinga Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 22°C to 32°C (Pleasant Hills)", bestTime: "October to March",
+    packing: "🧳 Traditional dhoti/kurta for inner sanctum rituals, light woolens for evenings.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: An ancient Jyotirlinga temple situated at the foot of Brahamagiri mountain, where the sacred Godavari River originates.",
+    picnic_spots: "🛕 Trimbakeshwar Jyotirlinga Temple\n🏛️ Brahmagiri Hills Trek (Origin of Godavari)\n🌿 Kushavarta Kund (Sacred bathing tank)\n🏞️ Anjneri Hills (Birthplace of Lord Hanuman)",
+    transport_roadmap: "Road Map: Connected via Nashik-Trimbak road (28 km from Nashik). Transport: Nashik Road Railway Station & Ozar Airport (Nashik).",
+    hotels_booking: "🏨 Hotel Trimbak Palace\n🏨 Anand Resort Trimbak\n🏨 MTDC Holiday Resort Trimbak",
+    markets_food: "🛍️ Trimbak Town Bazaar.\n🍲 Maharashtrian Thali, Misal Pav, Pithla Bhakri.",
+    culture_helpline: "Culture: Vedic rituals and pitru pujas. Helpline: Police: 100 | SOS: 112"
+  },
+  "dagdusheth": {
+    Name: "Shreemant Dagdusheth Halwai Ganpati - Beloved Pune Deity",
+    City: "Pune", State: "Maharashtra", Type: "🛕 Historic Ganesha Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 25°C to 35°C", bestTime: "August to March (Ganeshotsav is world-famous)",
+    packing: "🧳 Comfortable casuals or traditional clothes.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: Highly revered Ganesha temple established over a century ago in the heart of Pune city by sweets vendor Dagdusheth Halwai.",
+    picnic_spots: "🛕 Dagdusheth Ganpati Temple\n🏛️ Shaniwar Wada Fort (Historic Peshwa seat)\n🌿 Lal Mahal & Kasba Peth\n🏞️ Saras Baug & Ganpati Temple",
+    transport_roadmap: "Road Map: Located centrally in Budhwar Peth, Pune. Transport: Pune Junction Railway Station & Pune International Airport (PNQ).",
+    hotels_booking: "🏨 JW Marriott Hotel Pune\n🏨 Hotel Aurora Towers\n🏨 Hotel Ranjeet",
+    markets_food: "🛍️ Laxmi Road Bazaar, Tulsi Baug.\n🍲 Puneri Misal Pav, Mastani Milkshake, Bakarwadi.",
+    culture_helpline: "Culture: Maratha heritage and festivities. Helpline: Police: 100 | SOS: 112"
+  },
+  "tuljabhavani": {
+    Name: "Tulja Bhavani Temple - Guardian Goddess of Marathas",
+    City: "Tuljapur (Dharashiv)", State: "Maharashtra", Type: "🛕 Sacred Shakti Peeth",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C to 38°C", bestTime: "October to March",
+    packing: "🧳 Traditional Indian attire, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Historic temple dedicated to Goddess Bhavani, revered as the patron deity of Chhatrapati Shivaji Maharaj and the Maratha empire.",
+    picnic_spots: "🛕 Tulja Bhavani Main Temple Complex\n🏛️ Yamai Devi Temple & Ghats\n🌿 Chintamani Ganpati Temple\n🏞️ Fort of Ghatshila",
+    transport_roadmap: "Road Map: Connected via Solapur-Tuljapur highway. Transport: Solapur Railway Station (45 km).",
+    hotels_booking: "🏨 MTDC Holiday Resort Tuljapur\n🏨 Local Pilgrim Lodges & Hotels",
+    markets_food: "🛍️ Temple Approach Market.\n🍲 Jowar Bhakri, Zunka, Maharashtrian Thali.",
+    culture_helpline: "Culture: Maratha martial heritage & devotion. Helpline: Police: 100 | SOS: 112"
+  },
+  "grishneshwar": {
+    Name: "Grishneshwar Jyotirlinga - Last of the 12 Jyotirlingas",
+    City: "Verul (Aurangabad/Chhatrapati Sambhajinagar)", State: "Maharashtra", Type: "🛕 Ancient Jyotirlinga",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C to 38°C", bestTime: "October to March",
+    packing: "🧳 Light cotton clothing, traditional temple attire, sunglasses.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: An ancient Shiva temple located right next to the world-famous Ellora Caves. Regarded as the last of the 12 Jyotirlingas.",
+    picnic_spots: "🛕 Grishneshwar Jyotirlinga Temple\n🏛️ Ellora Caves (UNESCO World Heritage rock-cut architecture)\n🌿 Bhadra Maruti Temple (Khuldabad)\n🏞️ Daulatabad Fort (Devagiri)",
+    transport_roadmap: "Road Map: Located 30 km from Chhatrapati Sambhajinagar via Ellora road. Transport: Aurangabad Railway Station & Aurangabad Airport (IXU).",
+    hotels_booking: "🏨 Welcomhotel by ITC Hotels, Aurangabad\n🏨 Lemon Tree Hotel Aurangabad\n🏨 MTDC Ellora Resort",
+    markets_food: "🛍️ Ellora Handicraft Stalls, Local Town Market.\n🍲 Hyderabadi-influenced Maharashtrian Cuisine, Naan Qalia, Puran Poli.",
+    culture_helpline: "Culture: Deccan historical and architectural heritage. Helpline: Police: 100 | SOS: 112"
   }
 };
 
