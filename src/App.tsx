@@ -53,7 +53,7 @@ export default function App() {
           famous_markets: 'Amer Road Handicrafts & Royal Gem Bazaars.',
           famous_food: 'Dal Baati Churma, Pyaaz Kachori, Ghevar.',
           route_transport: '11 km from Jaipur City Centre; cabs, autos, and local buses readily available.',
-          emergency_services: 'Tourist Police: 100 | Ambulance: 108 | Main Control Room: 0141-2561255'
+          emergency_services: 'Tourist Police: 100 | Ambulance: 108 | Control Room: 0141-2561255'
         }
       ]);
     }
@@ -130,21 +130,21 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070B14] text-slate-100 flex flex-col font-sans pb-28 selection:bg-amber-500 selection:text-slate-950">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans pb-28 selection:bg-orange-500 selection:text-white">
       
-      {/* Professional Brand Header */}
-      <header className="sticky top-0 z-50 bg-[#070B14]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3 flex justify-between items-center shadow-2xl">
+      {/* Clean Premium Header */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-3.5 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.location.reload()}>
-          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-600 to-rose-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-orange-500/20">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white font-black text-lg shadow-md shadow-orange-500/20">
             🇮🇳
           </div>
           <div>
             <div className="flex items-center font-black tracking-wider text-xl leading-none">
-              <span className="text-amber-400">IN</span>
-              <span className="text-white">BHARAT</span>
+              <span className="text-orange-600">IN</span>
+              <span className="text-slate-900">BHARAT</span>
             </div>
-            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block mt-0.5">
-              Verified Utility & Tourism Hub
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest block mt-0.5">
+              Smart Local Ecosystem
             </span>
           </div>
         </div>
@@ -152,44 +152,42 @@ export default function App() {
         <div className="flex gap-2">
           <button 
             onClick={() => setShowVendorModal(true)} 
-            className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold text-xs px-3 py-1.5 rounded-xl transition active:scale-95"
+            className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 font-bold text-xs px-3 py-2 rounded-xl transition shadow-sm active:scale-95 flex items-center gap-1"
           >
-            💼 List Biz
+            <span>💼</span> <span>List Biz</span>
           </button>
           <button 
             onClick={() => setShowAddModal(true)} 
-            className="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/20 font-bold text-xs px-3 py-1.5 rounded-xl transition active:scale-95"
+            className="bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-300 font-bold text-xs px-3 py-2 rounded-xl transition shadow-sm active:scale-95 flex items-center gap-1"
           >
-            + Add Spot
+            <span>➕</span> <span>Add Spot</span>
           </button>
         </div>
       </header>
 
       {/* Hero Search Section */}
-      <section className="px-4 pt-8 pb-6 max-w-xl mx-auto w-full text-center relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-tr from-amber-500/10 to-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-2">
-          Bharat's Smart <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500">Local Ecosystem.</span>
+      <section className="px-4 pt-10 pb-6 max-w-xl mx-auto w-full text-center relative">
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 mb-2">
+          Bharat's Unified <span className="text-orange-600">Super-App.</span>
         </h1>
-        <p className="text-xs text-slate-400 mb-5 font-medium">
-          Structured intelligence for sightseeing, food, transport, and verified services.
+        <p className="text-xs sm:text-sm text-slate-600 mb-6 font-medium">
+          Structured intelligence for sightseeing, food, transport, and verified local services.
         </p>
 
         <form onSubmit={(e) => handleSearch(undefined, e)} className="relative z-10">
-          <div className="flex bg-slate-900/90 rounded-2xl p-1.5 border border-slate-700/60 focus-within:border-amber-500 transition shadow-xl backdrop-blur-md">
-            <span className="flex items-center pl-3 text-amber-500 text-base">🔍</span>
+          <div className="flex bg-white rounded-2xl p-2 border border-slate-300 focus-within:border-orange-500 transition shadow-lg">
+            <span className="flex items-center pl-3 text-orange-500 text-lg">🔍</span>
             <input
               type="text"
               placeholder="Search any city, town or village (e.g. Jaipur, Ujjain)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 bg-transparent px-3 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
+              className="flex-1 bg-transparent px-3 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none font-semibold"
             />
             <button 
               type="submit" 
               disabled={loading} 
-              className="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition disabled:opacity-50 shadow-md active:scale-95"
+              className="bg-orange-600 hover:bg-orange-700 text-white font-black text-xs sm:text-sm px-6 py-2.5 rounded-xl transition shadow-md disabled:opacity-50 active:scale-95"
             >
               {loading ? '...' : 'Explore'}
             </button>
@@ -202,10 +200,4 @@ export default function App() {
               key={city}
               type="button"
               onClick={() => handleSearch(city)}
-              className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition active:scale-95 shadow-sm"
-            >
-              📍 {city}
-            </button>
-          ))}
-        </div>
-      </section
+              className="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition shadow-sm active:scale-95 flex items-center gap-1
