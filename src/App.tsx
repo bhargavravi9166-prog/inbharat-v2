@@ -38,7 +38,7 @@ export default function App() {
   const [showBizModal, setShowBizModal] = useState(false);
   const [supabaseData, setSupabaseData] = useState<any[]>([]);
 
-  // Supabase data fetch integration using useEffect
+  // Load data from Supabase on mount
   useEffect(() => {
     async function loadData() {
       const { data, error } = await supabase.from('india_directory').select('*');
@@ -56,23 +56,44 @@ export default function App() {
     const key = query.trim().toLowerCase();
     if (!key) return;
 
-    if (CITIES_DB[key]) {
+    // Check if data exists in Supabase table (CSV upload)
+    const foundInSupabase = supabaseData.find(
+      (item) => 
+        (item.city_name && item.city_name.toLowerCase().includes(key)) ||
+        (item.state_name && item.state_name.toLowerCase().includes(key)) ||
+        (item.name && item.name.toLowerCase().includes(key))
+    );
+
+    if (foundInSupabase) {
+      setCityData({
+        Name: foundInSupabase.name || foundInSupabase.city_name || 'Destination',
+        City: foundInSupabase.city_name || query,
+        State: foundInSupabase.state_name || 'India',
+        Type: '✨ Database Verified Location',
+        image_url: foundInSupabase.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+        history_geo_political: foundInSupabase.history || foundInSupabase.description || 'Details loaded from Supabase directory.',
+        picnic_spots: foundInSupabase.picnic_spots || '🏛️ Local heritage points and attractions.',
+        transport_roadmap: foundInSupabase.transport || 'Road & rail connectivity available.',
+        hotels_booking: foundInSupabase.hotels || '🏨 Local stays and verified hotels.',
+        markets_food: foundInSupabase.markets_food || '🛍️ Local markets and regional food.',
+        culture_helpline: foundInSupabase.helpline || 'Helpline: SOS: 112'
+      });
+    } else if (CITIES_DB[key]) {
       setCityData(CITIES_DB[key]);
     } else {
       const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
-      
       setCityData({
         Name: `${cap} - Heritage & Culture Hub`,
         City: cap,
         State: 'India',
         Type: '✨ Verified Regional Destination',
         image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: `History: ${cap} is a historically significant region known for ancient trade routes, local dynasties, and cultural heritage. Geography: Positioned strategically across vibrant regional landscapes with local water bodies and green expanses. Political: Serves as an active municipal and administrative subdivision.`,
-        picnic_spots: `🏛️ ${cap} Ancient Fortified Gateway & Heritage Center (0 km)\n🌿 ${cap} Central Public Park & Botanical Garden (3 km)\n🛕 Historic Regional Temples & Spiritual Shrines (5 km)\n🏞️ Local River Bridge & Scenic Sunset Point (10 km)`,
-        transport_roadmap: `Road Map: Linked through major state highways and district roads. Transport: Local railway station, state transport bus depot, auto-rickshaw stands, and local cab services.`,
-        hotels_booking: `🏨 ${cap} Royal Heritage Inn & Suites\n🏨 Grand Comfort Hotel\n🏨 ${cap} City Residency & Lodge\n🏨 Traditional Homestay`,
-        markets_food: `🛍️ ${cap} Main Handloom Market, Local Artisan Bazaars & Handicraft Shops.\n🍲 Signature Regional Thali, Local Traditional Sweets, and Popular Street Snacks of ${cap}.`,
-        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant seasonal festivals. Helpline: Local Police Station: 100 | Medical Ambulance: 108 | Pan-India SOS: 112`
+        history_geo_political: `History & Geography details for ${cap}.`,
+        picnic_spots: `🏛️ Main attractions of ${cap}`,
+        transport_roadmap: `Transport links for ${cap}`,
+        hotels_booking: `Hotels in ${cap}`,
+        markets_food: `Markets and food of ${cap}`,
+        culture_helpline: `Helpline: 112`
       });
     }
   };
