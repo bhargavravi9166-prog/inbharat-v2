@@ -16,14 +16,11 @@ export default function App() {
   const [searched, setSearched] = useState(false);
   const [activeTab, setActiveTab] = useState<Record<number, string>>({});
 
-  // Modals
   const [showAddModal, setShowAddModal] = useState(false);
   const [showVendorModal, setShowVendorModal] = useState(false);
   const [showGovtModal, setShowGovtModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Form States
   const [formData, setFormData] = useState({
     Name: '', State: '', City: '', Type: '', Zone: '',
     geography_politics: '', history: '', famous_personalities: '',
@@ -32,13 +29,8 @@ export default function App() {
     panchayat_sarpanch: '', local_government: '', emergency_services: '', public_utilities: ''
   });
 
-  const [vendorData, setVendorData] = useState({
-    businessName: '', ownerName: '', phone: '', city: ''
-  });
-
-  const [govtData, setGovtData] = useState({
-    repName: '', designation: '', villageCity: '', phone: ''
-  });
+  const [vendorData, setVendorData] = useState({ businessName: '', ownerName: '', phone: '', city: '' });
+  const [govtData, setGovtData] = useState({ repName: '', designation: '', villageCity: '', phone: '' });
 
   useEffect(() => {
     loadDefaultData();
@@ -57,8 +49,8 @@ export default function App() {
     setLoading(false);
   };
 
-  // Universal All-India Live Fetch Engine
-  const fetchUniversalLocationData = async (query: string) => {
+  // Tourism & Nearby Radar Engine
+  const fetchTourismAndLocationData = async (query: string) => {
     try {
       const cleanQuery = query.trim();
       
@@ -82,33 +74,26 @@ export default function App() {
 
       const realImg = wikiData.thumbnail?.source || wikiData.originalimage?.source || null;
       const extractText = wikiData.extract || '';
-      
-      const popMatch = extractText.match(/(?:population|inhabitants)\s*(?:of|is|was)?\s*([0-9,]+)/i);
-      const detectedPopulation = popMatch ? popMatch[1] : 'Sthaniya Revenue / Gram Census Record';
 
       return {
         Name: wikiData.title,
         City: wikiData.title,
         State: 'Bharat / India',
-        Type: wikiData.description || 'Gram Panchayat / Village / Town',
-        Zone: 'India Administrative Zone',
+        Type: wikiData.description || 'Tourism & Heritage Destination',
+        Zone: 'InBharat Tourism Radar',
         image_url: realImg,
-        population: detectedPopulation,
         geography_politics: extractText,
         history: extractText,
-        famous_personalities: `Gram Panchayat & Local Representatives of ${wikiData.title}`,
-        culture: `Regional traditions & community heritage of ${wikiData.title}`,
-        famous_food: `Local food vendors & traditional cuisine of ${wikiData.title}`,
-        famous_markets: `${wikiData.title} Village / Town Local Market`,
-        temples_and_spots: `Local Community Center, Mandir & Govt School in ${wikiData.title}`,
-        route_transport: `Connected via District Roads & Nearby Transport Hubs.`,
-        panchayat_sarpanch: `Gram Panchayat Office (${wikiData.title}). Click 'Update Sarpanch' to claim & verify live representative details.`,
-        local_government: `Nearest Tehsil Office & Block Development Office (BDO) for ${wikiData.title}`,
-        emergency_services: `Local Police Station (100), Primary Health Centre / Ambulance (108)`,
-        public_utilities: `CSC / E-Mitra Portal, Electricity Board & Water Supply Dept`
+        temples_and_spots: `Top Nearby Spots around ${wikiData.title}: 1. Main Heritage Fort & Palace 2. Historic Ancient Temple 3. Local Cultural Museum 4. Scenic Viewpoint & Lake Gardens.`,
+        famous_markets: `${wikiData.title} Handloom Bazaar, Traditional Handicrafts & Street Food Hub.`,
+        famous_food: `Authentic Regional Thali, Local Sweets & Famous Street Snacks of ${wikiData.title}.`,
+        route_transport: `Well connected via State Highways, Taxi Services, Railway Station & Local Buses.`,
+        panchayat_sarpanch: `Local Tourism Help Desk & Municipal Office (${wikiData.title}).`,
+        emergency_services: `Tourist Police Helpline, District Hospital (108) & Police Station (100).`,
+        public_utilities: `ATM, Fuel Stations, EV Charging & E-Mitra Tourism Kiosk.`
       };
     } catch (e) {
-      console.error('Universal Fetch Error:', e);
+      console.error('Tourism API Error:', e);
       return null;
     }
   };
@@ -127,11 +112,10 @@ export default function App() {
     setLoading(true);
     setSearched(true);
 
-    // 1. Check Supabase First
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .or(`Name.ilike.%${cleanQuery}%,State.ilike.%${cleanQuery}%,City.ilike.%${cleanQuery}%,Zone.ilike.%${cleanQuery}%,temples_and_spots.ilike.%${cleanQuery}%,famous_markets.ilike.%${cleanQuery}%,panchayat_sarpanch.ilike.%${cleanQuery}%`);
+      .or(`Name.ilike.%${cleanQuery}%,State.ilike.%${cleanQuery}%,City.ilike.%${cleanQuery}%,temples_and_spots.ilike.%${cleanQuery}%,famous_markets.ilike.%${cleanQuery}%`);
 
     if (!error && data && data.length > 0) {
       setResults(data);
@@ -139,8 +123,7 @@ export default function App() {
       return;
     }
 
-    // 2. Fetch Live Dynamic Net Data
-    const apiResult = await fetchUniversalLocationData(cleanQuery);
+    const apiResult = await fetchTourismAndLocationData(cleanQuery);
     if (apiResult) {
       setResults([apiResult]);
     } else {
@@ -153,92 +136,25 @@ export default function App() {
     setActiveTab(prev => ({ ...prev, [cardIdx]: tabName }));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleAddSpotSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.Name || !formData.State) {
-      alert('Kripya Place Name aur State zaroor bharein!');
-      return;
-    }
-
-    setSubmitting(true);
-    const { error } = await supabase
-      .from('Heritage and tourism palace')
-      .insert([formData]);
-
-    setSubmitting(false);
-
-    if (error) {
-      alert('Error: ' + error.message);
-    } else {
-      setSubmitSuccess(true);
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setShowAddModal(false);
-      }, 2000);
-    }
-  };
-
-  const handleVendorSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Dhanyawad ${vendorData.ownerName}! InBharat team 24 ghante me aapke business "${vendorData.businessName}" ko verify karegi.`);
-    setShowVendorModal(false);
-  };
-
-  const handleGovtSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    
-    const { error } = await supabase
-      .from('Heritage and tourism palace')
-      .insert([{
-        Name: govtData.villageCity,
-        City: govtData.villageCity,
-        State: 'Verified Location',
-        Type: 'Panchayat Representative Verified',
-        panchayat_sarpanch: `${govtData.designation}: ${govtData.repName} (Contact: ${govtData.phone})`,
-        local_government: `Verified Representative Record for ${govtData.villageCity}`
-      }]);
-
-    setSubmitting(false);
-
-    if (error) {
-      alert('Submission Error: ' + error.message);
-    } else {
-      alert(`Dhanyawad ${govtData.repName}! Aapka record InBharat portal par LIVE update ho gaya hai.`);
-      setShowGovtModal(false);
-      handleSearch(govtData.villageCity);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-col font-sans pb-24 selection:bg-orange-500 selection:text-white">
       
       {/* Top Banner */}
       <div className="bg-[#0F2C59] text-amber-300 text-xs py-2 px-4 shadow-inner">
         <div className="max-w-4xl mx-auto flex justify-between items-center font-semibold">
-          <span className="truncate">🏛️ All India Villages, Sarpanch, Police & Emergency Portal</span>
+          <span className="truncate">🏛️ InBharat Tourism & Nearby Spots Discovery Hub</span>
           <div className="flex gap-2">
-            <button 
-              onClick={() => setShowGovtModal(true)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-2.5 py-0.5 rounded-full text-[10px] transition shadow whitespace-nowrap"
-            >
-              Update Panch/Sarpanch
+            <button onClick={() => setShowGovtModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-2.5 py-0.5 rounded-full text-[10px] transition shadow whitespace-nowrap">
+              Update Info
             </button>
-            <button 
-              onClick={() => setShowVendorModal(true)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-extrabold px-2.5 py-0.5 rounded-full text-[10px] transition shadow whitespace-nowrap"
-            >
-              List Shop
+            <button onClick={() => setShowVendorModal(true)} className="bg-orange-500 hover:bg-orange-600 text-white font-extrabold px-2.5 py-0.5 rounded-full text-[10px] transition shadow whitespace-nowrap">
+              List Business
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main App Navbar */}
+      {/* Main Navbar */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.location.reload()}>
           <div className="w-9 h-9 rounded-xl bg-[#0F2C59] flex items-center justify-center text-orange-500 font-black text-xl shadow-md border border-orange-500/20">
@@ -250,123 +166,116 @@ export default function App() {
               <span className="text-[#0F2C59]">BHARAT</span>
             </div>
             <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block -mt-0.5">
-              Super-App for All India
+              Tourism & Local Super-App
             </span>
           </div>
         </div>
 
-        <div className="flex gap-2">
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200 transition"
-          >
-            + Add Spot / Village
-          </button>
-        </div>
+        <button onClick={() => setShowAddModal(true)} className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200 transition">
+          + Add Place
+        </button>
       </header>
 
-      {/* Hero Banner Section */}
+      {/* Hero Search Section */}
       <section className="bg-gradient-to-b from-[#0F2C59] via-[#143B73] to-slate-900 text-white p-4 pt-8 pb-10 max-w-4xl mx-auto w-full relative overflow-hidden">
         <div className="text-center mb-6 relative z-10">
           <span className="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-            🌐 Live Search for Any Village, Town or City in Bharat
+            🌍 Explore Cities, Monuments & Nearby Tourist Attractions
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
-            Search Any Village or City in India
+            Discover India's Best Heritage & Spots
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Universal portal for population, Sarpanch, local history & emergency services!
+            Search any city to instantly view nearby sightseeing, monuments and local culture!
           </p>
         </div>
 
-        {/* Search Bar */}
         <form onSubmit={(e) => handleSearch(undefined, e)} className="relative max-w-2xl mx-auto z-10">
           <div className="flex bg-white rounded-2xl p-1.5 shadow-2xl border-2 border-orange-500">
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Type any village, city or tehsil name in India..."
+              placeholder="Search city or tourist destination (e.g. Jaipur, Ujjain, Tonk)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
             />
-            <button
-              type="submit"
-              disabled={loading}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-black text-xs sm:text-sm px-6 py-2.5 rounded-xl transition shadow-lg disabled:opacity-50"
-            >
-              {loading ? '...' : 'Search'}
+            <button type="submit" disabled={loading} className="bg-orange-500 hover:bg-orange-600 text-white font-black text-xs sm:text-sm px-6 py-2.5 rounded-xl transition shadow-lg disabled:opacity-50">
+              {loading ? '...' : 'Explore'}
             </button>
           </div>
         </form>
+
+        <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-[11px] justify-start sm:justify-center relative z-10">
+          {['Jaipur', 'Ujjain', 'Tonk', 'Varanasi', 'Agra', 'Jodhpur', 'Udaipur'].map(city => (
+            <button
+              key={city}
+              type="button"
+              onClick={() => handleSearch(city)}
+              className="bg-white/10 hover:bg-orange-500/20 text-slate-200 border border-white/20 px-3 py-1 rounded-full font-semibold whitespace-nowrap backdrop-blur-md active:scale-95 transition"
+            >
+              🏛️ {city}
+            </button>
+          ))}
+        </div>
       </section>
 
-      {/* Main Content Area */}
+      {/* Results Section */}
       <main className="p-4 max-w-3xl mx-auto w-full flex-1 -mt-4 relative z-20">
         {loading && (
           <div className="text-center py-16 bg-white rounded-3xl shadow-md border border-slate-200">
             <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-slate-600 font-bold">InBharat Engine Searching Universal Record...</p>
+            <p className="text-xs text-slate-600 font-bold">Scanning Tourism & Nearby Attractions...</p>
           </div>
         )}
 
         {!loading && results.length > 0 && (
           <div className="space-y-6">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Showing {results.length} Location Record(s)
+              Showing {results.length} Destination Radar Result(s)
             </p>
             {results.map((item, idx) => {
-              const currentTab = activeTab[idx] || 'overview';
+              const currentTab = activeTab[idx] || 'tourism';
 
               return (
                 <div key={idx} className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-lg transition hover:shadow-xl">
                   
-                  {/* Dynamic Header: Image or Name Card Graphic */}
                   {item.image_url ? (
-                    <div className="relative h-48 bg-slate-900 overflow-hidden">
-                      <img 
-                        src={item.image_url} 
-                        alt={item.Name || 'Location Banner'}
-                        className="w-full h-full object-cover opacity-90"
-                      />
+                    <div className="relative h-52 bg-slate-900 overflow-hidden">
+                      <img src={item.image_url} alt={item.Name || 'Destination'} className="w-full h-full object-cover opacity-90" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-orange-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full shadow-md">
+                          ⭐ TOP TOURIST SPOT
+                        </span>
+                      </div>
                       <div className="absolute bottom-3 left-3 right-3 text-white">
-                        <h3 className="text-xl font-black tracking-tight">{item.Name || item.City}</h3>
+                        <h3 className="text-2xl font-black tracking-tight">{item.Name || item.City}</h3>
                         <p className="text-xs text-amber-200 font-semibold mt-0.5">📍 {item.State}</p>
                       </div>
                     </div>
                   ) : (
-                    <div className="relative h-36 bg-gradient-to-r from-[#0F2C59] via-[#143B73] to-slate-900 p-4 flex flex-col justify-end text-white border-b border-orange-500/20">
+                    <div className="relative h-40 bg-gradient-to-r from-[#0F2C59] via-[#143B73] to-slate-900 p-5 flex flex-col justify-end text-white">
                       <span className="bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full w-fit mb-1">
-                        🏛️ Gram Panchayat / Village Portal
+                        🏛️ Heritage Destination
                       </span>
                       <h3 className="text-2xl font-black tracking-tight">{item.Name || item.City}</h3>
-                      <p className="text-xs text-amber-200 font-semibold">📍 Administrative Location, Bharat</p>
+                      <p className="text-xs text-amber-200 font-semibold">📍 InBharat Tourism Radar</p>
                     </div>
                   )}
 
-                  {/* Quick Stats Bar */}
-                  <div className="bg-slate-900 px-4 py-2 flex justify-between items-center text-[11px] border-b border-slate-800 text-slate-300">
-                    <div>📊 Population: <strong className="text-orange-400 font-bold">{item.population || 'Official Census'}</strong></div>
-                    <div className="flex gap-2">
-                      <a href={`tel:108`} className="bg-red-600 text-white px-2.5 py-0.5 rounded-lg font-bold">🚑 108</a>
-                      <a href={`tel:100`} className="bg-blue-600 text-white px-2.5 py-0.5 rounded-lg font-bold">👮 100</a>
-                    </div>
-                  </div>
-
-                  {/* 5 Super Tabs */}
+                  {/* Tabs */}
                   <div className="flex border-b border-slate-200 bg-slate-50 text-[11px] font-bold text-slate-500 overflow-x-auto no-scrollbar">
                     {[
-                      { key: 'overview', label: '📌 Overview & Pop.' },
-                      { key: 'govt', label: '🏛️ Govt & Sarpanch' },
-                      { key: 'history', label: '📜 History & Info' },
-                      { key: 'market', label: '🛍️ Market & Food' },
-                      { key: 'emergency', label: '🚑 Emergency & Services' },
+                      { key: 'tourism', label: '🏛️ Nearby Sightseeing' },
+                      { key: 'overview', label: '📌 Overview & History' },
+                      { key: 'market', label: '🛍️ Markets & Food' },
+                      { key: 'emergency', label: '🚑 Travel Help & Police' },
                     ].map(tab => (
                       <button
                         key={tab.key}
                         onClick={() => handleTabChange(idx, tab.key)}
-                        className={`flex-1 py-3 px-3 whitespace-nowrap border-b-2 transition ${
+                        className={`flex-1 py-3 px-4 whitespace-nowrap border-b-2 transition ${
                           currentTab === tab.key
                             ? 'border-orange-500 text-orange-600 bg-white font-black shadow-sm'
                             : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -377,42 +286,26 @@ export default function App() {
                     ))}
                   </div>
 
-                  {/* Tab Details */}
+                  {/* Tab Content */}
                   <div className="p-5 text-xs text-slate-700 space-y-3 bg-white">
+                    {currentTab === 'tourism' && (
+                      <div className="space-y-3">
+                        <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                          <strong className="text-amber-900 block font-bold mb-1.5 text-sm">🎯 Aas-Paas Ki Ghumne Ki Jagah (Nearby Spots):</strong>
+                          <p className="leading-relaxed text-slate-800 whitespace-pre-line">{item.temples_and_spots}</p>
+                        </div>
+                        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🚗 Route & Transport:</strong>
+                          <p className="leading-relaxed">{item.route_transport}</p>
+                        </div>
+                      </div>
+                    )}
+
                     {currentTab === 'overview' && (
                       <div className="space-y-3">
-                        <div className="bg-orange-50 p-3 rounded-2xl border border-orange-200 flex justify-between items-center">
-                          <span className="font-bold text-slate-800">📊 Estimated Population (Aabadi):</span>
-                          <strong className="text-orange-600 text-sm font-extrabold">{item.population || 'Census Record'}</strong>
-                        </div>
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🗺️ Geographical Profile:</strong>
-                          <p className="leading-relaxed">{item.geography_politics}</p>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentTab === 'govt' && (
-                      <div className="space-y-3">
-                        <div className="bg-amber-50 p-3.5 rounded-2xl border border-amber-200">
-                          <div className="flex justify-between items-center mb-1">
-                            <strong className="text-amber-900 block font-bold">🏛️ Sarpanch & Local Representative:</strong>
-                            <button onClick={() => setShowGovtModal(true)} className="text-[10px] bg-amber-700 text-white px-2 py-0.5 rounded font-bold">Claim / Update</button>
-                          </div>
-                          <p className="leading-relaxed text-slate-800">{item.panchayat_sarpanch}</p>
-                        </div>
-                        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🏛️ Tehsil & Block Office:</strong>
-                          <p className="leading-relaxed">{item.local_government}</p>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentTab === 'history' && (
-                      <div className="space-y-3">
-                        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 History & Background:</strong>
-                          <p className="leading-relaxed">{item.history}</p>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 Destination History & Profile:</strong>
+                          <p className="leading-relaxed">{item.history || item.geography_politics}</p>
                         </div>
                       </div>
                     )}
@@ -420,8 +313,9 @@ export default function App() {
                     {currentTab === 'market' && (
                       <div className="space-y-3">
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🍲 Local Food & Markets:</strong>
-                          <p className="leading-relaxed">{item.famous_food} • {item.famous_markets}</p>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🍲 Famous Food & Shopping Markets:</strong>
+                          <p className="leading-relaxed mb-2">🛍️ <strong>Markets:</strong> {item.famous_markets}</p>
+                          <p className="leading-relaxed">🍛 <strong>Special Food:</strong> {item.famous_food}</p>
                         </div>
                       </div>
                     )}
@@ -429,7 +323,7 @@ export default function App() {
                     {currentTab === 'emergency' && (
                       <div className="space-y-3">
                         <div className="bg-rose-50 p-3.5 rounded-2xl border border-rose-200">
-                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Local Helplines & Hospital:</strong>
+                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Tourist Helplines & Emergency:</strong>
                           <p className="leading-relaxed text-slate-800">{item.emergency_services}</p>
                         </div>
                       </div>
@@ -442,36 +336,19 @@ export default function App() {
         )}
       </main>
 
-      {/* Sarpanch Modal */}
-      {showGovtModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl border border-slate-200 w-full max-w-xs p-5 text-xs text-slate-700 shadow-2xl">
-            <h3 className="font-extrabold text-[#0F2C59] mb-3 text-sm">🏛️ Update Panch / Sarpanch Details</h3>
-            <form onSubmit={handleGovtSubmit} className="space-y-2.5">
-              <input type="text" required placeholder="Representative Name *" value={govtData.repName} onChange={(e) => setGovtData({...govtData, repName: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
-              <input type="text" required placeholder="Designation (Sarpanch / Panch) *" value={govtData.designation} onChange={(e) => setGovtData({...govtData, designation: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
-              <input type="text" required placeholder="Village / City Name *" value={govtData.villageCity} onChange={(e) => setGovtData({...govtData, villageCity: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
-              <input type="tel" required placeholder="Mobile / WhatsApp *" value={govtData.phone} onChange={(e) => setGovtData({...govtData, phone: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
-              <button type="submit" disabled={submitting} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl mt-2 shadow-md">{submitting ? '...' : 'Save Live Record'}</button>
-              <button type="button" onClick={() => setShowGovtModal(false)} className="w-full text-slate-400 py-1 font-semibold">Close</button>
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 flex justify-around py-2 z-40 text-[10px] font-extrabold text-slate-500 shadow-xl">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-500">
           <span className="text-lg">🔍</span>
-          <span>Search</span>
+          <span>Explore</span>
         </button>
         <button onClick={() => setShowGovtModal(true)} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900">
           <span className="text-lg">🏛️</span>
-          <span>Panch/Sarpanch</span>
+          <span>Update Info</span>
         </button>
         <button onClick={() => setShowVendorModal(true)} className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-900">
           <span className="text-lg">💼</span>
-          <span>List Shop</span>
+          <span>List Business</span>
         </button>
       </nav>
 
