@@ -57,12 +57,11 @@ export default function App() {
     setLoading(false);
   };
 
-  // Hybrid Wikidata + Wikipedia Engine
-  const fetchHybridLocationData = async (query: string) => {
+  // Universal All-India Live Fetch Engine
+  const fetchUniversalLocationData = async (query: string) => {
     try {
       const cleanQuery = query.trim();
       
-      // Step 1: OpenSearch API to get exact Wikipedia Title
       const searchRes = await fetch(
         `https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(cleanQuery)}&limit=1&namespace=0&format=json&origin=*`
       );
@@ -73,7 +72,6 @@ export default function App() {
         targetTitle = searchData[1][0];
       }
 
-      // Step 2: REST Summary API for Extract and Image
       const summaryRes = await fetch(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(targetTitle)}`
       );
@@ -82,37 +80,35 @@ export default function App() {
       const wikiData = await summaryRes.json();
       if (!wikiData.extract) return null;
 
-      // Extract Real Photo
-      const realImg = wikiData.thumbnail?.source || wikiData.originalimage?.source || `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((targetTitle || 'india').length * 13)}`;
-
-      // Step 3: Extract Population from text or auto-format
+      const realImg = wikiData.thumbnail?.source || wikiData.originalimage?.source || null;
       const extractText = wikiData.extract || '';
+      
       const popMatch = extractText.match(/(?:population|inhabitants)\s*(?:of|is|was)?\s*([0-9,]+)/i);
-      const detectedPopulation = popMatch ? popMatch[1] : 'Sthaniya Census / Gram Revenue Record';
+      const detectedPopulation = popMatch ? popMatch[1] : 'Sthaniya Revenue / Gram Census Record';
 
       return {
         Name: wikiData.title,
         City: wikiData.title,
         State: 'Bharat / India',
         Type: wikiData.description || 'Gram Panchayat / Village / Town',
-        Zone: 'Administrative Zone',
+        Zone: 'India Administrative Zone',
         image_url: realImg,
         population: detectedPopulation,
         geography_politics: extractText,
-        history: `Itihas & Demographics: ${extractText}`,
-        famous_personalities: `Gram Panchayat Members, Teachers & Prominent Figures of ${wikiData.title}`,
-        culture: `Sthaniya Parampara, Boli & Utsav in ${wikiData.title}`,
-        famous_food: `Desi Khana & Local Food Stalls in ${wikiData.title}`,
-        famous_markets: `${wikiData.title} Village Main Market & CSC Services`,
-        temples_and_spots: `Gramin Mandir, Community Centre & Govt School in ${wikiData.title}`,
-        route_transport: `Connected via District Roads & Nearby Bus Stand.`,
-        panchayat_sarpanch: `Gram Panchayat Bhawan (${wikiData.title}). Click 'Update Sarpanch' to verify official Sarpanch contact.`,
-        local_government: `Tehsil, Block Development Office (BDO) & District Revenue Office for ${wikiData.title}`,
+        history: extractText,
+        famous_personalities: `Gram Panchayat & Local Representatives of ${wikiData.title}`,
+        culture: `Regional traditions & community heritage of ${wikiData.title}`,
+        famous_food: `Local food vendors & traditional cuisine of ${wikiData.title}`,
+        famous_markets: `${wikiData.title} Village / Town Local Market`,
+        temples_and_spots: `Local Community Center, Mandir & Govt School in ${wikiData.title}`,
+        route_transport: `Connected via District Roads & Nearby Transport Hubs.`,
+        panchayat_sarpanch: `Gram Panchayat Office (${wikiData.title}). Click 'Update Sarpanch' to claim & verify live representative details.`,
+        local_government: `Nearest Tehsil Office & Block Development Office (BDO) for ${wikiData.title}`,
         emergency_services: `Local Police Station (100), Primary Health Centre / Ambulance (108)`,
-        public_utilities: `CSC / E-Mitra Center, Electricity Sub-division & Water Supply`
+        public_utilities: `CSC / E-Mitra Portal, Electricity Board & Water Supply Dept`
       };
     } catch (e) {
-      console.error('Hybrid Engine Error:', e);
+      console.error('Universal Fetch Error:', e);
       return null;
     }
   };
@@ -131,7 +127,7 @@ export default function App() {
     setLoading(true);
     setSearched(true);
 
-    // 1. First Search Supabase DB (For crowdsourced/verified records)
+    // 1. Check Supabase First
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
@@ -144,7 +140,7 @@ export default function App() {
     }
 
     // 2. Fetch Live Dynamic Net Data
-    const apiResult = await fetchHybridLocationData(cleanQuery);
+    const apiResult = await fetchUniversalLocationData(cleanQuery);
     if (apiResult) {
       setResults([apiResult]);
     } else {
@@ -196,7 +192,6 @@ export default function App() {
     e.preventDefault();
     setSubmitting(true);
     
-    // Direct Live Save in Supabase
     const { error } = await supabase
       .from('Heritage and tourism palace')
       .insert([{
@@ -205,7 +200,7 @@ export default function App() {
         State: 'Verified Location',
         Type: 'Panchayat Representative Verified',
         panchayat_sarpanch: `${govtData.designation}: ${govtData.repName} (Contact: ${govtData.phone})`,
-        local_government: `Verified Panchayat Representative for ${govtData.villageCity}`
+        local_government: `Verified Representative Record for ${govtData.villageCity}`
       }]);
 
     setSubmitting(false);
@@ -213,7 +208,7 @@ export default function App() {
     if (error) {
       alert('Submission Error: ' + error.message);
     } else {
-      alert(`Dhanyawad ${govtData.repName}! Aapka record InBharat database me LIVE save ho gaya hai.`);
+      alert(`Dhanyawad ${govtData.repName}! Aapka record InBharat portal par LIVE update ho gaya hai.`);
       setShowGovtModal(false);
       handleSearch(govtData.villageCity);
     }
@@ -225,7 +220,7 @@ export default function App() {
       {/* Top Banner */}
       <div className="bg-[#0F2C59] text-amber-300 text-xs py-2 px-4 shadow-inner">
         <div className="max-w-4xl mx-auto flex justify-between items-center font-semibold">
-          <span className="truncate">🏛️ Live Sarpanch, Population, Police & Emergency Helpline Portal</span>
+          <span className="truncate">🏛️ All India Villages, Sarpanch, Police & Emergency Portal</span>
           <div className="flex gap-2">
             <button 
               onClick={() => setShowGovtModal(true)}
@@ -274,13 +269,13 @@ export default function App() {
       <section className="bg-gradient-to-b from-[#0F2C59] via-[#143B73] to-slate-900 text-white p-4 pt-8 pb-10 max-w-4xl mx-auto w-full relative overflow-hidden">
         <div className="text-center mb-6 relative z-10">
           <span className="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-            🌐 Search Any Village, City, Sarpanch & Population
+            🌐 Live Search for Any Village, Town or City in Bharat
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
-            One-Stop Portal for Every Indian Village & City
+            Search Any Village or City in India
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Real photos, dynamic population, local governance & emergency services in 1 click!
+            Universal portal for population, Sarpanch, local history & emergency services!
           </p>
         </div>
 
@@ -290,7 +285,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Type village name, city or tehsil..."
+              placeholder="Type any village, city or tehsil name in India..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
@@ -304,20 +299,6 @@ export default function App() {
             </button>
           </div>
         </form>
-
-        {/* Quick Filter Chips */}
-        <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-[11px] justify-start sm:justify-center relative z-10">
-          {['Tonk', 'Becharaji', 'Jaipur', 'Ujjain', 'Varanasi', 'Agra'].map(city => (
-            <button
-              key={city}
-              type="button"
-              onClick={() => handleSearch(city)}
-              className="bg-white/10 hover:bg-orange-500/20 text-slate-200 border border-white/20 px-3 py-1 rounded-full font-semibold whitespace-nowrap backdrop-blur-md active:scale-95 transition"
-            >
-              📍 {city}
-            </button>
-          ))}
-        </div>
       </section>
 
       {/* Main Content Area */}
@@ -325,7 +306,7 @@ export default function App() {
         {loading && (
           <div className="text-center py-16 bg-white rounded-3xl shadow-md border border-slate-200">
             <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-slate-600 font-bold">InBharat Engine Loading Real Image, Population & Admin Info...</p>
+            <p className="text-xs text-slate-600 font-bold">InBharat Engine Searching Universal Record...</p>
           </div>
         )}
 
@@ -336,38 +317,33 @@ export default function App() {
             </p>
             {results.map((item, idx) => {
               const currentTab = activeTab[idx] || 'overview';
-              const displayImg = item.image_url || `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((item.Name || 'india').length * 13)}`;
 
               return (
                 <div key={idx} className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-lg transition hover:shadow-xl">
                   
-                  {/* Image Banner Header */}
-                  <div className="relative h-48 bg-slate-900 overflow-hidden">
-                    <img 
-                      src={displayImg} 
-                      alt={item.Name || 'Location Banner'}
-                      className="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    
-                    <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
-                      <span className="bg-emerald-500 text-white font-black text-[10px] px-2.5 py-1 rounded-full shadow-md">
-                        ✓ VERIFIED PORTAL
+                  {/* Dynamic Header: Image or Name Card Graphic */}
+                  {item.image_url ? (
+                    <div className="relative h-48 bg-slate-900 overflow-hidden">
+                      <img 
+                        src={item.image_url} 
+                        alt={item.Name || 'Location Banner'}
+                        className="w-full h-full object-cover opacity-90"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                      <div className="absolute bottom-3 left-3 right-3 text-white">
+                        <h3 className="text-xl font-black tracking-tight">{item.Name || item.City}</h3>
+                        <p className="text-xs text-amber-200 font-semibold mt-0.5">📍 {item.State}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative h-36 bg-gradient-to-r from-[#0F2C59] via-[#143B73] to-slate-900 p-4 flex flex-col justify-end text-white border-b border-orange-500/20">
+                      <span className="bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full w-fit mb-1">
+                        🏛️ Gram Panchayat / Village Portal
                       </span>
-                      {item.Type && (
-                        <span className="bg-orange-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full shadow-md truncate max-w-[160px]">
-                          📍 {item.Type}
-                        </span>
-                      )}
+                      <h3 className="text-2xl font-black tracking-tight">{item.Name || item.City}</h3>
+                      <p className="text-xs text-amber-200 font-semibold">📍 Administrative Location, Bharat</p>
                     </div>
-
-                    <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <h3 className="text-xl font-black tracking-tight drop-shadow-md">{item.Name || item.City || 'Location'}</h3>
-                      <p className="text-xs text-amber-200 font-semibold drop-shadow mt-0.5">
-                        📍 {item.City ? `${item.City}, ` : ''}{item.State} {item.Zone ? `• (${item.Zone} Zone)` : ''}
-                      </p>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Quick Stats Bar */}
                   <div className="bg-slate-900 px-4 py-2 flex justify-between items-center text-[11px] border-b border-slate-800 text-slate-300">
@@ -406,11 +382,11 @@ export default function App() {
                     {currentTab === 'overview' && (
                       <div className="space-y-3">
                         <div className="bg-orange-50 p-3 rounded-2xl border border-orange-200 flex justify-between items-center">
-                          <span className="font-bold text-slate-800">📊 Population (Aabadi):</span>
-                          <strong className="text-orange-600 text-sm font-extrabold">{item.population || 'Official Census Record'}</strong>
+                          <span className="font-bold text-slate-800">📊 Estimated Population (Aabadi):</span>
+                          <strong className="text-orange-600 text-sm font-extrabold">{item.population || 'Census Record'}</strong>
                         </div>
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🗺️ Unique Geography & Profile:</strong>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🗺️ Geographical Profile:</strong>
                           <p className="leading-relaxed">{item.geography_politics}</p>
                         </div>
                       </div>
@@ -420,13 +396,13 @@ export default function App() {
                       <div className="space-y-3">
                         <div className="bg-amber-50 p-3.5 rounded-2xl border border-amber-200">
                           <div className="flex justify-between items-center mb-1">
-                            <strong className="text-amber-900 block font-bold">🏛️ Sarpanch & Ward Panch Details:</strong>
-                            <button onClick={() => setShowGovtModal(true)} className="text-[10px] bg-amber-700 text-white px-2 py-0.5 rounded font-bold">Update Sarpanch</button>
+                            <strong className="text-amber-900 block font-bold">🏛️ Sarpanch & Local Representative:</strong>
+                            <button onClick={() => setShowGovtModal(true)} className="text-[10px] bg-amber-700 text-white px-2 py-0.5 rounded font-bold">Claim / Update</button>
                           </div>
                           <p className="leading-relaxed text-slate-800">{item.panchayat_sarpanch}</p>
                         </div>
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🏛️ Administrative Offices:</strong>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🏛️ Tehsil & Block Office:</strong>
                           <p className="leading-relaxed">{item.local_government}</p>
                         </div>
                       </div>
@@ -435,7 +411,7 @@ export default function App() {
                     {currentTab === 'history' && (
                       <div className="space-y-3">
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 History & Info:</strong>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 History & Background:</strong>
                           <p className="leading-relaxed">{item.history}</p>
                         </div>
                       </div>
@@ -444,7 +420,7 @@ export default function App() {
                     {currentTab === 'market' && (
                       <div className="space-y-3">
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">🍲 Food & Local Market:</strong>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🍲 Local Food & Markets:</strong>
                           <p className="leading-relaxed">{item.famous_food} • {item.famous_markets}</p>
                         </div>
                       </div>
@@ -453,7 +429,7 @@ export default function App() {
                     {currentTab === 'emergency' && (
                       <div className="space-y-3">
                         <div className="bg-rose-50 p-3.5 rounded-2xl border border-rose-200">
-                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Emergency & Helplines:</strong>
+                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Local Helplines & Hospital:</strong>
                           <p className="leading-relaxed text-slate-800">{item.emergency_services}</p>
                         </div>
                       </div>
