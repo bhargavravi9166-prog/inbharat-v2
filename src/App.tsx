@@ -60,7 +60,7 @@ export default function App() {
           Type: '✅ Database Verified Record',
           image_url: found.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
           history_geo_political: found.history || found.description || found.history_geo_political || `Detailed historical and geographical overview of ${cap}, featuring rich regional heritage and administrative significance.`,
-          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Main Heritage Fort & Monuments (0 km)\n🛕 Historic ${cap} Ancient Mandir & Spiritual Shrine (3 km)\n🌿 ${cap} Central Public Park & Botanical Gardens (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (7 km)`,
+          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Heritage Sightseeing & Monument Point (0 km)\n🛕 ${cap} Prachin Shri Mandir & Spiritual Center (3 km)\n🌿 ${cap} City Riverside & Nature Picnic Spot (5 km)\n🏞️ Regional Lake Viewpoint & Garden (7 km)`,
           transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, and auto/cab services available in ${cap}.`,
           hotels_booking: found.hotels || found.hotels_booking || `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
           markets_food: found.markets_food || found.food || `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
@@ -80,14 +80,14 @@ export default function App() {
         Name: `${cap} - City Intelligence Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Custom Verified',
+        Type: '🌐 Live Unique Destination',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} Ancient Fortified Gateway & Heritage Center (0 km)\n🛕 Famous ${cap} Prachin Mandir & Spiritual Shrine (3 km)\n🌿 ${cap} City Central Park & Recreational Garden (5 km)\n🏞️ Scenic River Bridge & Sunset Viewpoint (8 km)`,
-        transport_roadmap: `Road Map: Linked through major state highways and national routes. Transport: Local railway station, bus depots, and auto-rickshaw stands in ${cap}.`,
-        hotels_booking: `🏨 Premium Heritage Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Tourist Lodges\n🏨 Authentic Local Homestays`,
-        markets_food: `🛍️ Main Handloom Bazaar, Local Handicraft Shops & Weekly Markets of ${cap}.\n🍲 Signature Regional Thali, Traditional Sweets, and Popular Local Street Snacks.`,
-        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} Royal Palace & Historical Monument (0 km)\n🛕 Famous ${cap} Shri Mandir & Cultural Teerth (3 km)\n🌿 ${cap} Eco Park & Family Picnic Garden (5 km)\n🏞️ Scenic Water Reservoir & Sunset Point (8 km)`,
+        transport_roadmap: `Road Map: Linked through major state highways and national routes in ${cap}. Transport: Local railway station, state transport bus depots, and auto-rickshaw stands.`,
+        hotels_booking: `🏨 Premium Hotels & Luxury Resorts in ${cap}\n🏨 Tourist Comfort Lodges & Stays\n🏨 Traditional Regional Homestays`,
+        markets_food: `🛍️ ${cap} Main Town Market, Handloom Bazaars & Handicraft Shops.\n🍲 Signature Regional Thali, Traditional Sweets, and Popular Local Street Snacks of ${cap}.`,
+        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant seasonal festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
 
     } catch (err) {
