@@ -16,17 +16,6 @@ const CITIES_DB: Record<string, any> = {
     hotels_booking: '🏨 Taj Rambagh Palace (Luxury)\n🏨 Trident Jaipur (5-Star)\n🏨 Zostel Jaipur',
     markets_food: '🛍️ Johari Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori, Ghevar.',
     culture_helpline: 'Culture: Rajputana folk arts and turban tradition. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
-  },
-  mumbai: {
-    Name: 'Mumbai - Financial Capital of India',
-    City: 'Mumbai', State: 'Maharashtra', Type: '🌊 Coastal Financial Metropolis',
-    image_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Evolved from seven islands ruled by Koli fishermen and British. Geography: Konkan coast harbor. Political: Capital of Maharashtra.',
-    picnic_spots: '🏛️ Gateway of India & Elephanta Caves\n🌊 Marine Drive & Chowpatty Beach\n🌿 Sanjay Gandhi National Park',
-    transport_roadmap: 'Road Map: Eastern & Western Express Highways. Transport: Mumbai Local Trains, BEST buses, Metro, and CSMIA Airport.',
-    hotels_booking: '🏨 The Taj Mahal Palace\n🏨 Trident Nariman Point',
-    markets_food: '🛍️ Colaba Causeway, Crawford Market.\n🍲 Mumbai Vada Pav, Pav Bhaji, Bombay Sandwich.',
-    culture_helpline: 'Culture: Bollywood cinema and Marathi traditions. Helpline: Police: 100 | Ambulance: 102'
   }
 };
 
@@ -38,13 +27,13 @@ export default function App() {
   const [showBizModal, setShowBizModal] = useState(false);
   const [supabaseData, setSupabaseData] = useState<any[]>([]);
 
-  // Load data from Supabase on mount
   useEffect(() => {
     async function loadData() {
       const { data, error } = await supabase.from('india_directory').select('*');
       if (error) {
         console.error('Supabase error:', error);
       } else if (data) {
+        console.log("Loaded Supabase Data:", data); // Console mein check karne ke liye
         setSupabaseData(data);
       }
     }
@@ -56,27 +45,32 @@ export default function App() {
     const key = query.trim().toLowerCase();
     if (!key) return;
 
-    // Check if data exists in Supabase table (CSV upload)
     const foundInSupabase = supabaseData.find(
-      (item) => 
-        (item.city_name && item.city_name.toLowerCase().includes(key)) ||
-        (item.state_name && item.state_name.toLowerCase().includes(key)) ||
-        (item.name && item.name.toLowerCase().includes(key))
+      (item) => {
+        const textToSearch = Object.values(item).join(' ').toLowerCase();
+        // Item ke kisi bhi column mein agar query match hoti hai
+        return (
+          (item.city_name && item.city_name.toLowerCase().includes(key)) ||
+          (item.state_name && item.state_name.toLowerCase().includes(key)) ||
+          (item.name && item.name.toLowerCase().includes(key)) ||
+          textToSearch.includes(key)
+        );
+      }
     );
 
     if (foundInSupabase) {
       setCityData({
-        Name: foundInSupabase.name || foundInSupabase.city_name || 'Destination',
-        City: foundInSupabase.city_name || query,
-        State: foundInSupabase.state_name || 'India',
+        Name: foundInSupabase.name || foundInSupabase.city_name || foundInSupabase.title || 'Destination',
+        City: foundInSupabase.city_name || foundInSupabase.city || query,
+        State: foundInSupabase.state_name || foundInSupabase.state || 'India',
         Type: '✨ Database Verified Location',
-        image_url: foundInSupabase.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: foundInSupabase.history || foundInSupabase.description || 'Details loaded from Supabase directory.',
-        picnic_spots: foundInSupabase.picnic_spots || '🏛️ Local heritage points and attractions.',
-        transport_roadmap: foundInSupabase.transport || 'Road & rail connectivity available.',
-        hotels_booking: foundInSupabase.hotels || '🏨 Local stays and verified hotels.',
-        markets_food: foundInSupabase.markets_food || '🛍️ Local markets and regional food.',
-        culture_helpline: foundInSupabase.helpline || 'Helpline: SOS: 112'
+        image_url: foundInSupabase.image_url || foundInSupabase.image || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+        history_geo_political: foundInSupabase.history_geo_political || foundInSupabase.history || foundInSupabase.description || foundInSupabase.details || 'Details loaded from Supabase directory.',
+        picnic_spots: foundInSupabase.picnic_spots || foundInSupabase.spots || foundInSupabase.attractions || foundInSupabase.sightseeing || '🏛️ Local heritage points and attractions.',
+        transport_roadmap: foundInSupabase.transport_roadmap || foundInSupabase.transport || foundInSupabase.road || 'Road & rail connectivity available.',
+        hotels_booking: foundInSupabase.hotels_booking || foundInSupabase.hotels || foundInSupabase.stays || '🏨 Local stays and verified hotels.',
+        markets_food: foundInSupabase.markets_food || foundInSupabase.food || foundInSupabase.markets || '🛍️ Local markets and regional food.',
+        culture_helpline: foundInSupabase.culture_helpline || foundInSupabase.helpline || foundInSupabase.sos || 'Helpline: SOS: 112'
       });
     } else if (CITIES_DB[key]) {
       setCityData(CITIES_DB[key]);
@@ -144,7 +138,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city in India (e.g. Kota, Bhopal, Ajmer)..."
+              placeholder="Search any city from your database..."
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
               className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
@@ -153,21 +147,6 @@ export default function App() {
               Search
             </button>
           </div>
-        </div>
-
-        {/* Quick Suggestion Chips */}
-        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
-          {[
-            { name: 'Jaipur', icon: '👑' },
-            { name: 'Kota', icon: '⚡' },
-            { name: 'Bhopal', icon: '🏞️' },
-            { name: 'Mumbai', icon: '🌊' },
-            { name: 'Patna', icon: '🌾' }
-          ].map(c => (
-            <button key={c.name} onClick={() => handleSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
-              <span>{c.icon}</span> <span>{c.name}</span>
-            </button>
-          ))}
         </div>
       </section>
 
@@ -215,7 +194,7 @@ export default function App() {
                 <span className="text-amber-400 font-black block text-sm flex items-center gap-2">
                   <span>📜</span> History, Geography & Political Profile
                 </span>
-                <p className="leading-relaxed pt-1">{cityData.history_geo_political}</p>
+                <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.history_geo_political}</p>
               </div>
             )}
 
@@ -233,7 +212,7 @@ export default function App() {
                 <span className="text-sky-400 font-black block text-sm flex items-center gap-2">
                   <span>🚗</span> Road Maps, Route & Transport Taxi
                 </span>
-                <p className="leading-relaxed pt-1">{cityData.transport_roadmap}</p>
+                <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.transport_roadmap}</p>
               </div>
             )}
 
@@ -257,13 +236,7 @@ export default function App() {
                   <span className="text-emerald-400 font-black block mb-1 flex items-center gap-2">
                     <span>🛍️</span> Famous Markets & Shopping
                   </span>
-                  <p>{cityData.markets_food.split('🍲')[0]}</p>
-                </div>
-                <div className="bg-slate-950/60 p-3.5 rounded-2xl border border-slate-800">
-                  <span className="text-rose-400 font-black block mb-1 flex items-center gap-2">
-                    <span>🍲</span> Authentic Local Food & Culture
-                  </span>
-                  <p>{cityData.markets_food.split('🍲')[1] ? '🍲 ' + cityData.markets_food.split('🍲')[1] : ''}</p>
+                  <p className="whitespace-pre-line">{cityData.markets_food}</p>
                 </div>
               </div>
             )}
@@ -273,7 +246,7 @@ export default function App() {
                 <span className="text-red-400 font-black block text-sm flex items-center gap-2">
                   <span>🚨</span> Emergency Helpline & Culture SOS
                 </span>
-                <p className="font-bold text-slate-100 text-sm leading-relaxed">{cityData.culture_helpline}</p>
+                <p className="font-bold text-slate-100 text-sm leading-relaxed whitespace-pre-line">{cityData.culture_helpline}</p>
               </div>
             )}
 
