@@ -57,11 +57,10 @@ export default function App() {
     setLoading(false);
   };
 
-  // Smart OpenSearch API (Finds any village/town even with spelling variations)
+  // Fetch Real Wikipedia Image & Exact Dynamic Summary
   const fetchSmartNetData = async (query: string) => {
     try {
       const cleanQuery = query.trim();
-      // Step A: Search for nearest matching Wikipedia page
       const searchRes = await fetch(
         `https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(cleanQuery)}&limit=1&namespace=0&format=json&origin=*`
       );
@@ -69,10 +68,9 @@ export default function App() {
 
       let targetTitle = cleanQuery;
       if (searchData && searchData[1] && searchData[1].length > 0) {
-        targetTitle = searchData[1][0]; // Best matched title
+        targetTitle = searchData[1][0];
       }
 
-      // Step B: Get detailed summary of the matched village/town
       const summaryRes = await fetch(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(targetTitle)}`
       );
@@ -81,26 +79,30 @@ export default function App() {
       const wikiData = await summaryRes.json();
       if (!wikiData.extract) return null;
 
+      // Extract Real Photo URL if available from Wikipedia
+      const realImageUrl = wikiData.thumbnail?.source || wikiData.originalimage?.source || `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((targetTitle || 'india').length * 13)}`;
+
       return {
         Name: wikiData.title,
         City: wikiData.title,
         State: 'Bharat / India',
-        Type: 'Gram Panchayat / Village / City',
+        Type: wikiData.description || 'Village / Town / City',
         Zone: 'India Level',
-        'Establishment Year': 'Historical',
+        image_url: realImageUrl,
+        'Establishment Year': 'Historical Settlement',
         'Google review rating': '4.9',
         geography_politics: wikiData.extract,
         history: wikiData.extract,
-        famous_personalities: 'Local Panch, Sarpanch & Representatives of ' + wikiData.title,
-        culture: 'Traditional Indian culture, local heritage and community traditions.',
-        famous_food: 'Famous local street food & regional specialties of ' + wikiData.title,
-        famous_markets: wikiData.title + ' Village/City Main Market & Shops',
-        temples_and_spots: 'Local Temples, Community Hall & Gram Panchayat Bhawan',
-        route_transport: 'Connected via State/District Roads & Local Bus Stand.',
-        panchayat_sarpanch: 'Gram Panchayat Sarpanch & Ward Panch Office for ' + wikiData.title,
-        local_government: 'Tehsil Office, Block Development Officer & District Collectorate',
+        famous_personalities: 'Local Panch, Sarpanch, Teachers & Prominent Figures of ' + wikiData.title,
+        culture: 'Regional culture, local festivals and community traditions of ' + wikiData.title,
+        famous_food: 'Local authentic food, sweets & street vendors in ' + wikiData.title,
+        famous_markets: wikiData.title + ' Main Village Market, Grocery & Local Shops',
+        temples_and_spots: 'Gramin Mandir, Community Centre, Govt School & Local Spots in ' + wikiData.title,
+        route_transport: 'Connected via State/District Roads, Auto Stand & Nearby Bus Station.',
+        panchayat_sarpanch: `Gram Panchayat Office (${wikiData.title}). Click 'Update Panch/Sarpanch' to verify current Sarpanch name & phone.`,
+        local_government: `Tehsil Administration & Block Development Office for ${wikiData.title}.`,
         emergency_services: 'Local Police Station (100), Primary Health Centre / Ambulance (108)',
-        public_utilities: 'CSC / E-Mitra Kendra, Electricity Board & Water Department'
+        public_utilities: 'CSC / E-Mitra Kendra, Electricity Sub-division & Water Dept'
       };
     } catch (e) {
       console.error('Smart API Error:', e);
@@ -139,26 +141,7 @@ export default function App() {
     if (apiResult) {
       setResults([apiResult]);
     } else {
-      // 3. Dynamic Generated Backup if Net API is empty for very remote village
-      setResults([{
-        Name: cleanQuery,
-        City: cleanQuery,
-        State: 'Bharat',
-        Type: 'Village / Local Area',
-        Zone: 'India',
-        geography_politics: `${cleanQuery} Bharat ka ek local gaaon/kshetra hai. Iska administrative record Gram Panchayat aur Tehsil ke antargat aata hai.`,
-        history: `${cleanQuery} ka sthaniya itihas aur sanskriti bhartiya gramin parampara se judi hui hai.`,
-        famous_personalities: `Sthaniya Sarpanch, Ward Panch aur Pragatisheel Kisan.`,
-        culture: `Gramin Parampara, Lok Utsav aur Sthaniya Boli.`,
-        famous_food: `Sthaniya Desi Khana, Street Food aur Sweet Shops.`,
-        famous_markets: `${cleanQuery} Main Market & Local Shops.`,
-        temples_and_spots: `Gramin Mandir, Community Centre & Primary School.`,
-        route_transport: `Direct Auto, Taxi & District Bus Service Available.`,
-        panchayat_sarpanch: `Gram Panchayat Bhawan & Ward Panch Office (${cleanQuery}).`,
-        local_government: `Nearest Tehsil & Block Development Office.`,
-        emergency_services: `Police Station (100), Government Health Centre / Ambulance (108).`,
-        public_utilities: `CSC / E-Mitra Kendra & Electricity Sub-division.`
-      }]);
+      setResults([]);
     }
     setLoading(false);
   };
@@ -202,14 +185,30 @@ export default function App() {
     setShowVendorModal(false);
   };
 
-  const handleGovtSubmit = (e: React.FormEvent) => {
+  const handleGovtSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Dhanyawad ${govtData.repName}! Aapki application verify karke InBharat portal par live update kar di jayegi.`);
-    setShowGovtModal(false);
-  };
+    setSubmitting(true);
+    
+    // Save live submitted Sarpanch/Panch details into Supabase DB
+    const { error } = await supabase
+      .from('Heritage and tourism palace')
+      .insert([{
+        Name: govtData.villageCity,
+        City: govtData.villageCity,
+        State: 'Verified India Location',
+        Type: 'Panchayat Verified',
+        panchayat_sarpanch: `${govtData.designation}: ${govtData.repName} (Contact: ${govtData.phone})`,
+        local_government: `Verified Panchayat Representative for ${govtData.villageCity}`
+      }]);
 
-  const getSpotImage = (name: string, city: string) => {
-    return `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((name || 'india').length * 13)}`;
+    setSubmitting(false);
+
+    if (error) {
+      alert('Submission Error: ' + error.message);
+    } else {
+      alert(`Dhanyawad ${govtData.repName}! Aapki detail Live Portal par Save ho gayi hai.`);
+      setShowGovtModal(false);
+    }
   };
 
   return (
@@ -267,13 +266,13 @@ export default function App() {
       <section className="bg-gradient-to-b from-[#0F2C59] via-[#143B73] to-slate-900 text-white p-4 pt-8 pb-10 max-w-4xl mx-auto w-full relative overflow-hidden">
         <div className="text-center mb-6 relative z-10">
           <span className="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-            🌐 Live Smart Net Search Enabled for Any Village or Town
+            🌐 Live Internet Search Enabled for Any Village or Town
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
             Search Any Village, Town or City in India
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Try searching any random village or city name below!
+            Get instant real photos, local history, markets & administrative details!
           </p>
         </div>
 
@@ -283,7 +282,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Type any village name, town or city..."
+              placeholder="Type village name, city or tehsil..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
@@ -318,7 +317,7 @@ export default function App() {
         {loading && (
           <div className="text-center py-16 bg-white rounded-3xl shadow-md border border-slate-200">
             <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-slate-600 font-bold">InBharat Smart Engine Fetching Location Details...</p>
+            <p className="text-xs text-slate-600 font-bold">InBharat Engine Fetching Location & Image Details...</p>
           </div>
         )}
 
@@ -329,16 +328,17 @@ export default function App() {
             </p>
             {results.map((item, idx) => {
               const currentTab = activeTab[idx] || 'overview';
+              const displayImg = item.image_url || `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((item.Name || 'india').length * 13)}`;
 
               return (
                 <div key={idx} className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-lg transition hover:shadow-xl">
                   
                   {/* Image Banner Header */}
-                  <div className="relative h-44 bg-slate-900 overflow-hidden">
+                  <div className="relative h-48 bg-slate-900 overflow-hidden">
                     <img 
-                      src={getSpotImage(item.Name, item.City)} 
+                      src={displayImg} 
                       alt={item.Name || 'Location Banner'}
-                      className="w-full h-full object-cover opacity-85 hover:scale-105 transition duration-500"
+                      className="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     
@@ -347,7 +347,7 @@ export default function App() {
                         ✓ VERIFIED PORTAL
                       </span>
                       {item.Type && (
-                        <span className="bg-orange-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full shadow-md">
+                        <span className="bg-orange-500 text-white font-extrabold text-[10px] px-3 py-1 rounded-full shadow-md truncate max-w-[150px]">
                           📍 {item.Type}
                         </span>
                       )}
@@ -365,7 +365,7 @@ export default function App() {
                   <div className="bg-slate-900 px-4 py-2.5 flex gap-2 overflow-x-auto text-[11px] no-scrollbar border-b border-slate-800">
                     <a href={`tel:108`} className="bg-red-600 text-white px-3 py-1 rounded-xl font-extrabold whitespace-nowrap shadow">🚑 Ambulance (108)</a>
                     <a href={`tel:100`} className="bg-blue-600 text-white px-3 py-1 rounded-xl font-extrabold whitespace-nowrap shadow">👮 Police (100)</a>
-                    <a href={`https://www.makemytrip.com/hotels/${item.City || item.Name || 'india'}-hotels.html`} target="_blank" rel="noreferrer" className="bg-orange-500/20 text-orange-300 border border-orange-500/30 px-3 py-1 rounded-xl font-bold whitespace-nowrap">🏨 Hotels</a>
+                    <button onClick={() => setShowGovtModal(true)} className="bg-emerald-600 text-white px-3 py-1 rounded-xl font-extrabold whitespace-nowrap shadow">🏛️ Update Sarpanch</button>
                   </div>
 
                   {/* 5 Super Tabs */}
@@ -405,8 +405,15 @@ export default function App() {
                     {currentTab === 'govt' && (
                       <div className="space-y-3">
                         <div className="bg-amber-50 p-3.5 rounded-2xl border border-amber-200">
-                          <strong className="text-amber-900 block font-bold mb-1">🏛️ Sarpanch & Local Administration:</strong>
+                          <div className="flex justify-between items-center mb-1">
+                            <strong className="text-amber-900 block font-bold">🏛️ Sarpanch & Local Panch Details:</strong>
+                            <button onClick={() => setShowGovtModal(true)} className="text-[10px] bg-amber-700 text-white px-2 py-0.5 rounded font-bold">Verify / Update</button>
+                          </div>
                           <p className="leading-relaxed text-slate-800">{item.panchayat_sarpanch}</p>
+                        </div>
+                        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">🏛️ Administrative Offices:</strong>
+                          <p className="leading-relaxed">{item.local_government}</p>
                         </div>
                       </div>
                     )}
@@ -432,7 +439,7 @@ export default function App() {
                     {currentTab === 'emergency' && (
                       <div className="space-y-3">
                         <div className="bg-rose-50 p-3.5 rounded-2xl border border-rose-200">
-                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Emergency & Services:</strong>
+                          <strong className="text-rose-900 block mb-1 font-bold">🚑 Emergency & Helplines:</strong>
                           <p className="leading-relaxed text-slate-800">{item.emergency_services}</p>
                         </div>
                       </div>
@@ -444,6 +451,23 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* Sarpanch Modal */}
+      {showGovtModal && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl border border-slate-200 w-full max-w-xs p-5 text-xs text-slate-700 shadow-2xl">
+            <h3 className="font-extrabold text-[#0F2C59] mb-3 text-sm">🏛️ Update Panch / Sarpanch Details</h3>
+            <form onSubmit={handleGovtSubmit} className="space-y-2.5">
+              <input type="text" required placeholder="Representative Name *" value={govtData.repName} onChange={(e) => setGovtData({...govtData, repName: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
+              <input type="text" required placeholder="Designation (Sarpanch / Panch) *" value={govtData.designation} onChange={(e) => setGovtData({...govtData, designation: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
+              <input type="text" required placeholder="Village / City Name *" value={govtData.villageCity} onChange={(e) => setGovtData({...govtData, villageCity: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
+              <input type="tel" required placeholder="Mobile / WhatsApp *" value={govtData.phone} onChange={(e) => setGovtData({...govtData, phone: e.target.value})} className="w-full bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-900 outline-none focus:border-orange-500" />
+              <button type="submit" disabled={submitting} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl mt-2 shadow-md">{submitting ? '...' : 'Save Live Details'}</button>
+              <button type="button" onClick={() => setShowGovtModal(false)} className="w-full text-slate-400 py-1 font-semibold">Close</button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 flex justify-around py-2 z-40 text-[10px] font-extrabold text-slate-500 shadow-xl">
