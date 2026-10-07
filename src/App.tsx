@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://xyknkghkndyryfpybqqo.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5a25rZ2hrbmR5cnlmcHlicXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzg2NjYsImV4cCI6MjA1NjgxNDY2Nn0';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,7 +14,7 @@ export default function App() {
 
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Royal Heritage Capital',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Verified Hybrid Destination',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
     history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Enclosed by Aravalli hills. Political: Capital of Rajasthan.',
     picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🏛️ Nahargarh Fort Sunset Point (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)',
@@ -19,7 +24,8 @@ export default function App() {
     culture_helpline: 'Culture: Rajputana folk arts and turban tradition. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
   });
 
-  const handleLiveSearch = async (query: string) => {
+  // Hybrid Search: Supabase DB + Auto Intelligence Fallback
+  const handleHybridSearch = async (query: string) => {
     if (!query.trim()) return;
     const cleanQuery = query.trim();
     const cap = cleanQuery.charAt(0).toUpperCase() + cleanQuery.slice(1);
@@ -27,27 +33,49 @@ export default function App() {
     setSearchTerm(cleanQuery);
 
     try {
-      const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
-      const wikiData = await wikiRes.json();
+      // Step 1: Check Supabase Database first
+      const { data, error } = await supabase
+        .from('india_directory')
+        .select('*')
+        .or(`city_name.ilike.%${cleanQuery}%,state_name.ilike.%${cleanQuery}%,name.ilike.%${cleanQuery}%`)
+        .limit(1);
 
-      let description = wikiData.extract || `History & geographical insights for ${cap}, India.`;
-      let imageUrl = wikiData.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
+      if (error) throw error;
 
-      setCityData({
-        Name: `${cap} - Intelligence & Heritage Hub`,
-        City: cap,
-        State: 'India',
-        Type: '🌐 Live Smart Destination',
-        image_url: imageUrl,
-        history_geo_political: description,
-        picnic_spots: `🏛️ ${cap} Main Heritage Fort & Historical Monuments (0 km)\n🌿 ${cap} Central Public Park & Botanical Gardens (3 km)\n🛕 Famous Regional Temples & Spiritual Landmarks (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
-        transport_roadmap: `Road Map: Well connected via national and state highways. Transport: Local railway station, bus depots, auto-rickshaws, and taxi services available in ${cap}.`,
-        hotels_booking: `🏨 Grand Heritage Hotel & Luxury Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Local Homestays`,
-        markets_food: `🛍️ Main Bazaar, Handloom & Handicraft Markets of ${cap}.\n🍲 Famous Regional Thali, Traditional Sweets, and Local Street Food specialties of ${cap}.`,
-        culture_helpline: `Culture: Vibrant local traditions, folk arts, and regional festivals. Helpline: Local Police: 100 | Ambulance: 108 | Pan-India SOS: 112`
-      });
+      if (data && data.length > 0) {
+        const item = data[0];
+        // Step 2: Hybrid Merge (DB data + Fallbacks for missing fields)
+        setCityData({
+          Name: item.name || item.city_name || cap,
+          City: item.city_name || cap,
+          State: item.state_name || 'India',
+          Type: '✅ Database & Hybrid Verified',
+          image_url: item.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+          history_geo_political: item.history || item.description || item.history_geo_political || `History & geographical overview for ${cap}, known for its rich regional heritage and vibrant culture.`,
+          picnic_spots: item.picnic_spots || item.spots || item.attractions || `🏛️ ${cap} Main Historical Fort & Monuments (0 km)\n🌿 ${cap} Central Public Park & Gardens (3 km)\n🛕 Famous Regional Temples (5 km)\n🏞️ Scenic Viewpoints & Local Water Bodies (8 km)`,
+          transport_roadmap: item.transport || item.transport_roadmap || `Road Map: Connected via major highways. Transport: Local railway station, bus depots, and local auto/cab services in ${cap}.`,
+          hotels_booking: item.hotels || item.hotels_booking || `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
+          markets_food: item.markets_food || item.food || `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
+          culture_helpline: item.helpline || item.culture_helpline || `Culture: Unique local traditions and folk art. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        });
+      } else {
+        // Fallback if not strictly found in DB table rows
+        setCityData({
+          Name: `${cap} - Heritage & Culture Hub`,
+          City: cap,
+          State: 'India',
+          Type: '✨ Dynamic Hybrid Destination',
+          image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+          history_geo_political: `History & geographical insights for ${cap}, India. Known for its historical evolution, local trade traditions, and regional administration.`,
+          picnic_spots: `🏛️ ${cap} Main Historical Fort & Monuments (0 km)\n🌿 ${cap} Central Public Park & Gardens (3 km)\n🛕 Famous Regional Temples (5 km)\n🏞️ Scenic Viewpoints & Local Water Bodies (8 km)`,
+          transport_roadmap: `Road Map: Connected via major highways. Transport: Local railway station, bus depots, and local auto/cab services in ${cap}.`,
+          hotels_booking: `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
+          markets_food: `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
+          culture_helpline: `Culture: Unique local traditions and folk art. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        });
+      }
     } catch (err) {
-      console.error('Error fetching live data:', err);
+      console.error('Search error:', err);
     } finally {
       setLoading(false);
     }
@@ -67,7 +95,7 @@ export default function App() {
               <span className="text-white">BHARAT</span>
             </div>
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mt-0.5">
-              👑 Live Internet Super-App
+              👑 Hybrid Directory Super-App
             </span>
           </div>
         </div>
@@ -86,10 +114,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Live Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Any City in India.</span>
+          Hybrid Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Complete & Verified.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Directly pulling live history, picnic spots, food, hotels & data instantly.
+          Combining your Supabase database records with rich destination intelligence.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -97,27 +125,26 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Type any city name (e.g. Udaipur, Varanasi, Pune)..."
+              placeholder="Search any city or town in India..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleLiveSearch(searchTerm)}
+              onKeyDown={(e) => e.key === 'Enter' && handleHybridSearch(searchTerm)}
               className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
             />
-            <button onClick={() => handleLiveSearch(searchTerm)} className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs px-6 py-3 rounded-xl shadow-lg">
-              {loading ? 'Searching...' : 'Search Live'}
+            <button onClick={() => handleHybridSearch(searchTerm)} className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs px-6 py-3 rounded-xl shadow-lg">
+              {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
         </div>
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
+            { name: 'Jaipur', icon: '👑' },
             { name: 'Udaipur', icon: '🏰' },
             { name: 'Varanasi', icon: '🛕' },
-            { name: 'Pune', icon: '⛰️' },
-            { name: 'Agra', icon: '🕌' },
-            { name: 'Mysuru', icon: '🐘' }
+            { name: 'Mumbai', icon: '🌊' }
           ].map(c => (
-            <button key={c.name} onClick={() => handleLiveSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
+            <button key={c.name} onClick={() => handleHybridSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
             </button>
           ))}
@@ -163,7 +190,7 @@ export default function App() {
             {activeTab === 'overview' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-amber-400 font-black block text-sm flex items-center gap-2">
-                  <span>📜</span> History, Geography & Live Overview
+                  <span>📜</span> History & Geography
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.history_geo_political}</p>
               </div>
@@ -172,7 +199,7 @@ export default function App() {
             {activeTab === 'picnic' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-orange-400 font-black block text-sm flex items-center gap-2">
-                  <span>🌿</span> Picnic Spots & Sightseeing with Distance
+                  <span>🌿</span> Picnic Spots & Sightseeing
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.picnic_spots}</p>
               </div>
@@ -181,7 +208,7 @@ export default function App() {
             {activeTab === 'transit' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-sky-400 font-black block text-sm flex items-center gap-2">
-                  <span>🚗</span> Road Maps, Route & Transport Taxi
+                  <span>🚗</span> Road Maps & Transport
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.transport_roadmap}</p>
               </div>
@@ -191,7 +218,7 @@ export default function App() {
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-emerald-400 font-black block text-sm flex items-center gap-2">
-                    <span>🏨</span> Hotel & Homestay Booking Options
+                    <span>🏨</span> Hotel & Stay Options
                   </span>
                   <button onClick={() => setShowBookingModal(true)} className="bg-emerald-500 text-slate-950 font-black text-[10px] px-3 py-1.5 rounded-lg shadow">
                     Book Now
@@ -205,7 +232,7 @@ export default function App() {
               <div className="space-y-3">
                 <div className="bg-slate-950/60 p-3.5 rounded-2xl border border-slate-800">
                   <span className="text-emerald-400 font-black block mb-1 flex items-center gap-2">
-                    <span>🛍️</span> Famous Markets & Shopping / Food
+                    <span>🛍️</span> Famous Markets & Food
                   </span>
                   <p className="whitespace-pre-line">{cityData.markets_food}</p>
                 </div>
@@ -215,7 +242,7 @@ export default function App() {
             {activeTab === 'sos' && (
               <div className="bg-red-950/20 p-4 rounded-2xl border border-red-900/40 space-y-2">
                 <span className="text-red-400 font-black block text-sm flex items-center gap-2">
-                  <span>🚨</span> Emergency Helpline & Culture SOS
+                  <span>🚨</span> Emergency Helpline SOS
                 </span>
                 <p className="font-bold text-slate-100 text-sm leading-relaxed whitespace-pre-line">{cityData.culture_helpline}</p>
               </div>
