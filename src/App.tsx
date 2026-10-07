@@ -2,128 +2,363 @@ import React, { useState } from 'react';
 import { MASTER_INDIA_TOURISM_DIRECTORY } from './Data';
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState<'home' | 'planner' | 'addspot' | 'business' | 'profile'>('home');
   const [selectedShrine, setSelectedShrine] = useState<string | null>(null);
   const [selectedState, setSelectedState] = useState<string>("All");
-  const [bookingSuccess, setBookingSuccess] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [notification, setNotification] = useState<string | null>(null);
 
-  // Trip Planner States
+  // Planner States
   const [startCity, setStartCity] = useState<string>("");
-  const [tripPlanResult, setTripPlanResult] = useState<{ route: string; distanceEstimate: string } | null>(null);
+  const [travelMode, setTravelMode] = useState<string>("train");
+  const [yatraPlan, setYatraPlan] = useState<{ title: string; desc: string } | null>(null);
+
+  // Add Spot States
+  const [spotForm, setSpotForm] = useState({ name: '', city: '', state: '', desc: '' });
+  const [spotSubmitted, setSpotSubmitted] = useState(false);
 
   const states = ["All", ...Array.from(new Set(Object.values(MASTER_INDIA_TOURISM_DIRECTORY).map(s => s.State)))];
 
   const filteredShrines = Object.entries(MASTER_INDIA_TOURISM_DIRECTORY).filter(([_, shrine]) => {
-    if (selectedState === "All") return true;
-    return shrine.State === selectedState;
+    const matchesState = selectedState === "All" || shrine.State === selectedState;
+    const matchesSearch = shrine.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          shrine.City.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          shrine.State.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesState && matchesSearch;
   });
 
-  const handleBookingAction = (type: string, name: string) => {
-    setBookingSuccess(`🎉 Redirecting to secure partner for ${type} at ${name}... (Affiliate tracking active)`);
-    setTimeout(() => setBookingSuccess(null), 5000);
+  const triggerAction = (msg: string) => {
+    setNotification(msg);
+    setTimeout(() => setNotification(null), 4500);
   };
 
-  const handleGenerateTripPlan = (shrineName: string, defaultTransport: string) => {
+  const handleFullBooking = (serviceType: string, itemName: string) => {
+    triggerAction(`🚀 Redirecting to secure affiliate partner for ${serviceType} (${itemName}). Commission tracking active!`);
+  };
+
+  const handleGenerateCompleteTrip = (shrineName: string) => {
     if (!startCity.trim()) {
-      alert("Pehle apni starting city ka naam daalein (e.g., Ahmedabad, Delhi)");
+      alert("Kripya apni starting city enter karein (e.g., Ahmedabad, Delhi)");
       return;
     }
-    // Dynamic simulated route generation based on user input
-    setTripPlanResult({
-      route: `From ${startcity.toUpperCase()} to ${shrineName}: Route via National Highway / Expressways. ${defaultTransport}`,
-      distanceEstimate: "Calculated via optimal national driving corridors & connecting rail/air hubs."
+    setYatraPlan({
+      title: `Full Itinerary: ${startCity.toUpperCase()} ➔ ${shrineName}`,
+      desc: `Mode: ${travelMode.toUpperCase()} | Estimated distance calculated. Hotel, Cab & Train booking links enabled below.`
     });
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 sm:p-6">
-      <header className="max-w-6xl mx-auto mb-8 text-center">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-600 mb-2">
-          🛕 India Sacred Shrines Directory & Trip Planner
-        </h1>
-        <p className="text-slate-600 text-sm sm:text-base">
-          Discover divine heritage, trusted hotels, and customized travel routes across India.
-        </p>
-
-        {bookingSuccess && (
-          <div className="mt-4 max-w-xl mx-auto bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg text-sm shadow-md transition-all">
-            {bookingSuccess}
+    <div className="min-h-screen bg-amber-50/30 text-slate-900 font-sans pb-28">
+      {/* Top Header */}
+      <header className="bg-white border-b border-amber-200 sticky top-0 z-30 shadow-xs">
+        <div className="max-w-6xl mx-auto px-4 py-3.5 flex justify-between items-center">
+          <div>
+            <h1 className="text-xl sm:text-2xl font-black text-amber-800 flex items-center gap-2">
+              <span>🛕</span> <span>Bharat Yatra Pro</span>
+            </h1>
+            <p className="text-[10px] sm:text-xs text-amber-700 font-medium">All-in-One Pilgrimage, Hotel, Train & Taxi Booking Portal</p>
           </div>
-        )}
-
-        {/* State Filter Pills */}
-        <div className="flex flex-wrap justify-center gap-2 mt-6">
-          {states.map((state) => (
-            <button
-              key={state}
-              onClick={() => setSelectedState(state)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all shadow-sm ${
-                selectedState === state
-                  ? 'bg-amber-600 text-white shadow-md'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
-              }`}
-            >
-              {state}
-            </button>
-          ))}
+          <span className="text-xs font-bold bg-amber-600 text-white px-3 py-1 rounded-full shadow-xs">
+            Affiliate Active
+          </span>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredShrines.map(([key, shrine]) => (
-            <div 
-              key={key} 
-              className="bg-white rounded-xl shadow-md overflow-hidden border border-slate-200 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-            >
-              <div>
-                <img 
-                  src={shrine.image_url} 
-                  alt={shrine.Name} 
-                  className="w-full h-48 object-cover"
+      {/* Floating Notification */}
+      {notification && (
+        <div className="max-w-md mx-auto px-4 fixed top-16 left-0 right-0 z-50">
+          <div className="bg-amber-900 text-amber-50 px-4 py-3 rounded-2xl text-xs shadow-xl text-center font-bold border border-amber-700 animate-bounce">
+            {notification}
+          </div>
+        </div>
+      )}
+
+      <main className="max-w-6xl mx-auto p-4 sm:p-6">
+        {/* TAB 1: HOME */}
+        {activeTab === 'home' && (
+          <div>
+            <div className="text-center mb-6">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-1">Book Your Holy Yatra & Stays</h2>
+              <p className="text-slate-600 text-sm">Explore divine temples, book hotels, hire cabs, and order prasad instantly.</p>
+            </div>
+
+            {/* Search & State Filter */}
+            <div className="max-w-2xl mx-auto space-y-3 mb-8">
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-amber-600">
+                  🔍
+                </span>
+                <input 
+                  type="text"
+                  placeholder="Search temples, cities, Jyotirlingas..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-white rounded-2xl border border-amber-200 shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
                 />
-                <div className="p-5">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full mb-2">
-                    {shrine.Type}
-                  </span>
-                  <h3 className="text-xl font-bold text-slate-800 mb-1">
-                    {shrine.Name}
-                  </h3>
-                  <p className="text-slate-500 text-sm mb-3">
-                    📍 {shrine.City}, {shrine.State}
-                  </p>
-                  <p className="text-slate-600 text-sm line-clamp-2">
-                    {shrine.history_geo_political}
-                  </p>
-                </div>
               </div>
 
-              <div className="p-5 pt-0 border-t border-slate-100 mt-4">
-                <div className="flex justify-between items-center text-xs text-slate-500 mb-4 pt-3">
-                  <span>🌤️ {shrine.weather}</span>
-                  <span>💰 {shrine.budget}</span>
-                </div>
-                <button 
-                  onClick={() => {
-                    setSelectedShrine(key);
-                    setTripPlanResult(null);
-                    setStartCity("");
-                  }}
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm shadow-sm"
-                >
-                  View Travel & Plan Trip
-                </button>
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {states.map((st) => (
+                  <button
+                    key={st}
+                    onClick={() => setSelectedState(st)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      selectedState === st
+                        ? 'bg-amber-800 text-white shadow-md'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-amber-50'
+                    }`}
+                  >
+                    {st}
+                  </button>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Modal / Detailed Business & Trip Planner View */}
+            {/* Shrines Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredShrines.map(([key, shrine]) => (
+                <div 
+                  key={key} 
+                  className="bg-white rounded-3xl shadow-md overflow-hidden border border-amber-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="relative">
+                      <img 
+                        src={shrine.image_url} 
+                        alt={shrine.Name} 
+                        className="w-full h-48 object-cover"
+                      />
+                      <span className="absolute top-3 left-3 bg-amber-900/80 backdrop-blur-md text-amber-100 px-3 py-1 rounded-full text-xs font-bold">
+                        {shrine.Type}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-xl font-bold text-slate-800 mb-1">{shrine.Name}</h3>
+                      <p className="text-slate-500 text-sm mb-3 flex items-center gap-1">
+                        <span>📍</span> {shrine.City}, {shrine.State}
+                      </p>
+                      <p className="text-slate-600 text-sm line-clamp-2">{shrine.history_geo_political}</p>
+                    </div>
+                  </div>
+
+                  <div className="p-5 pt-0 border-t border-slate-100 mt-4">
+                    <div className="flex justify-between items-center text-xs text-slate-500 mb-4 pt-3">
+                      <span className="flex items-center gap-1">🌤️ {shrine.weather}</span>
+                      <span className="flex items-center gap-1 font-semibold text-amber-700">{shrine.budget}</span>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        setSelectedShrine(key);
+                        setYatraPlan(null);
+                        setStartCity("");
+                      }}
+                      className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm shadow-sm flex items-center justify-center gap-2"
+                    >
+                      <span>🎫</span> Book Hotels, Cabs & Guide
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: PLANNER (All-in-One Booking Planner) */}
+        {activeTab === 'planner' && (
+          <div className="max-w-xl mx-auto bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-amber-200">
+            <h2 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+              <span>🚆</span> Complete Yatra Booking Hub
+            </h2>
+            <p className="text-slate-600 text-sm mb-6">Book your Train tickets, Bus rides, and Highway Cabs instantly.</p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Starting City:</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g., Ahmedabad, Delhi..."
+                  value={startCity}
+                  onChange={(e) => setStartCity(e.target.value)}
+                  className="w-full border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Select Mode of Travel:</label>
+                <select 
+                  value={travelMode}
+                  onChange={(e) => setTravelMode(e.target.value)}
+                  className="w-full border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600 bg-white"
+                >
+                  <option value="train">🚆 Train Ticket (IRCTC Partner)</option>
+                  <option value="bus">🚌 Volvo / Luxury Bus Booking</option>
+                  <option value="taxi">🚕 Outstation Cab / Taxi Rental</option>
+                  <option value="flight">✈️ Flight Booking</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Destination Shrine:</label>
+                <select className="w-full border border-amber-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600 bg-white">
+                  {Object.entries(MASTER_INDIA_TOURISM_DIRECTORY).map(([key, s]) => (
+                    <option key={key} value={key}>{s.Name} ({s.State})</option>
+                  ))}
+                </select>
+              </div>
+
+              <button 
+                onClick={() => handleFullBooking(travelMode.toUpperCase(), "Yatra Transit")}
+                className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-4 rounded-xl transition-colors text-sm shadow-md"
+              >
+                Proceed to Instant Booking & Earn Cashback
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: ADD SPOT */}
+        {activeTab === 'addspot' && (
+          <div className="max-w-xl mx-auto bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-amber-200">
+            <h2 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+              <span>➕</span> Add Local / Hidden Temple
+            </h2>
+            <p className="text-slate-600 text-sm mb-6">List unlisted local shrines to help travelers discover spiritual heritage.</p>
+            
+            {spotSubmitted && (
+              <div className="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-xl text-xs font-medium">
+                ✅ Spot submitted successfully! Admin review in progress.
+              </div>
+            )}
+
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              if(!spotForm.name || !spotForm.city) { alert("Please fill details!"); return; }
+              setSpotSubmitted(true);
+              setTimeout(() => { setSpotSubmitted(false); setSpotForm({ name: '', city: '', state: '', desc: '' }); }, 4000);
+            }} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Temple Name *</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g., Gupt Mahadev Temple"
+                  value={spotForm.name}
+                  onChange={(e) => setSpotForm({...spotForm, name: e.target.value})}
+                  className="w-full border border-amber-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">City *</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g., Becharaji"
+                    value={spotForm.city}
+                    onChange={(e) => setSpotForm({...spotForm, city: e.target.value})}
+                    className="w-full border border-amber-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">State *</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g., Gujarat"
+                    value={spotForm.state}
+                    onChange={(e) => setSpotForm({...spotForm, state: e.target.value})}
+                    className="w-full border border-amber-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Significance</label>
+                <textarea 
+                  rows={3}
+                  placeholder="Write history..."
+                  value={spotForm.desc}
+                  onChange={(e) => setSpotForm({...spotForm, desc: e.target.value})}
+                  className="w-full border border-amber-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit"
+                className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-4 rounded-xl transition-colors text-sm shadow-md"
+              >
+                Submit Spot
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* TAB 4: BUSINESS / MONETIZATION HUB */}
+        {activeTab === 'business' && (
+          <div className="max-w-xl mx-auto bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-amber-200">
+            <h2 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+              <span>💼</span> Revenue & Affiliate Dashboard
+            </h2>
+            <p className="text-slate-600 text-sm mb-6">Track your multi-stream earnings from Hotels, Cabs, Trains, and Prasad orders.</p>
+
+            <div className="space-y-4">
+              <div className="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+                <h4 className="font-bold text-amber-900 text-sm mb-1">🏨 Hotel Stays & Dharamshalas</h4>
+                <p className="text-xs text-slate-600 mb-2">Makemytrip / Agoda Affiliate Feed</p>
+                <div className="flex justify-between text-xs font-bold text-amber-900 bg-white p-3 rounded-xl border border-amber-100">
+                  <span>Bookings: 84</span>
+                  <span>Commission: ₹3,400</span>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
+                <h4 className="font-bold text-blue-900 text-sm mb-1">🚆 Train & Taxi Cab Referrals</h4>
+                <p className="text-xs text-slate-600 mb-2">IRCTC & Outstation Cab Partners</p>
+                <div className="flex justify-between text-xs font-bold text-blue-900 bg-white p-3 rounded-xl border border-blue-100">
+                  <span>Trips Booked: 112</span>
+                  <span>Commission: ₹4,150</span>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 border border-orange-200 p-4 rounded-2xl">
+                <h4 className="font-bold text-orange-900 text-sm mb-1">🎁 E-Puja & Prasad Orders</h4>
+                <p className="text-xs text-slate-600 mb-2">Direct Temple Trust Fulfillment</p>
+                <div className="flex justify-between text-xs font-bold text-orange-900 bg-white p-3 rounded-xl border border-orange-100">
+                  <span>Dispatched: 145</span>
+                  <span>Margin Profit: ₹7,250</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: PROFILE */}
+        {activeTab === 'profile' && (
+          <div className="max-w-xl mx-auto bg-white p-6 sm:p-8 rounded-3xl shadow-md border border-amber-200 text-center">
+            <div className="w-20 h-20 bg-amber-700 text-white font-bold text-2xl rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+              RB
+            </div>
+            <h2 className="text-xl font-bold text-slate-800 mb-1">Ravi Bharggav</h2>
+            <p className="text-slate-500 text-xs mb-6">Founder & CEO, Bharat Yatra Pro</p>
+
+            <div className="space-y-2 text-left">
+              <div className="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-xs flex justify-between items-center">
+                <span>🎫 Active Bookings</span>
+                <span className="font-bold text-amber-800">2 Trips</span>
+              </div>
+              <div className="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-xs flex justify-between items-center">
+                <span>💰 Total Earnings Generated</span>
+                <span className="font-bold text-emerald-700">₹14,800</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Detailed Shrine Modal with All Booking Buttons */}
         {selectedShrine && (
-          <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto">
-            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl">
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 z-50 overflow-y-auto">
+            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
               <button 
                 onClick={() => setSelectedShrine(null)}
-                className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 w-8 h-8 rounded-full flex items-center justify-center font-bold"
+                className="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-colors z-10"
               >
                 ✕
               </button>
@@ -136,115 +371,118 @@ export default function App() {
                     <img 
                       src={shrine.image_url} 
                       alt={shrine.Name} 
-                      className="w-full h-64 object-cover rounded-xl mb-4"
+                      className="w-full h-64 object-cover rounded-2xl mb-4 shadow-md"
                     />
                     <h2 className="text-2xl font-bold text-slate-900 mb-1">{shrine.Name}</h2>
-                    <p className="text-slate-500 text-sm mb-4">📍 {shrine.City}, {shrine.State} | {shrine.Type}</p>
+                    <p className="text-slate-500 text-sm mb-6 flex items-center gap-1">
+                      <span>📍</span> {shrine.City}, {shrine.State} &bull; <span className="font-bold text-amber-700">{shrine.Type}</span>
+                    </p>
                     
-                    {/* BUSINESS REVENUE SECTION: Online Prasad & E-Puja */}
-                    <div className="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-4 rounded-xl mb-6 shadow-md">
-                      <h4 className="font-bold text-base mb-1">🎁 Book Home Delivery Prasad & Special E-Puja</h4>
-                      <p className="text-xs text-amber-100 mb-3">Get sacred prasad directly from this temple delivered to your doorstep with certified rituals.</p>
-                      <button 
-                        onClick={() => handleBookingAction("Online Puja & Prasad", shrine.Name)}
-                        className="bg-white text-amber-900 hover:bg-amber-50 font-bold py-2 px-4 rounded-lg text-xs transition-colors shadow"
-                      >
-                        Book Prasad / Puja Now (Partner Service)
-                      </button>
+                    {/* ALL-IN-ONE BOOKING REVENUE PANEL */}
+                    <div className="bg-gradient-to-r from-amber-700 to-orange-700 text-white p-5 rounded-2xl mb-6 shadow-md space-y-3">
+                      <h4 className="font-bold text-base flex items-center gap-2">
+                        <span>⚡</span> Instant Yatra Booking & Services
+                      </h4>
+                      <p className="text-xs text-amber-100">Book everything required for this trip in 1 click and get instant cashback/commission.</p>
+                      
+                      <div className="grid grid-cols-2 gap-2 pt-1">
+                        <button 
+                          onClick={() => handleFullBooking("Hotel Stay", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🏨</span> Book Hotel
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Train Ticket", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🚆</span> Book Train
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Taxi / Cab", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🚕</span> Hire Taxi
+                        </button>
+                        <button 
+                          onClick={() => handleFullBooking("Prasad & Puja", shrine.Name)}
+                          className="bg-white text-amber-900 font-bold py-2 px-3 rounded-xl text-xs hover:bg-amber-50 shadow transition-colors flex items-center justify-center gap-1"
+                        >
+                          <span>🎁</span> Order Prasad
+                        </button>
+                      </div>
                     </div>
 
                     <div className="space-y-4 text-sm text-slate-700">
                       
-                      {/* NEW FEATURE: SMART TRIP PLANNER & ROUTE GENERATOR */}
-                      <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                        <h4 className="font-bold text-blue-900 mb-2 flex items-center gap-2">
-                          🗺️ Custom Trip & Route Planner
+                      {/* Trip Planner Box */}
+                      <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                        <h4 className="font-bold text-amber-900 mb-2 text-sm flex items-center gap-1">
+                          <span>🗺️</span> Custom Route & Transit Planner
                         </h4>
-                        <p className="text-xs text-blue-700 mb-3">Apni current starting city daaliye aur is mandir tak ka best route aur travel guide paiye:</p>
-                        
-                        <div className="flex gap-2 mb-3">
+                        <div className="flex gap-2 mb-2">
                           <input 
                             type="text" 
-                            placeholder="e.g., Ahmedabad, Delhi, Mumbai..." 
+                            placeholder="Enter starting city (e.g., Delhi, Jaipur)" 
                             value={startCity}
                             onChange={(e) => setStartCity(e.target.value)}
-                            className="flex-1 bg-white border border-blue-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="flex-1 bg-white border border-amber-300 rounded-xl px-3 py-2 text-xs text-slate-800"
                           />
                           <button 
-                            onClick={() => handleGenerateTripPlan(shrine.Name, shrine.transport_roadmap)}
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-xs transition-colors shadow-sm"
+                            onClick={() => handleGenerateCompleteTrip(shrine.Name)}
+                            className="bg-amber-700 text-white font-semibold px-3 py-2 rounded-xl text-xs"
                           >
-                            Generate Route
+                            Plan Route
                           </button>
                         </div>
-
-                        {tripPlanResult && (
-                          <div className="bg-white p-3 rounded-lg border border-blue-100 text-xs text-slate-700 space-y-1 mt-2">
-                            <p className="font-semibold text-blue-900">🚗 Custom Route Plan:</p>
-                            <p>{tripPlanResult.route}</p>
-                            <p className="text-slate-500 italic mt-1">💡 {tripPlanResult.distanceEstimate}</p>
+                        {yatraPlan && (
+                          <div className="bg-white p-3 rounded-xl border border-amber-200 text-xs text-slate-700 mt-2">
+                            <p className="font-bold text-amber-900">{yatraPlan.title}</p>
+                            <p>{yatraPlan.desc}</p>
                           </div>
                         )}
                       </div>
 
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">🏛️ History & Significance:</strong>
-                        {shrine.history_geo_political}
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🏛️</span> History & Significance:</strong>
+                        <p className="text-slate-600">{shrine.history_geo_political}</p>
                       </div>
 
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">🌿 Nearby Picnic & Sightseeing Spots:</strong>
-                        <p className="whitespace-pre-line">{shrine.picnic_spots}</p>
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🌿</span> Sightseeing Spots:</strong>
+                        <p className="whitespace-pre-line text-slate-600">{shrine.picnic_spots}</p>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                          <strong className="block text-slate-900 mb-1">🌤️ Weather & Best Time:</strong>
-                          <p>{shrine.weather}</p>
-                          <p className="text-xs text-slate-500 mt-1">Best: {shrine.bestTime}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                          <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🌤️</span> Weather:</strong>
+                          <p className="text-slate-600">{shrine.weather}</p>
                         </div>
-                        <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                          <strong className="block text-slate-900 mb-1">💰 Estimated Budget:</strong>
-                          <p>{shrine.budget}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                          <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>💰</span> Est. Budget:</strong>
+                          <p className="text-slate-600">{shrine.budget}</p>
                         </div>
                       </div>
 
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">🧳 Packing Essentials:</strong>
-                        <p>{shrine.packing}</p>
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🚗</span> Transport Roadmap:</strong>
+                        <p className="text-slate-600">{shrine.transport_roadmap}</p>
                       </div>
 
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">🚗 Transport & Road Map:</strong>
-                        <p>{shrine.transport_roadmap}</p>
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🏨</span> Hotel & Stay Recommendations:</strong>
+                        <p className="whitespace-pre-line text-xs text-slate-700">{shrine.hotels_booking}</p>
                       </div>
 
-                      {/* BUSINESS REVENUE SECTION: Hotel Affiliate Booking */}
-                      <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
-                        <strong className="block text-amber-900 mb-1">🏨 Recommended Hotels & Stay Booking (Affiliate):</strong>
-                        <p className="whitespace-pre-line text-xs text-slate-700 mb-3">{shrine.hotels_booking}</p>
-                        <button 
-                          onClick={() => handleBookingAction("Hotel Stay", shrine.Name)}
-                          className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-3 rounded-lg text-xs transition-colors shadow-sm"
-                        >
-                          Find & Book Best Hotel Rates Nearby
-                        </button>
-                      </div>
-
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">🛍️ Local Markets & Food:**</strong>
-                        <p className="whitespace-pre-line">{shrine.markets_food}</p>
-                      </div>
-
-                      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                        <strong className="block text-slate-900 mb-1">📞 Culture & Helpline:</strong>
-                        <p>{shrine.culture_helpline}</p>
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <strong className="block text-slate-900 mb-1 flex items-center gap-2"><span>🛍️</span> Local Food & Markets:</strong>
+                        <p className="whitespace-pre-line text-slate-600">{shrine.markets_food}</p>
                       </div>
                     </div>
 
                     <button 
                       onClick={() => setSelectedShrine(null)}
-                      className="mt-6 w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                      className="mt-6 w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-3 px-4 rounded-xl transition-colors text-sm shadow-md"
                     >
                       Close Guide
                     </button>
@@ -255,6 +493,51 @@ export default function App() {
           </div>
         )}
       </main>
+
+      {/* FIXED BOTTOM NAVIGATION BAR */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-amber-200 shadow-xl z-40 py-2.5 px-4">
+        <div className="max-w-md mx-auto flex justify-between items-center text-xs font-semibold text-slate-600">
+          <button 
+            onClick={() => setActiveTab('home')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'home' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">🛕</span>
+            <span>Teerth</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('planner')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'planner' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">🚆</span>
+            <span>Transit & Book</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('addspot')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'addspot' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">➕</span>
+            <span>Add Spot</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('business')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'business' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">💼</span>
+            <span>Revenue</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('profile')}
+            className={`flex flex-col items-center gap-1 transition-colors ${activeTab === 'profile' ? 'text-amber-800 font-bold' : 'hover:text-amber-700'}`}
+          >
+            <span className="text-lg">👤</span>
+            <span>Profile</span>
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }
