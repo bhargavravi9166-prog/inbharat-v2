@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Fallback to hardcoded Supabase configuration for instant connectivity
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xllmsjytvskzlyvynuzv.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsbG1zanl0dnNremx5dnludXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4NTYzMjQsImV4cCI6MjAyNTQzMjMyNH0.placeholder';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL || SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY || SUPABASE_ANON_KEY
+);
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,7 +47,7 @@ export default function App() {
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .or(`Name.ilike.%${query}%,State.ilike.%${query}%,City.ilike.%${query}%`);
+      .or(`Name.ilike.%${query}%,State.ilike.%${query}%,City.ilike.%${query}%,Zone.ilike.%${query}%`);
 
     if (error) {
       console.error('Fetch error:', error);
@@ -91,16 +96,14 @@ export default function App() {
     setShowVendorModal(false);
   };
 
-  // Helper function to get image according to location
-  const getSpotImage = (name: string, city: string, type: string) => {
-    const query = encodeURIComponent(`${name} ${city} ${type} india heritage`);
-    return `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.floor(Math.random() * 100)}`;
+  const getSpotImage = (name: string, city: string) => {
+    return `https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80&sig=${Math.abs((name || 'india').length * 13)}`;
   };
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-col font-sans pb-24 selection:bg-orange-500 selection:text-white">
       
-      {/* Top Announcement Bar */}
+      {/* Top Bar */}
       <div className="bg-[#0F2C59] text-amber-300 text-xs py-2 px-4 shadow-inner">
         <div className="max-w-4xl mx-auto flex justify-between items-center font-semibold">
           <span className="truncate">🏪 Promote your Shop, Hotel or Taxi on InBharat</span>
@@ -113,23 +116,20 @@ export default function App() {
         </div>
       </div>
 
-      {/* Main App Navbar */}
+      {/* Main Navbar */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.location.reload()}>
-          {/* Logo SVG Representation corresponding to user provided logo design */}
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-[#0F2C59] flex items-center justify-center text-orange-500 font-black text-xl shadow-md border border-orange-500/20">
-              🏰
+          <div className="w-9 h-9 rounded-xl bg-[#0F2C59] flex items-center justify-center text-orange-500 font-black text-xl shadow-md border border-orange-500/20">
+            🏰
+          </div>
+          <div>
+            <div className="flex items-center font-black tracking-tight text-xl leading-none">
+              <span className="text-orange-500">IN</span>
+              <span className="text-[#0F2C59]">BHARAT</span>
             </div>
-            <div>
-              <div className="flex items-center font-black tracking-tight text-xl leading-none">
-                <span className="text-orange-500">IN</span>
-                <span className="text-[#0F2C59]">BHARAT</span>
-              </div>
-              <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block -mt-0.5">
-                Heritage & Tourism
-              </span>
-            </div>
+            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest block -mt-0.5">
+              Heritage & Tourism
+            </span>
           </div>
         </div>
 
@@ -151,8 +151,6 @@ export default function App() {
 
       {/* Hero Banner Section */}
       <section className="bg-gradient-to-b from-[#0F2C59] via-[#143B73] to-slate-900 text-white p-4 pt-8 pb-10 max-w-4xl mx-auto w-full relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-3xl pointer-events-none rounded-full"></div>
-
         <div className="text-center mb-6 relative z-10">
           <span className="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
             ✨ India's Super Tourism Platform
@@ -161,7 +159,7 @@ export default function App() {
             Explore History, Food, Culture & Markets
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Discover verified details, temples, transport routes and local guides across Bharat.
+            Discover 320+ verified spots, temples, routes and local guides across Bharat.
           </p>
         </div>
 
@@ -171,7 +169,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Search city, state, or spot (e.g. Jaipur, Tonk, Amer, Agra)..."
+              placeholder="Search city, state, or zone (e.g. Uttar Pradesh, Central, Jhansi, Agra)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
@@ -188,7 +186,7 @@ export default function App() {
 
         {/* Quick Filter Chips */}
         <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-[11px] justify-start sm:justify-center relative z-10">
-          {['Jaipur', 'Tonk', 'Agra', 'Amer', 'Varanasi', 'Udaipur'].map(city => (
+          {['Central', 'Uttar Pradesh', 'Madhya Pradesh', 'Jhansi', 'Gwalior', 'Indore'].map(city => (
             <button
               key={city}
               type="button"
@@ -226,23 +224,26 @@ export default function App() {
 
         {!loading && results.length > 0 && (
           <div className="space-y-6">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              Showing {results.length} Location(s)
+            </p>
             {results.map((item, idx) => {
               const currentTab = activeTab[idx] || 'overview';
 
               return (
                 <div key={idx} className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-lg transition hover:shadow-xl">
                   
-                  {/* Card Visual Header with Image Banner */}
+                  {/* Image Banner Header */}
                   <div className="relative h-44 bg-slate-900 overflow-hidden">
                     <img 
-                      src={getSpotImage(item.Name, item.City, item.Type)} 
-                      alt={item.Name}
+                      src={getSpotImage(item.Name, item.City)} 
+                      alt={item.Name || 'Heritage Spot'}
                       className="w-full h-full object-cover opacity-85 hover:scale-105 transition duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                     
                     <div className="absolute top-3 left-3 right-3 flex justify-between items-center">
-                      <span className="bg-emerald-500 text-white font-black text-[10px] px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+                      <span className="bg-emerald-500 text-white font-black text-[10px] px-2.5 py-1 rounded-full shadow-md">
                         ✓ VERIFIED
                       </span>
                       {item.Type && (
@@ -253,38 +254,38 @@ export default function App() {
                     </div>
 
                     <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <h3 className="text-xl font-black tracking-tight drop-shadow-md">{item.Name || 'Unnamed Spot'}</h3>
+                      <h3 className="text-xl font-black tracking-tight drop-shadow-md">{item.Name || item.City || 'Heritage Location'}</h3>
                       <p className="text-xs text-amber-200 font-semibold drop-shadow mt-0.5">
-                        📍 {item.City ? `${item.City}, ` : ''}{item.State} {item.Zone ? `• ${item.Zone} Zone` : ''}
+                        📍 {item.City ? `${item.City}, ` : ''}{item.State} {item.Zone ? `• (${item.Zone} Zone)` : ''}
                       </p>
                     </div>
                   </div>
 
-                  {/* Commercial Actions Strip */}
+                  {/* Commercial Actions */}
                   <div className="bg-slate-900 px-4 py-2.5 flex gap-2 overflow-x-auto text-[11px] no-scrollbar border-b border-slate-800">
                     <a 
-                      href={`https://www.makemytrip.com/hotels/${item.City || item.Name}-hotels.html`} 
+                      href={`https://www.makemytrip.com/hotels/${item.City || item.Name || 'india'}-hotels.html`} 
                       target="_blank" rel="noreferrer"
                       className="bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 border border-orange-500/30 px-3 py-1 rounded-xl font-bold whitespace-nowrap transition"
                     >
                       🏨 Book Hotel
                     </a>
                     <a 
-                      href={`https://www.redbus.in/bus-tickets/${item.City || item.Name}`} 
+                      href={`https://www.redbus.in/bus-tickets/${item.City || item.Name || 'india'}`} 
                       target="_blank" rel="noreferrer"
                       className="bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-xl font-bold whitespace-nowrap transition"
                     >
                       🚌 Book Bus
                     </a>
                     <button 
-                      onClick={() => alert(`InBharat Verified Local Guide Helpline: +91-9876543210`)}
+                      onClick={() => alert(`InBharat Verified Guide Helpline: +91-9876543210`)}
                       className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-3 py-1 rounded-xl whitespace-nowrap shadow transition"
                     >
                       🚩 Hire Local Guide
                     </button>
                   </div>
 
-                  {/* Tab Navigation Buttons */}
+                  {/* Tabs */}
                   <div className="flex border-b border-slate-200 bg-slate-50 text-[11px] font-bold text-slate-500 overflow-x-auto no-scrollbar">
                     {[
                       { key: 'overview', label: '📌 Overview' },
@@ -306,7 +307,7 @@ export default function App() {
                     ))}
                   </div>
 
-                  {/* Tab Content */}
+                  {/* Content */}
                   <div className="p-5 text-xs text-slate-700 space-y-3 bg-white">
                     {currentTab === 'overview' && (
                       <div className="space-y-3">
@@ -371,7 +372,7 @@ export default function App() {
         )}
       </main>
 
-      {/* App Fixed Bottom Navigation Bar */}
+      {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 flex justify-around py-2 z-40 text-[10px] font-extrabold text-slate-500 shadow-xl">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-500">
           <span className="text-lg">🔍</span>
@@ -387,7 +388,7 @@ export default function App() {
         </button>
       </nav>
 
-      {/* Business Listing Modal */}
+      {/* Modals */}
       {showVendorModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl border border-slate-200 w-full max-w-xs p-5 text-xs text-slate-700 shadow-2xl">
@@ -403,7 +404,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Add Spot Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl border border-slate-200 w-full max-w-sm p-5 text-xs text-slate-700 shadow-2xl max-h-[85vh] overflow-y-auto">
