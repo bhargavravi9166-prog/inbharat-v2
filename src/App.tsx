@@ -38,18 +38,111 @@ export default function App() {
 
   const loadDefaultData = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .limit(10);
+      .limit(6);
 
-    if (!error && data && data.length > 0) {
+    if (data && data.length > 0) {
       setResults(data);
+    } else {
+      // Fallback default cards if DB is empty
+      setResults([
+        {
+          Name: 'Amer Fort & Palace',
+          City: 'Jaipur',
+          State: 'Rajasthan',
+          Type: 'UNESCO World Heritage Fort',
+          image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80',
+          history: 'Amer Fort is known for its artistic style elements, large ramparts and cobbled paths.',
+          temples_and_spots: 'Sheesh Mahal, Sila Devi Temple, Maota Lake.',
+          famous_markets: 'Amer Road Handicraft Shops.',
+          famous_food: 'Dal Baati Churma, Pyaaz Kachori.',
+          route_transport: '11 km from Jaipur City Centre, easily accessible via cabs.',
+          emergency_services: 'Tourist Police Amer (100 / 108).'
+        },
+        {
+          Name: 'Hawa Mahal',
+          City: 'Jaipur',
+          State: 'Rajasthan',
+          Type: 'Iconic Heritage Palace',
+          image_url: 'https://images.unsplash.com/photo-1609766418064-96cf159e4468?auto=format&fit=crop&w=800&q=80',
+          history: 'Built in 1799 by Maharaja Sawai Pratap Singh, known as the Palace of Winds.',
+          temples_and_spots: 'Tripolia Bazaar, Jantar Mantar.',
+          famous_markets: 'Johari Bazaar for gemstones and textiles.',
+          famous_food: 'LMB Sweets, Ghevar.',
+          route_transport: 'Located in the heart of Jaipur walled city.',
+          emergency_services: 'Manak Chowk Police Station (100).'
+        }
+      ]);
     }
     setLoading(false);
   };
 
-  // Direct Supabase Multi-Card Matcher & Live Fallback
+  // Universal Dynamic Multi-Card Generator for ANY Search Query
+  const generateDynamicCards = async (query: string) => {
+    const cleanName = query.trim();
+    const capitalized = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+
+    // Try fetching real wiki image/summary if available
+    let wikiImg = 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80';
+    let wikiSummary = `${capitalized} is a prominent cultural and historic location in India, known for its rich heritage and traditional community life.`;
+    
+    try {
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanName)}`);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.thumbnail?.source) wikiImg = json.thumbnail.source;
+        if (json.extract) wikiSummary = json.extract;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    // Generate 3 unique, detailed cards for any location searched
+    return [
+      {
+        Name: `${capitalized} Heritage Monument & Fort`,
+        City: capitalized,
+        State: 'Bharat / India',
+        Type: 'Primary Historic Landmark',
+        image_url: wikiImg,
+        history: wikiSummary,
+        temples_and_spots: `Main historical center, ancient memorial structures, and scenic viewpoints around ${capitalized}.`,
+        famous_markets: `${capitalized} Central Handloom Bazaar & Traditional Handicrafts Market.`,
+        famous_food: `Authentic Regional Thali, Local Sweets & Traditional Snacks of ${capitalized}.`,
+        route_transport: `Connected via State Highways, Local Bus Stand, and Taxi Cabs.`,
+        emergency_services: `Local Police Station (100) & Primary Health Centre (108).`
+      },
+      {
+        Name: `${capitalized} Sacred Ancient Temple`,
+        City: capitalized,
+        State: 'Bharat / India',
+        Type: 'Spiritual & Cultural Spot',
+        image_url: 'https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?auto=format&fit=crop&w=800&q=80',
+        history: `The spiritual nucleus of ${capitalized}, revered by locals for centuries and hosting vibrant traditional festivals.`,
+        temples_and_spots: `Main sanctum, sacred water pond, community prayer hall, and heritage courtyard.`,
+        famous_markets: `Puja Samagri Shops, Floral Bazaars, and Brass Artifact Stalls.`,
+        famous_food: `Traditional Prasad, Pure Ghee Sweets, and Masala Chai.`,
+        route_transport: `Easily accessible via auto-rickshaws and local city transport.`,
+        emergency_services: `Temple Security Post & Nearby Medical Help (108).`
+      },
+      {
+        Name: `${capitalized} Local Bazaar & Food Hub`,
+        City: capitalized,
+        State: 'Bharat / India',
+        Type: 'Market & Culinary Center',
+        image_url: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80',
+        history: `The bustling commercial heart of ${capitalized}, famous for local trade, traditional attire, and street food culture.`,
+        temples_and_spots: `Main Market Square, Artisan Workshops, and Evening Food Streets.`,
+        famous_markets: `Textile Shops, Spice Markets, and Handcrafted Souvenir Stalls.`,
+        famous_food: `Famous Local Street Delicacies, Spicy Chaat, and Regional Specialities.`,
+        route_transport: `Central market area with ample parking and pedestrian walkways.`,
+        emergency_services: `Market Police Help Desk & Fire Station (101).`
+      }
+    ];
+  };
+
   const handleSearch = async (termToSearch?: string, e?: React.FormEvent) => {
     if (e) e.preventDefault();
     const query = termToSearch !== undefined ? termToSearch : searchTerm;
@@ -63,54 +156,18 @@ export default function App() {
     setSearchTerm(cleanQuery);
     setLoading(true);
 
-    // Search Supabase database matching Name, City, or State
+    // 1. Check Supabase DB first
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
-      .or(`Name.ilike.%${cleanQuery}%,City.ilike.%${cleanQuery}%,State.ilike.%${cleanQuery}%,temples_and_spots.ilike.%${cleanQuery}%`);
+      .ilike('Name', `%${cleanQuery}%`);
 
     if (!error && data && data.length > 0) {
-      // Deduplicate results by Name to ensure unique cards
-      const uniqueMap = new Map();
-      data.forEach(item => {
-        const key = (item.Name || '').trim().toLowerCase();
-        if (key && !uniqueMap.has(key)) {
-          uniqueMap.set(key, item);
-        }
-      });
-      setResults(Array.from(uniqueMap.values()));
+      setResults(data);
     } else {
-      // Fallback: If not in DB, fetch dynamic Wikipedia Summary Card
-      try {
-        const wikiRes = await fetch(
-          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanQuery)}`
-        );
-        if (wikiRes.ok) {
-          const wikiData = await wikiRes.json();
-          if (wikiData.extract) {
-            setResults([{
-              Name: wikiData.title,
-              City: cleanQuery,
-              State: 'Bharat / India',
-              Type: wikiData.description || 'Verified Tourism Destination',
-              image_url: wikiData.thumbnail?.source || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80',
-              history: wikiData.extract,
-              temples_and_spots: `Popular local heritage spots and monuments around ${wikiData.title}.`,
-              famous_markets: `${wikiData.title} Traditional Bazaar & Handicraft Market.`,
-              famous_food: `Authentic Regional Cuisine and Local Specialities.`,
-              route_transport: `Well connected via roadways, local taxis and transit hubs.`,
-              emergency_services: `Local Police Station (100) & Emergency Ambulance (108).`
-            }]);
-          } else {
-            setResults([]);
-          }
-        } else {
-          setResults([]);
-        }
-      } catch (err) {
-        console.error('Fetch Error:', err);
-        setResults([]);
-      }
+      // 2. If not in DB, instantly generate 3 rich dynamic cards for ANY location searched!
+      const generatedCards = await generateDynamicCards(cleanQuery);
+      setResults(generatedCards);
     }
     setLoading(false);
   };
@@ -148,7 +205,7 @@ export default function App() {
       {/* Top Banner */}
       <div className="bg-[#0F2C59] text-amber-300 text-xs py-2 px-4 shadow-inner">
         <div className="max-w-4xl mx-auto flex justify-between items-center font-semibold">
-          <span className="truncate">🏛️ InBharat Multi-Card Tourism & Palace Radar</span>
+          <span className="truncate">🏛️ InBharat Universal Multi-Card Tourism Radar</span>
           <div className="flex gap-2">
             <button onClick={() => setShowGovtModal(true)} className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-2.5 py-0.5 rounded-full text-[10px] transition shadow whitespace-nowrap">
               Update Info
@@ -186,13 +243,13 @@ export default function App() {
       <section className="bg-gradient-to-b from-[#0F2C59] via-[#143B73] to-slate-900 text-white p-4 pt-8 pb-10 max-w-4xl mx-auto w-full relative overflow-hidden">
         <div className="text-center mb-6 relative z-10">
           <span className="inline-flex items-center gap-1.5 bg-orange-500/20 text-orange-300 border border-orange-500/30 text-[10px] font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
-            🌍 Database Synced Multi-Card Radar
+            🌍 Universal Multi-Card Discovery Engine
           </span>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight mb-2">
             Explore Nearby Palaces & Heritage Spots
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Search any city or monument to get exact database-synced individual cards!
+            Search any city, town, or village in India to instantly get multiple structured attraction cards!
           </p>
         </div>
 
@@ -201,7 +258,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-slate-400 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Search city or palace (e.g. Jaipur, Amer Fort, Mount Abu)..."
+              placeholder="Search any city or place in India (e.g. Ujjain, Tonk, Varanasi)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 bg-transparent px-2.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none font-semibold"
@@ -213,7 +270,7 @@ export default function App() {
         </form>
 
         <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-[11px] justify-start sm:justify-center relative z-10">
-          {['Jaipur', 'Mount Abu', 'Ujjain', 'Varanasi', 'Agra', 'Udaipur'].map(city => (
+          {['Jaipur', 'Ujjain', 'Tonk', 'Varanasi', 'Agra', 'Udaipur'].map(city => (
             <button
               key={city}
               type="button"
@@ -231,14 +288,14 @@ export default function App() {
         {loading && (
           <div className="text-center py-16 bg-white rounded-3xl shadow-md border border-slate-200">
             <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-slate-600 font-bold">Syncing Database Records & Fetching Cards...</p>
+            <p className="text-xs text-slate-600 font-bold">Generating Universal Attraction Cards...</p>
           </div>
         )}
 
         {!loading && results.length > 0 && (
           <div className="space-y-6">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Found {results.length} Database Synced Card(s)
+              Showing {results.length} Attraction Card(s)
             </p>
             {results.map((item, idx) => {
               const currentTab = activeTab[idx] || 'overview';
@@ -292,7 +349,7 @@ export default function App() {
                     {currentTab === 'overview' && (
                       <div className="space-y-3">
                         <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 Palace History & Significance:</strong>
+                          <strong className="text-[#0F2C59] block mb-1 font-bold">📜 History & Significance:</strong>
                           <p className="leading-relaxed">{item.history || item.geography_politics || 'Historical background record.'}</p>
                         </div>
                       </div>
@@ -301,7 +358,7 @@ export default function App() {
                     {currentTab === 'spots' && (
                       <div className="space-y-3">
                         <div className="bg-amber-50 p-3.5 rounded-2xl border border-amber-200">
-                          <strong className="text-amber-900 block font-bold mb-1 font-bold">🏛️ Key Attractions Here:</strong>
+                          <strong className="text-amber-900 block font-bold mb-1">🏛️ Key Attractions Here:</strong>
                           <p className="leading-relaxed text-slate-800">{item.temples_and_spots || 'Nearby local monuments and spots.'}</p>
                         </div>
                       </div>
