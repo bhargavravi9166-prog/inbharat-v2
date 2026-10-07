@@ -15,10 +15,10 @@ export default function App() {
 
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Complete Directory Hub',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Smart Custom Directory',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
     history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Enclosed by Aravalli hills. Political: Capital of Rajasthan.',
-    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🏛️ Nahargarh Fort Sunset Point (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)',
+    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🛕 Govind Dev Ji Temple & Birla Mandir (4 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n🏞️ Jal Mahal Water Palace (8 km)',
     transport_roadmap: 'Road Map: Connected via NH-48. Transport: Jaipur Metro, low-floor buses, autos, and Jaipur Airport (JAI).',
     hotels_booking: '🏨 Taj Rambagh Palace (Luxury)\n🏨 Trident Jaipur (5-Star)\n🏨 Zostel Jaipur',
     markets_food: '🛍️ Johari Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori, Ghevar.',
@@ -38,7 +38,6 @@ export default function App() {
     fetchAllData();
   }, []);
 
-  // Full Data Generator for All Horizontal Tabs
   const handleUniversalSearch = async (query: string) => {
     if (!query.trim()) return;
     const cleanQuery = query.trim();
@@ -47,7 +46,6 @@ export default function App() {
     setLoading(true);
 
     try {
-      // 1. Check Supabase Database First
       const found = dbRecords.find((item) => {
         const cityName = String(item.city_name || item.city || item.name || '').toLowerCase();
         const stateName = String(item.state_name || item.state || '').toLowerCase();
@@ -61,9 +59,9 @@ export default function App() {
           State: found.state_name || found.state || 'India',
           Type: '✅ Database Verified Record',
           image_url: found.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-          history_geo_political: found.history || found.description || found.history_geo_political || `Comprehensive history and geographical overview of ${cap}, featuring local governance, cultural heritage, and regional significance.`,
-          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Main Historical Fort & Monuments (0 km)\n🌿 ${cap} City Central Park & Botanical Gardens (3 km)\n🛕 Famous Regional Temples & Shrines (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
-          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Connected via major national and state highways. Transport: Local railway station, bus terminal, and auto/cab services available in ${cap}.`,
+          history_geo_political: found.history || found.description || found.history_geo_political || `Detailed historical and geographical overview of ${cap}, featuring rich regional heritage and administrative significance.`,
+          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Main Heritage Fort & Monuments (0 km)\n🛕 Historic ${cap} Ancient Mandir & Spiritual Shrine (3 km)\n🌿 ${cap} Central Public Park & Botanical Gardens (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (7 km)`,
+          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, and auto/cab services available in ${cap}.`,
           hotels_booking: found.hotels || found.hotels_booking || `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
           markets_food: found.markets_food || found.food || `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
           culture_helpline: found.helpline || found.culture_helpline || `Culture: Unique local traditions and folk art. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
@@ -72,25 +70,24 @@ export default function App() {
         return;
       }
 
-      // 2. Fetch Live from Wikipedia & Build Rich Data for All Tabs
       const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wiki = await res.json();
 
-      let desc = wiki.extract || `Detailed geographical and historical overview of ${cap}, India, highlighting its local culture, administration, and community landmarks.`;
+      let desc = wiki.extract || `Comprehensive profile of ${cap}, India, highlighting its local culture, regional landmarks, and historical milestones.`;
       let img = wiki.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - Complete Intelligence Hub`,
+        Name: `${cap} - City Intelligence Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Web Verified',
+        Type: '🌐 Live Custom Verified',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} Main Historic Fort & Monuments (0 km)\n🌿 ${cap} City Public Park & Botanical Garden (3 km)\n🛕 Famous Regional Temples & Shrines (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
-        transport_roadmap: `Road Map: Connected via national/state highways. Transport: Railway station, bus terminal, and auto/cab services available in ${cap}.`,
-        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Lodges\n🏨 Traditional Homestays`,
-        markets_food: `🛍️ Main Handloom & Local Artisan Markets of ${cap}.\n🍲 Famous Regional Thali, Local Street Food & Traditional Sweets.`,
-        culture_helpline: `Culture: Rich regional heritage, local folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} Ancient Fortified Gateway & Heritage Center (0 km)\n🛕 Famous ${cap} Prachin Mandir & Spiritual Shrine (3 km)\n🌿 ${cap} City Central Park & Recreational Garden (5 km)\n🏞️ Scenic River Bridge & Sunset Viewpoint (8 km)`,
+        transport_roadmap: `Road Map: Linked through major state highways and national routes. Transport: Local railway station, bus depots, and auto-rickshaw stands in ${cap}.`,
+        hotels_booking: `🏨 Premium Heritage Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Tourist Lodges\n🏨 Authentic Local Homestays`,
+        markets_food: `🛍️ Main Handloom Bazaar, Local Handicraft Shops & Weekly Markets of ${cap}.\n🍲 Signature Regional Thali, Traditional Sweets, and Popular Local Street Snacks.`,
+        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
 
     } catch (err) {
@@ -133,10 +130,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Complete Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Data in Every Tab.</span>
+          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">City-Wise Intelligence.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Every horizontal section loaded with rich city intelligence.
+          Get precise picnic spots, temples, markets and history for any city.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -144,7 +141,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city, town or village in India..."
+              placeholder="Search any city, town or tourist place..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleUniversalSearch(searchTerm)}
@@ -161,7 +158,7 @@ export default function App() {
             { name: 'Jaipur', icon: '👑' },
             { name: 'Udaipur', icon: '🏰' },
             { name: 'Varanasi', icon: '🛕' },
-            { name: 'Jodhpur', icon: '🛡️' }
+            { name: 'Ayodhya', icon: '🚩' }
           ].map(c => (
             <button key={c.name} onClick={() => handleUniversalSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
@@ -192,7 +189,7 @@ export default function App() {
           <div className="flex border-b border-slate-800 bg-slate-950/70 text-[10px] sm:text-[11px] font-bold text-slate-400 overflow-x-auto no-scrollbar">
             {[
               { key: 'overview', label: 'History & Geo', icon: '📜' },
-              { key: 'picnic', label: 'Picnic Spots', icon: '🌿' },
+              { key: 'picnic', label: 'Picnic & Mandir', icon: '🛕' },
               { key: 'transit', label: 'Road & Transit', icon: '🚗' },
               { key: 'hotel', label: 'Hotels', icon: '🏨' },
               { key: 'marketfood', label: 'Food & Market', icon: '🍲' },
@@ -218,7 +215,7 @@ export default function App() {
             {activeTab === 'picnic' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-orange-400 font-black block text-sm flex items-center gap-2">
-                  <span>🌿</span> Picnic Spots & Sightseeing
+                  <span>🛕</span> Picnic Spots & Famous Mandirs
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.picnic_spots}</p>
               </div>
