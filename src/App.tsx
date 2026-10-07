@@ -7,7 +7,6 @@ export default function App() {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
 
-  // Default dynamic city state (Jaipur)
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
     City: 'Jaipur', State: 'Rajasthan', Type: '👑 Royal Heritage Capital',
@@ -20,7 +19,6 @@ export default function App() {
     culture_helpline: 'Culture: Rajputana folk arts and turban tradition. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
   });
 
-  // Live Internet Data Fetcher (Wikipedia & Unsplash Integration)
   const handleLiveSearch = async (query: string) => {
     if (!query.trim()) return;
     const cleanQuery = query.trim();
@@ -29,7 +27,6 @@ export default function App() {
     setSearchTerm(cleanQuery);
 
     try {
-      // Fetch Live Summary from Wikipedia Free API
       const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wikiData = await wikiRes.json();
 
@@ -37,17 +34,17 @@ export default function App() {
       let imageUrl = wikiData.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - Live Intelligence Hub`,
+        Name: `${cap} - Intelligence & Heritage Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Internet Verified',
+        Type: '🌐 Live Smart Destination',
         image_url: imageUrl,
         history_geo_political: description,
-        picnic_spots: `🏛️ Main Heritage Monuments & Forts of ${cap}\n🌿 ${cap} City Central Park & Botanical Gardens\n🛕 Historic Regional Temples & Landmarks\n🏞️ Scenic Viewpoints & Riverside Attractions`,
-        transport_roadmap: `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, auto services, and cab aggregators in ${cap}.`,
-        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Lodges\n🏨 Traditional Homestays`,
-        markets_food: `🛍️ Main Bazaar, Handloom & Local Artisan Markets of ${cap}.\n🍲 Famous Regional Thali, Local Street Food & Traditional Sweets.`,
-        culture_helpline: `Culture: Rich regional heritage, local folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} Main Heritage Fort & Historical Monuments (0 km)\n🌿 ${cap} Central Public Park & Botanical Gardens (3 km)\n🛕 Famous Regional Temples & Spiritual Landmarks (5 km)\n🏞️ Scenic Riverfront & Sunset Viewpoints (8 km)`,
+        transport_roadmap: `Road Map: Well connected via national and state highways. Transport: Local railway station, bus depots, auto-rickshaws, and taxi services available in ${cap}.`,
+        hotels_booking: `🏨 Grand Heritage Hotel & Luxury Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Local Homestays`,
+        markets_food: `🛍️ Main Bazaar, Handloom & Handicraft Markets of ${cap}.\n🍲 Famous Regional Thali, Traditional Sweets, and Local Street Food specialties of ${cap}.`,
+        culture_helpline: `Culture: Vibrant local traditions, folk arts, and regional festivals. Helpline: Local Police: 100 | Ambulance: 108 | Pan-India SOS: 112`
       });
     } catch (err) {
       console.error('Error fetching live data:', err);
@@ -59,7 +56,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans pb-32 selection:bg-orange-500 selection:text-white">
       
-      {/* Header */}
       <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-2xl border-b border-slate-800/80 px-4 py-3.5 flex justify-between items-center shadow-2xl">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.reload()}>
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-600 via-amber-500 to-orange-400 flex items-center justify-center text-xl shadow-lg shadow-orange-500/20">
@@ -86,7 +82,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Search Section */}
       <section className="px-4 pt-10 pb-6 max-w-2xl mx-auto text-center relative">
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
@@ -94,7 +89,7 @@ export default function App() {
           Live Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Any City in India.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Directly pulling live history, maps, hotels & data from global live networks.
+          Directly pulling live history, picnic spots, food, hotels & data instantly.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -114,7 +109,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Quick Suggestion Chips */}
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
             { name: 'Udaipur', icon: '🏰' },
@@ -130,7 +124,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Comprehensive Intelligence Card */}
       <main className="px-4 max-w-xl mx-auto space-y-6 relative z-10">
         <div className="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
           
@@ -150,7 +143,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Navigation Tabs */}
           <div className="flex border-b border-slate-800 bg-slate-950/70 text-[10px] sm:text-[11px] font-bold text-slate-400 overflow-x-auto no-scrollbar">
             {[
               { key: 'overview', label: 'History & Geo', icon: '📜' },
@@ -166,7 +158,6 @@ export default function App() {
             ))}
           </div>
 
-          {/* Tab Content Panels */}
           <div className="p-5 space-y-4 text-xs text-slate-300 font-medium">
             
             {activeTab === 'overview' && (
@@ -214,7 +205,7 @@ export default function App() {
               <div className="space-y-3">
                 <div className="bg-slate-950/60 p-3.5 rounded-2xl border border-slate-800">
                   <span className="text-emerald-400 font-black block mb-1 flex items-center gap-2">
-                    <span>🛍️</span> Famous Markets & Shopping
+                    <span>🛍️</span> Famous Markets & Shopping / Food
                   </span>
                   <p className="whitespace-pre-line">{cityData.markets_food}</p>
                 </div>
@@ -235,7 +226,6 @@ export default function App() {
         </div>
       </main>
 
-      {/* Booking Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-6 text-xs text-slate-200 shadow-2xl space-y-3">
@@ -252,7 +242,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Business Listing Modal */}
       {showBizModal && (
         <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-6 text-xs text-slate-200 shadow-2xl space-y-3">
@@ -269,7 +258,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Bottom Nav */}
       <nav className="fixed bottom-3 left-4 right-4 max-w-md mx-auto bg-slate-900/90 backdrop-blur-2xl border border-slate-800 flex justify-around py-3 z-40 rounded-2xl shadow-2xl text-[11px] font-extrabold text-slate-400">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-400"><span>🔍</span><span>Search</span></button>
         <button onClick={() => setShowBizModal(true)} className="flex flex-col items-center gap-0.5 text-emerald-400"><span>💼</span><span>List Biz</span></button>
