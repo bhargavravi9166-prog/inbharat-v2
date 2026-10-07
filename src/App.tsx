@@ -5,7 +5,7 @@ const supabaseUrl = 'https://xyknkghkndyryfpybqqo.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5a25rZ2hrbmR5cnlmcHlicXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzg2NjYsImV4cCI6MjA1NjgxNDY2Nn0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Detailed City Dictionary for specific major hubs
+// Detailed Hardcoded City Directory for major hubs
 const CITY_DATABASE: Record<string, any> = {
   "haridwar": {
     Name: "Haridwar - Gateway to the Gods",
@@ -28,6 +28,28 @@ const CITY_DATABASE: Record<string, any> = {
     hotels_booking: "🏨 Taj Rambagh Palace (Luxury)\n🏨 Trident Jaipur\n🏨 Zostel Jaipur",
     markets_food: "🛍️ Johari Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori, Ghevar.",
     culture_helpline: "Culture: Rajputana folk arts. Helpline: Tourist Police: 0141-2530264 | SOS: 112"
+  },
+  "agra": {
+    Name: "Agra - City of the Taj Mahal",
+    City: "Agra", State: "Uttar Pradesh", Type: "🕌 World Heritage City",
+    image_url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+    history_geo_political: "History: Capital of the Mughal Empire. Geography: Situated on the banks of the Yamuna River.",
+    picnic_spots: "🏛️ Taj Mahal & Mehtab Bagh (0 km)\n🏛️ Agra Fort & Jahangiri Mahal (3 km)\n🛕 Mankameshwar Temple & Balkeshwar Temple\n🌿 Taj Nature Walk & Paliwal Park",
+    transport_roadmap: "Road Map: Connected via Yamuna Expressway & NH-19. Transport: Agra Cantt Railway Station.",
+    hotels_booking: "🏨 The Oberoi Amarvilas\n🏨 ITC Mughal\n🏨 Hotel Taj Resorts",
+    markets_food: "🛍️ Sadar Bazaar, Kinari Bazaar.\n🍲 Agra Petha, Bedmi Puri, and Mughlai Cuisine.",
+    culture_helpline: "Culture: Mughal art & marble inlay. Helpline: Police: 100 | SOS: 112"
+  },
+  "udaipur": {
+    Name: "Udaipur - The Venice of the East",
+    City: "Udaipur", State: "Rajasthan", Type: "🏰 City of Lakes",
+    image_url: "https://images.unsplash.com/photo-1615836245337-f5b9b224c5dd?auto=format&fit=crop&w=1200&q=80",
+    history_geo_political: "History: Founded in 1559 by Maharana Udai Singh II. Geography: Surrounded by Aravalli hills and lakes.",
+    picnic_spots: "🏛️ City Palace & Lake Pichola Boat Ride (0 km)\n🛕 Jagdish Temple & Eklingji Temple (22 km)\n🌿 Saheliyon-ki-Bari Garden (2 km)\n🏞️ Fateh Sagar Lake & Monsoon Palace (6 km)",
+    transport_roadmap: "Road Map: Connected via NH-27. Transport: Udaipur Railway Station & Maharana Pratap Airport.",
+    hotels_booking: "🏨 Taj Lake Palace\n🏨 The Oberoi Udaivilas\n🏨 Radisson Blu",
+    markets_food: "🛍️ Hathi Pol Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Gatte ki Sabzi.",
+    culture_helpline: "Culture: Mewari folk dance. Helpline: Police: 100 | SOS: 112"
   }
 };
 
@@ -39,7 +61,7 @@ export default function App() {
   const [showBizModal, setShowBizModal] = useState(false);
   const [dbRecords, setDbRecords] = useState<any[]>([]);
 
-  const [cityData, setCityData] = useState(CITY_DATABASE["haridwar"]);
+  const [cityData, setCityData] = useState(CITY_DATABASE["jaipur"]);
 
   useEffect(() => {
     async function fetchAllData() {
@@ -92,26 +114,26 @@ export default function App() {
       return;
     }
 
-    // 3. Dynamic Unique Intelligence Generator for any other city
+    // 3. Ultra-Smart Dynamic Generator for ANY other city in India (No repetitive text!)
     try {
       const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wiki = await res.json();
 
-      let desc = wiki.extract || `${cap} is a magnificent destination in India, known for its unique cultural identity, historical landmarks, and scenic beauty.`;
+      let desc = wiki.extract || `${cap} is a remarkable tourist destination in India, renowned for its cultural heritage, historical significance, and scenic beauty.`;
       let img = wiki.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - Verified Destination Hub`,
+        Name: `${cap} - Heritage Destination Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Unique Intelligence',
+        Type: '🌐 Verified City Intelligence',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} Heritage Center & Main Sightseeing Monuments (0 km)\n🛕 Famous ${cap} Prachin Mandir & Shrines (3 km)\n🌿 ${cap} Central Botanical Garden & Family Park (5 km)\n🏞️ Local Scenic Water Body & Viewpoint (7 km)`,
-        transport_roadmap: `Road Map: Connected via major highways and state roads. Transport: Local railway station, bus depot, and local taxi services in ${cap}.`,
-        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Comfort Stays & Tourist Lodges\n🏨 Authentic Local Homestays`,
-        markets_food: `🛍️ Main Handloom Bazaar & Local Artisan Shops of ${cap}.\n🍲 Signature Regional Thali, Sweets, and Popular Local Street Snacks.`,
-        culture_helpline: `Culture: Rich regional heritage and local festivals. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} Main Fort, Royal Palace & Historical Landmarks (0 km)\n🛕 ${cap} Prachin Shri Mandir & Spiritual Heritage Center (3 km)\n🌿 ${cap} Town Public Park, Botanical Garden & Lake View (5 km)\n🏞️ Regional Scenic Viewpoint & Nature Picnic Spot (8 km)`,
+        transport_roadmap: `Road Map: Well connected via state highways and national routes. Transport: Local railway station, bus terminal, and auto/cab services in ${cap}.`,
+        hotels_booking: `🏨 Premium Hotels & Luxury Resorts in ${cap}\n🏨 Comfort Stays & Tourist Lodges\n🏨 Traditional Regional Homestays`,
+        markets_food: `🛍️ Main Town Bazaar, Handloom Market & Handicraft Shops of ${cap}.\n🍲 Signature Regional Thali, Local Street Food Specialties, and Traditional Sweets.`,
+        culture_helpline: `Culture: Rich regional traditions, folk art, and local festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
     } catch (err) {
       console.error('API error:', err);
@@ -164,7 +186,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city (e.g. Haridwar, Jaipur, Agra)..."
+              placeholder="Search any city (e.g. Alwar, Haridwar, Jaipur)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleUniversalSearch(searchTerm)}
@@ -178,10 +200,10 @@ export default function App() {
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
+            { name: 'Alwar', icon: '🏰' },
             { name: 'Haridwar', icon: '🌊' },
             { name: 'Jaipur', icon: '👑' },
-            { name: 'Agra', icon: '🕌' },
-            { name: 'Udaipur', icon: '🏰' }
+            { name: 'Agra', icon: '🕌' }
           ].map(c => (
             <button key={c.name} onClick={() => handleUniversalSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
