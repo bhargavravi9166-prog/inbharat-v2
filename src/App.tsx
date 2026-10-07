@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xllmsjytvskzlyvynuzv.supabase.co';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsbG1zanl0dnNremx5dnludXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4NTYzMjQsImV4cCI6MjAyNTQzMjMyNH0.placeholder';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsbG1zanl0dnNremx5dnludXp2Iiwicm9sZSI6Inhsb24iLCJpYXQiOjE3MDk4NTYzMjQsImV4cCI6MjAyNTQzMjMyNH0.placeholder';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL || SUPABASE_URL,
@@ -114,4 +114,211 @@ export default function App() {
     } else {
       alert('Spot successfully added to InBharat database!');
       setShowAddModal(false);
+      handleSearch(formData.City);
+    }
+  };
+
+  const handleVendorSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!vendorData.businessName || !vendorData.phone) {
+      alert('Kripya Business Name aur Phone number dalein!');
+      return;
+    }
+    alert(`Success! ${vendorData.businessName} has been registered successfully.`);
+    setShowVendorModal(false);
+    setVendorData({ businessName: '', ownerName: '', phone: '', city: '', category: 'Hotel / Homestay' });
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans pb-32 selection:bg-orange-500 selection:text-white">
       
+      {/* Top Professional Header */}
+      <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 px-4 py-3.5 flex justify-between items-center shadow-xl">
+        <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.location.reload()}>
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-orange-500/20">
+            🇮🇳
+          </div>
+          <div>
+            <div className="flex items-center font-black tracking-wider text-xl leading-none">
+              <span className="text-orange-500">IN</span>
+              <span className="text-white">BHARAT</span>
+            </div>
+            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block mt-0.5">
+              Super-App & Travel Hub
+            </span>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <button 
+            onClick={() => setShowVendorModal(true)} 
+            className="bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold text-xs px-3 py-2 rounded-xl transition shadow-sm active:scale-95 flex items-center gap-1"
+          >
+            <span>💼</span> <span className="hidden sm:inline">List Biz</span>
+          </button>
+          <button 
+            onClick={() => setShowAddModal(true)} 
+            className="bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 border border-orange-500/30 font-bold text-xs px-3 py-2 rounded-xl transition shadow-sm active:scale-95 flex items-center gap-1"
+          >
+            <span>➕</span> <span className="hidden sm:inline">Add Spot</span>
+          </button>
+        </div>
+      </header>
+
+      {/* Hero Search Section */}
+      <section className="px-4 pt-10 pb-8 max-w-2xl mx-auto w-full text-center relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none blur-3xl"></div>
+        
+        <span className="inline-flex items-center gap-1.5 bg-orange-500/10 text-orange-400 border border-orange-500/20 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4 shadow-inner">
+          ✨ India's Ultimate Local & Tourism Ecosystem
+        </span>
+        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
+          Explore Any City, <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">Instantly.</span>
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto mb-8 font-medium">
+          Get verified history, sightseeing spots, local food, transport, and emergency SOS in one clean dashboard.
+        </p>
+
+        <form onSubmit={(e) => handleSearch(undefined, e)} className="relative z-10 max-w-xl mx-auto">
+          <div className="flex bg-slate-800/90 rounded-2xl p-2 border border-slate-700 focus-within:border-orange-500 transition shadow-2xl backdrop-blur-md">
+            <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
+            <input
+              type="text"
+              placeholder="Search city, town or monument (e.g. Jaipur, Ujjain)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-400 outline-none font-semibold"
+            />
+            <button 
+              type="submit" 
+              disabled={loading} 
+              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-orange-500/25 disabled:opacity-50 active:scale-95"
+            >
+              {loading ? 'Searching...' : 'Explore'}
+            </button>
+          </div>
+        </form>
+
+        <div className="flex gap-2 overflow-x-auto mt-5 no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
+          {['Jaipur', 'Ujjain', 'Varanasi', 'Agra', 'Tonk', 'Mount Abu'].map(city => (
+            <button
+              key={city}
+              type="button"
+              onClick={() => handleSearch(city)}
+              className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition shadow-sm active:scale-95 flex items-center gap-1"
+            >
+              <span>📍</span> <span>{city}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Main Results Feed */}
+      <main className="px-4 max-w-xl mx-auto w-full flex-1 space-y-6 relative z-10">
+        {loading && (
+          <div className="text-center py-20 bg-slate-800/50 backdrop-blur-md rounded-3xl border border-slate-700 shadow-xl">
+            <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+            <p className="text-xs text-slate-300 font-bold tracking-wider">Assembling Structured Intelligence...</p>
+          </div>
+        )}
+
+        {!loading && results.map((item, idx) => (
+          <div key={idx} className="bg-slate-800/90 border border-slate-700 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
+            
+            {/* Header Image */}
+            <div className="relative h-56 bg-slate-950 overflow-hidden">
+              <img 
+                src={item.image_url || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80'} 
+                alt={item.Name} 
+                className="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+              
+              <div className="absolute top-3 left-3">
+                <span className="bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
+                  ⭐ {item.Type || 'Verified Destination'}
+                </span>
+              </div>
+
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-2xl font-black text-white tracking-tight drop-shadow-md">{item.Name}</h3>
+                <p className="text-xs text-amber-300 font-bold mt-0.5 flex items-center gap-1">
+                  <span>📍</span> {item.City}, {item.State}
+                </p>
+              </div>
+            </div>
+
+            {/* Category Navigation Tabs */}
+            <div className="flex border-b border-slate-700 bg-slate-900/80 text-[11px] font-bold text-slate-300 overflow-x-auto no-scrollbar">
+              {[
+                { key: 'overview', label: 'History', icon: '📜' },
+                { key: 'spots', label: 'Attractions', icon: '🏛️' },
+                { key: 'marketfood', label: 'Food & Market', icon: '🍲' },
+                { key: 'transit', label: 'Transit', icon: '🚌' },
+                { key: 'sos', label: 'SOS Help', icon: '🚨' },
+              ].map(tab => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 py-3 px-3 whitespace-nowrap border-b-2 transition flex items-center justify-center gap-1.5 ${
+                    activeTab === tab.key
+                      ? 'border-orange-500 text-orange-400 bg-slate-800 font-black shadow-sm'
+                      : 'border-transparent text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-sm">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Dynamic Content Display */}
+            <div className="p-5 space-y-4 text-xs text-slate-200">
+              
+              {activeTab === 'overview' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-amber-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>📜</span> Heritage & History Overview
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.history || item.geography_politics}</p>
+                </div>
+              )}
+
+              {activeTab === 'spots' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-orange-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>🏛️</span> Key Sightseeing & Monuments
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1 whitespace-pre-line">{item.temples_and_spots}</p>
+                </div>
+              )}
+
+              {activeTab === 'marketfood' && (
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
+                    <span className="text-emerald-400 font-black block mb-1 flex items-center gap-1.5">
+                      <span>🛍️</span> Famous Local Markets
+                    </span>
+                    <p className="text-slate-300 font-medium">{item.famous_markets}</p>
+                  </div>
+                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
+                    <span className="text-rose-400 font-black block mb-1 flex items-center gap-1.5">
+                      <span>🍲</span> Famous Food & Delicacies
+                    </span>
+                    <p className="text-slate-300 font-medium">{item.famous_food}</p>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'transit' && (
+                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
+                  <span className="text-sky-400 font-black block text-sm flex items-center gap-1.5">
+                    <span>🚌</span> Bus, Taxi & Route Connectivity
+                  </span>
+                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.route_transport}</p>
+                </div>
+              )}
+
+              {activeTab === 'sos' && (
+                <div className="bg-red-950/30 p-4 rounded-2xl border border-red-900/50 shadow-inner space-y-1.5">
+                  <span className="text-red-400 font-black block text
