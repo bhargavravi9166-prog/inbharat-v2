@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xllmsjytvskzlyvynuzv.supabase.co';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsbG1zanl0dnNremx5dnludXp2Iiwicm9sZSI6Inhsb24iLCJpYXQiOjE3MDk4NTYzMjQsImV4cCI6MjAyNTQzMjMyNH0.placeholder';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsbG1zanl0dnNremx5dnludXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk4NTYzMjQsImV4cCI6MjAyNTQzMjMyNH0.placeholder';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL || SUPABASE_URL,
@@ -215,110 +215,3 @@ export default function App() {
 
       {/* Main Results Feed */}
       <main className="px-4 max-w-xl mx-auto w-full flex-1 space-y-6 relative z-10">
-        {loading && (
-          <div className="text-center py-20 bg-slate-800/50 backdrop-blur-md rounded-3xl border border-slate-700 shadow-xl">
-            <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-slate-300 font-bold tracking-wider">Assembling Structured Intelligence...</p>
-          </div>
-        )}
-
-        {!loading && results.map((item, idx) => (
-          <div key={idx} className="bg-slate-800/90 border border-slate-700 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
-            
-            {/* Header Image */}
-            <div className="relative h-56 bg-slate-950 overflow-hidden">
-              <img 
-                src={item.image_url || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80'} 
-                alt={item.Name} 
-                className="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
-              
-              <div className="absolute top-3 left-3">
-                <span className="bg-orange-500 text-white font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
-                  ⭐ {item.Type || 'Verified Destination'}
-                </span>
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="text-2xl font-black text-white tracking-tight drop-shadow-md">{item.Name}</h3>
-                <p className="text-xs text-amber-300 font-bold mt-0.5 flex items-center gap-1">
-                  <span>📍</span> {item.City}, {item.State}
-                </p>
-              </div>
-            </div>
-
-            {/* Category Navigation Tabs */}
-            <div className="flex border-b border-slate-700 bg-slate-900/80 text-[11px] font-bold text-slate-300 overflow-x-auto no-scrollbar">
-              {[
-                { key: 'overview', label: 'History', icon: '📜' },
-                { key: 'spots', label: 'Attractions', icon: '🏛️' },
-                { key: 'marketfood', label: 'Food & Market', icon: '🍲' },
-                { key: 'transit', label: 'Transit', icon: '🚌' },
-                { key: 'sos', label: 'SOS Help', icon: '🚨' },
-              ].map(tab => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 py-3 px-3 whitespace-nowrap border-b-2 transition flex items-center justify-center gap-1.5 ${
-                    activeTab === tab.key
-                      ? 'border-orange-500 text-orange-400 bg-slate-800 font-black shadow-sm'
-                      : 'border-transparent text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  <span className="text-sm">{tab.icon}</span>
-                  <span>{tab.label}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Dynamic Content Display */}
-            <div className="p-5 space-y-4 text-xs text-slate-200">
-              
-              {activeTab === 'overview' && (
-                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
-                  <span className="text-amber-400 font-black block text-sm flex items-center gap-1.5">
-                    <span>📜</span> Heritage & History Overview
-                  </span>
-                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.history || item.geography_politics}</p>
-                </div>
-              )}
-
-              {activeTab === 'spots' && (
-                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
-                  <span className="text-orange-400 font-black block text-sm flex items-center gap-1.5">
-                    <span>🏛️</span> Key Sightseeing & Monuments
-                  </span>
-                  <p className="text-slate-300 leading-relaxed font-medium pt-1 whitespace-pre-line">{item.temples_and_spots}</p>
-                </div>
-              )}
-
-              {activeTab === 'marketfood' && (
-                <div className="grid grid-cols-1 gap-3">
-                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
-                    <span className="text-emerald-400 font-black block mb-1 flex items-center gap-1.5">
-                      <span>🛍️</span> Famous Local Markets
-                    </span>
-                    <p className="text-slate-300 font-medium">{item.famous_markets}</p>
-                  </div>
-                  <div className="bg-slate-900/70 p-3.5 rounded-2xl border border-slate-700">
-                    <span className="text-rose-400 font-black block mb-1 flex items-center gap-1.5">
-                      <span>🍲</span> Famous Food & Delicacies
-                    </span>
-                    <p className="text-slate-300 font-medium">{item.famous_food}</p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'transit' && (
-                <div className="bg-slate-900/70 p-4 rounded-2xl border border-slate-700 shadow-inner space-y-1.5">
-                  <span className="text-sky-400 font-black block text-sm flex items-center gap-1.5">
-                    <span>🚌</span> Bus, Taxi & Route Connectivity
-                  </span>
-                  <p className="text-slate-300 leading-relaxed font-medium pt-1">{item.route_transport}</p>
-                </div>
-              )}
-
-              {activeTab === 'sos' && (
-                <div className="bg-red-950/30 p-4 rounded-2xl border border-red-900/50 shadow-inner space-y-1.5">
-                  <span className="text-red-400 font-black block text
