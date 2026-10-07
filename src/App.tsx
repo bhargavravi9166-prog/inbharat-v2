@@ -1,178 +1,45 @@
 import React, { useState } from 'react';
 
-// Ultimate Complete Indian Tourism Directory (All Major Tourist Cities & Hill Stations)
-const COMPLETE_TOURISM_DATABASE: Record<string, any> = {
+// Master Comprehensive Indian Tourism Directory with Verified Famous Mandirs & Heritage Shrines
+const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, any> = {
+  // --- RAJASTHAN ---
   "jaipur": {
     Name: "Jaipur - The Pink City & Royal Capital",
     City: "Jaipur", State: "Rajasthan", Type: "👑 Royal Heritage Capital",
     image_url: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Founded in 1727 by Maharaja Sawai Jai Singh II. Enclosed by Aravalli hills.",
-    picnic_spots: "🏛️ Amer Fort & Maota Lake (11 km)\n🛕 Govind Dev Ji Temple & Birla Mandir (4 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n🏞️ Jal Mahal Water Palace (8 km)",
-    transport_roadmap: "Road Map: Connected via NH-48. Transport: Jaipur Metro, low-floor buses, and Jaipur Airport (JAI).",
+    weather: "☀️ 28°C (Sunny & Pleasant)", bestTime: "October to March",
+    packing: "🧳 Light cotton clothes, sunglasses, sunscreen, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,000 / day",
+    history_geo_political: "History: Founded in 1727 by Maharaja Sawai Jai Singh II. Capital of Rajasthan.",
+    picnic_spots: "🏛️ Amer Fort & Maota Lake\n🛕 Govind Dev Ji Temple & Birla Mandir\n🌿 Jawahar Circle & Patrika Gate\n🏞️ Jal Mahal Water Palace",
+    transport_roadmap: "Road Map: Connected via NH-48. Transport: Jaipur Metro, low-floor buses, and JAI Airport.",
     hotels_booking: "🏨 Taj Rambagh Palace\n🏨 Trident Jaipur\n🏨 Zostel Jaipur",
     markets_food: "🛍️ Johari Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori, Ghevar.",
-    culture_helpline: "Culture: Rajputana folk arts. Helpline: Police: 100 | SOS: 112"
-  },
-  "agra": {
-    Name: "Agra - City of the Taj Mahal",
-    City: "Agra", State: "Uttar Pradesh", Type: "🕌 World Heritage City",
-    image_url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Capital of the Mughal Empire. Situated on the banks of the Yamuna River.",
-    picnic_spots: "🏛️ Taj Mahal & Mehtab Bagh (0 km)\n🏛️ Agra Fort & Jahangiri Mahal (3 km)\n🛕 Mankameshwar Temple\n🌿 Taj Nature Walk & Paliwal Park",
-    transport_roadmap: "Road Map: Connected via Yamuna Expressway & NH-19. Transport: Agra Cantt Railway Station.",
-    hotels_booking: "🏨 The Oberoi Amarvilas\n🏨 ITC Mughal\n🏨 Hotel Taj Resorts",
-    markets_food: "🛍️ Sadar Bazaar, Kinari Bazaar.\n🍲 Agra Petha, Bedmi Puri, Mughlai Cuisine.",
-    culture_helpline: "Culture: Mughal art & inlay. Helpline: Police: 100 | SOS: 112"
+    culture_helpline: "Culture: Rajputana folk arts. Helpline: Tourist Police: 0141-2530264 | SOS: 112"
   },
   "udaipur": {
     Name: "Udaipur - The Venice of the East",
     City: "Udaipur", State: "Rajasthan", Type: "🏰 City of Lakes",
     image_url: "https://images.unsplash.com/photo-1615836245337-f5b9b224c5dd?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Founded in 1559 by Maharana Udai Singh II. Surrounded by Aravalli hills and lakes.",
-    picnic_spots: "🏛️ City Palace & Lake Pichola Boat Ride (0 km)\n🛕 Jagdish Temple & Eklingji Temple (22 km)\n🌿 Saheliyon-ki-Bari Garden (2 km)\n🏞️ Fateh Sagar Lake & Monsoon Palace (6 km)",
-    transport_roadmap: "Road Map: Connected via NH-27. Transport: Udaipur Railway Station & Maharana Pratap Airport.",
+    weather: "☀️ 27°C (Pleasant Breeze)", bestTime: "September to March",
+    packing: "🧳 Casual cotton wear, evening wraps, camera, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹3,000 - ₹6,500 / day",
+    history_geo_political: "History: Founded in 1559 by Maharana Udai Singh II. Surrounded by Aravalli hills.",
+    picnic_spots: "🏛️ City Palace & Lake Pichola Boat Ride\n🛕 Jagdish Temple (17th Century Indo-Aryan architecture) & Eklingji Temple\n🌿 Saheliyon-ki-Bari Garden\n🏞️ Fateh Sagar Lake & Monsoon Palace",
+    transport_roadmap: "Road Map: Connected via NH-27. Transport: Udaipur Railway Station & UDR Airport.",
     hotels_booking: "🏨 Taj Lake Palace\n🏨 The Oberoi Udaivilas\n🏨 Radisson Blu",
     markets_food: "🛍️ Hathi Pol Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Gatte ki Sabzi.",
     culture_helpline: "Culture: Mewari folk dance. Helpline: Police: 100 | SOS: 112"
-  },
-  "haridwar": {
-    Name: "Haridwar - Gateway to the Gods",
-    City: "Haridwar", State: "Uttarakhand", Type: "🌊 Sacred Pilgrimage City",
-    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: One of the seven holiest places in Hinduism. Located where Ganges exits Himalayas.",
-    picnic_spots: "🏛️ Har Ki Pauri Ganga Aarti Ghat (0 km)\n🛕 Mansa Devi Temple & Chandi Devi Temple\n🌿 Shantikunj Ashram & Daksh Mahadev Temple (4 km)\n🏞️ Rajaji National Park Safari (10 km)",
-    transport_roadmap: "Road Map: Connected via NH-334. Transport: Haridwar Junction & Jolly Grant Airport Dehradun.",
-    hotels_booking: "🏨 Hotel Ganga Lahari\n🏨 Radisson Blu Haridwar\n🏨 Amatra Ganges",
-    markets_food: "🛍️ Moti Bazar, Bara Bazar.\n🍲 Chole Bhature, Aloo Puri, Rabri Malai.",
-    culture_helpline: "Culture: Vedic rituals. Helpline: Police: 100 | SOS: 112"
-  },
-  "varanasi": {
-    Name: "Varanasi - The Spiritual Heart of India",
-    City: "Varanasi", State: "Uttar Pradesh", Type: "🛕 Ancient Holy City",
-    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: One of the oldest continuously inhabited cities. Situated on the bank of Ganges.",
-    picnic_spots: "🛕 Kashi Vishwanath Temple & Annapurna Temple (0 km)\n🏛️ Dashashwamedh Ghat & Ganga Aarti Boat Ride\n🌿 Sarnath Deer Park & Museum (10 km)\n🏞️ Assi Ghat Sunrise Point",
-    transport_roadmap: "Road Map: Connected via NH-19. Transport: Varanasi Junction & Lal Bahadur Shastri Airport.",
-    hotels_booking: "🏨 BrijRama Palace\n🏨 Taj Ganges Varanasi\n🏨 Hotel Surya",
-    markets_food: "🛍️ Vishwanath Gali, Thatheri Bazaar.\n🍲 Banarasi Paan, Kachori Jalebi, Malaiyyo.",
-    culture_helpline: "Culture: Spirituality. Helpline: Police: 100 | SOS: 112"
-  },
-  "mount abu": {
-    Name: "Mount Abu - Rajasthan's Only Hill Station",
-    City: "Mount Abu", State: "Rajasthan", Type: "⛰️ Scenic Hill Station",
-    image_url: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Ancient mythological history. Nestled in Aravalli hills with Nakki Lake.",
-    picnic_spots: "🏛️ Dilwara Jain Temples (3 km)\n🛕 Adhar Devi Temple\n🌿 Nakki Lake Boating & Sunset Point (0 km)\n🏞️ Guru Shikhar Peak (15 km)",
-    transport_roadmap: "Road Map: Connected via NH-27. Transport: Abu Road Railway Station (28 km).",
-    hotels_booking: "🏨 Hotel Hillock\n🏨 Cama Rajputana Club Resort\n🏨 Sunset Inn Resort",
-    markets_food: "🛍️ Nakki Lake Market.\n🍲 Rajasthani Dal Baati, Rabdi.",
-    culture_helpline: "Culture: Tribal heritage. Helpline: Police: 100 | SOS: 112"
-  },
-  "new delhi": {
-    Name: "New Delhi - Capital of India",
-    City: "New Delhi", State: "Delhi", Type: "🏛️ National Capital",
-    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Rich in Mughal and British heritage. Located on the banks of Yamuna River.",
-    picnic_spots: "🏛️ Red Fort, Qutub Minar, India Gate (0 km)\n🛕 Lotus Temple, Akshardham Temple\n🌿 Lodhi Garden & Nehru Park",
-    transport_roadmap: "Road Map: Connected via expressways. Transport: IGI Airport & Metro Network.",
-    hotels_booking: "🏨 The Leela Palace\n🏨 Taj Palace\n🏨 Zostel Delhi",
-    markets_food: "🛍️ Chandni Chowk, Sarojini Nagar.\n🍲 Chole Bhature, Parathas, Street Chaat.",
-    culture_helpline: "Culture: Multicultural hub. Helpline: Tourist Helpline: 1363 | SOS: 112"
-  },
-  "mumbai": {
-    Name: "Mumbai - The City of Dreams",
-    City: "Mumbai", State: "Maharashtra", Type: "🌊 Financial Capital",
-    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Major port city on Konkan coast. Financial & entertainment capital of India.",
-    picnic_spots: "🏛️ Gateway of India, Elephanta Caves (0 km)\n🛕 Siddhivinayak Temple\n🌿 Marine Drive, Hanging Gardens, Juhu Beach",
-    transport_roadmap: "Road Map: Western/Central Express Highways. Transport: CSMIA Airport & Suburban Trains.",
-    hotels_booking: "🏨 The Taj Mahal Palace\n🏨 Trident Nariman Point\n🏨 Hotel Sea Princess",
-    markets_food: "🛍️ Colaba Causeway, Crawford Market.\n🍲 Vada Pav, Pav Bhaji, Bombay Duck.",
-    culture_helpline: "Culture: Bollywood & Marathi culture. Helpline: Police: 100 | SOS: 112"
-  },
-  "goa": {
-    Name: "Goa - Sun, Sand & Sea",
-    City: "Goa", State: "Goa", Type: "🏖️ Coastal Paradise",
-    image_url: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Portuguese colonial history. Pristine coastline along Arabian Sea.",
-    picnic_spots: "🏛️ Fort Aguada, Chapora Fort (0 km)\n🛕 Shanta Durga Temple, Mangeshi Temple\n🌿 Baga Beach, Calangute Beach, Dudhsagar Waterfalls",
-    transport_roadmap: "Road Map: NH-66 connectivity. Transport: Dabolim & Mopa Airports.",
-    hotels_booking: "🏨 Taj Exotica\n🏨 W Goa\n🏨 Zostel Goa",
-    markets_food: "🛍️ Anjuna Flea Market, Mapusa Market.\n🍲 Goan Fish Curry, Bebinca, Xacuti.",
-    culture_helpline: "Culture: Konkani heritage. Helpline: Tourist Police: 0832-2425090 | SOS: 112"
-  },
-  "shimla": {
-    Name: "Shimla - Queen of Hill Stations",
-    City: "Shimla", State: "Himachal Pradesh", Type: "❄️ Himalayan Hill Station",
-    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Former summer capital of British India. Nestled in lower Himalayan ranges.",
-    picnic_spots: "🏛️ The Ridge, Viceregal Lodge (0 km)\n🛕 Jakhoo Temple, Tara Devi Temple\n🌿 Mall Road, Kufri Valley Snow Point",
-    transport_roadmap: "Road Map: Connected via NH-5. Transport: Kalka-Shimla Toy Train.",
-    hotels_booking: "🏨 The Oberoi Cecil\n🏨 Clarkes Hotel\n🏨 Hotel Combermere",
-    markets_food: "🛍️ Mall Road Shopping Center, Lakkar Bazaar.\n🍲 Madra, Siddu, Himachali Thali.",
-    culture_helpline: "Culture: Pahari tradition. Helpline: Police: 100 | SOS: 112"
-  },
-  "manali": {
-    Name: "Manali - Valley of the Gods",
-    City: "Manali", State: "Himachal Pradesh", Type: "🏔️ Adventure & Snow Hub",
-    image_url: "https://images.unsplash.com/photo-1605648916361-9bc12ad6a563?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Ancient trade route town. Situated in Beas River valley.",
-    picnic_spots: "🏛️ Naggar Castle, Old Manali Heritage Village (0 km)\n🛕 Hadimba Temple, Vashisht Hot Springs\n🌿 Solang Valley, Rohtang Pass, Atal Tunnel",
-    transport_roadmap: "Road Map: Connected via NH-3. Transport: Bhuntar Airport (50 km).",
-    hotels_booking: "🏨 The Span Resort & Spa\n🏨 Manu All Seasons\n🏨 Zostel Manali",
-    markets_food: "🛍️ Mall Road Manali, Tibetan Market.\n🍲 Trout Fish, Dham, Hot Maggi.",
-    culture_helpline: "Culture: Himalayan culture. Helpline: Police: 100 | SOS: 112"
-  },
-  "rishikesh": {
-    Name: "Rishikesh - Yoga Capital of the World",
-    City: "Rishikesh", State: "Uttarakhand", Type: "🧘 Spiritual & Adventure Hub",
-    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Ancient sanctuary for sages. Situated where Ganges flows from Himalayas.",
-    picnic_spots: "🏛️ Triveni Ghat Ganga Aarti (0 km)\n🛕 Parmarth Niketan, Beatles Ashram\n🌿 Ram Jhula & Lakshman Jhula Suspension Bridges\n🏞️ Shivpuri River Rafting Camp (16 km)",
-    transport_roadmap: "Road Map: Connected via NH-7. Transport: Rishikesh Railway Station & Dehradun Airport.",
-    hotels_booking: "🏨 Ananda in the Himalayas\n🏨 Aloha On The Ganges\n🏨 Zostel Rishikesh",
-    markets_food: "🛍️ Lakshman Jhula Market, Swarg Ashram.\n🍲 Ayurvedic Sattvic Thali, Organic Cafes.",
-    culture_helpline: "Culture: Spirituality. Helpline: Police: 100 | SOS: 112"
-  },
-  "mysuru": {
-    Name: "Mysuru - The Heritage City",
-    City: "Mysuru", State: "Karnataka", Type: "🏛️ Royal Palace City",
-    image_url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Capital of Wodeyar dynasty. Famous for grand Dasara festivals.",
-    picnic_spots: "🏛️ Mysore Palace & Chamundi Hills (0 km)\n🛕 Chamundeshwari Temple & Nandi Bull Statue\n🌿 Brindavan Gardens & Karanji Lake\n🏞️ Ranganathittu Bird Sanctuary",
-    transport_roadmap: "Road Map: Connected via NH-275. Transport: Mysore Junction & Mysore Airport.",
-    hotels_booking: "🏨 Lalitha Mahal Palace\n🏨 Radisson Blu Plaza\n🏨 Hotel Roopa",
-    markets_food: "🛍️ Devaraja Market, Mysore Silk Emporium.\n🍲 Mysore Pak, Bisi Bele Bath, Dosa.",
-    culture_helpline: "Culture: Karnataka heritage. Helpline: Police: 100 | SOS: 112"
-  },
-  "kolkata": {
-    Name: "Kolkata - The City of Joy",
-    City: "Kolkata", State: "West Bengal", Type: "🎨 Cultural Capital",
-    image_url: "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Capital during British Raj, renowned for literature, art, and revolutionary history.",
-    picnic_spots: "🏛️ Victoria Memorial, Howrah Bridge, Fort William (0 km)\n🛕 Dakshineswar Kali Temple & Kalighat Temple\n🌿 Eco Park, Maidan, Princep Ghat",
-    transport_roadmap: "Road Map: NH-12 connectivity. Transport: Netaji Subhash Chandra Bose Airport & Metro.",
-    hotels_booking: "🏨 The Oberoi Grand\n🏨 ITC Sonar\n🏨 The Peerless Inn",
-    markets_food: "🛍️ New Market, Gariahat Market.\n🍲 Rosogolla, Mishti Doi, Kathi Roll.",
-    culture_helpline: "Culture: Bengali literature. Helpline: Police: 100 | SOS: 112"
-  },
-  "hyderabad": {
-    Name: "Hyderabad - The City of Pearls",
-    City: "Hyderabad", State: "Telangana", Type: "🕌 Historic Tech Hub",
-    image_url: "https://images.unsplash.com/photo-1588416936002-3163fc68997b?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Ruled by Qutb Shahis and Nizams. Famous blend of history and modern IT industry.",
-    picnic_spots: "🏛️ Charminar, Golconda Fort, Chowmahalla Palace (0 km)\n🛕 Birla Mandir & Chilkur Balaji Temple\n🌿 Hussain Sagar Lake, Lumbini Park, Ramoji Film City",
-    transport_roadmap: "Road Map: NH-44 connectivity. Transport: Rajiv Gandhi International Airport & Metro.",
-    hotels_booking: "🏨 Taj Falaknuma Palace\n🏨 ITC Kakatiya\n🏨 Green Park Hotel",
-    markets_food: "🛍️ Laad Bazaar, Sultan Bazaar.\n🍲 Hyderabadi Dum Biryani, Irani Chai, Haleem.",
-    culture_helpline: "Culture: Deccani tehzeeb. Helpline: Police: 100 | SOS: 112"
   },
   "jaisalmer": {
     Name: "Jaisalmer - The Golden City",
     City: "Jaisalmer", State: "Rajasthan", Type: "🐪 Desert Fortress City",
     image_url: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C (Warm Desert Sun)", bestTime: "October to March",
+    packing: "🧳 Light cottons for day, heavy woolens for cold desert nights, sunglasses.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
     history_geo_political: "History: Founded in 1156 by Rawal Jaisal. Located in heart of Thar Desert.",
-    picnic_spots: "🏛️ Jaisalmer Golden Fort & Patwon Ki Haveli (0 km)\n🛕 Tanot Mata Temple & Nathmal Ji ki Haveli\n🌿 Sam Sand Dunes Desert Safari & Camp (40 km)\n🏞️ Gadisar Lake & Sunset Point",
+    picnic_spots: "🏛️ Jaisalmer Golden Fort & Patwon Ki Haveli\n🛕 Tanot Mata Temple (Miraculous Indo-Pak border shrine) & Jain Temples inside Fort\n🌿 Sam Sand Dunes Desert Safari\n🏞️ Gadisar Lake & Sunset Point",
     transport_roadmap: "Road Map: Connected via NH-15. Transport: Jaisalmer Railway Station & Airport.",
     hotels_booking: "🏨 Suryagarh Jaisalmer\n🏨 Desert Tulip Hotel\n🏨 Heritage Camp Stays",
     markets_food: "🛍️ Sadar Bazaar, Bhatia Bazaar.\n🍲 Gatte ki Sabzi, Ker Sangri, Pyaaz Kachori.",
@@ -182,89 +49,403 @@ const COMPLETE_TOURISM_DATABASE: Record<string, any> = {
     Name: "Jodhpur - The Blue City & Sun City",
     City: "Jodhpur", State: "Rajasthan", Type: "🏰 Blue Heritage Hub",
     image_url: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 29°C (Sunny)", bestTime: "October to March",
+    packing: "🧳 Comfortable clothing, sunglasses, hat, walking shoes.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,000 / day",
     history_geo_political: "History: Founded in 1459 by Rao Jodha. Famous for blue-painted houses.",
-    picnic_spots: "🏛️ Mehrangarh Fort & Jaswant Thada (0 km)\n🛕 Umaid Bhawan Palace Museum & Clock Tower\n🌿 Mandore Gardens & Rao Jodha Desert Rock Park\n🏞️ Balsamand Lake & Palace",
+    picnic_spots: "🏛️ Mehrangarh Fort & Jaswant Thada\n🛕 Umaid Bhawan Palace & Achnath Mahadev Temple\n🌿 Mandore Gardens & Desert Rock Park\n🏞️ Balsamand Lake & Palace",
     transport_roadmap: "Road Map: Connected via NH-62. Transport: Jodhpur Junction & Airport (JDH).",
     hotels_booking: "🏨 Umaid Bhawan Palace\n🏨 RAAS Jodhpur\n🏨 Ajit Bhawan",
     markets_food: "🛍️ Nai Sarak, Clock Tower Market.\n🍲 Jodhpuri Mirchi Bada, Mawa Kachori.",
     culture_helpline: "Culture: Marwar traditions. Helpline: Police: 100 | SOS: 112"
   },
+  "mount abu": {
+    Name: "Mount Abu - Rajasthan's Only Hill Station",
+    City: "Mount Abu", State: "Rajasthan", Type: "⛰️ Scenic Hill Station",
+    image_url: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 20°C (Pleasant & Breezy)", bestTime: "July to February",
+    packing: "🧳 Light woolens for evenings, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Ancient mythological history. Nestled in Aravalli hills with Nakki Lake.",
+    picnic_spots: "🏛️ Dilwara Jain Temples (World famous marble architecture)\n🛕 Adhar Devi Temple (Goddess Durga in cave) & Rasiya Balam Temple\n🌿 Nakki Lake Boating & Sunset Point\n🏞️ Guru Shikhar Peak",
+    transport_roadmap: "Road Map: Connected via NH-27. Transport: Abu Road Railway Station (28 km).",
+    hotels_booking: "🏨 Hotel Hillock\n🏨 Cama Rajputana Club Resort\n🏨 Sunset Inn Resort",
+    markets_food: "🛍️ Nakki Lake Market.\n🍲 Rajasthani Dal Baati, Rabdi.",
+    culture_helpline: "Culture: Tribal heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "pushkar": {
+    Name: "Pushkar - Sacred Brahma Temple Town",
+    City: "Pushkar", State: "Rajasthan", Type: "🌸 Holy Oasis Town",
+    image_url: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C (Sunny)", bestTime: "October to March",
+    packing: "🧳 Modest ethnic wear, comfortable footwear (shoes removed at ghats).",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: One of the oldest cities in India. Famous for rare Lord Brahma Temple.",
+    picnic_spots: "🛕 Brahma Temple (Only major Brahma temple in world) & Savitri Temple\n🏛️ Pushkar Lake & 52 Sacred Ghats Aarti\n🌿 Varaha Temple & Rangji Temple\n🏞️ Desert Camping Sites",
+    transport_roadmap: "Road Map: Connected via Ajmer-Pushkar road. Transport: Ajmer Railway Station (15 km).",
+    hotels_booking: "🏨 Ananta Spa & Resort\n🏨 Pushkar Bagh Resort\n🏨 Zostel Pushkar",
+    markets_food: "🛍️ Main Market, Bazaars.\n🍲 Malpua, Falooda, Special Lassi, Poha.",
+    culture_helpline: "Culture: Spiritual fairs & rituals. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- UTTAR PRADESH ---
+  "agra": {
+    Name: "Agra - City of the Taj Mahal",
+    City: "Agra", State: "Uttar Pradesh", Type: "🕌 World Heritage City",
+    image_url: "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 29°C (Clear Sky)", bestTime: "October to March",
+    packing: "🧳 Light casual clothes, camera, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Capital of the Mughal Empire. Situated on the banks of the Yamuna River.",
+    picnic_spots: "🏛️ Taj Mahal & Mehtab Bagh\n🏛️ Agra Fort & Jahangiri Mahal\n🛕 Mankameshwar Temple (Ancient Shiva temple) & Balkeshwar Temple\n🌿 Taj Nature Walk",
+    transport_roadmap: "Road Map: Connected via Yamuna Expressway & NH-19. Transport: Agra Cantt Station.",
+    hotels_booking: "🏨 The Oberoi Amarvilas\n🏨 ITC Mughal\n🏨 Hotel Taj Resorts",
+    markets_food: "🛍️ Sadar Bazaar, Kinari Bazaar.\n🍲 Agra Petha, Bedmi Puri, Mughlai Cuisine.",
+    culture_helpline: "Culture: Mughal art & inlay. Helpline: Police: 100 | SOS: 112"
+  },
+  "varanasi": {
+    Name: "Varanasi - The Spiritual Heart of India",
+    City: "Varanasi", State: "Uttar Pradesh", Type: "🛕 Ancient Holy City",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌡️ 30°C (Warm & Humid)", bestTime: "October to March",
+    packing: "🧳 Modest ethnic clothing, comfortable footwear for ghats, scarf.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: One of the oldest continuously inhabited cities. Situated on the bank of Ganges.",
+    picnic_spots: "🛕 Kashi Vishwanath Temple (Jyotirlinga shrine) & Annapurna Temple\n🏛️ Dashashwamedh Ghat & Ganga Aarti Boat Ride\n🌿 Sarnath Deer Park & Museum\n🏞️ Assi Ghat Sunrise Point",
+    transport_roadmap: "Road Map: Connected via NH-19. Transport: Varanasi Junction & Airport.",
+    hotels_booking: "🏨 BrijRama Palace\n🏨 Taj Ganges Varanasi\n🏨 Hotel Surya",
+    markets_food: "🛍️ Vishwanath Gali, Thatheri Bazaar.\n🍲 Banarasi Paan, Kachori Jalebi, Malaiyyo.",
+    culture_helpline: "Culture: Spirituality. Helpline: Police: 100 | SOS: 112"
+  },
   "ayodhya": {
     Name: "Ayodhya - Birthplace of Lord Rama",
     City: "Ayodhya", State: "Uttar Pradesh", Type: "🛕 Sacred Ram Janmabhoomi",
     image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "⛅ 28°C (Peaceful)", bestTime: "October to March",
+    packing: "🧳 Traditional modest clothing, comfortable shoes.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
     history_geo_political: "History: Ancient holy city on the banks of Saryu River, mentioned in the Ramayana.",
-    picnic_spots: "🛕 Sri Ram Janmabhoomi Mandir & Hanumangarhi (0 km)\n🏛️ Kanak Bhawan & Treta Ke Thakur\n🌿 Saryu River Ghat Aarti & Lata Mangeshkar Chowk\n🏞️ Guptar Ghat & Ram Katha Park",
+    picnic_spots: "🛕 Sri Ram Janmabhoomi Mandir & Hanumangarhi Temple\n🏛️ Kanak Bhawan & Treta Ke Thakur\n🌿 Saryu River Ghat Aarti & Lata Mangeshkar Chowk\n🏞️ Guptar Ghat & Ram Katha Park",
     transport_roadmap: "Road Map: Connected via NH-27. Transport: Ayodhya Dham Junction & Valmiki Airport.",
     hotels_booking: "🏨 Ramada by Wyndham Ayodhya\n🏨 Hotel Krishna Palace\n🏨 Taraji Resort",
     markets_food: "🛍️ Ram Path Market, Chowk Bazaar.\n🍲 Awadhi Thali, Rabri Jalebi, Chaat.",
     culture_helpline: "Culture: Sanatan Vedic heritage. Helpline: Police: 100 | SOS: 112"
   },
-  "ooty": {
-    Name: "Ooty - Queen of Nilgiri Hills",
-    City: "Ooty", State: "Tamil Nadu", Type: "🌿 Scenic Hill Station",
-    image_url: "https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Established as a British summer resort in Nilgiri mountains.",
-    picnic_spots: "🏛️ Nilgiri Mountain Toy Train (Heritage Ride)\n🛕 Elk Hill Murugan Temple & Mariamman Temple\n🌿 Ooty Botanical Gardens & Rose Garden (2 km)\n🏞️ Ooty Lake Boating & Doddabetta Peak (9 km)",
-    transport_roadmap: "Road Map: Connected via NH-181. Transport: Mettupalayam Railway Station & Coimbatore Airport.",
-    hotels_booking: "🏨 Savoy - IHCL World\n🏨 Sterling Ooty Fern Hill\n🏨 Zostel Ooty",
-    markets_food: "🛍️ Ooty Municipal Market, Commercial Road.\n🍲 Homemade Ooty Chocolates, Nilgiri Tea, Carrot Halwa.",
-    culture_helpline: "Culture: Toda tribal heritage. Helpline: Police: 100 | SOS: 112"
+  "mathura": {
+    Name: "Mathura - Birthplace of Lord Krishna",
+    City: "Mathura", State: "Uttar Pradesh", Type: "🛕 Divine Braj Bhumi",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 29°C (Sunny)", bestTime: "October to March",
+    packing: "🧳 Traditional Indian wear, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Sacred Hindu pilgrimage city where Lord Krishna was born.",
+    picnic_spots: "🛕 Shri Krishna Janmabhoomi Temple & Dwarkadhish Temple\n🏛️ Vishram Ghat Yamuna Boat Ride\n🌿 Gita Mandir & Kans Quila\n🏞️ Govardhan Hill Parikrama",
+    transport_roadmap: "Road Map: Connected via NH-19. Transport: Mathura Junction.",
+    hotels_booking: "🏨 Brijwasi Royal Hotel\n🏨 Hotel Goverdhan Palace\n🏨 Nidhivan Hotel",
+    markets_food: "🛍️ Holi Gate Bazaar, Chatta Bazaar.\n🍲 Mathura Peda, Bedmi Puri, Lassi.",
+    culture_helpline: "Culture: Braj folk culture. Helpline: Police: 100 | SOS: 112"
   },
-  "darjeeling": {
-    Name: "Darjeeling - Land of Himalayan Tea",
-    City: "Darjeeling", State: "West Bengal", Type: "🍵 Tea & Himalayan Hub",
-    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Developed by the British as a hill station. Famous for world-class tea gardens.",
-    picnic_spots: "🏛️ Darjeeling Himalayan Railway (Toy Train - UNESCO)\n🛕 Mahakal Temple & Japanese Peace Pagoda\n🌿 Tiger Hill Sunrise Point & Batasia Loop (5 km)\n🏞️ Happy Valley Tea Estate & Himalayan Mountaineering Institute",
-    transport_roadmap: "Road Map: Connected via Hill Cart Road. Transport: NJP Station & Bagdogra Airport.",
-    hotels_booking: "🏨 Mayfair Darjeeling\n🏨 Elgin Hotel\n🏨 Sinclairs Darjeeling",
-    markets_food: "🛍️ Mall Road Chowrasta, Tibetan Refugee Centre.\n🍲 Darjeeling Momos, Thukpa, Fresh Organic Tea.",
-    culture_helpline: "Culture: Gorkha heritage. Helpline: Police: 100 | SOS: 112"
+  "vrindavan": {
+    Name: "Vrindavan - City of Temples & Leelas",
+    City: "Vrindavan", State: "Uttar Pradesh", Type: "🌸 Divine Spiritual Town",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 29°C (Sunny)", bestTime: "October to March",
+    packing: "🧳 Traditional clothes, light shawl for evening breeze.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Major pilgrimage town associated with Lord Krishna's childhood pastimes.",
+    picnic_spots: "🛕 Banke Bihari Temple, ISKCON Temple & Prem Mandir\n🏛️ Nidhivan Sacred Forest & Seva Kunj\n🌿 Kesi Ghat Yamuna Aarti\n🏞️ Radha Raman Temple",
+    transport_roadmap: "Road Map: Connected via NH-19. Transport: Mathura Junction (12 km).",
+    hotels_booking: "🏨 Nidhivan Sarovar Portico\n🏨 MVT Guesthouse\n🏨 Hotel Ananda",
+    markets_food: "🛍️ Loi Bazaar, Banke Bihari Street.\n🍲 Pedas, Rabri, Kachori, Thandai.",
+    culture_helpline: "Culture: Bhakti movement hub. Helpline: Police: 100 | SOS: 112"
   },
-  "nainital": {
-    Name: "Nainital - The City of Lakes",
-    City: "Nainital", State: "Uttarakhand", Type: "🛶 Himalayan Lake District",
-    image_url: "https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Founded by British sugar merchant P. Barron in 1841 around Naini Lake.",
-    picnic_spots: "🏛️ Governor's House (Raj Bhawan) & Snow View Point (0 km)\n🛕 Naina Devi Temple (Shakti Peeth)\n🌿 Naini Lake Boating & Mall Road (0 km)\n🏞️ Tiffin Top (Dorothy's Seat) & Eco Cave Gardens",
-    transport_roadmap: "Road Map: Connected via NH-109. Transport: Kathgodam Railway Station (34 km) & Pantnagar Airport.",
-    hotels_booking: "🏨 The Manu Maharani\n🏨 Shervani Hilltop\n🏨 Lagoons Nainital",
-    markets_food: "🛍️ Mall Road Market, Tibetan Market.\n🍲 Kumaoni Roti, Ras Bhaat, Hot Bal Mithai.",
-    culture_helpline: "Culture: Kumaoni traditions. Helpline: Police: 100 | SOS: 112"
+
+  // --- UTTARAKHAND ---
+  "haridwar": {
+    Name: "Haridwar - Gateway to the Gods",
+    City: "Haridwar", State: "Uttarakhand", Type: "🌊 Sacred Pilgrimage City",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "⛅ 24°C (Cool & Fresh)", bestTime: "October to April",
+    packing: "🧳 Modest clothing, comfortable walking shoes for ghats.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: One of the seven holiest places in Hinduism where Ganges exits Himalayas.",
+    picnic_spots: "🏛️ Har Ki Pauri Ganga Aarti Ghat\n🛕 Mansa Devi Temple & Chandi Devi Temple (Ropeway available)\n🌿 Shantikunj Ashram & Daksh Mahadev Temple\n🏞️ Rajaji National Park Safari",
+    transport_roadmap: "Road Map: Connected via NH-334. Transport: Haridwar Junction & Jolly Grant Airport.",
+    hotels_booking: "🏨 Hotel Ganga Lahari\n🏨 Radisson Blu Haridwar\n🏨 Amatra Ganges",
+    markets_food: "🛍️ Moti Bazar, Bara Bazar.\n🍲 Chole Bhature, Aloo Puri, Rabri Malai.",
+    culture_helpline: "Culture: Vedic rituals. Helpline: Police: 100 | SOS: 112"
   },
-  "leh": {
-    Name: "Leh-Ladakh - Land of High Passes",
-    City: "Leh", State: "Ladakh", Type: "🏔️ High Altitude Desert",
-    image_url: "https://images.unsplash.com/photo-1581793745862-99fdb7fb9632?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Ancient stopover on trade routes along Indus Valley. Buddhist royal heritage.",
-    picnic_spots: "🏛️ Leh Palace & Shanti Stupa Sunset Point (0 km)\n🛕 Thiksey Monastery & Hemis Monastery (40 km)\n🌿 Pangong Tso Lake & Khardung La Pass (Highest Motorable Pass)\n🏞️ Nubra Valley Sand Dunes & Magnetic Hill",
-    transport_roadmap: "Road Map: Connected via Srinagar-Leh & Manali-Leh Highways. Transport: Kushok Bakula Rimpochee Airport.",
-    hotels_booking: "🏨 The Grand Dragon Ladakh\n🏨 Stok Palace Heritage Hotel\n🏨 Zostel Leh",
-    markets_food: "🛍️ Leh Main Bazaar, Tibetan Handicraft Market.\n🍲 Thukpa, Skyu, Butter Tea, Momos.",
-    culture_helpline: "Culture: Tibetan Buddhist culture. Helpline: Police: 100 | SOS: 112"
+  "rishikesh": {
+    Name: "Rishikesh - Yoga Capital of the World",
+    City: "Rishikesh", State: "Uttarakhand", Type: "🧘 Spiritual & Adventure Hub",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌿 25°C (Serene & Pleasant)", bestTime: "September to April",
+    packing: "🧳 Comfortable yoga wear, modest clothes, river sandals.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Ancient sanctuary for sages. Situated where Ganges flows from the Himalayas.",
+    picnic_spots: "🏛️ Triveni Ghat Ganga Aarti\n🛕 Parmarth Niketan, Beatles Ashram & Trayambakeshwar Temple\n🌿 Ram Jhula & Lakshman Jhula Bridges\n🏞️ Shivpuri River Rafting Camps",
+    transport_roadmap: "Road Map: Connected via NH-7. Transport: Rishikesh Station & Dehradun Airport.",
+    hotels_booking: "🏨 Ananda in the Himalayas\n🏨 Aloha On The Ganges\n🏨 Zostel Rishikesh",
+    markets_food: "🛍️ Lakshman Jhula Market, Swarg Ashram.\n🍲 Ayurvedic Sattvic Thali, Organic Cafes.",
+    culture_helpline: "Culture: Spirituality. Helpline: Police: 100 | SOS: 112"
   },
+
+  // --- HIMACHAL PRADESH ---
+  "shimla": {
+    Name: "Shimla - Queen of Hill Stations",
+    City: "Shimla", State: "Himachal Pradesh", Type: "❄️ Himalayan Hill Station",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "❄️ 15°C (Chilly & Clear)", bestTime: "March to June & December",
+    packing: "🧳 Woolens, heavy jacket for night, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Former summer capital of British India. Nestled in lower Himalayan ranges.",
+    picnic_spots: "🏛️ The Ridge & Viceregal Lodge\n🛕 Jakhoo Temple (Famous giant Hanuman statue) & Tara Devi Temple\n🌿 Mall Road & Kufri Snow Valley\n🏞️ Christ Church",
+    transport_roadmap: "Road Map: Connected via NH-5. Transport: Kalka-Shimla Toy Train.",
+    hotels_booking: "🏨 The Oberoi Cecil\n🏨 Clarkes Hotel\n🏨 Hotel Combermere",
+    markets_food: "🛍️ Mall Road Shopping Center, Lakkar Bazaar.\n🍲 Madra, Siddu, Himachali Thali.",
+    culture_helpline: "Culture: Pahari tradition. Helpline: Police: 100 | SOS: 112"
+  },
+  "manali": {
+    Name: "Manali - Valley of the Gods",
+    City: "Manali", State: "Himachal Pradesh", Type: "🏔️ Adventure & Snow Hub",
+    image_url: "https://images.unsplash.com/photo-1605648916361-9bc12ad6a563?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌨️ 12°C (Cold Mountain Air)", bestTime: "October to June",
+    packing: "🧳 Heavy woolens, thermals, gloves, snow boots.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹6,000 / day",
+    history_geo_political: "History: Ancient trade route town situated in Beas River valley.",
+    picnic_spots: "🏛️ Naggar Castle & Old Manali Village\n🛕 Hadimba Temple (Wooden pagoda temple in cedar forest) & Vashisht Hot Springs\n🌿 Solang Valley & Rohtang Pass\n🏞️ Atal Tunnel",
+    transport_roadmap: "Road Map: Connected via NH-3. Transport: Bhuntar Airport (50 km).",
+    hotels_booking: "🏨 The Span Resort & Spa\n🏨 Manu All Seasons\n🏨 Zostel Manali",
+    markets_food: "🛍️ Mall Road Manali, Tibetan Market.\n🍲 Trout Fish, Dham, Hot Maggi.",
+    culture_helpline: "Culture: Himalayan culture. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- JAMMU & KASHMIR ---
+  "katra": {
+    Name: "Katra - Base Camp of Vaishno Devi",
+    City: "Katra", State: "Jammu and Kashmir", Type: "🛕 Sacred Yatra Town",
+    image_url: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 26°C (Pleasant)", bestTime: "Year-round",
+    packing: "🧳 Comfortable trek shoes, track pants, light woolens for Trikuta hills.",
+    budget: "💰 Est. Budget: ₹1,500 - ₹3,500 / day",
+    history_geo_political: "History: Foothill town of Trikuta mountains serving as gateway to Mata Vaishno Devi Shrine.",
+    picnic_spots: "🛕 Mata Vaishno Devi Bhavan Cave Shrine (12 km sacred trek)\n🏛️ Bhairon Temple & Adhkund\n🌿 Sanji Chhat Helipad\n🏞️ Baba Dhansar Waterfall",
+    transport_roadmap: "Road Map: Connected via NH-44. Transport: SVDK Katra Railway Station.",
+    hotels_booking: "🏨 Vivanta Katra - Vaishno Devi\n🏨 Lemon Tree Hotel Katra\n🏨 Hotel Shree Mata",
+    markets_food: "🛍️ Main Bazaar Katra, Jammu Road.\n🍲 Rajma Chawal, Kalari Cheese, Prasad Dry Sweets.",
+    culture_helpline: "Culture: Dogra devotion. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- PUNJAB ---
   "amritsar": {
     Name: "Amritsar - City of the Golden Temple",
     City: "Amritsar", State: "Punjab", Type: "🛕 Sikh Spiritual Capital",
     image_url: "https://images.unsplash.com/photo-1514222134-b57cbb8ce073?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 27°C (Clear)", bestTime: "October to March",
+    packing: "🧳 Head scarves/dupattas (mandatory for Golden Temple), modest clothing.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,000 / day",
     history_geo_political: "History: Founded in 1577 by Guru Ram Das Ji. Known for Sikh history and patriotism.",
-    picnic_spots: "🛕 Sri Harmandir Sahib (Golden Temple) & Jallianwala Bagh (0 km)\n🏛️ Partition Museum & Gobindgarh Fort (2 km)\n🌿 Wagah Border Beating Retreat Ceremony (30 km)",
-    transport_roadmap: "Road Map: Connected via Grand Trunk Road (NH-3). Transport: Amritsar Junction & Sri Guru Ram Dass Jee Airport.",
+    picnic_spots: "🛕 Sri Harmandir Sahib (Golden Temple - Holiest Sikh Shrine) & Jallianwala Bagh\n🏛️ Partition Museum & Gobindgarh Fort\n🌿 Wagah Border Beating Retreat Ceremony\n🏞️ Durgiana Temple (Silver Temple)",
+    transport_roadmap: "Road Map: Connected via Grand Trunk Road. Transport: Amritsar Station & ATQ Airport.",
     hotels_booking: "🏨 Taj Swarna Amritsar\n🏨 Hyatt Amritsar\n🏨 Hotel City Park",
-    markets_food: "🛍️ Hall Bazaar, Katra Jaimal Singh.\n🍲 Amritsari Kulcha, Lassi, Makki di Roti & Sarson da Saag.",
+    markets_food: "🛍️ Hall Bazaar, Katra Jaimal Singh.\n🍲 Amritsari Kulcha, Lassi, Makki di Roti.",
     culture_helpline: "Culture: Punjabi hospitality. Helpline: Police: 100 | SOS: 112"
   },
-  "goa": {
-    Name: "Goa - Sun, Sand & Sea",
-    City: "Goa", State: "Goa", Type: "🏖️ Coastal Paradise",
-    image_url: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80",
-    history_geo_political: "History: Portuguese colonial history. Pristine coastline along Arabian Sea.",
-    picnic_spots: "🏛️ Fort Aguada, Chapora Fort (0 km)\n🛕 Shanta Durga Temple, Mangeshi Temple\n🌿 Baga Beach, Calangute Beach, Dudhsagar Waterfalls",
-    transport_roadmap: "Road Map: NH-66 connectivity. Transport: Dabolim & Mopa Airports.",
-    hotels_booking: "🏨 Taj Exotica\n🏨 W Goa\n🏨 Zostel Goa",
-    markets_food: "🛍️ Anjuna Flea Market, Mapusa Market.\n🍲 Goan Fish Curry, Bebinca, Xacuti.",
-    culture_helpline: "Culture: Konkani heritage. Helpline: Tourist Police: 0832-2425090 | SOS: 112"
+
+  // --- MAHARASHTRA ---
+  "mumbai": {
+    Name: "Mumbai - The City of Dreams",
+    City: "Mumbai", State: "Maharashtra", Type: "🌊 Financial Capital",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌊 31°C (Tropical & Humid)", bestTime: "November to February",
+    packing: "🧳 Light cotton clothes, sunglasses, umbrella.",
+    budget: "💰 Est. Budget: ₹3,500 - ₹7,000 / day",
+    history_geo_political: "History: Major port city on Konkan coast. Financial & entertainment capital of India.",
+    picnic_spots: "🏛️ Gateway of India & Elephanta Caves\n🛕 Siddhivinayak Temple (Revered Ganesha shrine) & Mumbadevi Temple\n🌿 Marine Drive, Hanging Gardens, Juhu Beach\n🏞️ Bandra-Worli Sea Link",
+    transport_roadmap: "Road Map: Western/Central Express Highways. Transport: CSMIA Airport & Trains.",
+    hotels_booking: "🏨 The Taj Mahal Palace\n🏨 Trident Nariman Point\n🏨 Hotel Sea Princess",
+    markets_food: "🛍️ Colaba Causeway, Crawford Market.\n🍲 Vada Pav, Pav Bhaji, Bombay Duck.",
+    culture_helpline: "Culture: Bollywood & Marathi culture. Helpline: Police: 100 | SOS: 112"
+  },
+  "pune": {
+    Name: "Pune - Oxford of the East & Cultural Capital",
+    City: "Pune", State: "Maharashtra", Type: "🏰 Maratha Heritage City",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C (Pleasant)", bestTime: "July to February",
+    packing: "🧳 Casual cottons, light sweater for evenings.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,000 / day",
+    history_geo_political: "History: Former base of the Maratha Empire under Chhatrapati Shivaji Maharaj.",
+    picnic_spots: "🏛️ Shaniwar Wada & Aga Khan Palace\n🛕 Dagdusheth Halwai Ganpati Temple & Pataleshwar Cave Temple\n🌿 Sinhagad Fort & Panshet Dam\n🏞️ Osho Ashram",
+    transport_roadmap: "Road Map: Connected via Mumbai-Pune Expressway. Transport: Pune Junction & Airport.",
+    hotels_booking: "🏨 JW Marriott Pune\n🏨 The Corinthians Resort\n🏨 Conrad Pune",
+    markets_food: "🛍️ FC Road, Tulshibaug Market.\n🍲 Puneri Misal Pav, Bakarwadi, Mastani.",
+    culture_helpline: "Culture: Maratha martial history. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- KARNATAKA ---
+  "mysuru": {
+    Name: "Mysuru - The Heritage City",
+    City: "Mysuru", State: "Karnataka", Type: "🏛️ Royal Palace City",
+    image_url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 26°C (Breezy)", bestTime: "October to March",
+    packing: "🧳 Comfortable clothing, walking shoes for palace tours.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Capital of Wodeyar dynasty. Famous for grand Dasara festivals and palaces.",
+    picnic_spots: "🏛️ Mysore Palace\n🛕 Chamundeshwari Temple ( atop Chamundi Hills) & Nandi Bull Statue\n🌿 Brindavan Gardens & Karanji Lake\n🏞️ Ranganathittu Bird Sanctuary",
+    transport_roadmap: "Road Map: Connected via NH-275. Transport: Mysore Junction & Mysore Airport.",
+    hotels_booking: "🏨 Lalitha Mahal Palace\n🏨 Radisson Blu Plaza\n🏨 Hotel Roopa",
+    markets_food: "🛍️ Devaraja Market, Mysore Silk Emporium.\n🍲 Mysore Pak, Bisi Bele Bath, Masala Dosa.",
+    culture_helpline: "Culture: Karnataka heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "hampi": {
+    Name: "Hampi - Ruins of the Vijayanagara Empire",
+    City: "Hampi", State: "Karnataka", Type: "🏛️ UNESCO World Heritage Ruins",
+    image_url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 33°C (Warm & Sunny)", bestTime: "October to February",
+    packing: "🧳 Light cottons, hat, sunglasses, sturdy walking shoes for boulder climbing.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: Capital of the 14th-century Vijayanagara Empire.",
+    picnic_spots: "🏛️ Virupaksha Temple (Towering ancient shrine still in worship) & Vittula Temple\n🛕 Lotus Mahal & Elephant Stables\n🌿 Matanga Hill Sunrise Point & Sanapur Lake\n🏞️ Tungabhadra River Bank",
+    transport_roadmap: "Road Map: Connected via NH-50. Transport: Hospet Junction Railway Station (13 km).",
+    hotels_booking: "🏨 Evolve Back Hampi\n🏨 Heritage Resort Hampi\n🏨 Gopi Guest House",
+    markets_food: "🛍️ Hampi Bazaar Street.\n🍲 South Indian Thali, Banana Leaf Meals, Mango Juice.",
+    culture_helpline: "Culture: Vijayanagara architectural glory. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- KERALA ---
+  "kochi": {
+    Name: "Kochi (Cochin) - Queen of the Arabian Sea",
+    City: "Kochi", State: "Kerala", Type: "🌴 Coastal Heritage Port",
+    image_url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌴 30°C (Tropical Coastal)", bestTime: "October to March",
+    packing: "🧳 Light cotton clothing, sunscreen, sunglasses, umbrella.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Ancient spice trading port influenced by Portuguese, Dutch, and British.",
+    picnic_spots: "🏛️ Fort Kochi Chinese Fishing Nets & Mattancherry Palace\n🛕 Paradesi Synagogue, St. Francis Church & Ernakulam Shiva Temple\n🌿 Marine Drive Kochi & Cherai Beach\n🏞️ Kerala Kathakali Center",
+    transport_roadmap: "Road Map: Connected via NH-66. Transport: Cochin International Airport (COK) & Metro.",
+    hotels_booking: "🏨 Taj Malabar Resort & Spa\n🏨 Brunton Boatyard\n🏨 Zostel Kochi",
+    markets_food: "🛍️ Jew Town Antique Market, Broadway Bazaar.\n🍲 Kerala Fish Curry, Appam with Stew, Karimeen Pollichathu.",
+    culture_helpline: "Culture: Multicultural maritime history. Helpline: Tourist Police: 0484-2666579 | SOS: 112"
+  },
+
+  // --- TAMIL NADU ---
+  "chennai": {
+    Name: "Chennai - Gateway to South India",
+    City: "Chennai", State: "Tamil Nadu", Type: "🏛️ Cultural & Coastal Capital",
+    image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌴 32°C (Warm & Coastal)", bestTime: "November to February",
+    packing: "🧳 Light cotton clothes, sunglasses, sun hat, comfortable sandals.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Formerly Madras. Established by East India Company in 1639.",
+    picnic_spots: "🏛️ Fort St. George Museum & San Thome Basilica\n🛕 Kapaleeshwarar Temple (Mylapore - Pallava architecture) & Parthasarathy Temple\n🌿 Marina Beach & Elliot's Beach\n🏞️ Mahabalipuram Shore Temples",
+    transport_roadmap: "Road Map: Connected via NH-48. Transport: Chennai Airport (MAA) & Metro.",
+    hotels_booking: "🏨 Taj Coromandel Chennai\n🏨 ITC Grand Chola\n🏨 Zostel Chennai",
+    markets_food: "🛍️ T. Nagar Pondy Bazaar, Ranganathan Street.\n🍲 Chettinad Meals, Filter Coffee, Idli Sambar.",
+    culture_helpline: "Culture: Classical music & dance. Helpline: Police: 100 | SOS: 112"
+  },
+  "madurai": {
+    Name: "Madurai - Athens of the East",
+    City: "Madurai", State: "Tamil Nadu", Type: "🛕 Ancient Temple City",
+    image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 33°C (Warm)", bestTime: "October to March",
+    packing: "🧳 Modest ethnic clothing, comfortable slip-on footwear for temple visits.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: Over 2,500 years old. Capital of ancient Pandya kings.",
+    picnic_spots: "🛕 Arulmigu Meenakshi Amman Temple (World famous thousand-pillar hall shrine)\n🏛️ Thirumalai Nayakkar Palace & Gandhi Memorial Museum\n🌿 Vandiyur Marippulam Teppakulam Tank\n🏞️ Alagar Kovil Temple",
+    transport_roadmap: "Road Map: Connected via NH-38. Transport: Madurai Junction & IXM Airport.",
+    hotels_booking: "🏨 Heritage Madurai\n🏨 The Gateway Hotel Pasumalai\n🏨 Hotel Royal Court",
+    markets_food: "🛍️ Puthu Mandapam Market, Avani Moola Street.\n🍲 Madurai Jigarthanda, Paruthi Paal, Kothu Parotta.",
+    culture_helpline: "Culture: Tamil Sangam heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "rameswaram": {
+    Name: "Rameswaram - Sacred Island & Temple Town",
+    City: "Rameswaram", State: "Tamil Nadu", Type: "🛕 Holy Island Pilgrimage",
+    image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 31°C (Coastal Breeze)", bestTime: "October to April",
+    packing: "🧳 Traditional modest clothing, extra change of clothes for holy theertham baths.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: Sacred island town connected to mainland by Pamban Bridge.",
+    picnic_spots: "🛕 Ramanathaswamy Temple (Famous for longest corridor and 22 sacred holy wells)\n🏛️ Pamban Rail Bridge & Dr. A.P.J. Abdul Kalam Memorial\n🌿 Dhanushkodi Beach (Land's End)\n🏞️ Agnitheertham Sea Bath",
+    transport_roadmap: "Road Map: Connected via NH-87. Transport: Rameswaram Railway Station.",
+    hotels_booking: "🏨 Daiwik Hotels Rameswaram\n🏨 Hotel Rameshwaram Grand\n🏨 Hotel Pearl Residency",
+    markets_food: "🛍️ Temple Car Street Bazaar.\n🍲 South Indian Meals, Fresh Seafood.",
+    culture_helpline: "Culture: Epical heritage. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- ANDHRA PRADESH & TELANGANA ---
+  "hyderabad": {
+    Name: "Hyderabad - The City of Pearls",
+    City: "Hyderabad", State: "Telangana", Type: "🕌 Historic Tech Hub",
+    image_url: "https://images.unsplash.com/photo-1588416936002-3163fc68997b?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C (Pleasant)", bestTime: "October to March",
+    packing: "🧳 Comfortable casual clothes, walking shoes.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Ruled by Qutb Shahis and Nizams. Famous blend of history and modern IT industry.",
+    picnic_spots: "🏛️ Charminar, Golconda Fort, Chowmahalla Palace\n🛕 Birla Mandir (White marble Venkateswara temple) & Chilkur Balaji Temple\n🌿 Hussain Sagar Lake & Lumbini Park\n🏞️ Ramoji Film City",
+    transport_roadmap: "Road Map: NH-44 connectivity. Transport: RGIA Airport (HYD) & Metro.",
+    hotels_booking: "🏨 Taj Falaknuma Palace\n🏨 ITC Kakatiya\n🏨 Green Park Hotel",
+    markets_food: "🛍️ Laad Bazaar, Sultan Bazaar.\n🍲 Hyderabadi Dum Biryani, Irani Chai, Haleem.",
+    culture_helpline: "Culture: Deccani tehzeeb. Helpline: Police: 100 | SOS: 112"
+  },
+  "tirupati": {
+    Name: "Tirupati - Abode of Lord Venkateswara",
+    City: "Tirupati", State: "Andhra Pradesh", Type: "🛕 Richest Spiritual Shrine",
+    image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 32°C (Warm)", bestTime: "September to March",
+    packing: "🧳 Traditional Indian attire (Dhoti/Kurta for men, Saree/Salwar for women).",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: World-renowned temple town nestled in the Seshachalam Hills.",
+    picnic_spots: "🛕 Sri Venkateswara Swami Temple (Tirumala Hills - Richest temple in the world)\n🏛️ Govindaraja Swamy Temple & Alamelu Mangapuram\n🌿 Sri Venkateswara Zoological Park & Silathoranam\n🏞️ Akasaganga Waterfalls",
+    transport_roadmap: "Road Map: Connected via NH-716. Transport: Tirupati Main Station & TIR Airport.",
+    hotels_booking: "🏨 Fortune Select Grand Ridge\n🏨 Marasa Sarovar Premiere\n🏨 Hotel Bliss",
+    markets_food: "🛍️ Tirumala Bazaar, Municipal Market.\n🍲 World famous Tirupati Laddu Prasadam, Andhra Meals.",
+    culture_helpline: "Culture: Ancient Hindu devotional heritage. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- ODISHA & WEST BENGAL ---
+  "puri": {
+    Name: "Puri - Sacred Jagannath Dham & Beach",
+    City: "Puri", State: "Odisha", Type: "🛕 Holy Coastal Dham",
+    image_url: "https://images.unsplash.com/photo-1561359313-0639aad49ff6?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌴 31°C (Coastal & Warm)", bestTime: "July to March",
+    packing: "🧳 Traditional Indian wear, cotton clothes, beachwear.",
+    budget: "💰 Est. Budget: ₹1,800 - ₹4,000 / day",
+    history_geo_political: "History: One of the four Char Dhams in Hinduism. Renowned for Lord Jagannath Temple.",
+    picnic_spots: "🛕 Sri Jagannath Temple (Famous 12th-century Char Dham shrine) & Gundicha Temple\n🏛️ Puri Beach & Swargadwar Beach\n🌿 Konark Sun Temple (UNESCO World Heritage - 35 km)\n🏞️ Chilika Lake Dolphin Sanctuary",
+    transport_roadmap: "Road Map: Connected via NH-316. Transport: Puri Station & Bhubaneswar Airport (60 km).",
+    hotels_booking: "🏨 Mayfair Heritage Puri\n🏨 Sterling Puri\n🏨 Hotel Golden Dust",
+    markets_food: "🛍️ Grand Road (Bada Danda) Market, Sea Beach Stalls.\n🍲 Mahaprasad, Dalma, Chhena Poda, Khaja.",
+    culture_helpline: "Culture: Odia religious heritage. Helpline: Police: 100 | SOS: 112"
+  },
+  "kolkata": {
+    Name: "Kolkata - The City of Joy",
+    City: "Kolkata", State: "West Bengal", Type: "🎨 Cultural Capital",
+    image_url: "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1200&q=80",
+    weather: "⛅ 29°C (Humid)", bestTime: "October to March",
+    packing: "🧳 Comfortable casuals, cotton clothing, umbrella.",
+    budget: "💰 Est. Budget: ₹2,500 - ₹5,500 / day",
+    history_geo_political: "History: Capital during British Raj, renowned for literature, art, and history.",
+    picnic_spots: "🏛️ Victoria Memorial & Howrah Bridge\n🛕 Dakshineswar Kali Temple (Famous temple built by Rani Rashmoni) & Kalighat Kali Temple\n🌿 Eco Park, Maidan, Princep Ghat\n🏞️ Indian Museum",
+    transport_roadmap: "Road Map: NH-12 connectivity. Transport: Netaji Subhash Chandra Bose Airport (CCU) & Metro.",
+    hotels_booking: "🏨 The Oberoi Grand\n🏨 ITC Sonar\n🏨 The Peerless Inn",
+    markets_food: "🛍️ New Market, Gariahat Market.\n🍲 Rosogolla, Mishti Doi, Kathi Roll, Biryani.",
+    culture_helpline: "Culture: Bengali literature. Helpline: Police: 100 | SOS: 112"
+  },
+
+  // --- ASSAM ---
+  "guwahati": {
+    Name: "Guwahati - Gateway to North-East India",
+    City: "Guwahati", State: "Assam", Type: "🌊 Gateway Temple City",
+    image_url: "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C (Humid & Warm)", bestTime: "October to April",
+    packing: "🧳 Light cotton clothing, umbrella, comfortable walking shoes.",
+    budget: "💰 Est. Budget: ₹2,000 - ₹4,500 / day",
+    history_geo_political: "History: Ancient city of Pragjyotishpura situated on the banks of the Brahmaputra.",
+    picnic_spots: "🛕 Kamakhya Temple (Revered Shakti Peeth atop Nilachal Hills) & Umananda Temple\n🏛️ Assam State Zoo & Botanical Garden\n🌿 Basistha Ashram\n🏞️ Pobitora Wildlife Sanctuary (40 km)",
+    transport_roadmap: "Road Map: Connected via NH-27. Transport: Guwahati Station & LGBI Airport (GAU).",
+    hotels_booking: "🏨 Radisson Blu Hotel Guwahati\n🏨 Vivanta Guwahati\n🏨 Hotel Brahmaputra Ashok",
+    markets_food: "🛍️ Fancy Bazaar, Paltan Bazaar.\n🍲 Assamese Thali, Masor Tenga, Kamrupi Pitha.",
+    culture_helpline: "Culture: Assamese traditions. Helpline: Police: 100 | SOS: 112"
   }
 };
 
@@ -274,8 +455,9 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('overview');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
+  const [wishlist, setWishlist] = useState<string[]>([]);
   
-  const [cityData, setCityData] = useState(COMPLETE_TOURISM_DATABASE["jaipur"]);
+  const [cityData, setCityData] = useState(MASTER_INDIA_TOURISM_DIRECTORY["jaipur"]);
 
   const handleUniversalSearch = (query: string) => {
     if (!query.trim()) return;
@@ -285,26 +467,39 @@ export default function App() {
     setLoading(true);
 
     setTimeout(() => {
-      if (COMPLETE_TOURISM_DATABASE[cleanQuery]) {
-        setCityData(COMPLETE_TOURISM_DATABASE[cleanQuery]);
+      if (MASTER_INDIA_TOURISM_DIRECTORY[cleanQuery]) {
+        setCityData(MASTER_INDIA_TOURISM_DIRECTORY[cleanQuery]);
       } else {
-        // Fallback for any other city search
         setCityData({
           Name: `${cap} - Verified Destination Hub`,
           City: cap,
           State: 'India',
-          Type: '✨ Verified Tourist Intelligence',
+          Type: '✨ Master Tourist Intelligence',
+          weather: '☀️ 28°C (Pleasant Local Weather)',
+          bestTime: 'October to March (Ideal Season)',
+          packing: `🧳 Comfortable travel clothes, walking shoes, sunglasses, water bottle, and personal medical kit for ${cap}.`,
+          budget: '💰 Est. Budget: ₹2,000 - ₹4,500 / day (Per Person)',
           image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-          history_geo_political: `${cap} is a remarkable historical and cultural destination in India, known for its unique traditions, local heritage, and scenic appeal.`,
-          picnic_spots: `🏛️ ${cap} Main Heritage Fort & Old Monuments (0 km)\n🛕 Famous ${cap} Prachin Mandir & Shrines (3 km)\n🌿 ${cap} Central Botanical Garden & City Park (5 km)\n🏞️ Regional Scenic Water Viewpoint (8 km)`,
-          transport_roadmap: `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, and auto/cab services in ${cap}.`,
-          hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Comfort Stays & Tourist Lodges\n🏨 Traditional Homestays`,
-          markets_food: `🛍️ Main Town Bazaar & Handloom Shops of ${cap}.\n🍲 Signature Regional Thali, Local Street Food, and Traditional Sweets.`,
-          culture_helpline: `Culture: Rich regional heritage and local festivals. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
+          history_geo_political: `${cap} is a prominent cultural and geographical region in India, recognized for its local heritage roots, traditional community lifestyle, and regional landscape.`,
+          picnic_spots: `🏛️ ${cap} Heritage Old Town Gateway & Monuments (0 km)\n🛕 Famous Prachin Shri Mandir & Local Shrines (2.5 km)\n🌿 ${cap} Central Public Park & Green Garden (4 km)\n🏞️ Scenic Water Reservoir & Sunset Point (6 km)`,
+          transport_roadmap: `Road Map: Connected via state highways and district roads. Transport: Local railway station, bus depots, auto-rickshaws, and cab services in ${cap}.`,
+          hotels_booking: `🏨 Premium Hotels & Tourist Lodges in ${cap}\n🏨 Comfort Stays & Heritage Guest Houses\n🏨 Verified Local Homestays`,
+          markets_food: `🛍️ Main Town Bazaar & Traditional Artisan Markets of ${cap}.\n🍲 Signature Regional Thali, Local Street Snacks, and Traditional Sweets.`,
+          culture_helpline: `Culture: Rich regional arts and local festivals. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
         });
       }
       setLoading(false);
     }, 200);
+  };
+
+  const toggleWishlist = (cityName: string) => {
+    if (wishlist.includes(cityName)) {
+      setWishlist(wishlist.filter(c => c !== cityName));
+      alert(`${cityName} wishlist se hata diya gaya hai!`);
+    } else {
+      setWishlist([...wishlist, cityName]);
+      alert(`${cityName} wishlist mein jod diya gaya hai! ❤️`);
+    }
   };
 
   return (
@@ -321,7 +516,7 @@ export default function App() {
               <span className="text-white">BHARAT</span>
             </div>
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mt-0.5">
-              👑 Universal Super-App
+              👑 Master Tourism Super-App
             </span>
           </div>
         </div>
@@ -340,10 +535,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">City-Wise Intelligence.</span>
+          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Mandirs & Heritage.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Get precise picnic spots, temples, markets and history for any tourist destination.
+          Search any destination or holy city to discover verified temples, picnic spots and hotels.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -351,7 +546,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city (e.g. Leh, Nainital, Amritsar, Ooty)..."
+              placeholder="Search holy city or temple town (e.g. Varanasi, Ayodhya, Tirupati, Puri)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleUniversalSearch(searchTerm)}
@@ -365,12 +560,12 @@ export default function App() {
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
-            { name: 'Leh', icon: '🏔️' },
-            { name: 'Nainital', icon: '🛶' },
-            { name: 'Amritsar', icon: '🛕' },
-            { name: 'Manali', icon: '❄️' },
-            { name: 'Udaipur', icon: '🏰' },
-            { name: 'Goa', icon: '🏖️' }
+            { name: 'Varanasi', icon: '🛕' },
+            { name: 'Ayodhya', icon: '🛕' },
+            { name: 'Tirupati', icon: '🌸' },
+            { name: 'Puri', icon: '🌊' },
+            { name: 'Amritsar', icon: '✨' },
+            { name: 'Madurai', icon: '🏛️' }
           ].map(c => (
             <button key={c.name} onClick={() => handleUniversalSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
@@ -386,15 +581,37 @@ export default function App() {
             <img src={cityData.image_url} alt={cityData.Name} className="w-full h-full object-cover opacity-90" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
             
-            <div className="absolute top-3 left-3">
-              <span className="bg-orange-500/90 text-white font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-lg">
+            <div className="absolute top-3 left-3 flex gap-2">
+              <span className="bg-orange-500/90 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-lg">
                 {cityData.Type}
               </span>
             </div>
 
+            <button 
+              onClick={() => toggleWishlist(cityData.City)} 
+              className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md p-2 rounded-full border border-slate-700 text-lg shadow-lg active:scale-90 transition">
+              {wishlist.includes(cityData.City) ? '❤️' : '🤍'}
+            </button>
+
             <div className="absolute bottom-4 left-4 right-4">
               <h3 className="text-2xl font-black text-white">{cityData.Name}</h3>
-              <p className="text-xs text-amber-300 font-bold mt-1">📍 {cityData.City}, {cityData.State}</p>
+              <div className="flex justify-between items-center mt-1">
+                <p className="text-xs text-amber-300 font-bold">📍 {cityData.City}, {cityData.State}</p>
+                <div className="flex gap-2 text-[10px] font-bold">
+                  <span className="bg-slate-900/80 px-2.5 py-1 rounded-lg border border-slate-700 text-sky-300">{cityData.weather}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 p-4 bg-slate-950/40 border-b border-slate-800 text-[11px]">
+            <div className="bg-slate-900/80 p-3 rounded-2xl border border-slate-800 space-y-1">
+              <span className="text-amber-400 font-black block">🎒 Packing Guide</span>
+              <p className="text-slate-300 font-medium">{cityData.packing}</p>
+            </div>
+            <div className="bg-slate-900/80 p-3 rounded-2xl border border-slate-800 space-y-1">
+              <span className="text-emerald-400 font-black block">💵 Trip Budget</span>
+              <p className="text-slate-300 font-medium">{cityData.budget}</p>
             </div>
           </div>
 
@@ -427,7 +644,7 @@ export default function App() {
             {activeTab === 'picnic' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-orange-400 font-black block text-sm flex items-center gap-2">
-                  <span>🛕</span> Picnic Spots & Famous Mandirs
+                  <span>🛕</span> Famous Mandirs & Picnic Spots
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.picnic_spots}</p>
               </div>
@@ -468,11 +685,23 @@ export default function App() {
             )}
 
             {activeTab === 'sos' && (
-              <div className="bg-red-950/20 p-4 rounded-2xl border border-red-900/40 space-y-2">
+              <div className="bg-red-950/20 p-4 rounded-2xl border border-red-900/40 space-y-3">
                 <span className="text-red-400 font-black block text-sm flex items-center gap-2">
                   <span>🚨</span> Emergency Helpline SOS
                 </span>
                 <p className="font-bold text-slate-100 text-sm leading-relaxed whitespace-pre-line">{cityData.culture_helpline}</p>
+                
+                <div className="grid grid-cols-3 gap-2 pt-2">
+                  <a href="tel:100" className="bg-red-600 hover:bg-red-500 text-white text-center py-2.5 rounded-xl font-black shadow-lg block">
+                    📞 Police (100)
+                  </a>
+                  <a href="tel:108" className="bg-red-600 hover:bg-red-500 text-white text-center py-2.5 rounded-xl font-black shadow-lg block">
+                    🚑 Ambulance (108)
+                  </a>
+                  <a href="tel:112" className="bg-red-600 hover:bg-red-500 text-white text-center py-2.5 rounded-xl font-black shadow-lg block">
+                    🚨 Pan-India (112)
+                  </a>
+                </div>
               </div>
             )}
 
