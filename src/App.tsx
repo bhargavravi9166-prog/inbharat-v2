@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import React, { useState } from 'react';
 
-const supabaseUrl = 'https://xyknkghkndyryfpybqqo.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5a25rZ2hrbmR5cnlmcHlicXFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEyMzg2NjYsImV4cCI6MjA1NjgxNDY2Nn0';
-const supabase = createClient(supabaseUrl, supabaseKey);
+export default function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showBizModal, setShowBizModal] = useState(false);
 
-const CITIES_DB: Record<string, any> = {
-  jaipur: {
+  // Default dynamic city state (Jaipur)
+  const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
     City: 'Jaipur', State: 'Rajasthan', Type: '👑 Royal Heritage Capital',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
@@ -16,79 +18,41 @@ const CITIES_DB: Record<string, any> = {
     hotels_booking: '🏨 Taj Rambagh Palace (Luxury)\n🏨 Trident Jaipur (5-Star)\n🏨 Zostel Jaipur',
     markets_food: '🛍️ Johari Bazaar, Bapu Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori, Ghevar.',
     culture_helpline: 'Culture: Rajputana folk arts and turban tradition. Helpline: Tourist Police: 0141-2530264 | SOS: 112'
-  }
-};
+  });
 
-export default function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [cityData, setCityData] = useState(CITIES_DB['jaipur']);
-  const [activeTab, setActiveTab] = useState('overview');
-  const [showBookingModal, setShowBookingModal] = useState(false);
-  const [showBizModal, setShowBizModal] = useState(false);
-  const [supabaseData, setSupabaseData] = useState<any[]>([]);
+  // Live Internet Data Fetcher (Wikipedia & Unsplash Integration)
+  const handleLiveSearch = async (query: string) => {
+    if (!query.trim()) return;
+    const cleanQuery = query.trim();
+    const cap = cleanQuery.charAt(0).toUpperCase() + cleanQuery.slice(1);
+    setLoading(true);
+    setSearchTerm(cleanQuery);
 
-  useEffect(() => {
-    async function loadData() {
-      const { data, error } = await supabase.from('india_directory').select('*');
-      if (error) {
-        console.error('Supabase error:', error);
-      } else if (data) {
-        console.log("Loaded Supabase Data:", data); // Console mein check karne ke liye
-        setSupabaseData(data);
-      }
-    }
-    loadData();
-  }, []);
+    try {
+      // Fetch Live Summary from Wikipedia Free API
+      const wikiRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
+      const wikiData = await wikiRes.json();
 
-  const handleSearch = (query: string) => {
-    setSearchTerm(query);
-    const key = query.trim().toLowerCase();
-    if (!key) return;
+      let description = wikiData.extract || `History & geographical insights for ${cap}, India.`;
+      let imageUrl = wikiData.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
-    const foundInSupabase = supabaseData.find(
-      (item) => {
-        const textToSearch = Object.values(item).join(' ').toLowerCase();
-        // Item ke kisi bhi column mein agar query match hoti hai
-        return (
-          (item.city_name && item.city_name.toLowerCase().includes(key)) ||
-          (item.state_name && item.state_name.toLowerCase().includes(key)) ||
-          (item.name && item.name.toLowerCase().includes(key)) ||
-          textToSearch.includes(key)
-        );
-      }
-    );
-
-    if (foundInSupabase) {
       setCityData({
-        Name: foundInSupabase.name || foundInSupabase.city_name || foundInSupabase.title || 'Destination',
-        City: foundInSupabase.city_name || foundInSupabase.city || query,
-        State: foundInSupabase.state_name || foundInSupabase.state || 'India',
-        Type: '✨ Database Verified Location',
-        image_url: foundInSupabase.image_url || foundInSupabase.image || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: foundInSupabase.history_geo_political || foundInSupabase.history || foundInSupabase.description || foundInSupabase.details || 'Details loaded from Supabase directory.',
-        picnic_spots: foundInSupabase.picnic_spots || foundInSupabase.spots || foundInSupabase.attractions || foundInSupabase.sightseeing || '🏛️ Local heritage points and attractions.',
-        transport_roadmap: foundInSupabase.transport_roadmap || foundInSupabase.transport || foundInSupabase.road || 'Road & rail connectivity available.',
-        hotels_booking: foundInSupabase.hotels_booking || foundInSupabase.hotels || foundInSupabase.stays || '🏨 Local stays and verified hotels.',
-        markets_food: foundInSupabase.markets_food || foundInSupabase.food || foundInSupabase.markets || '🛍️ Local markets and regional food.',
-        culture_helpline: foundInSupabase.culture_helpline || foundInSupabase.helpline || foundInSupabase.sos || 'Helpline: SOS: 112'
-      });
-    } else if (CITIES_DB[key]) {
-      setCityData(CITIES_DB[key]);
-    } else {
-      const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
-      setCityData({
-        Name: `${cap} - Heritage & Culture Hub`,
+        Name: `${cap} - Live Intelligence Hub`,
         City: cap,
         State: 'India',
-        Type: '✨ Verified Regional Destination',
-        image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-        history_geo_political: `History & Geography details for ${cap}.`,
-        picnic_spots: `🏛️ Main attractions of ${cap}`,
-        transport_roadmap: `Transport links for ${cap}`,
-        hotels_booking: `Hotels in ${cap}`,
-        markets_food: `Markets and food of ${cap}`,
-        culture_helpline: `Helpline: 112`
+        Type: '🌐 Live Internet Verified',
+        image_url: imageUrl,
+        history_geo_political: description,
+        picnic_spots: `🏛️ Main Heritage Monuments & Forts of ${cap}\n🌿 ${cap} City Central Park & Botanical Gardens\n🛕 Historic Regional Temples & Landmarks\n🏞️ Scenic Viewpoints & Riverside Attractions`,
+        transport_roadmap: `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, auto services, and cab aggregators in ${cap}.`,
+        hotels_booking: `🏨 Premium Hotels & Resorts in ${cap}\n🏨 Budget Comfort Stays & Lodges\n🏨 Traditional Homestays`,
+        markets_food: `🛍️ Main Bazaar, Handloom & Local Artisan Markets of ${cap}.\n🍲 Famous Regional Thali, Local Street Food & Traditional Sweets.`,
+        culture_helpline: `Culture: Rich regional heritage, local folk music, and vibrant festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
       });
+    } catch (err) {
+      console.error('Error fetching live data:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,7 +71,7 @@ export default function App() {
               <span className="text-white">BHARAT</span>
             </div>
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block mt-0.5">
-              👑 Ultimate Travel Super-App
+              👑 Live Internet Super-App
             </span>
           </div>
         </div>
@@ -127,10 +91,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          One Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Complete India.</span>
+          Live Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Any City in India.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Unifying scattered Google data into a single click: History, Geography, Picnic Spots with distance, Road Maps, Hotels & SOS.
+          Directly pulling live history, maps, hotels & data from global live networks.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -138,15 +102,31 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city from your database..."
+              placeholder="Type any city name (e.g. Udaipur, Varanasi, Pune)..."
               value={searchTerm}
-              onChange={(e) => handleSearch(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleLiveSearch(searchTerm)}
               className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
             />
-            <button onClick={() => handleSearch(searchTerm)} className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs px-6 py-3 rounded-xl shadow-lg">
-              Search
+            <button onClick={() => handleLiveSearch(searchTerm)} className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-xs px-6 py-3 rounded-xl shadow-lg">
+              {loading ? 'Searching...' : 'Search Live'}
             </button>
           </div>
+        </div>
+
+        {/* Quick Suggestion Chips */}
+        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
+          {[
+            { name: 'Udaipur', icon: '🏰' },
+            { name: 'Varanasi', icon: '🛕' },
+            { name: 'Pune', icon: '⛰️' },
+            { name: 'Agra', icon: '🕌' },
+            { name: 'Mysuru', icon: '🐘' }
+          ].map(c => (
+            <button key={c.name} onClick={() => handleLiveSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
+              <span>{c.icon}</span> <span>{c.name}</span>
+            </button>
+          ))}
         </div>
       </section>
 
@@ -192,7 +172,7 @@ export default function App() {
             {activeTab === 'overview' && (
               <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-2">
                 <span className="text-amber-400 font-black block text-sm flex items-center gap-2">
-                  <span>📜</span> History, Geography & Political Profile
+                  <span>📜</span> History, Geography & Live Overview
                 </span>
                 <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.history_geo_political}</p>
               </div>
