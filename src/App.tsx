@@ -1,50 +1,63 @@
 import React, { useState } from 'react';
 
-const BHARAT_SUPER_DATABASE: Record<string, any> = {
+const PAN_INDIA_MASTER_DB: Record<string, any> = {
   jaipur: {
-    Name: 'Jaipur - The Pink City',
+    Name: 'Jaipur - The Pink City & Royal Capital',
     City: 'Jaipur',
     State: 'Rajasthan',
-    Type: '👑 Royal Capital & Tourism Hub',
-    image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1000&q=80',
-    history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Surrounded by Aravalli hills in eastern Rajasthan. Political: Capital city housing the Rajasthan Vidhan Sabha and district headquarters.',
-    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🏛️ Nahargarh Fort Sunset Point (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle Garden (6 km)',
-    transport_roadmap: 'Road Map: Well-connected via NH-48 from Delhi (270 km). Transport: Jaipur Metro, AC low-floor buses, auto-rickshaws, Ola/Uber cabs, and Jaipur International Airport (JAI).',
-    hotels_booking: '🏨 Taj Rambagh Palace (Luxury)\n🏨 Trident Jaipur (5-Star)\n🏨 Zostel Jaipur (Backpacker Hostel)\n🏨 Pearl Palace Heritage (Boutique)',
-    markets_food: '🛍️ Johari Bazaar (Jewelry), Bapu Bazaar (Textiles), Tripolia Bazaar.\n🍲 Dal Baati Churma, Pyaaz Kachori (LMB), Ghevar (Rawat Mishthan Bhandar).',
-    culture_helpline: 'Culture: Vibrant Rajasthani folk music, Kalbeliya dance, and vibrant turbans. Helpline: Tourist Police 0141-2530264 | General SOS: 112'
+    Type: '👑 Royal Heritage & Tourism Capital',
+    image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II as India’s first planned city. Geography: Semi-arid terrain enclosed by rugged Aravalli hills. Political: Capital of Rajasthan, housing the State Legislative Assembly and administrative headquarters.',
+    picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km from centre)\n🏛️ Nahargarh Fort Sunset Viewpoint (15 km)\n🏛️ Jantar Mantar & City Palace (0 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n💧 Jal Mahal Water Palace (4 km)',
+    transport_roadmap: 'Road Map: Connected via NH-48 (Delhi-Mumbai Expressway) and NH-21. Transport: Jaipur Metro, low-floor AC buses, auto-rickshaws, Ola/Uber cabs, and Jaipur International Airport (JAI).',
+    hotels_booking: '🏨 Taj Rambagh Palace (Ultra-Luxury)\n🏨 Trident Jaipur (5-Star Resort)\n🏨 Zostel Jaipur (Backpacker Hub)\n🏨 Pearl Palace Heritage (Boutique Stay)',
+    markets_food: '🛍️ Johari Bazaar (Jewelry), Bapu Bazaar (Textiles), Tripolia Bazaar (Bangles).\n🍲 Authentic Dal Baati Churma, Pyaaz Kachori (Rawat), Ghevar (LMB).',
+    culture_helpline: 'Culture: Rich Rajputana heritage, vibrant folk dance (Kalbeliya), and traditional turban culture. Helpline: Tourist Police: 0141-2530264 | General SOS: 112 | Ambulance: 108'
   },
   mumbai: {
-    Name: 'Mumbai - Financial & Coastal Metropolis',
+    Name: 'Mumbai - Financial Capital of India',
     City: 'Mumbai',
     State: 'Maharashtra',
-    Type: '🌊 Coastal Financial Capital',
-    image_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1000&q=80',
-    history_geo_political: 'History: Developed from seven islands ruled by Koli fishermen, Portuguese, and British East India Company. Geography: Coastal city on the Konkan coast facing the Arabian Sea. Political: Capital of Maharashtra, economic hub of India.',
-    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌿 Sanjay Gandhi National Park & Kanheri Caves (30 km)\n🌊 Marine Drive & Chowpatty Beach\n🏰 Bandra-Worli Sea Link Viewpoints',
-    transport_roadmap: 'Road Map: Connected via Eastern & Western Express Highways. Transport: Iconic Mumbai Local Trains, BEST buses, Metro lines, yellow-black taxis, and CSMIA Airport.',
-    hotels_booking: '🏨 The Taj Mahal Palace (Iconic Luxury)\n🏨 Trident Nariman Point\n🏨 Abode Bombay (Boutique)\n🏨 Backpacker Panda Colaba',
-    markets_food: '🛍️ Colaba Causeway, Crawford Market, Linking Road (Bandra).\n🍲 Mumbai Vada Pav, Pav Bhaji (Sardar), Bombay Sandwich, Bhel Puri.',
-    culture_helpline: 'Culture: Cosmopolitan blend of Marathi heritage, Bollywood cinema, and Ganesh Utsav fervor. Helpline: Mumbai Police Control: 100 | Ambulance: 102'
+    Type: '🌊 Coastal Financial & Entertainment Hub',
+    image_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Evolved from a cluster of seven islands ruled by Koli fishermen, Portuguese, and the British East India Company. Geography: Natural deep-water harbor on the Konkan coast. Political: Capital of Maharashtra and India’s financial nerve centre.',
+    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌊 Marine Drive & Chowpatty Beach (0 km)\n🌿 Sanjay Gandhi National Park & Kanheri Caves (30 km)\n🏰 Bandra-Worli Sea Link Promenade (8 km)',
+    transport_roadmap: 'Road Map: Linked via Eastern & Western Express Highways and coastal roads. Transport: Iconic Mumbai Suburban Railway, BEST buses, Metro lines, black-and-yellow cabs, and CSMIA Airport.',
+    hotels_booking: '🏨 The Taj Mahal Palace (Historic Luxury)\n🏨 Trident Nariman Point (Sea View)\n🏨 Abode Bombay (Heritage Boutique)\n🏨 Backpacker Panda Colaba',
+    markets_food: '🛍️ Colaba Causeway, Crawford Market, Linking Road (Bandra).\n🍲 Mumbai Vada Pav, Pav Bhaji, Bombay Sandwich, Bhel Puri.',
+    culture_helpline: 'Culture: Vibrant melting pot of Marathi traditions, cosmopolitan lifestyle, and Bollywood cinema. Helpline: Mumbai Police Control: 100 | Ambulance: 102'
   },
   goa: {
-    Name: 'Goa - Tropical Paradise',
+    Name: 'Goa - Sun, Sand & Heritage Paradise',
     City: 'Goa',
     State: 'Goa',
-    Type: '🌴 Beach & Portuguese Heritage Hub',
-    image_url: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1000&q=80',
-    history_geo_political: 'History: Ruled by Portuguese for over 450 years until liberation in 1961. Geography: Bounded by Maharashtra to the north, Karnataka to the east/south, and Arabian Sea to the west. Political: India smallest state by area with Panaji as capital.',
-    picnic_spots: '🏖️ Calangute, Baga & Palolem Beaches\n🏛️ Basilica of Bom Jesus & Se Cathedral (Old Goa)\n🌊 Dudhsagar Waterfalls (60 km from Panaji)\n🏰 Fort Aguada & Chapora Fort',
-    transport_roadmap: 'Road Map: NH-66 connects Goa to Mumbai and Bengaluru. Transport: Mopa & Dabolim Airports, Konkan Railways, self-drive rental cars, scooty rentals, and local pre-paid taxis.',
-    hotels_booking: '🏨 W Goa Vagator (Luxury Resort)\n🏨 Taj Exotica Resort & Spa\n🏨 The Hosteller Goa (Stays)\n🏨 Beleza By The Beach',
-    markets_food: '🛍️ Anjuna Wednesday Flea Market, Saturday Night Market (Arpora), Mapusa Market.\n🍲 Goan Fish Curry Rice, Bebinca, Prawn Balchão & Xacuti.',
-    culture_helpline: 'Culture: Indo-Portuguese fusion, Carnival festivals, Konkani music and beach life. Helpline: Tourist Police: 112 | Coastal Security: 0832-2428165'
+    Type: '🌴 Tropical Beach & Cultural State',
+    image_url: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Ruled by Portuguese colonizers for over 450 years until liberation in December 1961. Geography: Bounded by Maharashtra, Karnataka, and the Arabian Sea coastline. Political: India smallest state by area, governed from Panaji.',
+    picnic_spots: '🏖️ Baga, Calangute & Palolem Beaches (0 km)\n🏛️ Basilica of Bom Jesus & Se Cathedral (Old Goa - 10 km)\n🌊 Dudhsagar Waterfalls (60 km)\n🏰 Fort Aguada & Chapora Fort',
+    transport_roadmap: 'Road Map: Connected via NH-66 and scenic coastal routes. Transport: Mopa & Dabolim International Airports, Konkan Railway network, self-drive rental cars, and scooties.',
+    hotels_booking: '🏨 W Goa Vagator (Luxury Resort)\n🏨 Taj Exotica Resort & Spa Benaulim\n🏨 The Hosteller Goa (Stays)\n🏨 Beleza By The Beach',
+    markets_food: '🛍️ Anjuna Flea Market, Saturday Night Market (Arpora), Mapusa Friday Market.\n🍲 Goan Fish Curry Rice, Bebinca, Prawn Balchão & Xacuti.',
+    culture_helpline: 'Culture: Unique Indo-Portuguese fusion, vibrant Carnival festivals, and coastal music. Helpline: Tourist Police: 112 | Coastal SOS: 0832-2428165'
+  },
+  delhi: {
+    Name: 'New Delhi - National Capital Territory',
+    City: 'Delhi',
+    State: 'Delhi NCR',
+    Type: '🏛️ Political & Historical Capital',
+    image_url: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80',
+    history_geo_political: 'History: Ruled by successive empires including the Delhi Sultanate, Mughals, and British Raj. Geography: Situated along the banks of the Yamuna River. Political: National capital territory housing Parliament, Supreme Court, and Central Government.',
+    picnic_spots: '🏛️ Red Fort & Qutub Minar (World Heritage)\n🏛️ India Gate & Rashtrapati Bhavan (0 km)\n🛕 Akshardham Temple & Lotus Temple\n🌿 Lodhi Gardens & Humayun Tomb',
+    transport_roadmap: 'Road Map: Connected via outer/inner ring roads and expressways. Transport: World-class Delhi Metro network, DTC electric buses, EV cabs, and Indira Gandhi International Airport (DEL).',
+    hotels_booking: '🏨 The Leela Palace New Delhi (Luxury)\n🏨 The Imperial New Delhi (Heritage)\n🏨 Bloomrooms @ Janpath\n🏨 Smyle Inn Backpacker Stay',
+    markets_food: '🛍️ Chandni Chowk, Dilli Haat, Sarojini Nagar, Janpath.\n🍲 Old Delhi Chole Bhature, Butter Chicken, Paranthas & Kebabs.',
+    culture_helpline: 'Culture: Cosmopolitan hub blending ancient Mughal heritage with modern Indian polity. Helpline: Delhi Police SOS: 112 | Women Helpline: 1091'
   }
 };
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [data, setData] = useState(BHARAT_SUPER_DATABASE['jaipur']);
+  const [cityData, setCityData] = useState(PAN_INDIA_MASTER_DB['jaipur']);
   const [activeTab, setActiveTab] = useState('overview');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
@@ -54,22 +67,22 @@ export default function App() {
     const key = query.trim().toLowerCase();
     if (!key) return;
 
-    if (BHARAT_SUPER_DATABASE[key]) {
-      setData(BHARAT_SUPER_DATABASE[key]);
+    if (PAN_INDIA_MASTER_DB[key]) {
+      setCityData(PAN_INDIA_MASTER_DB[key]);
     } else {
       const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
-      setData({
-        Name: `${cap} - Complete City Intelligence Hub`,
+      setCityData({
+        Name: `${cap} - Unified City Intelligence Hub`,
         City: cap,
         State: 'Bharat / India',
         Type: '✨ Verified Pan-India Destination',
-        image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1000&q=80',
-        history_geo_political: `History: ${cap} holds deep historical significance with ancient roots and rich cultural milestones. Geography: Strategically located regional terrain with local rivers and scenic green landscapes. Political: Serves as an active administrative and municipal district headquarters.`,
-        picnic_spots: `🏛️ ${cap} Historic Town Square & Clock Tower (0 km)\n🌿 Central City Park & Botanical Gardens (3 km)\n🏛️ Ancient Regional Heritage Temples (5 km)\n🏞️ Scenic Riverfront or Valley Viewpoint (12 km)`,
-        transport_roadmap: `Road Map: Connected via national and state highways. Transport: Indian Railways station connectivity, state roadways bus depots, local auto-rickshaws, and taxi rental services.`,
+        image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+        history_geo_political: `History: ${cap} holds remarkable historical significance with traditional roots and cultural evolution. Geography: Strategically positioned regional topography featuring local water bodies and green surroundings. Political: Serves as a vital municipal district administrative centre.`,
+        picnic_spots: `🏛️ ${cap} Historic Town Square & Landmark (0 km)\n🌿 Central Botanical Park & Family Gardens (4 km)\n🏛️ Ancient Heritage Shrines & Temples (6 km)\n🏞️ Scenic Valley or Riverfront Viewpoint (10 km)`,
+        transport_roadmap: `Road Map: Connected via national and state highway grids. Transport: Indian Railways station, state roadways bus depot, local auto-rickshaws, and taxi rental services.`,
         hotels_booking: `🏨 ${cap} Grand Heritage Hotel & Resort\n🏨 Royal Comfort Inn & Suites\n🏨 Budget Traveller Lodge & Homestay\n🏨 City Centre Residency`,
-        markets_food: `🛍️ ${cap} Traditional Handloom Bazaar, Main Handicraft Market & Spice Street.\n🍲 Signature Regional Thali, Local Sweets, Traditional Snacks & Famous Street Food.`,
-        culture_helpline: `Culture: Rich regional traditions, folk arts, local crafts, and vibrant seasonal festivals. Helpline: Local Police: 100 | Medical Ambulance: 108 | National SOS: 112`
+        markets_food: `🛍️ ${cap} Traditional Handloom Bazaar, Main Handicraft Market & Local Shops.\n🍲 Signature Regional Thali, Local Sweets, Traditional Snacks & Famous Street Delicacies.`,
+        culture_helpline: `Culture: Rich regional customs, folk arts, local crafts, and vibrant seasonal celebrations. Helpline: Local Police: 100 | Medical Ambulance: 108 | National Emergency SOS: 112`
       });
     }
   };
@@ -104,15 +117,15 @@ export default function App() {
         </div>
       </header>
 
-      {/* Search Hero */}
+      {/* Hero Search Section */}
       <section className="px-4 pt-10 pb-6 max-w-2xl mx-auto text-center relative">
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Search Any Place in <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">India.</span>
+          One Search. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Complete India.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Get history, geography, picnic spots with distance, road maps, hotels, markets, food & emergency helpline instantly.
+          Unifying scattered Google data into a single click: History, Geography, Picnic Spots with distance, Road Maps, Hotels & SOS.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -131,6 +144,7 @@ export default function App() {
           </div>
         </div>
 
+        {/* Quick Suggestion Chips */}
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
             { name: 'Jaipur', icon: '👑' },
@@ -147,27 +161,27 @@ export default function App() {
         </div>
       </section>
 
-      {/* Comprehensive City Intelligence Card */}
+      {/* Comprehensive Intelligence Card */}
       <main className="px-4 max-w-xl mx-auto space-y-6 relative z-10">
         <div className="bg-slate-900/90 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
           
           <div className="relative h-64 bg-slate-950 overflow-hidden">
-            <img src={data.image_url} alt={data.Name} className="w-full h-full object-cover opacity-90" />
+            <img src={cityData.image_url} alt={cityData.Name} className="w-full h-full object-cover opacity-90" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
             
             <div className="absolute top-3 left-3">
               <span className="bg-orange-500/90 text-white font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-lg">
-                {data.Type}
+                {cityData.Type}
               </span>
             </div>
 
             <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="text-2xl font-black text-white">{data.Name}</h3>
-              <p className="text-xs text-amber-300 font-bold mt-1">📍 {data.City}, {data.State}</p>
+              <h3 className="text-2xl font-black text-white">{cityData.Name}</h3>
+              <p className="text-xs text-amber-300 font-bold mt-1">📍 {cityData.City}, {cityData.State}</p>
             </div>
           </div>
 
-          {/* Solution Navigation Tabs */}
+          {/* Navigation Tabs */}
           <div className="flex border-b border-slate-800 bg-slate-950/70 text-[10px] sm:text-[11px] font-bold text-slate-400 overflow-x-auto no-scrollbar">
             {[
               { key: 'overview', label: 'History & Geo', icon: '📜' },
@@ -183,7 +197,7 @@ export default function App() {
             ))}
           </div>
 
-          {/* Dynamic Content Sections */}
+          {/* Tab Content Panels */}
           <div className="p-5 space-y-4 text-xs text-slate-300 font-medium">
             
             {activeTab === 'overview' && (
@@ -191,7 +205,7 @@ export default function App() {
                 <span className="text-amber-400 font-black block text-sm flex items-center gap-2">
                   <span>📜</span> History, Geography & Political Profile
                 </span>
-                <p className="leading-relaxed pt-1">{data.history_geo_political}</p>
+                <p className="leading-relaxed pt-1">{cityData.history_geo_political}</p>
               </div>
             )}
 
@@ -200,7 +214,7 @@ export default function App() {
                 <span className="text-orange-400 font-black block text-sm flex items-center gap-2">
                   <span>🌿</span> Picnic Spots & Sightseeing with Distance
                 </span>
-                <p className="leading-relaxed pt-1 whitespace-pre-line">{data.picnic_spots}</p>
+                <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.picnic_spots}</p>
               </div>
             )}
 
@@ -209,7 +223,7 @@ export default function App() {
                 <span className="text-sky-400 font-black block text-sm flex items-center gap-2">
                   <span>🚗</span> Road Maps, Route & Transport Taxi
                 </span>
-                <p className="leading-relaxed pt-1">{data.transport_roadmap}</p>
+                <p className="leading-relaxed pt-1">{cityData.transport_roadmap}</p>
               </div>
             )}
 
@@ -223,7 +237,7 @@ export default function App() {
                     Book Now
                   </button>
                 </div>
-                <p className="leading-relaxed pt-1 whitespace-pre-line">{data.hotels_booking}</p>
+                <p className="leading-relaxed pt-1 whitespace-pre-line">{cityData.hotels_booking}</p>
               </div>
             )}
 
@@ -233,13 +247,13 @@ export default function App() {
                   <span className="text-emerald-400 font-black block mb-1 flex items-center gap-2">
                     <span>🛍️</span> Famous Markets & Shopping
                   </span>
-                  <p>{data.markets_food.split('🍲')[0]}</p>
+                  <p>{cityData.markets_food.split('🍲')[0]}</p>
                 </div>
                 <div className="bg-slate-950/60 p-3.5 rounded-2xl border border-slate-800">
                   <span className="text-rose-400 font-black block mb-1 flex items-center gap-2">
                     <span>🍲</span> Authentic Local Food & Culture
                   </span>
-                  <p>{data.markets_food.split('🍲')[1] ? '🍲 ' + data.markets_food.split('🍲')[1] : ''}</p>
+                  <p>{cityData.markets_food.split('🍲')[1] ? '🍲 ' + cityData.markets_food.split('🍲')[1] : ''}</p>
                 </div>
               </div>
             )}
@@ -249,7 +263,7 @@ export default function App() {
                 <span className="text-red-400 font-black block text-sm flex items-center gap-2">
                   <span>🚨</span> Emergency Helpline & Culture SOS
                 </span>
-                <p className="font-bold text-slate-100 text-sm leading-relaxed">{data.culture_helpline}</p>
+                <p className="font-bold text-slate-100 text-sm leading-relaxed">{cityData.culture_helpline}</p>
               </div>
             )}
 
@@ -258,20 +272,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* Hotel Booking Modal */}
+      {/* Booking Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
           <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-6 text-xs text-slate-200 shadow-2xl space-y-3">
             <h3 className="font-black text-white text-base flex items-center gap-2">
-              <span>🏨</span> Book Hotel / Stay in {data.City}
+              <span>🏨</span> Book Hotel / Stay in {cityData.City}
             </h3>
             <input type="text" placeholder="Full Name *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
             <input type="tel" placeholder="Mobile Number *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            <div className="grid grid-cols-2 gap-2">
-              <input type="date" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-              <input type="date" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            </div>
-            <button onClick={() => { alert('Hotel booking request confirmed! Our concierge will contact you shortly.'); setShowBookingModal(false); }} className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
+            <button onClick={() => { alert('Hotel booking request confirmed!'); setShowBookingModal(false); }} className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
               Confirm Booking
             </button>
             <button onClick={() => setShowBookingModal(false)} className="w-full text-slate-500 py-1 font-semibold">Cancel</button>
@@ -288,7 +298,7 @@ export default function App() {
             </h3>
             <input type="text" placeholder="Business Name *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
             <input type="tel" placeholder="Phone Number *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            <button onClick={() => { alert('Business listed successfully on InBharat!'); setShowBizModal(false); }} className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
+            <button onClick={() => { alert('Business listed successfully!'); setShowBizModal(false); }} className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
               Submit Listing
             </button>
             <button onClick={() => setShowBizModal(false)} className="w-full text-slate-500 py-1 font-semibold">Cancel</button>
