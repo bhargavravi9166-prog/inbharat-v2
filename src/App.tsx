@@ -44,12 +44,13 @@ export default function App() {
       .limit(10);
 
     if (data && data.length > 0) {
-      setResults(data);
+      // Remove duplicates by Name using Map
+      const uniqueData = Array.from(new Map(data.map(item => [item.Name?.toLowerCase(), item])).values());
+      setResults(uniqueData);
     }
     setLoading(false);
   };
 
-  // Tourism & Nearby Radar Engine
   const fetchTourismAndLocationData = async (query: string) => {
     try {
       const cleanQuery = query.trim();
@@ -112,23 +113,30 @@ export default function App() {
     setLoading(true);
     setSearched(true);
 
+    let combinedResults: any[] = [];
+
+    // 1. Fetch from Supabase
     const { data, error } = await supabase
       .from('Heritage and tourism palace')
       .select('*')
       .or(`Name.ilike.%${cleanQuery}%,State.ilike.%${cleanQuery}%,City.ilike.%${cleanQuery}%,temples_and_spots.ilike.%${cleanQuery}%,famous_markets.ilike.%${cleanQuery}%`);
 
     if (!error && data && data.length > 0) {
-      setResults(data);
-      setLoading(false);
-      return;
+      combinedResults = [...data];
     }
 
+    // 2. Fetch from Wikipedia Net API
     const apiResult = await fetchTourismAndLocationData(cleanQuery);
     if (apiResult) {
-      setResults([apiResult]);
-    } else {
-      setResults([]);
+      combinedResults.push(apiResult);
     }
+
+    // 3. Deduplicate results by Name so nothing shows double/triple
+    const uniqueResults = Array.from(
+      new Map(combinedResults.map(item => [item.Name?.trim().toLowerCase(), item])).values()
+    );
+
+    setResults(uniqueResults);
     setLoading(false);
   };
 
@@ -186,7 +194,7 @@ export default function App() {
             Discover India's Best Heritage & Spots
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
-            Search any city to instantly view nearby sightseeing, monuments and local culture!
+            Search any city to instantly view unique sightseeing, monuments and local culture!
           </p>
         </div>
 
@@ -232,7 +240,7 @@ export default function App() {
         {!loading && results.length > 0 && (
           <div className="space-y-6">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Showing {results.length} Destination Radar Result(s)
+              Showing {results.length} Unique Destination Record(s)
             </p>
             {results.map((item, idx) => {
               const currentTab = activeTab[idx] || 'tourism';
