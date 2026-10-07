@@ -288,5 +288,17 @@ export default function App() {
   );
 }
 // update
-const { data, error } = await supabase.from('india_ directory').select('*');
+
+// Apne component ke andar is tarah se likhein:
+useEffect(() => {
+  async function loadData() {
+    const { data, error } = await supabase.from('india_directory').select('*');
+    if (error) {
+      console.error(error);
+    } else {
+      setPlaces(data); // ya jo bhi aapka state variable ho
+    }
+  }
+  loadData();
+}, []);
 
