@@ -15,7 +15,7 @@ export default function App() {
 
   const [cityData, setCityData] = useState({
     Name: 'Jaipur - The Pink City & Royal Capital',
-    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Smart Custom Directory',
+    City: 'Jaipur', State: 'Rajasthan', Type: '👑 Live Net Intelligence Hub',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
     history_geo_political: 'History: Founded in 1727 by Maharaja Sawai Jai Singh II. Geography: Enclosed by Aravalli hills. Political: Capital of Rajasthan.',
     picnic_spots: '🏛️ Amer Fort & Maota Lake (11 km)\n🛕 Govind Dev Ji Temple & Birla Mandir (4 km)\n🌿 Jawahar Circle & Patrika Gate (6 km)\n🏞️ Jal Mahal Water Palace (8 km)',
@@ -59,35 +59,36 @@ export default function App() {
           State: found.state_name || found.state || 'India',
           Type: '✅ Database Verified Record',
           image_url: found.image_url || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
-          history_geo_political: found.history || found.description || found.history_geo_political || `Detailed historical and geographical overview of ${cap}, featuring rich regional heritage and administrative significance.`,
-          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} Heritage Sightseeing & Monument Point (0 km)\n🛕 ${cap} Prachin Shri Mandir & Spiritual Center (3 km)\n🌿 ${cap} City Riverside & Nature Picnic Spot (5 km)\n🏞️ Regional Lake Viewpoint & Garden (7 km)`,
-          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: Connected via national and state highways. Transport: Local railway station, bus terminal, and auto/cab services available in ${cap}.`,
-          hotels_booking: found.hotels || found.hotels_booking || `🏨 Grand Heritage Hotel & Suites in ${cap}\n🏨 Comfort Inn & Budget Stays\n🏨 Traditional Homestays`,
-          markets_food: found.markets_food || found.food || `🛍️ Main Handloom & Artisan Market of ${cap}.\n🍲 Famous Regional Thali, Local Street Food, and Traditional Sweets.`,
-          culture_helpline: found.helpline || found.culture_helpline || `Culture: Unique local traditions and folk art. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+          history_geo_political: found.history || found.description || found.history_geo_political || `${cap} ke baare mein vishesh itihas aur bhogolik jankari.`,
+          picnic_spots: found.picnic_spots || found.spots || found.attractions || `🏛️ ${cap} ke pramukh Aitihasik Sthal\n🛕 ${cap} ke Prasiddh Mandir aur Teerth Sthal\n🌿 Local Picnic Spots aur Gardens`,
+          transport_roadmap: found.transport || found.transport_roadmap || `Road Map: National aur State highways se juda hua. Transport: Local railway station aur bus stand available.`,
+          hotels_booking: found.hotels || found.hotels_booking || `🏨 ${cap} ke sabhi shandar hotels aur homestays`,
+          markets_food: found.markets_food || found.food || `🛍️ Local Handicraft Bazaars\n🍲 ${cap} ke prasiddh traditional pakwan aur street food`,
+          culture_helpline: found.helpline || found.culture_helpline || `Culture: Sthaniya lok-sanskriti. Helpline: Police: 100 | SOS: 112`
         });
         setLoading(false);
         return;
       }
 
+      // Net se live data uthane ke liye Wikipedia free API gateway ka use
       const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cap)}`);
       const wiki = await res.json();
 
-      let desc = wiki.extract || `Comprehensive profile of ${cap}, India, highlighting its local culture, regional landmarks, and historical milestones.`;
+      let desc = wiki.extract || `${cap}, India ka ek mahatvapurna aur sundar shehar hai jo apni sanskriti aur itihas ke liye jana jata hai.`;
       let img = wiki.thumbnail?.source || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80';
 
       setCityData({
-        Name: `${cap} - City Intelligence Hub`,
+        Name: `${cap} - Live Intelligence Hub`,
         City: cap,
         State: 'India',
-        Type: '🌐 Live Unique Destination',
+        Type: '🌐 Net Live Connected',
         image_url: img,
         history_geo_political: desc,
-        picnic_spots: `🏛️ ${cap} Royal Palace & Historical Monument (0 km)\n🛕 Famous ${cap} Shri Mandir & Cultural Teerth (3 km)\n🌿 ${cap} Eco Park & Family Picnic Garden (5 km)\n🏞️ Scenic Water Reservoir & Sunset Point (8 km)`,
-        transport_roadmap: `Road Map: Linked through major state highways and national routes in ${cap}. Transport: Local railway station, state transport bus depots, and auto-rickshaw stands.`,
-        hotels_booking: `🏨 Premium Hotels & Luxury Resorts in ${cap}\n🏨 Tourist Comfort Lodges & Stays\n🏨 Traditional Regional Homestays`,
-        markets_food: `🛍️ ${cap} Main Town Market, Handloom Bazaars & Handicraft Shops.\n🍲 Signature Regional Thali, Traditional Sweets, and Popular Local Street Snacks of ${cap}.`,
-        culture_helpline: `Culture: Distinct local dialects, traditional folk music, and vibrant seasonal festivals. Helpline: Local Police: 100 | Ambulance: 108 | SOS: 112`
+        picnic_spots: `🏛️ ${cap} ke Pramukh Aitihasik Monuments aur Sightseeing Spots\n🛕 ${cap} ke Prasiddh Mandir aur Adhyatmik Sthal\n🌿 Family Picnic Gardens aur Natural Views\n🏞️ Local Lakes aur Sunset Points`,
+        transport_roadmap: `Road Map: National highways aur state roads dwara behtareen connectivity. Transport: ${cap} Railway Station, local auto service, aur cab facilities available.`,
+        hotels_booking: `🏨 ${cap} ke Best Luxury Hotels & Resorts\n🏨 Budget Friendly Tourist Lodges\n🏨 Traditional Homestays`,
+        markets_food: `🛍️ ${cap} ke Main Shopping Bazaars aur Handloom Markets.\n🍲 Wahan ke Special Traditional Pakwan, Sweets aur Street Food.`,
+        culture_helpline: `Culture: Sthaniya lok-kala, paramparayein aur tyohar. Helpline: Police: 100 | Ambulance: 108 | SOS: 112`
       });
 
     } catch (err) {
@@ -130,10 +131,10 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-orange-500/15 via-transparent to-transparent pointer-events-none blur-3xl"></div>
         
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white mb-3">
-          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">City-Wise Intelligence.</span>
+          Explore India. <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300">Live Net Connected.</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto mb-6">
-          Get precise picnic spots, temples, markets and history for any city.
+          Kisi bhi city ka naam search karo, net se poora data live fetch hokar aayega.
         </p>
 
         <div className="relative z-10 max-w-xl mx-auto mb-5">
@@ -141,7 +142,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search any city, town or tourist place..."
+              placeholder="Koi bhi city type karein (jaise Mount Abu, Ajmer, Jaipur)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleUniversalSearch(searchTerm)}
@@ -155,10 +156,10 @@ export default function App() {
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
+            { name: 'Mount Abu', icon: '⛰️' },
+            { name: 'Ajmer', icon: '🕌' },
             { name: 'Jaipur', icon: '👑' },
-            { name: 'Udaipur', icon: '🏰' },
-            { name: 'Varanasi', icon: '🛕' },
-            { name: 'Ayodhya', icon: '🚩' }
+            { name: 'Udaipur', icon: '🏰' }
           ].map(c => (
             <button key={c.name} onClick={() => handleUniversalSearch(c.name)} className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-4 py-2 rounded-xl font-bold whitespace-nowrap flex items-center gap-1.5 shadow-sm active:scale-95">
               <span>{c.icon}</span> <span>{c.name}</span>
