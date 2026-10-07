@@ -41,13 +41,13 @@ export default function App() {
           Name: 'Amer Fort & Palace',
           City: 'Jaipur',
           State: 'Rajasthan',
-          Type: 'Heritage Fort',
+          Type: 'Royal Heritage Fort',
           image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80',
-          history: 'Amer Fort is known for its artistic style elements, large ramparts, series of gates and cobbled paths.',
-          temples_and_spots: 'Sheesh Mahal, Sila Devi Temple, Maota Lake.',
-          famous_markets: 'Amer Road Handicraft Shops & Traditional Bazaars.',
-          famous_food: 'Dal Baati Churma, Pyaaz Kachori.',
-          route_transport: '11 km from Jaipur City Centre; cabs and autos easily available.',
+          history: 'Amer Fort is a breathtaking blend of Hindu and Mughal architecture, perched high on the Aravalli hills.',
+          temples_and_spots: 'Sheesh Mahal, Sila Devi Temple, Diwan-e-Aam.',
+          famous_markets: 'Amer Road Handicrafts & Royal Gem Bazaars.',
+          famous_food: 'Dal Baati Churma, Pyaaz Kachori, Ghevar.',
+          route_transport: '11 km from Jaipur City Centre; cabs and autos readily available.',
           emergency_services: 'Tourist Police: 100 | Ambulance: 108'
         }
       ]);
@@ -78,16 +78,16 @@ export default function App() {
       const cap = cleanQuery.charAt(0).toUpperCase() + cleanQuery.slice(1);
       setResults([
         {
-          Name: `${cap} Heritage & Sightseeing Spot`,
+          Name: `${cap} Heritage & Culture Hub`,
           City: cap,
           State: 'Bharat / India',
           Type: 'Verified Destination',
           image_url: 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=800&q=80',
-          history: `${cap} is a historic and culturally rich location known for its vibrant heritage and traditional community life.`,
-          temples_and_spots: `Main town square, ancient temples, and local viewpoints around ${cap}.`,
-          famous_markets: `${cap} Handloom Bazaar & Handicraft Shops.`,
-          famous_food: `Authentic regional thali and local traditional snacks.`,
-          route_transport: `Well connected via state roadways, local auto-rickshaws and cabs.`,
+          history: `${cap} is a magnificent cultural landmark brimming with rich historical stories, vibrant community life, and timeless heritage.`,
+          temples_and_spots: `Main town square, historic ancient temples, and scenic sunset viewpoints around ${cap}.`,
+          famous_markets: `${cap} Handloom Bazaar & Traditional Artisan Shops.`,
+          famous_food: `Authentic regional thali, local sweets, and famous street delicacies.`,
+          route_transport: `Well connected via state highways, local auto-rickshaws, and taxi services.`,
           emergency_services: `Local Police: 100 | Hospital/Ambulance: 108`
         }
       ]);
@@ -114,17 +114,17 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans pb-24 selection:bg-orange-500">
+    <div className="min-h-screen bg-[#0A0F1D] text-slate-100 flex flex-col font-sans pb-28 selection:bg-amber-500 selection:text-slate-950">
       
-      {/* Clean Navbar */}
-      <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex justify-between items-center">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.location.reload()}>
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white font-bold text-base shadow-md">
+      {/* Vibrant Header */}
+      <header className="sticky top-0 z-50 bg-[#0A0F1D]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3.5 flex justify-between items-center shadow-xl">
+        <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.location.reload()}>
+          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-600 to-rose-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-orange-500/20">
             🇮🇳
           </div>
           <div>
-            <div className="flex items-center font-black tracking-wider text-lg leading-none">
-              <span className="text-orange-500">IN</span>
+            <div className="flex items-center font-black tracking-wider text-xl leading-none">
+              <span className="text-amber-400">IN</span>
               <span className="text-white">BHARAT</span>
             </div>
           </div>
@@ -132,149 +132,58 @@ export default function App() {
 
         <button 
           onClick={() => setShowAddModal(true)} 
-          className="bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-xl border border-amber-500/20 transition"
+          className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-slate-950 font-black text-xs px-4 py-2 rounded-xl shadow-lg shadow-orange-500/20 transition active:scale-95"
         >
           + Add Spot
         </button>
       </header>
 
-      {/* Hero Search */}
-      <section className="px-4 pt-8 pb-8 max-w-xl mx-auto w-full text-center">
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white mb-2">
-          Discover India, <span className="text-orange-500">Clean & Fast.</span>
+      {/* Vibrant Hero Section */}
+      <section className="px-4 pt-10 pb-8 max-w-xl mx-auto w-full text-center relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-tr from-amber-500/15 to-orange-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <span className="inline-block bg-amber-500/10 text-amber-400 font-bold text-[10px] uppercase tracking-widest px-3 py-1 rounded-full mb-3 border border-amber-500/20">
+          ✨ Premium Discovery Platform
+        </span>
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white mb-2">
+          Discover India's Soul, <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500">Beautifully.</span>
         </h1>
-        <p className="text-xs text-slate-400 mb-6">
-          Search any city to get structured history, food, transport and emergency details.
+        <p className="text-xs text-slate-400 mb-6 font-medium">
+          Heritage, food, transport, and emergency details crafted in a stunning modern interface.
         </p>
 
-        <form onSubmit={(e) => handleSearch(undefined, e)} className="relative">
-          <div className="flex bg-slate-900 rounded-2xl p-1.5 border border-slate-700/80 focus-within:border-orange-500 transition shadow-lg">
-            <span className="flex items-center pl-3 text-slate-400 text-sm">🔍</span>
+        <form onSubmit={(e) => handleSearch(undefined, e)} className="relative z-10">
+          <div className="flex bg-slate-900/90 rounded-2xl p-2 border border-slate-700/60 focus-within:border-amber-500 transition shadow-2xl backdrop-blur-md">
+            <span className="flex items-center pl-3 text-amber-500 text-base">🔍</span>
             <input
               type="text"
-              placeholder="Search city (e.g. Jaipur, Ujjain, Tonk)..."
+              placeholder="Search city or monument (e.g. Jaipur, Ujjain, Tonk)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-medium"
+              className="flex-1 bg-transparent px-3 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
             />
             <button 
               type="submit" 
               disabled={loading} 
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs px-5 py-2 rounded-xl transition disabled:opacity-50 shadow-md"
+              className="bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition disabled:opacity-50 shadow-md active:scale-95"
             >
-              {loading ? '...' : 'Search'}
+              {loading ? '...' : 'Explore'}
             </button>
           </div>
         </form>
 
-        <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-xs justify-start sm:justify-center">
+        <div className="flex gap-2 overflow-x-auto mt-4 no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {['Jaipur', 'Ujjain', 'Varanasi', 'Agra', 'Tonk', 'Mount Abu'].map(city => (
             <button
               key={city}
               type="button"
               onClick={() => handleSearch(city)}
-              className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 px-3 py-1 rounded-lg font-semibold whitespace-nowrap transition"
+              className="bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition active:scale-95 shadow-sm"
             >
-              {city}
+              📍 {city}
             </button>
           ))}
         </div>
       </section>
 
-      {/* Results Feed (Clean Card Design) */}
-      <main className="px-4 max-w-xl mx-auto w-full flex-1 space-y-4">
-        {loading && (
-          <div className="text-center py-16 bg-slate-900/40 rounded-2xl border border-slate-800">
-            <div className="w-8 h-8 border-3 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-            <p className="text-xs text-slate-400 font-semibold">Loading details...</p>
-          </div>
-        )}
-
-        {!loading && results.map((item, idx) => (
-          <div key={idx} className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-            
-            {/* Image Header */}
-            <div className="relative h-48 bg-slate-950 overflow-hidden">
-              <img 
-                src={item.image_url || 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80'} 
-                alt={item.Name} 
-                className="w-full h-full object-cover opacity-90" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-              
-              <div className="absolute bottom-3 left-3 right-3">
-                <span className="bg-orange-500 text-white font-bold text-[9px] px-2.5 py-0.5 rounded-md mb-1 inline-block">
-                  {item.Type || 'Landmark'}
-                </span>
-                <h3 className="text-xl font-black text-white tracking-tight">{item.Name}</h3>
-                <p className="text-[11px] text-amber-300 font-medium">📍 {item.City}, {item.State}</p>
-              </div>
-            </div>
-
-            {/* Content Details (Clean & Minimalist Layout) */}
-            <div className="p-4 space-y-3 text-xs text-slate-300">
-              
-              <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/60">
-                <span className="text-amber-400 font-bold block mb-0.5">📜 History & Overview</span>
-                <p className="text-slate-300 leading-relaxed">{item.history || item.geography_politics}</p>
-              </div>
-
-              <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/60">
-                <span className="text-orange-400 font-bold block mb-0.5">🏛️ Key Sightseeing Spots</span>
-                <p className="text-slate-300 leading-relaxed">{item.temples_and_spots}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/60">
-                  <span className="text-emerald-400 font-bold block mb-0.5">🛍️ Markets</span>
-                  <p className="text-slate-300">{item.famous_markets}</p>
-                </div>
-                <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800/60">
-                  <span className="text-rose-400 font-bold block mb-0.5">🍲 Food</span>
-                  <p className="text-slate-300">{item.famous_food}</p>
-                </div>
-              </div>
-
-              <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 space-y-2">
-                <div>
-                  <span className="text-sky-400 font-bold block mb-0.5">🚌 Transport Connectivity</span>
-                  <p className="text-slate-300">{item.route_transport}</p>
-                </div>
-                <div className="border-t border-slate-800/80 pt-2">
-                  <span className="text-red-400 font-bold block mb-0.5">🚨 Emergency & Police SOS</span>
-                  <p className="text-slate-200 font-semibold">{item.emergency_services}</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        ))}
-      </main>
-
-      {/* Add Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-sm p-5 text-xs text-slate-200 shadow-2xl">
-            <h3 className="font-black text-white mb-3 text-sm">Add Spot to InBharat</h3>
-            <form onSubmit={handleAddSubmit} className="space-y-2.5">
-              <input type="text" required placeholder="Spot Name" value={formData.Name} onChange={(e) => setFormData({...formData, Name: e.target.value})} className="w-full bg-slate-950 p-2.5 rounded-xl border border-slate-800 outline-none focus:border-orange-500" />
-              <div className="grid grid-cols-2 gap-2">
-                <input type="text" required placeholder="City" value={formData.City} onChange={(e) => setFormData({...formData, City: e.target.value})} className="w-full bg-slate-950 p-2.5 rounded-xl border border-slate-800 outline-none focus:border-orange-500" />
-                <input type="text" required placeholder="State" value={formData.State} onChange={(e) => setFormData({...formData, State: e.target.value})} className="w-full bg-slate-950 p-2.5 rounded-xl border border-slate-800 outline-none focus:border-orange-500" />
-              </div>
-              <input type="url" required placeholder="Image URL (Unsplash)" value={formData.image_url} onChange={(e) => setFormData({...formData, image_url: e.target.value})} className="w-full bg-slate-950 p-2.5 rounded-xl border border-slate-800 outline-none focus:border-orange-500" />
-              <textarea required placeholder="History..." value={formData.history} onChange={(e) => setFormData({...formData, history: e.target.value})} className="w-full bg-slate-950 p-2.5 rounded-xl border border-slate-800 outline-none focus:border-orange-500 h-16 resize-none"></textarea>
-              <button type="submit" disabled={submitting} className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 rounded-xl mt-2">
-                {submitting ? 'Saving...' : 'Publish'}
-              </button>
-              <button type="button" onClick={() => setShowAddModal(false)} className="w-full text-slate-500 py-1 font-semibold">
-                Cancel
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-    </div>
-  );
-}
+      {/* Results
