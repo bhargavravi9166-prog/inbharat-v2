@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CITIES_MASTER_DB: Record<string, any> = {
+const BHARAT_MASTER_DATABASE: Record<string, any> = {
   jaipur: {
     Name: 'Jaipur - The Pink City & Royal Capital',
     City: 'Jaipur', State: 'Rajasthan', Type: '👑 Royal Heritage & Tourism Capital',
@@ -16,45 +16,34 @@ const CITIES_MASTER_DB: Record<string, any> = {
     Name: 'Ajmer - City of Sufi Shrine & Lakes',
     City: 'Ajmer', State: 'Rajasthan', Type: '🕌 Spiritual & Historical City',
     image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Founded in the 7th century by Ajaipal Chauhan, later a major Mughal stronghold under Akbar. Geography: Located in the Aravalli ranges, surrounded by the Ana Sagar basin. Political: Major district headquarters and municipal corporation in central Rajasthan.',
-    picnic_spots: '🕌 Khwaja Gharib Nawaz Dargah Sharif (1 km)\n🌊 Ana Sagar Lake & Baradari Gardens (2 km)\n🏔️ Taragarh Fort Mountain Trek (5 km)\n🛕 Adhai Din ka Jhonpra Ancient Monument (1.5 km)',
-    transport_roadmap: 'Road Map: Connected via NH-58 and NH-48 from Jaipur (135 km). Transport: Ajmer Junction railway station, state roadways buses, and local auto-rickshaws.',
-    hotels_booking: '🏨 Pratap Sarovar Portico (Luxury)\n🏨 Hotel Mansingh Palace\n🏨 Hotel LN Courtyard',
-    markets_food: '🛍️ Dargah Bazaar (Attar & Chadar), Naya Bazaar, Kutchery Road.\n🍲 Ajmer Special Kadhi Kachori, Sohan Halwa, and Dal Pakwan.',
-    culture_helpline: 'Culture: Harmony of Sufi music, Qawwali, and Rajasthani traditions. Helpline: Ajmer Police: 0145-2425555 | SOS: 112'
+    history_geo_political: 'History: Founded in the 7th century by Ajaipal Chauhan, later a major Mughal stronghold. Geography: Located in the Aravalli ranges, surrounded by Ana Sagar basin. Political: Major district headquarters and municipal corporation.',
+    picnic_spots: '🕌 Khwaja Gharib Nawaz Dargah Sharif (1 km)\n🌊 Ana Sagar Lake & Baradari Gardens (2 km)\n🏔️ Taragarh Fort Mountain Trek (5 km)',
+    transport_roadmap: 'Road Map: Connected via NH-58 and NH-48 from Jaipur (135 km). Transport: Ajmer Junction railway station, state buses.',
+    hotels_booking: '🏨 Pratap Sarovar Portico (Luxury)\n🏨 Hotel Mansingh Palace',
+    markets_food: '🛍️ Dargah Bazaar (Attar & Chadar), Naya Bazaar.\n🍲 Ajmer Special Kadhi Kachori, Sohan Halwa.',
+    culture_helpline: 'Culture: Harmony of Sufi music and Qawwali. Helpline: Ajmer Police: 0145-2425555 | SOS: 112'
   },
   udaipur: {
     Name: 'Udaipur - The City of Lakes',
     City: 'Udaipur', State: 'Rajasthan', Type: '🌊 Venice of the East & Royal City',
     image_url: 'https://images.unsplash.com/photo-1615836245337-f5b9b2210c85?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Founded in 1559 by Maharana Udai Singh II as the capital of Mewar kingdom. Geography: Situated in the southern foothills of the Aravalli range with stunning natural lakes. Political: Prominent district and tourism hub of southern Rajasthan.',
-    picnic_spots: '🏛️ City Palace & Lake Pichola Boat Ride (0 km)\n🌿 Saheliyon-ki-Bari Garden (2 km)\n🏰 Monsoon Palace / Sajjangarh Fort (8 km)\n💧 Fateh Sagar Lake & Nehru Garden (3 km)',
-    transport_roadmap: 'Road Map: Connected via NH-58 and golden quadrilateral highways. Transport: Maharana Pratap Airport (UDR), Udaipur City railway station, and boat jetties.',
-    hotels_booking: '🏨 Taj Lake Palace (Island Luxury)\n🏨 The Oberoi Udaivilas\n🏨 Zostel Udaipur (Backpacker)',
-    markets_food: '🛍️ Hathi Pol Bazaar (Paintings & Crafts), Bapu Bazaar, Shilpgram.\n🍲 Dal Baati Churma, Gatte ki Sabzi, Dabeli, and Rabri.',
-    culture_helpline: 'Culture: Mewari heritage, Gangaur festival celebrations, and classical puppet shows. Helpline: Tourist Police: 0294-2415355 | SOS: 112'
-  },
-  jodhpur: {
-    Name: 'Jodhpur - The Blue City & Sun City',
-    City: 'Jodhpur', State: 'Rajasthan', Type: '💙 Blue Architecture & Fortress City',
-    image_url: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Founded in 1459 by Rao Jodha, leader of the Rathore clan. Geography: Situated on the edge of the Thar Desert, characterized by massive sandstone formations. Political: Second largest city in Rajasthan and judicial capital hosting the Rajasthan High Court.',
-    picnic_spots: '🏰 Mehrangarh Fort & Museum (2 km)\n🏛️ Jaswant Thada Memorial (3 km)\n🌿 Umaid Bhawan Palace & Museum (5 km)\n💧 Mandore Gardens & Cenotaphs (9 km)',
-    transport_roadmap: 'Road Map: Connected via NH-62 across western Rajasthan. Transport: Jodhpur Airport (JDH), Jodhpur Junction railway station, and auto networks.',
-    hotels_booking: '🏨 Umaid Bhawan Palace (Taj Luxury)\n🏨 RAAS Jodhpur (Boutique Heritage)\n🏨 The Fern Residency',
-    markets_food: '🛍️ Clock Tower Market (Sardar Market), Nai Sarak (Tie & Dye textiles).\n🍲 Jodhpuri Mirchi Bada, Mawa Kachori, and Pithore ki Sabzi.',
-    culture_helpline: 'Culture: Marwari folk music, turban tying, and desert lifestyle. Helpline: Jodhpur Police: 0291-2545666 | SOS: 112'
+    history_geo_political: 'History: Founded in 1559 by Maharana Udai Singh II as the capital of Mewar. Geography: Situated in southern Aravalli foothills with stunning natural lakes. Political: Prominent district and tourism hub of southern Rajasthan.',
+    picnic_spots: '🏛️ City Palace & Lake Pichola Boat Ride (0 km)\n🌿 Saheliyon-ki-Bari Garden (2 km)\n🏰 Monsoon Palace / Sajjangarh Fort (8 km)',
+    transport_roadmap: 'Road Map: Connected via NH-58. Transport: Maharana Pratap Airport (UDR), Udaipur City railway station.',
+    hotels_booking: '🏨 Taj Lake Palace (Island Luxury)\n🏨 The Oberoi Udaivilas',
+    markets_food: '🛍️ Hathi Pol Bazaar (Paintings & Crafts), Shilpgram.\n🍲 Dal Baati Churma, Gatte ki Sabzi.',
+    culture_helpline: 'Culture: Mewari heritage and puppet shows. Helpline: Tourist Police: 0294-2415355 | SOS: 112'
   },
   mumbai: {
     Name: 'Mumbai - Financial Capital of India',
     City: 'Mumbai', State: 'Maharashtra', Type: '🌊 Coastal Financial & Entertainment Hub',
     image_url: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80',
-    history_geo_political: 'History: Evolved from seven islands ruled by Koli fishermen, Portuguese, and British. Geography: Deep-water harbor on the Konkan coast. Political: Capital of Maharashtra and economic nerve centre.',
-    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌊 Marine Drive & Chowpatty Beach (0 km)\n🌿 Sanjay Gandhi National Park & Kanheri Caves (30 km)',
+    history_geo_political: 'History: Evolved from seven islands ruled by Koli fishermen, Portuguese, and British. Geography: Deep-water harbor on Konkan coast. Political: Capital of Maharashtra and economic nerve centre.',
+    picnic_spots: '🏛️ Gateway of India & Elephanta Caves (Boat ride)\n🌊 Marine Drive & Chowpatty Beach (0 km)\n🌿 Sanjay Gandhi National Park (30 km)',
     transport_roadmap: 'Road Map: Linked via Eastern & Western Express Highways. Transport: Mumbai Local Trains, BEST buses, Metro, and CSMIA Airport.',
-    hotels_booking: '🏨 The Taj Mahal Palace (Historic Luxury)\n🏨 Trident Nariman Point\n🏨 Abode Bombay (Boutique)',
+    hotels_booking: '🏨 The Taj Mahal Palace (Historic Luxury)\n🏨 Trident Nariman Point',
     markets_food: '🛍️ Colaba Causeway, Crawford Market, Linking Road.\n🍲 Mumbai Vada Pav, Pav Bhaji, Bombay Sandwich.',
-    culture_helpline: 'Culture: Melting pot of Marathi traditions and Bollywood cinema. Helpline: Police Control: 100 | Ambulance: 102'
+    culture_helpline: 'Culture: Melting pot of Marathi traditions and Bollywood. Helpline: Police Control: 100 | Ambulance: 102'
   },
   delhi: {
     Name: 'New Delhi - National Capital Territory',
@@ -63,7 +52,7 @@ const CITIES_MASTER_DB: Record<string, any> = {
     history_geo_political: 'History: Seat of Delhi Sultanate, Mughals, and British Raj. Geography: Banks of Yamuna River. Political: National capital housing Parliament and Supreme Court.',
     picnic_spots: '🏛️ Red Fort & Qutub Minar\n🏛️ India Gate & Rashtrapati Bhavan (0 km)\n🛕 Akshardham Temple & Lotus Temple',
     transport_roadmap: 'Road Map: Ring roads and expressways. Transport: Delhi Metro, DTC electric buses, and IGI Airport (DEL).',
-    hotels_booking: '🏨 The Leela Palace New Delhi\n🏨 The Imperial New Delhi\n🏨 Bloomrooms @ Janpath',
+    hotels_booking: '🏨 The Leela Palace New Delhi\n🏨 The Imperial New Delhi',
     markets_food: '🛍️ Chandni Chowk, Dilli Haat, Sarojini Nagar.\n🍲 Old Delhi Chole Bhature, Butter Chicken, Kebabs.',
     culture_helpline: 'Culture: Mughal heritage meets modern polity. Helpline: Police SOS: 112 | Women Helpline: 1091'
   }
@@ -71,22 +60,23 @@ const CITIES_MASTER_DB: Record<string, any> = {
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [cityData, setCityData] = useState(CITIES_MASTER_DB['jaipur']);
+  const [cityData, setCityData] = useState(BHARAT_MASTER_DATABASE['jaipur']);
   const [activeTab, setActiveTab] = useState('overview');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showBizModal, setShowBizModal] = useState(false);
+  const [showCsvModal, setShowCsvModal] = useState(false);
 
   const handleSearch = (query: string) => {
     setSearchTerm(query);
     const key = query.trim().toLowerCase();
     if (!key) return;
 
-    if (CITIES_MASTER_DB[key]) {
-      setCityData(CITIES_MASTER_DB[key]);
+    if (BHARAT_MASTER_DATABASE[key]) {
+      setCityData(BHARAT_MASTER_DATABASE[key]);
     } else {
       const cap = query.trim().charAt(0).toUpperCase() + query.trim().slice(1);
       
-      // ULTRA-SMART DYNAMIC INTELLIGENCE GENERATOR FOR ANY SEARCHED CITY IN INDIA
+      // Unstoppable Dynamic Synthesizer for any location in India
       setCityData({
         Name: `${cap} - Complete City Intelligence Hub`,
         City: cap,
@@ -101,6 +91,44 @@ export default function App() {
         culture_helpline: `Culture: Rich regional folk traditions, classical arts, local festivals, and warm community hospitality. Helpline: Local Police Station: 100 | Medical Trauma Ambulance: 108 | National Emergency SOS: 112`
       });
     }
+  };
+
+  const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result as string;
+      const lines = text.split('\n');
+      let count = 0;
+      
+      for (let i = 1; i < lines.length; i++) {
+        const row = lines[i].split(',');
+        if (row.length >= 3) {
+          const cityName = row[1]?.trim().toLowerCase();
+          if (cityName) {
+            BHARAT_MASTER_DATABASE[cityName] = {
+              Name: row[0]?.trim() || `${row[1]} Hub`,
+              City: row[1]?.trim(),
+              State: row[2]?.trim() || 'India',
+              Type: row[3]?.trim() || '✨ Custom Uploaded Spot',
+              image_url: row[10]?.trim() || 'https://images.unsplash.com/photo-1588095920028-a433f42f7c6a?auto=format&fit=crop&w=1200&q=80',
+              history_geo_political: row[4]?.trim() || 'History & geography data loaded from CSV.',
+              picnic_spots: row[5]?.trim() || 'Picnic spots available locally.',
+              transport_roadmap: row[6]?.trim() || 'Road connectivity available.',
+              hotels_booking: row[7]?.trim() || 'Hotels available.',
+              markets_food: row[8]?.trim() || 'Famous food and markets.',
+              culture_helpline: row[9]?.trim() || 'Police: 100 | SOS: 112'
+            };
+            count++;
+          }
+        }
+      }
+      alert(`Success! ${count} locations imported successfully! Now search them instantly.`);
+      setShowCsvModal(false);
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -124,11 +152,11 @@ export default function App() {
         </div>
 
         <div className="flex gap-2">
-          <button onClick={() => setShowBizModal(true)} className="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3 py-2 rounded-xl border border-emerald-500/30 flex items-center gap-1">
-            <span>💼</span> <span>List Biz</span>
+          <button onClick={() => setShowCsvModal(true)} className="bg-sky-500/10 text-sky-400 text-xs font-bold px-3 py-2 rounded-xl border border-sky-500/30 flex items-center gap-1">
+            <span>📁</span> <span className="hidden sm:inline">CSV</span>
           </button>
           <button onClick={() => setShowBookingModal(true)} className="bg-orange-500/10 text-orange-400 text-xs font-bold px-3 py-2 rounded-xl border border-orange-500/30 flex items-center gap-1">
-            <span>🏨</span> <span>Book Hotel</span>
+            <span>🏨</span> <span>Book</span>
           </button>
         </div>
       </header>
@@ -149,7 +177,7 @@ export default function App() {
             <span className="flex items-center pl-3 text-orange-400 text-lg">🔍</span>
             <input
               type="text"
-              placeholder="Search Jodhpur, Ajmer, Udaipur, Jaipur, Mumbai..."
+              placeholder="Search Jaipur, Ajmer, Udaipur, Mumbai, Delhi..."
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
               className="flex-1 bg-transparent px-3 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 outline-none font-semibold"
@@ -164,7 +192,6 @@ export default function App() {
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs justify-start sm:justify-center relative z-10">
           {[
             { name: 'Jaipur', icon: '👑' },
-            { name: 'Jodhpur', icon: '💙' },
             { name: 'Ajmer', icon: '🕌' },
             { name: 'Udaipur', icon: '🌊' },
             { name: 'Mumbai', icon: '🌊' },
@@ -288,6 +315,25 @@ export default function App() {
         </div>
       </main>
 
+      {/* CSV Upload Modal */}
+      {showCsvModal && (
+        <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-6 text-xs text-slate-200 shadow-2xl space-y-4">
+            <h3 className="font-black text-white text-base flex items-center gap-2">
+              <span>📁</span> Upload CSV Data File
+            </h3>
+            <p className="text-slate-400">Apni city data wali CSV file select karein. File upload hote hi saara data app me load ho jayega.</p>
+            <input 
+              type="file" 
+              accept=".csv" 
+              onChange={handleCsvUpload} 
+              className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600" 
+            />
+            <button onClick={() => setShowCsvModal(false)} className="w-full text-slate-500 py-1 font-semibold">Cancel</button>
+          </div>
+        </div>
+      )}
+
       {/* Booking Modal */}
       {showBookingModal && (
         <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
@@ -297,7 +343,7 @@ export default function App() {
             </h3>
             <input type="text" placeholder="Full Name *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
             <input type="tel" placeholder="Mobile Number *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            <button onClick={() => { alert('Hotel booking request confirmed!'); setShowBookingModal(false); }} className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
+            <button onClick={() => { alert('Hotel booking confirmed!'); setShowBookingModal(false); }} className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
               Confirm Booking
             </button>
             <button onClick={() => setShowBookingModal(false)} className="w-full text-slate-500 py-1 font-semibold">Cancel</button>
@@ -305,28 +351,11 @@ export default function App() {
         </div>
       )}
 
-      {/* Business Listing Modal */}
-      {showBizModal && (
-        <div className="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md p-6 text-xs text-slate-200 shadow-2xl space-y-3">
-            <h3 className="font-black text-white text-base flex items-center gap-2">
-              <span>💼</span> List Your Business / Hotel
-            </h3>
-            <input type="text" placeholder="Business Name *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            <input type="tel" placeholder="Phone Number *" className="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-white outline-none" />
-            <button onClick={() => { alert('Business listed successfully!'); setShowBizModal(false); }} className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black py-3 rounded-xl mt-2 shadow-lg">
-              Submit Listing
-            </button>
-            <button onClick={() => setShowBizModal(false)} className="w-full text-slate-500 py-1 font-semibold">Cancel</button>
-          </div>
-        </div>
-      )}
-
       {/* Bottom Nav */}
       <nav className="fixed bottom-3 left-4 right-4 max-w-md mx-auto bg-slate-900/90 backdrop-blur-2xl border border-slate-800 flex justify-around py-3 z-40 rounded-2xl shadow-2xl text-[11px] font-extrabold text-slate-400">
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-center gap-0.5 text-orange-400"><span>🔍</span><span>Search</span></button>
-        <button onClick={() => setShowBookingModal(true)} className="flex flex-col items-center gap-0.5 text-emerald-400"><span>🏨</span><span>Hotels</span></button>
-        <button onClick={() => setShowBizModal(true)} className="flex flex-col items-center gap-0.5"><span>💼</span><span>List Biz</span></button>
+        <button onClick={() => setShowCsvModal(true)} className="flex flex-col items-center gap-0.5 text-sky-400"><span>📁</span><span>CSV</span></button>
+        <button onClick={() => setShowBookingModal(true)} className="flex flex-col items-center gap-0.5 text-emerald-400"><span>🏨</span><span>Book</span></button>
       </nav>
 
     </div>
