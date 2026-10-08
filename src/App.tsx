@@ -30,12 +30,19 @@ export default function App() {
     setActiveTab('home');
   };
 
-  const filteredItems = Object.entries(spots).filter(([_, s]) => 
-    s.Name.toLowerCase().includes(search.toLowerCase()) || 
-    s.City.toLowerCase().includes(search.toLowerCase()) || 
-    s.State.toLowerCase().includes(search.toLowerCase()) ||
-    s.Type.toLowerCase().includes(search.toLowerCase())
-  );
+  // Google-like smart multi-field search filter
+  const filteredItems = Object.entries(spots).filter(([_, s]) => {
+    const query = search.toLowerCase().trim();
+    if (!query) return true;
+
+    const nameMatch = s.Name?.toLowerCase().includes(query);
+    const cityMatch = s.City?.toLowerCase().includes(query);
+    const stateMatch = s.State?.toLowerCase().includes(query);
+    const typeMatch = s.Type?.toLowerCase().includes(query);
+    const descMatch = s.history_geo_political?.toLowerCase().includes(query);
+
+    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch;
+  });
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 pb-28 font-sans selection:bg-orange-500 selection:text-white">
@@ -66,7 +73,7 @@ export default function App() {
               <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 text-sm">🔍</span>
               <input 
                 type="text"
-                placeholder="Search divine temples, cities, states..."
+                placeholder="Search states, cities, or temples..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-11 pr-4 py-3.5 bg-slate-800/90 rounded-2xl border border-slate-700 text-sm text-slate-100 placeholder-slate-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
@@ -84,7 +91,9 @@ export default function App() {
             {/* Premium Cards List */}
             <div className="space-y-4">
               {filteredItems.length === 0 ? (
-                <div className="text-center py-16 text-slate-400 text-sm">No sanctuary found matching your search.</div>
+                <div className="text-center py-16 text-slate-400 text-sm">
+                  No destinations found matching "{search}". Try searching another city or state!
+                </div>
               ) : (
                 filteredItems.map(([k, s]) => (
                   <div key={k} className="bg-slate-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-700/80 overflow-hidden hover:border-orange-500/50 transition-all duration-300 group">
@@ -146,7 +155,7 @@ export default function App() {
               </div>
               <div>
                 <label className="font-semibold text-slate-300">History & Significance</label>
-                <textarea rows={2.5} placeholder="Write historical details..." value={form.history_geo_political} onChange={e=>setForm({...form, history_geo_political: e.target.value})} className="w-full mt-1.5 p-3 bg-slate-900 border border-slate-700 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none"></textarea>
+                <textarea rows={3} placeholder="Write historical details..." value={form.history_geo_political} onChange={e=>setForm({...form, history_geo_political: e.target.value})} className="w-full mt-1.5 p-3 bg-slate-900 border border-slate-700 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none"></textarea>
               </div>
               <div>
                 <label className="font-semibold text-slate-300">Key Attractions / Spots</label>
