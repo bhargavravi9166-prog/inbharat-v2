@@ -48,28 +48,27 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Ultra-Smart & Deep Multi-Field Search Filter (Spaces & Spelling safe)
+  // Ultra-Friendly & Smart Fuzzy Search Filter (Any order words, space independent)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
-    const query = search.toLowerCase().replace(/\s+/g, '').trim();
-    if (!query) return true;
+    const rawQuery = search.toLowerCase().trim();
+    if (!rawQuery) return true;
 
-    const name = s.Name?.toLowerCase().replace(/\s+/g, '') || '';
-    const city = s.City?.toLowerCase().replace(/\s+/g, '') || '';
-    const state = s.State?.toLowerCase().replace(/\s+/g, '') || '';
-    const type = s.Type?.toLowerCase().replace(/\s+/g, '') || '';
-    const desc = s.history_geo_political?.toLowerCase().replace(/\s+/g, '') || '';
-    const picnic = s.picnic_spots?.toLowerCase().replace(/\s+/g, '') || '';
-    const key = k.toLowerCase().replace(/\s+/g, '') || '';
+    // User query ko words mein tod lo taaki aage-piche likhne par bhi match ho jaye
+    const queryWords = rawQuery.split(/\s+/);
 
-    return (
-      name.includes(query) || 
-      city.includes(query) || 
-      state.includes(query) || 
-      type.includes(query) || 
-      desc.includes(query) || 
-      picnic.includes(query) || 
-      key.includes(query)
-    );
+    // Saare text fields ko combine karke ek single searchable string bana lo
+    const searchableText = [
+      s.Name,
+      s.City,
+      s.State,
+      s.Type,
+      s.history_geo_political,
+      s.picnic_spots,
+      k
+    ].filter(Boolean).join(' ').toLowerCase();
+
+    // Check karo ki query ke saare words us spot mein maujud hain ya nahi
+    return queryWords.every(word => searchableText.includes(word));
   });
 
   return (
