@@ -1,11 +1,14 @@
-
 import React, { useState } from 'react';
-import { MASTER_INDIA_TOURISM_DIRECTORY } from './tourismData';
+
+const SAMPLE_DIRECTORY = {
+  somnath: { Name: "Somnath Temple", City: "Veraval", State: "Gujarat", Type: "Jyotirlinga", weather: "28°C", budget: "₹2,000", distance: "5 km", history_geo_political: "First among the twelve jyotirlinga shrines of Shiva." },
+  varanasi: { Name: "Kashi Vishwanath Temple", City: "Varanasi", State: "Uttar Pradesh", Type: "Jyotirlinga", weather: "30°C", budget: "₹1,500", distance: "2 km", history_geo_political: "One of the most famous Hindu temples dedicated to Lord Shiva." }
+};
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'reels' | 'add' | 'planner' | 'business' | 'profile'>('home');
   const [search, setSearch] = useState<string>("");
-  const [spots] = useState(MASTER_INDIA_TOURISM_DIRECTORY);
+  const [spots] = useState(SAMPLE_DIRECTORY);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-28 font-sans">
