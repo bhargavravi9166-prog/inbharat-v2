@@ -527,8 +527,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace Jaipur | Fairmont Jaipur | Samode Haveli | Trident Jaipur",
     markets_food: "Johri Bazaar, Bapu Bazaar & Tripolia Bazaar | Dal Baati Churma, Pyaaz Kachori, Ghevar, Mirchi Bada",
     culture_helpline: "Rajputana royal heritage | Police: 100 | SOS: 112"
-  }
-};  "jaipur_picnic_jal_mahal": {
+  },
+ "jaipur_picnic_jal_mahal": {
     Name: "Jal Mahal - The Water Palace",
     City: "Jaipur", State: "Rajasthan", Type: "🏞️ Scenic Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
