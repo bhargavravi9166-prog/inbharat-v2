@@ -583,4 +583,60 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Marriott Jaipur | Hotel Clarks Amer",
     markets_food: "Malviya Nagar Markets | Street Food, Fast Food, South Indian",
     culture_helpline: "Modern Jaipur | Police: 100 | SOS: 112"
-      }
+    },  "jaipur_picnic_kanota_dam": {
+    Name: "Kanota Dam & Lake Reservoir",
+    City: "Jaipur", State: "Rajasthan", Type: "🌊 Lakeside Picnic & Sunset Spot",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 40°C", bestTime: "October to March",
+    packing: "Casual clothes, snacks, camera.",
+    budget: "₹1,000 - ₹2,500 / day",
+    history_geo_political: "A scenic water reservoir located on the outskirts of Jaipur towards Agra road, famous among locals as a quiet weekend picnic and sunset getaway.",
+    picnic_spots: "🌊 Open water reservoir banks ideal for relaxing\n🌅 Breathtaking sunset views over the water\n📸 Quiet weekend hangout spot away from city rush",
+    transport_roadmap: "Located off Agra Road, roughly 15-20 km from Jaipur main city center.",
+    hotels_booking: "Narain Niwas Palace | Heritage Resorts",
+    markets_food: "Agra Road Highway dhabas | Desi Chai, Pakoda, Local Meals",
+    culture_helpline: "Outskirts leisure | Police: 100 | SOS: 112"
+  },  "jaipur_picnic_smriti_van": {
+    Name: "Smriti Van - Biodiversity & Nature Park",
+    City: "Jaipur", State: "Rajasthan", Type: "🌿 Nature & Ecological Picnic Spot",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 40°C", bestTime: "October to March (Morning & Evening)",
+    packing: "Comfortable walking shoes, sportswear, water bottle.",
+    budget: "₹1,000 - ₹2,000 / day",
+    history_geo_political: "A massive ecological and forestry park developed on the slopes of Jhalana hills, featuring diverse sections of trees, walking trails, and peace.",
+    picnic_spots: "🌿 Tranquil walking and jogging trails through dense trees\n🐦 Bird watching spots and peaceful water ponds\n📸 Scenic nature photography locations",
+    transport_roadmap: "Located near JLN Marg, opposite National Institute of Technology (MNIT), Jaipur.",
+    hotels_booking: "Hotel Clarks Amer | Marriott Jaipur",
+    markets_food: "Malviya Nagar local cafes | Healthy juices, Tea, Snacks",
+    culture_helpline: "Eco tourism | Police: 100 | SOS: 112"
+  },
+  "jaipur_picnic_central_park": {
+    Name: "Central Park Jaipur & National Flag",
+    City: "Jaipur", State: "Rajasthan", Type: "🌳 City Park & Picnic Spot",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 40°C", bestTime: "October to March (Evening)",
+    packing: "Casual clothes, walking shoes.",
+    budget: "₹1,000 - ₹2,000 / day",
+    history_geo_political: "The largest park in Jaipur city, built by the Jaipur Development Authority, featuring a massive national flag, musical fountain, and golf course.",
+    picnic_spots: "⛲ Musical fountain show in the evenings\n🚩 Giant monumental National Flag installation\n🌿 Long green walking and running tracks for families",
+    transport_roadmap: "Located right in the heart of the city near Prithviraj Road, C-Scheme.",
+    hotels_booking: "Rambagh Palace | Hotel Madhuban",
+    markets_food: "C-Scheme food outlets | Coffee, Fast Food, Local Delicacies",
+    culture_helpline: "Urban leisure | Police: 100 | SOS: 112"
+  },
+  "jaipur_picnic_kanota_dam": {
+    Name: "Kanota Dam & Lake Reservoir",
+    City: "Jaipur", State: "Rajasthan", Type: "🌊 Lakeside Picnic & Sunset Spot",
+    image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 40°C", bestTime: "October to March",
+    packing: "Casual clothes, snacks, camera.",
+    budget: "₹1,000 - ₹2,500 / day",
+    history_geo_political: "A scenic water reservoir located on the outskirts of Jaipur towards Agra road, famous among locals as a quiet weekend picnic and sunset getaway.",
+    picnic_spots: "🌊 Open water reservoir banks ideal for relaxing\n🌅 Breathtaking sunset views over the water\n📸 Quiet weekend hangout spot away from city rush",
+    transport_roadmap: "Located off Agra Road, roughly 15-20 km from Jaipur main city center.",
+    hotels_booking: "Narain Niwas Palace | Heritage Resorts",
+    markets_food: "Agra Road Highway dhabas | Desi Chai, Pakoda, Local Meals",
+    culture_helpline: "Outskirts leisure | Police: 100 | SOS: 112"
+  }
+};
+
