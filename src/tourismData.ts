@@ -670,6 +670,45 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Circuit House Ambaji | Hotel Ambaji International",
     markets_food: "Ambaji Temple Bazaar | Mohanthal Prasad, Gujarati Snacks, Thali",
     culture_helpline: "Devotional heritage | Police: 100 | SOS: 112"
+  },  "gujarat_gir_forest": {
+    Name: "Gir National Park & Wildlife Sanctuary",
+    City: "Sasangir", State: "Gujarat", Type: "🦁 Asiatic Lion Sanctuary & Nature Hub",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 38°C", bestTime: "December to March (Safari Season)",
+    packing: "Dull-colored safari clothing (khaki/green), binoculars, dust mask, comfortable boots.",
+    budget: "₹2,500 - ₹6,500 / day",
+    history_geo_political: "The only natural habitat in the world where the majestic Asiatic Lions roam free, established as a protected sanctuary in 1965.",
+    picnic_spots: "🦁 Gir Jungle Safari (Open jeep wildlife tours)\n🏛️ Devalia Safari Park (Interpretation Zone)\n🌿 Kamleshwar Dam (Riverside picnic & crocodile viewing)\n🏞️ Kankai Mata Temple inside deep forest",
+    transport_roadmap: "Veraval Railway Station (40 km) & Diu Airport (65 km). Well connected via road.",
+    hotels_booking: "The Fern Gir Forest Resort | Woods at Sasan | Gir Birding Lodge",
+    markets_food: "Sasangir Local Bazaar | Kathiyawadi Meals, Bajra Roti, Sev Tamatar",
+    culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
+  },"gujarat_champaner_pavagadh": {
+    Name: "Champaner-Pavagadh Archaeological Park",
+    City: "Pavagadh", State: "Gujarat", Type: "🏰 UNESCO Forts & Shakti Peeth Temple",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 24°C to 39°C", bestTime: "October to March",
+    packing: "Comfortable trekking shoes, cotton clothing, camera.",
+    budget: "₹1,800 - ₹4,000 / day",
+    history_geo_political: "A UNESCO World Heritage Site featuring ancient Hindu and Islamic architecture, massive fort walls, palaces, and the sacred Kalika Mata Temple on top of Pavagadh hill.",
+    picnic_spots: "🛕 Kalika Mata Temple Pavagadh (Hilltop Shakti Peeth via Ropeway)\n🏛️ Champaner Fort Ruins & Royal Palaces (Mahals)\n🌿 Jama Masjid & Kevada Masjid (Historic architecture)\n🏞️ Pavagadh Hill nature viewpoints and waterfalls",
+    transport_roadmap: "Vadodara Junction (50 km) & Vadodara Airport (BDQ).",
+    hotels_booking: "Champaner Heritage Resort | Hotel Pavagadh International",
+    markets_food: "Pavagadh Hill base market | Gujarati Snacks, Fafda, Chai",
+    culture_helpline: "UNESCO heritage | Police: 100 | SOS: 112"
+  },"gujarat_kutch_white_rann": {
+    Name: "Great Rann of Kutch & Cultural Hub",
+    City: "Bhuj", State: "Gujarat", Type: "✨ White Salt Desert & Royal Palaces",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 12°C to 36°C (Cool nights, warm days)", bestTime: "November to February (Rann Utsav)",
+    packing: "Warm jackets for cold desert nights, sunglasses, traditional or casual wear.",
+    budget: "₹2,500 - ₹7,000 / day",
+    history_geo_political: "A vast expanse of white salt desert that transforms into a magical cultural wonderland during the winter Rann Utsav, surrounded by historic palaces.",
+    picnic_spots: "✨ White Rann Salt Desert (Moonlight view & Camel safari)\n🏛️ Aina Mahal & Prag Mahal (Royal Palaces in Bhuj)\n🌿 Kalo Dungar (Black Hill - Highest point of Kutch)\n🏞️ Dholavira (Ancient Indus Valley Civilization site)",
+    transport_roadmap: "Bhuj Airport (BHJ) & Bhuj Railway Station. Well connected via highways.",
+    hotels_booking: "Rann Utsav Tent City Dhordo | Regenta Resort Bhuj",
+    markets_food: "Bhujodi Village & Mandvi Beach markets | Kutchi Dabeli, Pakwan, Kutchi Thali",
+    culture_helpline: "Kutch handicraft heritage | Police: 100 | SOS: 112"
   }
 };
 
