@@ -1321,6 +1321,86 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Lotus Hotel Kushinagar | Hotel The Royal Residency",
     markets_food: "Kushinagar Town Market | North Indian Thali, Buddhist Monastery Snacks, Tea",
     culture_helpline: "Buddhist pilgrimage | Police: 100 | SOS: 112"
+  },  "delhi_red_fort_chandni_chowk": {
+    Name: "Delhi Red Fort & Chandni Chowk Heritage",
+    City: "New Delhi / Delhi", State: "Delhi", Type: "🏰 UNESCO Mughal Fort & Historic Market",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 22°C to 42°C", bestTime: "October to March",
+    packing: "Comfortable walking shoes, light cottons, camera.",
+    budget: "₹1,500 - ₹4,000 / day",
+    history_geo_political: "The political heart of India, featuring the iconic 17th-century Mughal Red Fort from where the Prime Minister addresses the nation, surrounded by Asia's oldest bustling bazaars.",
+    picnic_spots: "🏛️ Red Fort (Lal Qila UNESCO site) & Lahore Gate\n🛕 Jama Masjid & Sri Digambar Jain Lal Mandir\n🌿 Chandni Chowk Rickshaw rides & Kinari Bazaar\n🏞️ Raj Ghat (Mahatma Gandhi Memorial complex)",
+    transport_roadmap: "Indira Gandhi International Airport (DEL) & New Delhi Railway Station (NDLS). Well connected via Metro.",
+    hotels_booking: "The Imperial New Delhi | Maidens Hotel Delhi",
+    markets_food: "Chandni Chowk Street Food | Paranthe Wali Gali, Dahi Bhalla, Jalebi",
+    culture_helpline: "National capital heritage | Police: 100 | SOS: 112"
+  },
+  "delhi_qutub_minar_mehrab": {
+    Name: "Qutub Minar & Mehrauli Archaeological Park",
+    City: "New Delhi", State: "Delhi", Type: "🏛️ UNESCO World Heritage Minaret & Ruins",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 22°C to 41°C", bestTime: "October to March",
+    packing: "Comfortable walking shoes, sunglasses, sun cap.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "Home to the world's tallest brick minaret, built in the 12th century by Qutb-ud-din Aibak, alongside the mysterious rust-free Iron Pillar.",
+    picnic_spots: "🏛️ Qutub Minar Complex & Iron Pillar of Delhi\n🌿 Mehrauli Archaeological Park & Jamali Kamali Mosque\n🏞️ Sanjay Van green forest trails\n🛕 Yogmaya Temple (Ancient mythological temple)",
+    transport_roadmap: "Qutub Minar Metro Station & IGI Airport (15 km).",
+    hotels_booking: "Hotel Clarion Collection Qutab | The Ashok New Delhi",
+    markets_food: "Mehrauli Market & Saket Select CityWalk | North Indian Mughlai Cuisine",
+    culture_helpline: "Delhi Sultanate heritage | Police: 100 | SOS: 112"
+  },
+  "haryana_kurukshetra": {
+    Name: "Kurukshetra Mahabharata War Battlefield & Sarovars",
+    City: "Kurukshetra", State: "Haryana", Type: "🛕 Epic Mahabharata Land & Holy Sarovars",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 20°C to 38°C", bestTime: "October to March (Gita Mahotsav)",
+    packing: "Traditional temple attire, comfortable walking shoes.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "The holy land where the epic Mahabharata war was fought and Lord Krishna recited the Bhagavad Gita to Arjuna at Jyotisar.",
+    picnic_spots: "🛕 Brahma Sarovar & Jyotisar (Birthplace of Bhagavad Gita banyan tree)\n🏛️ Sannihit Sarovar & Bhishma Kund at Narkati\n🌿 Kalpana Chawla Memorial Planetarium\n🏞️ Sheikh Chilli's Tomb (Mughal architectural complex)",
+    transport_roadmap: "Kurukshetra Junction Railway Station & Chandigarh Airport (90 km away).",
+    hotels_booking: "Haryana Tourism Neelkanth
+ },  "delhi_akshardham_lotus": {
+    Name: "Akshardham Temple & Lotus Temple Delhi",
+    City: "New Delhi", State: "Delhi", Type: "🛕 Grand Spiritual Architecture & Monuments",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 22°C to 42°C", bestTime: "October to March",
+    packing: "Modest temple clothing, comfortable walking shoes.",
+    budget: "₹1,500 - ₹4,000 / day",
+    history_geo_political: "Modern architectural masterpieces of Delhi, featuring the world's largest comprehensive Hindu temple complex and the iconic lotus-shaped Bahá'í House of Worship.",
+    picnic_spots: "🛕 Swaminarayan Akshardham Complex & Musical Fountain Water Show\n🏛️ Lotus Temple (Bahá'í House of Worship)\n🌿 Humayun's Tomb (UNESCO Mughal garden tomb)\n🏞️ India Gate & Kartavya Path lawns (Evening picnic spot)",
+    transport_roadmap: "Akshardham Metro Station & Kalkaji Mandir Metro Station. Well connected via Delhi Metro.",
+    hotels_booking: "The LaLiT New Delhi | Bloomrooms Janpath",
+    markets_food: "South Extension & Connaught Place Market | Delhi Chaat, North Indian Thali, Cafes",
+    culture_helpline: "Modern cultural heritage | Police: 100 | SOS: 112"
+  },
+  "haryana_panipat": {
+    Name: "Panipat Historic Battlefields & Museum",
+    City: "Panipat", State: "Haryana", Type: "⚔️ Historic Battlefields & Textile Hub",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 21°C to 39°C", bestTime: "October to March",
+    packing: "Comfortable walking shoes, light cottons.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "The legendary city of weavers and historic battles, where three landmark battles of Indian history shaped the political destiny of the country.",
+    picnic_spots: "🏛️ Panipat Battle Field Memorial (Kala Amb)\n🛕 Devi Temple & Kabuli Bagh Mosque\n🌿 Ibrahim Lodhi Tomb\n🏞️ Panipat Handloom and Blanket Market alleys",
+    transport_roadmap: "Panipat Junction Railway Station & Delhi-Ambala GT Road NH-44.",
+    hotels_booking: "Hotel Hive Panipat | The Kalandar Hotel",
+    markets_food: "Panipat Cloth Market & Main Bazaar | North Indian Dhabas, Sweets, Chole Bhature",
+    culture_helpline: "Battlefield heritage | Police: 100 | SOS: 112"
+  },
+  "haryana_sultanpur_bird": {
+    Name: "Sultanpur National Park & Bird Sanctuary",
+    City: "Gurugram (Farrukhnagar)", State: "Haryana", Type: "🦅 Migratory Bird Sanctuary & Nature",
+    image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 15°C to 35°C", bestTime: "October to March (Winter Migratory Season)",
+    packing: "Binoculars, camera with zoom lens, comfortable walking boots, light woolens.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "A world-famous wetland bird sanctuary nestled in Gurugram district, visited by hundreds of rare migratory bird species from Europe and Siberia during winters.",
+    picnic_spots: "🦅 Bird watching watchtowers and wetland trails around lake\n🌿 Sultanpur National Park dense green forest paths\n🏛️ Farrukhnagar Fort and historic Baoli (stepwell) nearby\n🏞️ Quiet family picnic lawns inside sanctuary complex",
+    transport_roadmap: "Located 50 km from Delhi IGI Airport and 15 km from Gurugram city via Farrukhnagar road.",
+    hotels_booking: "Hotels in Gurugram / Cyber City | Haryana Tourism Teal Resort",
+    markets_food: "Farrukhnagar Town Bazaar | Local Snacks, Haryana Dhabas, Chai",
+    culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
   }
 };
 
