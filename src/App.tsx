@@ -6,12 +6,14 @@ export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
 
-  // LocalStorage se saved spots load karna, warna default directory use karna
+  // FIX: Master file aur LocalStorage dono ko merge kar liya hai taaki naye spots turant dikhein!
   const [spots, setSpots] = useState(() => {
     const savedSpots = localStorage.getItem("in_bharat_custom_spots");
     if (savedSpots) {
       try {
-        return JSON.parse(savedSpots);
+        const parsed = JSON.parse(savedSpots);
+        // Master directory ke sath custom spots ko combine kar do taaki koi miss na ho
+        return { ...MASTER_INDIA_TOURISM_DIRECTORY, ...parsed };
       } catch (e) {
         return MASTER_INDIA_TOURISM_DIRECTORY;
       }
@@ -41,15 +43,14 @@ export default function App() {
     };
 
     setSpots(updatedSpots);
-    // LocalStorage mein save kar dena taaki refresh karne par na ude
     localStorage.setItem("in_bharat_custom_spots", JSON.stringify(updatedSpots));
 
     alert("Spot published successfully!");
     setActiveTab('home');
   };
 
-  // Ultra-Smart State & Field Search Filter
-  const filteredItems = Object.entries(spots).filter(([k, s]) => {
+  // Ultra-Smart & Deep Multi-Field Search Filter
+  const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
     const query = search.toLowerCase().trim();
     if (!query) return true;
 
@@ -58,11 +59,10 @@ export default function App() {
     const stateMatch = s.State?.toLowerCase().includes(query);
     const typeMatch = s.Type?.toLowerCase().includes(query);
     const descMatch = s.history_geo_political?.toLowerCase().includes(query);
-    
-    // Key match (jaise punjab_amritsar ya rajasthan)
+    const picnicMatch = s.picnic_spots?.toLowerCase().includes(query);
     const keyMatch = k.toLowerCase().includes(query);
 
-    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch || keyMatch;
+    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch || picnicMatch || keyMatch;
   });
 
   return (
@@ -94,7 +94,7 @@ export default function App() {
               <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 text-sm">🔍</span>
               <input 
                 type="text"
-                placeholder="Search states, cities, or temples..."
+                placeholder="Search states, cities, forts, temples..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-11 pr-4 py-3.5 bg-slate-800/90 rounded-2xl border border-slate-700 text-sm text-slate-100 placeholder-slate-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
@@ -116,7 +116,7 @@ export default function App() {
                   No destinations found matching "{search}". Try searching another city or state!
                 </div>
               ) : (
-                filteredItems.map(([k, s]) => (
+                filteredItems.map(([k, s]: [string, any]) => (
                   <div key={k} className="bg-slate-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-700/80 overflow-hidden hover:border-orange-500/50 transition-all duration-300 group">
                     <div className="relative h-42 overflow-hidden">
                       <img src={s.image_url} alt={s.Name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
