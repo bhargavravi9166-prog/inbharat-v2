@@ -48,15 +48,12 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Ultra-Friendly & Smart Fuzzy Search Filter (Any order words, space independent)
+  // Bulletproof Search Filter (Ignores spaces, casing, and symbol differences completely)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
-    const rawQuery = search.toLowerCase().trim();
+    const rawQuery = search.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
     if (!rawQuery) return true;
 
-    // User query ko words mein tod lo taaki aage-piche likhne par bhi match ho jaye
-    const queryWords = rawQuery.split(/\s+/);
-
-    // Saare text fields ko combine karke ek single searchable string bana lo
+    // Saare text fields ko combine karke special characters aur spaces hata do
     const searchableText = [
       s.Name,
       s.City,
@@ -65,10 +62,10 @@ export default function App() {
       s.history_geo_political,
       s.picnic_spots,
       k
-    ].filter(Boolean).join(' ').toLowerCase();
+    ].filter(Boolean).join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    // Check karo ki query ke saare words us spot mein maujud hain ya nahi
-    return queryWords.every(word => searchableText.includes(word));
+    // Ab user chahe bina space ke likhe ("uttarpradesh") ya space ke sath, match hoga!
+    return searchableText.includes(rawQuery);
   });
 
   return (
