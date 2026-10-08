@@ -5,7 +5,19 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'home' | 'add' | 'business' | 'profile'>('home');
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
-  const [spots, setSpots] = useState(MASTER_INDIA_TOURISM_DIRECTORY);
+
+  // LocalStorage se saved spots load karna, warna default directory use karna
+  const [spots, setSpots] = useState(() => {
+    const savedSpots = localStorage.getItem("in_bharat_custom_spots");
+    if (savedSpots) {
+      try {
+        return JSON.parse(savedSpots);
+      } catch (e) {
+        return MASTER_INDIA_TOURISM_DIRECTORY;
+      }
+    }
+    return MASTER_INDIA_TOURISM_DIRECTORY;
+  });
 
   // Form state for adding custom spot
   const [form, setForm] = useState({
@@ -19,13 +31,19 @@ export default function App() {
     e.preventDefault();
     if (!form.Name || !form.City) return alert("Please enter name and city!");
     const key = form.Name.toLowerCase().replace(/\s+/g, '_');
-    setSpots({
+    
+    const updatedSpots = {
       ...spots,
       [key]: {
         ...form,
         image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
       }
-    });
+    };
+
+    setSpots(updatedSpots);
+    // LocalStorage mein save kar dena taaki refresh karne par na ude
+    localStorage.setItem("in_bharat_custom_spots", JSON.stringify(updatedSpots));
+
     alert("Spot published successfully!");
     setActiveTab('home');
   };
