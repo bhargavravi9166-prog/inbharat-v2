@@ -1,6 +1,6 @@
 // Force fresh build trigger - Bharat Yatra Pro Final
 import React, { useState } from 'react';
-import { MASTER_INDIA_TOURISM_DIRECTORY } from './data';
+import { MASTER_INDIA_TOURISM_DIRECTORY } from './tourismData';
 
 export default function App() {
   const [tab, setTab] = useState<'home' | 'business'>('home');
