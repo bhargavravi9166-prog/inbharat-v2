@@ -48,28 +48,21 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Smart multi-field & auto key-derived state search filter
+  // Ultra-Smart State & Field Search Filter
   const filteredItems = Object.entries(spots).filter(([k, s]) => {
     const query = search.toLowerCase().trim();
     if (!query) return true;
 
-    const keyLower = k.toLowerCase();
-    let derivedState = "";
-    if (keyLower.startsWith("punjab")) derivedState = "punjab";
-    else if (keyLower.startsWith("hp") || keyLower.includes("shimla") || keyLower.includes("manali") || keyLower.includes("kullu") || keyLower.includes("spiti") || keyLower.includes("bir") || keyLower.includes("dharamshala") || keyLower.includes("dalhousie") || keyLower.includes("kasol") || keyLower.includes("palampur")) derivedState = "himachal pradesh";
-    else if (keyLower.startsWith("uk") || keyLower.includes("rishikesh") || keyLower.includes("haridwar") || keyLower.includes("nainital") || keyLower.includes("kedarnath") || keyLower.includes("badrinath") || keyLower.includes("mussoorie") || keyLower.includes("corbett") || keyLower.includes("auli") || keyLower.includes("chakrata") || keyLower.includes("lansdowne")) derivedState = "uttarakhand";
-    else if (keyLower.startsWith("bihar")) derivedState = "bihar";
-    else if (keyLower.startsWith("rajasthan")) derivedState = "rajasthan";
-    else if (keyLower.startsWith("jk")) derivedState = "jammu and kashmir";
-    else if (keyLower.startsWith("ladakh")) derivedState = "ladakh";
-
     const nameMatch = s.Name?.toLowerCase().includes(query);
     const cityMatch = s.City?.toLowerCase().includes(query);
-    const stateMatch = s.State?.toLowerCase().includes(query) || derivedState.includes(query);
+    const stateMatch = s.State?.toLowerCase().includes(query);
     const typeMatch = s.Type?.toLowerCase().includes(query);
     const descMatch = s.history_geo_political?.toLowerCase().includes(query);
+    
+    // Key match (jaise punjab_amritsar ya rajasthan)
+    const keyMatch = k.toLowerCase().includes(query);
 
-    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch;
+    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch || keyMatch;
   });
 
   return (
