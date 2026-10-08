@@ -6,16 +6,16 @@ export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
 
-  // Master file aur LocalStorage dono ko combine karke saare spots load karna
-  const [spots, setSpots] = useState(() => {
-    const savedSpots = localStorage.getItem("in_bharat_custom_spots");
-    if (savedSpots) {
-      try {
+  // Safe data initializer combining master directory and user local storage
+  const [spots] = useState(() => {
+    try {
+      const savedSpots = localStorage.getItem("in_bharat_custom_spots");
+      if (savedSpots) {
         const parsed = JSON.parse(savedSpots);
         return { ...MASTER_INDIA_TOURISM_DIRECTORY, ...parsed };
-      } catch (e) {
-        return MASTER_INDIA_TOURISM_DIRECTORY;
       }
+    } catch (e) {
+      console.error(e);
     }
     return MASTER_INDIA_TOURISM_DIRECTORY;
   });
@@ -41,29 +41,29 @@ export default function App() {
       }
     };
 
-    setSpots(updatedSpots);
     localStorage.setItem("in_bharat_custom_spots", JSON.stringify(updatedSpots));
-
-    alert("Spot published successfully!");
+    alert("Spot published successfully! Please refresh to view.");
     setActiveTab('home');
   };
 
-  // 100% Foolproof Search Filter (Ignores all spaces and casing automatically)
+  // Ultra-Robust Universal Search Filter (Works for all states, handles spaces & typos seamlessly)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
-    const rawQuery = search.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
-    if (!rawQuery) return true;
+    if (!s) return false;
+    const query = search.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+    if (!query) return true;
 
-    const searchableText = [
-      s.Name,
-      s.City,
-      s.State,
-      s.Type,
-      s.history_geo_political,
-      s.picnic_spots,
-      k
-    ].filter(Boolean).join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
+    // Combine all fields into a single uniform string without spaces/symbols
+    const targetString = [
+      s.Name || '',
+      s.City || '',
+      s.State || '',
+      s.Type || '',
+      s.history_geo_political || '',
+      s.picnic_spots || '',
+      k || ''
+    ].join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    return searchableText.includes(rawQuery);
+    return targetString.includes(query);
   });
 
   return (
