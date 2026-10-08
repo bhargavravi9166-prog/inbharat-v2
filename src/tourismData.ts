@@ -1061,6 +1061,47 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Kings Lodge Bandhavgarh | Kanha Earth Lodge | Taj Mahasu",
     markets_food: "Resort Dining & Local Village Markets | North Indian & Madhyapradeshi Thali",
     culture_helpline: "Wildlife sanctuary | Police: 100 | SOS: 112"
+  },  "mp_maheshwar": {
+    Name: "Maheshwar Narmada Ghats & Ahilya Fort",
+    City: "Maheshwar (Khargone)", State: "Madhya Pradesh", Type: "🛕 Holy Ghats, Fort & Handloom Hub",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 24°C to 39°C", bestTime: "October to March",
+    packing: "Traditional/comfortable clothing, walking shoes for stone ghats.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "Ancient temple town on the banks of Narmada River, capital of Holkar queen Ahilyabai Holkar, famous for magnificent ghats and handloom Maheshwari sarees.",
+    picnic_spots: "🛕 Kaleshwar & Rajarajeshwara Temples\n🏛️ Ahilya Fort Palace & Royal Cenotaphs (Chhatris)\n🌿 Narmada River Boating Ghats (Sahastradhar)\n🏞️ Maheshwari Handloom Weaving Centers",
+    transport_roadmap: "Indore Airport (90 km away) & Barwaha Railway Station (39 km).",
+    hotels_booking: "Ahilya Fort Hotel | Narmada Resort Maheshwar",
+    markets_food: "Maheshwar Fort Bazaar | Malwadi Namkeen, Dal Bafla, Local Sweets",
+    culture_helpline: "Holkar ghat traditions | Police: 100 | SOS: 112"
+  },
+  "mp_bhojpur": {
+    Name: "Bhojpur Cyclopean Dam & Giant Shivling",
+    City: "Bhojpur (Raisen)", State: "Madhya Pradesh", Type: "🛕 Ancient Gigantic Shiva Temple",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 23°C to 39°C", bestTime: "October to March",
+    packing: "Light cottons, camera, comfortable shoes.",
+    budget: "₹1,000 - ₹2,500 / day",
+    history_geo_political: "Historical village famous for the incomplete 11th-century Bhojeshwar Temple, housing one of the largest monolithic Shiva lingams in the world, built by King Bhoja.",
+    picnic_spots: "🛕 Bhojeshwar Temple (Giant Monolithic Shivling)\n🏛️ Unfinished Cyclopean Dam ruins on Betwa river\n🌿 Scenic rocky hill surrounding landscapes\n🏞️ Quiet countryside picnic spots near Bhopal",
+    transport_roadmap: "Located just 32 km from Bhopal Railway Station and Airport.",
+    hotels_booking: "Day trip from Bhopal hotels (Jehan Numa Palace / Courtyard Marriott)",
+    markets_food: "Local village tea stalls | Traditional Snacks, Chai",
+    culture_helpline: "Paramara architecture | Police: 100 | SOS: 112"
+  },
+  "mp_datia": {
+    Name: "Datia Pitambara Peeth & Seven-Storied Palace",
+    City: "Datia", State: "Madhya Pradesh", Type: "🛕 Siddhapeeth Temple & Seven-Story Mahal",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 22°C to 40°C", bestTime: "October to March",
+    packing: "Traditional temple clothing, comfortable walking footwear.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "Ancient town steeped in mythology and Bundela history, famous worldwide for the revered Baglamukhi Devi temple (Pitambara Peeth) and architectural palaces.",
+    picnic_spots: "🛕 Shri Pitambara Peeth Temple & Dhumavati Mata Mandir\n🏛️ Datia Palace / Bir Singh Palace (Seven-story architectural wonder)\n🌿 Sonagiri Jain Temple complex nearby (Hill of 100 temples)\n🏞️ Datia town heritage markets",
+    transport_roadmap: "Datia Railway Station & Gwalior Airport (75 km away).",
+    hotels_booking: "Local Pilgrim Guest Houses | Hotels in Jhansi (25 km away)",
+    markets_food: "Datia Main Bazaar | Bundelkhandi Sweets, Peda, Local Thali",
+    culture_helpline: "Bundela spiritual heritage | Police: 100 | SOS: 112"
   }
 };
 
