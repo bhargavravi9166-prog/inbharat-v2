@@ -22,8 +22,8 @@ export default function App() {
         const parsed = JSON.parse(savedSpots);
         return { ...MASTER_INDIA_TOURISM_DIRECTORY, ...parsed };
       }
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
     return MASTER_INDIA_TOURISM_DIRECTORY;
   });
@@ -35,8 +35,8 @@ export default function App() {
     transport_roadmap: '', hotels_booking: '', markets_food: '', culture_helpline: ''
   });
 
-  const handleAddSpot = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAddSpot = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!form.Name || !form.City) return alert("Please enter name and city!");
     const key = form.Name.toLowerCase().replace(/\s+/g, '_');
     
@@ -53,8 +53,8 @@ export default function App() {
     setActiveTab('home');
   };
 
-  const handleUploadReel = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleUploadReel = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!reelForm.title || !reelForm.location) return alert("Please enter reel title and location!");
     const newReel = {
       id: Date.now(),
@@ -68,8 +68,8 @@ export default function App() {
     setActiveTab('reels');
   };
 
-  const handleGenerateItinerary = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGenerateItinerary = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!plannerForm.destination) return alert("Please enter a destination!");
     setItineraryResult({
       title: `Yatra Plan for ${plannerForm.destination}`,
@@ -114,6 +114,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-28 font-sans selection:bg-orange-500 selection:text-white">
       
+      {/* Header */}
       <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-blue-900 p-0.5 shadow-md flex items-center justify-center overflow-hidden border border-orange-500/30">
@@ -129,6 +130,7 @@ export default function App() {
 
       <div className="max-w-md mx-auto p-4 space-y-4">
         
+        {/* TAB 1: HOME */}
         {activeTab === 'home' && (
           <>
             <div className="relative group">
@@ -188,6 +190,7 @@ export default function App() {
           </>
         )}
 
+        {/* TAB 2: REELS */}
         {activeTab === 'reels' && (
           <div className="space-y-5">
             <div className="flex items-center justify-between bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
@@ -218,6 +221,7 @@ export default function App() {
           </div>
         )}
 
+        {/* TAB 3: ADD SPOT & REEL */}
         {activeTab === 'add' && (
           <div className="space-y-5">
             <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
@@ -278,6 +282,7 @@ export default function App() {
           </div>
         )}
 
+        {/* TAB 4: PLANNER */}
         {activeTab === 'planner' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
             <div>
@@ -325,6 +330,7 @@ export default function App() {
           </div>
         )}
 
+        {/* TAB 5: BUSINESS */}
         {activeTab === 'business' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
             <div>
@@ -347,6 +353,7 @@ export default function App() {
           </div>
         )}
 
+        {/* TAB 6: PROFILE */}
         {activeTab === 'profile' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 text-center space-y-4">
             <div className="w-16 h-16 bg-gradient-to-tr from-orange-500 to-blue-900 text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto shadow-lg border-2 border-orange-400/30">
