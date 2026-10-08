@@ -527,8 +527,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace Jaipur | Fairmont Jaipur | Samode Haveli | Trident Jaipur",
     markets_food: "Johri Bazaar, Bapu Bazaar & Tripolia Bazaar | Dal Baati Churma, Pyaaz Kachori, Ghevar, Mirchi Bada",
     culture_helpline: "Rajputana royal heritage | Police: 100 | SOS: 112"
-  },
- "jaipur_picnic_jal_mahal": {
+  }, "jaipur_picnic_jal_mahal": {
     Name: "Jal Mahal - The Water Palace",
     City: "Jaipur", State: "Rajasthan", Type: "🏞️ Scenic Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -541,8 +540,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Trident Jaipur | Hotel Clarks Amer",
     markets_food: "Lakeside food stalls | Local Chai, Chaat, Rajasthani Snacks",
     culture_helpline: "Pink City tourism | Police: 100 | SOS: 112"
-  },
-  "jaipur_picnic_ram_niwas": {
+  }, "jaipur_picnic_ram_niwas": {
     Name: "Ram Niwas Garden & Albert Hall",
     City: "Jaipur", State: "Rajasthan", Type: "🌿 Botanical Garden & Picnic Hub",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -555,8 +553,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace | Hotel Apex International",
     markets_food: "Nearby Johri Bazaar | Pyaaz Kachori, Local Sweets",
     culture_helpline: "Local heritage | Police: 100 | SOS: 112"
-  },
-  "jaipur_picnic_sisodia_rani": {
+  },"jaipur_picnic_sisodia_rani": {
     Name: "Sisodia Rani Garden & Palace",
     City: "Jaipur", State: "Rajasthan", Type: "🏰 Royal Garden Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -569,8 +566,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Fairmont Jaipur | Treehouse Hotel",
     markets_food: "Agra Road local eateries | Dal Baati, Samosa, Tea",
     culture_helpline: "Rajputana heritage | Police: 100 | SOS: 112"
-  },
-  "jaipur_picnic_patrika_gate": {
+  },"jaipur_picnic_patrika_gate": {
     Name: "Patrika Gate & Jawahar Circle Garden",
     City: "Jaipur", State: "Rajasthan", Type: "📸 Architectural Landmark & Garden",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -609,8 +605,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Clarks Amer | Marriott Jaipur",
     markets_food: "Malviya Nagar local cafes | Healthy juices, Tea, Snacks",
     culture_helpline: "Eco tourism | Police: 100 | SOS: 112"
-  },
-  "jaipur_picnic_central_park": {
+  },"jaipur_picnic_central_park": {
     Name: "Central Park Jaipur & National Flag",
     City: "Jaipur", State: "Rajasthan", Type: "🌳 City Park & Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -623,8 +618,7 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace | Hotel Madhuban",
     markets_food: "C-Scheme food outlets | Coffee, Fast Food, Local Delicacies",
     culture_helpline: "Urban leisure | Police: 100 | SOS: 112"
-  },
-  "jaipur_picnic_kanota_dam": {
+  },"jaipur_picnic_kanota_dam": {
     Name: "Kanota Dam & Lake Reservoir",
     City: "Jaipur", State: "Rajasthan", Type: "🌊 Lakeside Picnic & Sunset Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
