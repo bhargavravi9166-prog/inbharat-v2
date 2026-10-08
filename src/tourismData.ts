@@ -1672,6 +1672,60 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "GMVN Tourist Rest Houses (Kedarnath/Badrinath routes) | Local Pilgrim Lodges",
     markets_food: "Yatra Route Dhaba Stalls | Hot Maggi, Chai, Simple Vegetarian North Indian Thali",
     culture_helpline: "Char Dham Shrine Board | Police: 100 | SOS: 112"
+  },  "uk_mussoorie_kempty": {
+    Name: "Mussoorie Queen of Hills & Kempty Falls",
+    City: "Mussoorie (Dehradun)", State: "Uttarakhand", Type: "⛰️ Colonial Hill Station, Waterfalls & Views",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 10°C to 26°C", bestTime: "March to June & September to November",
+    packing: "Light woolens for evenings, comfortable walking shoes for Mall Road strolls.",
+    budget: "₹1,800 - ₹4,500 / day",
+    history_geo_political: "A celebrated British colonial hill station overlooking the Doon Valley and Shiwalik ranges, famous for its romantic walks, waterfalls, and scenic viewpoints.",
+    picnic_spots: "🏛️ Camel's Back Road & Gun Hill (Ropeway viewpoint of snow peaks)\n🌿 Kempty Falls (Gushing multi-tiered waterfall picnic spot)\n🏞️ Lal Tibba (Highest peak viewpoint in Mussoorie)\n🛕 Company Garden and municipal flower lawns",
+    transport_roadmap: "Dehradun Jolly Grant Airport (55 km away) & Dehradun Railway Station (32 km).",
+    hotels_booking: "JW Marriott Mussoorie Walnut Grove Resort | The Savoy Mussoorie | Hotel Nand Residency",
+    markets_food: "Mall Road Mussoorie & Kulri Bazaar | Tibetan Momos, Hot Chocolate, North Indian Food",
+    culture_helpline: "Colonial hill heritage | Police: 100 | SOS: 112"
+  },
+  "uk_jim_corbett_safari": {
+    Name: "Jim Corbett National Park Tiger Safari & Jungle",
+    City: "Ramnagar (Nainital)", State: "Uttarakhand", Type: "🐅 Wildlife Sanctuary & Jeep Safaris",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 12°C to 35°C", bestTime: "November to June (Safari season)",
+    packing: "Earth-toned or camouflage cotton clothing, safari hat, binoculars, camera with zoom lens.",
+    budget: "₹2,500 - ₹6,000 / day",
+    history_geo_political: "Established in 1936 as Hailey National Park, India's oldest national park is named after the legendary hunter-turned-conservationist Jim Corbett, renowned for Bengal tigers and rich wildlife.",
+    picnic_spots: "🐅 Dhikala & Bijrani Safari Zones (Jeep and Elephant wildlife safaris)\n🏛️ Corbett Museum at Kaladhungi (Historic home of Jim Corbett)\n🌿 Garjia Devi Temple (Sacred shrine on a rock in Kosi River)\n🏞️ Kosi River riverside nature trails and sunset spots",
+    transport_roadmap: "Pantnagar Airport (85 km away) & Ramnagar Railway Station (Direct trains from Delhi).",
+    hotels_booking: "Aahana The Corbett Wilderness | Taj Corbett Resort & Spa | Jim Corbett Jungle Camp",
+    markets_food: "Ramnagar Market Stalls | Kumaoni Thali, Local Dhabas, North Indian Snacks",
+    culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
+  },  "uk_auli_skiing": {
+    Name: "Auli Ski Resort & Himalayan Snow Slopes",
+    City: "Auli (Chamoli)", State: "Uttarakhand", Type: "⛷️ Alpine Ski Slopes & Cable Car",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "❄️ -4°C to 15°C", bestTime: "December to March (Snow skiing) & May to October (Meadows)",
+    packing: "Heavy winter parkas, thermals, snow boots, windproof jacket, sunglasses.",
+    budget: "₹2,200 - ₹5,500 / day",
+    history_geo_political: "A world-class skiing destination perched at 3,050 meters, offering breathtaking panoramic views of massive Himalayan peaks like Nanda Devi, Trishul, and Kamet.",
+    picnic_spots: "⛷️ Auli Artificial Lake & World's Longest Cable Car Ride (Joshimath to Auli)\n🏔️ Panoramic snow peak viewing decks and trekking trails\n🛕 Narsingh Temple at Joshimath (Winter seat of Badrinath)\n🌿 Gorson Bugyal high-altitude alpine meadow walks",
+    transport_roadmap: "Dehradun Jolly Grant Airport (270 km) or Joshimath road connectivity via cable car/taxi.",
+    hotels_booking: "Clifftop Club Auli | The Royal Resort Auli | GMVN TRH Auli",
+    markets_food: "Joshimath & Auli Resort Stalls | Maggi, Hot Tea, North Indian Pahadi Thali",
+    culture_helpline: "Alpine adventure | Police: 100 | SOS: 112"
+  },
+  "uk_chakrata_lansdowne": {
+    Name: "Chakrata & Lansdowne Peaceful Pine Hills",
+    City: "Chakrata & Lansdowne", State: "Uttarakhand", Type: "🌲 Serene Pine Forests & Cantonment Hills",
+    image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
+    weather: "🍃 8°C to 24°C", bestTime: "March to June & September to November",
+    packing: "Light woolens, comfortable walking boots, binoculars for bird watching.",
+    budget: "₹1,500 - ₹3,800 / day",
+    history_geo_political: "Two of Uttarakhand's most pristine, uncommercialized military cantonment hill stations, known for dense oak-pine forests, colonial bungalows, and absolute tranquility.",
+    picnic_spots: "🌿 Tiger Falls (Highest direct water waterfall in Uttarakhand near Chakrata)\n🏛️ Bhulla Tal Lake & St. Mary's Church in Lansdowne cantonment\n🏞️ Chilmiri Neck sunset viewpoint (Chakrata)\n🛕 Tarkeshwar Mahadev ancient temple deep in pine forests",
+    transport_roadmap: "Dehradun Airport (85 km to Chakrata) & Kotdwar Railway Station (40 km to Lansdowne).",
+    hotels_booking: "Hotel Snow View Lansdowne | Himalayan Eco Lodges Chakrata",
+    markets_food: "Lansdowne Cantonment Bazaar | Pahadi Dal, Local Dhabas, Bakery Biscuits",
+    culture_helpline: "Cantonment heritage | Police: 100 | SOS: 112"
   }
 };
 
