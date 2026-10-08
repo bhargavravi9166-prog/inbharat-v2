@@ -48,12 +48,11 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Bulletproof Search Filter (Ignores spaces, casing, and symbol differences completely)
+  // 100% Foolproof Search Filter (Ignores all spaces and casing automatically)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
     const rawQuery = search.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
     if (!rawQuery) return true;
 
-    // Saare text fields ko combine karke special characters aur spaces hata do
     const searchableText = [
       s.Name,
       s.City,
@@ -64,7 +63,6 @@ export default function App() {
       k
     ].filter(Boolean).join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    // Ab user chahe bina space ke likhe ("uttarpradesh") ya space ke sath, match hoga!
     return searchableText.includes(rawQuery);
   });
 
