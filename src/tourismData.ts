@@ -631,6 +631,45 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Narain Niwas Palace | Heritage Resorts",
     markets_food: "Agra Road Highway dhabas | Desi Chai, Pakoda, Local Meals",
     culture_helpline: "Outskirts leisure | Police: 100 | SOS: 112"
+  }, "gujarat_dwarka_completes": {
+    Name: "Dwarka Kingdom, Temples & Coastal Spots",
+    City: "Dwarka", State: "Gujarat", Type: "🛕 Ancient Char Dham & Coastal Hub",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 30°C (Coastal Breeze)", bestTime: "October to March",
+    packing: "Light cotton clothing, traditional temple attire, sunglasses.",
+    budget: "₹2,000 - ₹4,500 / day",
+    history_geo_political: "Ancient coastal city believed to be the legendary capital kingdom of Lord Krishna. One of the sacred Char Dhams.",
+    picnic_spots: "🛕 Dwarkadhish Temple (Jagat Mandir) & Nageshwar Jyotirlinga\n🏛️ Sudama Setu & Gomti Ghat\n🌿 Bet Dwarka Island & Marine National Park\n🏞️ Rukmini Devi Temple",
+    transport_roadmap: "Connected via NH-51. Dwarka Railway Station & Jamnagar Airport (130 km).",
+    hotels_booking: "Goverdhan Green Resort Dwarka | Hotel Lord's Inn Dwarka",
+    markets_food: "Dwarka Market Chowk | Gujarati Thali, Dhokla, Fafda, Sweets",
+    culture_helpline: "Coastal Saurashtra heritage | Police: 100 | SOS: 112"
+  },"gujarat_statue_of_unity": {
+    Name: "Statue of Unity & Kevadia Complex",
+    City: "Kevadia (Ekta Nagar)", State: "Gujarat", Type: "🗿 World's Tallest Statue & Picnic Hub",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 26°C to 38°C", bestTime: "October to March",
+    packing: "Comfortable walking shoes, casual cottons, camera.",
+    budget: "₹2,500 - ₹5,500 / day",
+    history_geo_political: "World's tallest monument (182 meters) dedicated to Sardar Vallabhbhai Patel, surrounded by eco-tourism spots on Narmada river.",
+    picnic_spots: "🗿 Statue of Unity Viewing Gallery & Laser Light Show\n🌿 Valley of Flowers & Cactus Garden\n🏞️ Sardar Sarovar Dam & Narmada Tent City\n🦁 Jungle Safari & Children Nutrition Park",
+    transport_roadmap: "Ekta Nagar Railway Station (EKNR) & Vadodara Airport (90 km).",
+    hotels_booking: "Tent City Narmada | Statue of Unity Kevadia Resorts",
+    markets_food: "Ekta Food Court | Gujarati Thali, Kathiyawadi Food, Snacks",
+    culture_helpline: "Unity heritage | Police: 100 | SOS: 112"
+  }, "gujarat_ambaji": {
+    Name: "Ambaji Shakti Peeth & Gabbar Hill",
+    City: "Ambaji", State: "Gujarat", Type: "🛕 Sacred Shakti Peeth Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 22°C to 35°C", bestTime: "October to March (Bhadra Purnima Mela)",
+    packing: "Traditional or comfortable clothes, walking shoes.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "One of the 51 Shakti Peethas where the heart of Goddess Sati is believed to have fallen. Highly revered pilgrimage center.",
+    picnic_spots: "🛕 Ambaji Mata Main Temple (No idol, sacred Visa Yantra)\n🏛️ Gabbar Hill Temple (Ropeway ride available)\n🌿 Mansarovar Lake near temple\n🏞️ Kamakshi Mandir & Shaktipith Darshan Park",
+    transport_roadmap: "Abu Road Railway Station (20 km) & Ahmedabad Airport (180 km).",
+    hotels_booking: "Circuit House Ambaji | Hotel Ambaji International",
+    markets_food: "Ambaji Temple Bazaar | Mohanthal Prasad, Gujarati Snacks, Thali",
+    culture_helpline: "Devotional heritage | Police: 100 | SOS: 112"
   }
 };
 
