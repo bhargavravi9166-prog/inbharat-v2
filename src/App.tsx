@@ -6,19 +6,15 @@ export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
 
-  // Reels State (Local storage support for user uploaded reels)
   const [reelsList, setReelsList] = useState<any[]>([
     { id: 1, title: "Varanasi Ganga Aarti Cinematic View", location: "Varanasi, Uttar Pradesh", url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80" },
     { id: 2, title: "Mount Abu Sunset Point Vibe", location: "Mount Abu, Rajasthan", url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80" }
   ]);
 
   const [reelForm, setReelForm] = useState({ title: '', location: '', url: '' });
-
-  // Trip Planner Form State
   const [plannerForm, setPlannerForm] = useState({ destination: '', days: '3 Days', budget: 'Moderate (₹10,000)' });
   const [itineraryResult, setItineraryResult] = useState<any>(null);
 
-  // Master file and LocalStorage combination
   const [spots] = useState(() => {
     try {
       const savedSpots = localStorage.getItem("in_bharat_custom_spots");
@@ -32,7 +28,6 @@ export default function App() {
     return MASTER_INDIA_TOURISM_DIRECTORY;
   });
 
-  // Form state for adding custom spot
   const [form, setForm] = useState({
     id: '', Name: '', City: '', State: '', Type: 'Cultural Spot',
     weather: '26°C', bestTime: 'October to March', packing: 'Comfortable casual wear',
@@ -54,7 +49,7 @@ export default function App() {
     };
 
     localStorage.setItem("in_bharat_custom_spots", JSON.stringify(updatedSpots));
-    alert("Spot published successfully! Please refresh to view.");
+    alert("Spot published successfully!");
     setActiveTab('home');
   };
 
@@ -69,7 +64,7 @@ export default function App() {
     };
     setReelsList([newReel, ...reelsList]);
     setReelForm({ title: '', location: '', url: '' });
-    alert("Reel uploaded successfully to feed!");
+    alert("Reel uploaded successfully!");
     setActiveTab('reels');
   };
 
@@ -88,7 +83,6 @@ export default function App() {
     });
   };
 
-  // Google-Like Smart Search Filter with Relevance Scoring & Token Matching
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
     if (!s) return false;
     const rawQuery = search.toLowerCase().trim();
@@ -120,7 +114,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-28 font-sans selection:bg-orange-500 selection:text-white">
       
-      {/* Instagram Style Header */}
+      {/* Header */}
       <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-blue-900 p-0.5 shadow-md flex items-center justify-center overflow-hidden border border-orange-500/30">
@@ -131,14 +125,11 @@ export default function App() {
             <p className="text-[9px] text-slate-400 font-semibold tracking-widest uppercase">Pro Travel Network</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[10px] px-2.5 py-1 rounded-full font-bold">💎 Pro Edition</span>
-        </div>
+        <span className="bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[10px] px-2.5 py-1 rounded-full font-bold">💎 Pro Edition</span>
       </div>
 
       <div className="max-w-md mx-auto p-4 space-y-4">
         
-        {/* TAB 1: HOME FEED */}
         {activeTab === 'home' && (
           <>
             <div className="relative group">
@@ -162,9 +153,7 @@ export default function App() {
                   <div key={k} className="bg-slate-900 rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
                     <div className="px-3.5 py-2.5 flex items-center justify-between border-b border-slate-800/50">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-blue-900 flex items-center justify-center text-[10px] font-bold text-white">
-                          IN
-                        </div>
+                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-blue-900 flex items-center justify-center text-[10px] font-bold text-white">IN</div>
                         <div>
                           <p className="text-xs font-bold text-slate-200">{s.Name}</p>
                           <p className="text-[9px] text-slate-400">📍 {s.City}, {s.State}</p>
@@ -200,7 +189,6 @@ export default function App() {
           </>
         )}
 
-        {/* TAB 2: REELS FEED & UPLOAD */}
         {activeTab === 'reels' && (
           <div className="space-y-5">
             <div className="flex items-center justify-between bg-slate-900 p-3.5 rounded-2xl border border-slate-800">
@@ -231,7 +219,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: ADD SPOT / UPLOAD REEL FORM */}
         {activeTab === 'add' && (
           <div className="space-y-5">
             <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
@@ -267,25 +254,24 @@ export default function App() {
               </form>
             </div>
 
-            {/* Upload Reel Section */}
             <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
               <div>
                 <h2 className="font-bold text-sm text-slate-100">🎥 Upload Travel Reel</h2>
-                <p className="text-[10px] text-slate-400">Publish your short video/reel directly to the Reels feed.</p>
+                <p className="text-[10px] text-slate-400">Publish your short reel directly to the Reels feed.</p>
               </div>
 
               <form onSubmit={handleUploadReel} className="space-y-3 text-xs">
                 <div>
                   <label className="font-semibold text-slate-300">Reel Title / Caption</label>
-                  <input type="text" placeholder="e.g. Evening Ghat Vibe in Varanasi" value={reelForm.title} onChange={e=>setReelForm({...reelForm, title: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
+                  <input type="text" placeholder="e.g. Evening Ghat Vibe" value={reelForm.title} onChange={e=>setReelForm({...reelForm, title: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
                 </div>
                 <div>
                   <label className="font-semibold text-slate-300">Location</label>
-                  <input type="text" placeholder="e.g. Varanasi, Uttar Pradesh" value={reelForm.location} onChange={e=>setReelForm({...reelForm, location: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
+                  <input type="text" placeholder="e.g. Varanasi, UP" value={reelForm.location} onChange={e=>setReelForm({...reelForm, location: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-300">Image/Video Thumbnail URL</label>
-                  <input type="text" placeholder="Paste image/video link..." value={reelForm.url} onChange={e=>setReelForm({...reelForm, url: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                  <label className="font-semibold text-slate-300">Thumbnail URL</label>
+                  <input type="text" placeholder="Paste image link..." value={reelForm.url} onChange={e=>setReelForm({...reelForm, url: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" />
                 </div>
                 <button type="submit" className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg mt-2 hover:opacity-95 transition">Publish Reel Now</button>
               </form>
@@ -293,7 +279,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 4: TRIP PLANNER */}
         {activeTab === 'planner' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
             <div>
@@ -303,8 +288,8 @@ export default function App() {
             
             <form onSubmit={handleGenerateItinerary} className="space-y-3 text-xs">
               <div>
-                <label className="font-semibold text-slate-300">Target Destination / City</label>
-                <input type="text" placeholder="e.g. Varanasi or Mount Abu" value={plannerForm.destination} onChange={e=>setPlannerForm({...plannerForm, destination: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
+                <label className="font-semibold text-slate-300">Target Destination</label>
+                <input type="text" placeholder="e.g. Varanasi" value={plannerForm.destination} onChange={e=>setPlannerForm({...plannerForm, destination: e.target.value})} className="w-full mt-1 p-2.5 bg-slate-950 border border-slate-800 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
               </div>
               <div className="grid grid-cols-2 gap-2.5">
                 <div>
@@ -341,7 +326,6 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 5: BUSINESS DASHBOARD */}
         {activeTab === 'business' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 space-y-4">
             <div>
@@ -352,24 +336,18 @@ export default function App() {
             <div className="bg-gradient-to-br from-orange-950/60 to-slate-950 border border-orange-500/30 p-4 rounded-2xl text-center shadow-inner">
               <p className="text-[10px] text-orange-300 font-semibold uppercase tracking-wider">Total Ecosystem Revenue</p>
               <h3 className="text-2xl font-extrabold text-white mt-1">₹14,800</h3>
-              <p className="text-[9px] text-slate-400 mt-1">Live via Hotel & Cab Affiliate API</p>
             </div>
 
             <div className="text-xs space-y-2 text-slate-300">
-              <p className="font-semibold text-slate-200">🚀 Active Monetization Streams:</p>
+              <p className="font-semibold text-slate-200">🚀 Active Streams:</p>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
                 <span>🏨 Luxury & Budget Hotel Stays</span>
-                <span className="font-bold text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]">Active</span>
-              </div>
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
-                <span>🛺 Pilgrim Cab & Taxi Transfers</span>
                 <span className="font-bold text-emerald-400 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-500/30 text-[10px]">Active</span>
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 6: PROFILE */}
         {activeTab === 'profile' && (
           <div className="bg-slate-900 p-5 rounded-2xl shadow-xl border border-slate-800 text-center space-y-4">
             <div className="w-16 h-16 bg-gradient-to-tr from-orange-500 to-blue-900 text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto shadow-lg border-2 border-orange-400/30">
@@ -393,91 +371,49 @@ export default function App() {
                 <p className="text-[9px] text-slate-400">Reels Shared</p>
               </div>
             </div>
-            <div className="text-left text-xs space-y-2 text-slate-300">
-              <p className="font-bold text-slate-200">📊 Recent Activities:</p>
-              <div className="p-2.5 bg-slate-950 rounded-xl border border-slate-800 text-[11px] flex justify-between">
-                <span>Uploaded new Reel: {reelsList[0]?.title}</span>
-                <span className="text-slate-500">Just now</span>
-              </div>
-            </div>
           </div>
         )}
 
       </div>
 
-      {/* DETAILED MODAL POPUP */}
       {selectedKey && spots[selectedKey] && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center z-50 p-0 sm:p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            
-            <div className="relative h-48">
-              <img src={spots[selectedKey].image_url} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-              <button onClick={() => setSelectedKey(null)} className="absolute top-3.5 right-3.5 bg-slate-900/80 hover:bg-slate-800 text-slate-200 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm border border-slate-700 shadow">✕</button>
+          <div className="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl p-4 space-y-3.5 text-xs text-slate-300">
+            <div className="flex justify-between items-center">
+              <h2 className="font-extrabold text-lg text-white">{spots[selectedKey].Name}</h2>
+              <button onClick={() => setSelectedKey(null)} className="bg-slate-800 text-white px-2 py-1 rounded-full">✕</button>
             </div>
-
-            <div className="p-4 space-y-3.5 text-xs text-slate-300">
-              <div>
-                <span className="bg-orange-950/80 text-orange-300 border border-orange-500/30 px-2.5 py-1 rounded-lg font-bold text-[10px]">{spots[selectedKey].Type}</span>
-                <h2 className="font-extrabold text-lg text-white mt-1.5">{spots[selectedKey].Name}</h2>
-                <p className="text-slate-400 mt-0.5">📍 {spots[selectedKey].City}, {spots[selectedKey].State}</p>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <p className="font-bold text-orange-400 text-[9px]">🌤️ Weather</p>
-                  <p className="text-slate-300 mt-0.5 text-[10px]">{spots[selectedKey].weather}</p>
-                </div>
-                <div className="bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <p className="font-bold text-blue-400 text-[9px]">💰 Budget</p>
-                  <p className="text-slate-300 mt-0.5 text-[10px]">{spots[selectedKey].budget}</p>
-                </div>
-                <div className="bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <p className="font-bold text-emerald-400 text-[9px]">🛣️ Distance</p>
-                  <p className="text-slate-300 mt-0.5 text-[10px]">{spots[selectedKey].distance || "City Center"}</p>
-                </div>
-              </div>
-
-              <div>
-                <p className="font-bold text-slate-200 text-xs">🏛️ History & Significance</p>
-                <p className="text-slate-400 mt-1 leading-relaxed">{spots[selectedKey].history_geo_political}</p>
-              </div>
-
-              <button 
-                onClick={() => alert("Booking & Yatra affiliate portal initiated successfully!")} 
-                className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-3 rounded-xl font-bold text-xs shadow-lg transition mt-2">
-                🚀 Book Hotel / Train / Taxi Now
-              </button>
-            </div>
+            <img src={spots[selectedKey].image_url} alt="" className="w-full h-48 object-cover rounded-xl" />
+            <p>{spots[selectedKey].history_geo_political}</p>
           </div>
         </div>
       )}
 
-      {/* BOTTOM NAVIGATION BAR */}
-      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 py-2.5 px-3 flex justify-around items-center z-40 shadow-2xl">
-        <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-0.5 transition ${activeTab === 'home' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+      {/* 6-Tab Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 py-2 px-2 flex justify-around items-center z-40 shadow-2xl">
+        <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'home' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">🏠</span>
-          <span className="text-[9px]">Home</span>
+          <span className="text-[8px]">Home</span>
         </button>
-        <button onClick={() => setActiveTab('reels')} className={`flex flex-col items-center gap-0.5 transition ${activeTab === 'reels' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+        <button onClick={() => setActiveTab('reels')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'reels' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">🎬</span>
-          <span className="text-[9px]">Reels</span>
+          <span className="text-[8px]">Reels</span>
         </button>
-        <button onClick={() => setActiveTab('add')} className={`flex flex-col items-center gap-0.5 transition ${activeTab === 'add' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+        <button onClick={() => setActiveTab('add')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'add' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">➕</span>
-          <span className="text-[10px]">Add Spot</span>
+          <span className="text-[8px]">Add Spot</span>
         </button>
-        <button onClick={() => setActiveTab('planner')} className={`flex flex-col items-center gap-0.5 transition ${activeTab === 'planner' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+        <button onClick={() => setActiveTab('planner')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'planner' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">🗺️</span>
-          <span className="text-[9px]">Planner</span>
+          <span className="text-[8px]">Planner</span>
         </button>
-        <button onClick={() => setActiveTab('business')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'business' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+        <button onClick={() => setActiveTab('business')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'business' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">💼</span>
-          <span className="text-[9px]">Business</span>
+          <span className="text-[8px]">Business</span>
         </button>
-        <button onClick={() => setActiveTab('profile')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'profile' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400 font-medium'}`}>
+        <button onClick={() => setActiveTab('profile')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'profile' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">👤</span>
-          <span className="text-[9px]">Profile</span>
+          <span className="text-[8px]">Profile</span>
         </button>
       </div>
 
