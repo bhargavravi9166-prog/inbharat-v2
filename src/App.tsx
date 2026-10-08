@@ -6,13 +6,12 @@ export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
 
-  // FIX: Master file aur LocalStorage dono ko merge kar liya hai taaki naye spots turant dikhein!
+  // Master file aur LocalStorage dono ko combine karke saare spots load karna
   const [spots, setSpots] = useState(() => {
     const savedSpots = localStorage.getItem("in_bharat_custom_spots");
     if (savedSpots) {
       try {
         const parsed = JSON.parse(savedSpots);
-        // Master directory ke sath custom spots ko combine kar do taaki koi miss na ho
         return { ...MASTER_INDIA_TOURISM_DIRECTORY, ...parsed };
       } catch (e) {
         return MASTER_INDIA_TOURISM_DIRECTORY;
@@ -49,20 +48,28 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Ultra-Smart & Deep Multi-Field Search Filter
+  // Ultra-Smart & Deep Multi-Field Search Filter (Spaces & Spelling safe)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
-    const query = search.toLowerCase().trim();
+    const query = search.toLowerCase().replace(/\s+/g, '').trim();
     if (!query) return true;
 
-    const nameMatch = s.Name?.toLowerCase().includes(query);
-    const cityMatch = s.City?.toLowerCase().includes(query);
-    const stateMatch = s.State?.toLowerCase().includes(query);
-    const typeMatch = s.Type?.toLowerCase().includes(query);
-    const descMatch = s.history_geo_political?.toLowerCase().includes(query);
-    const picnicMatch = s.picnic_spots?.toLowerCase().includes(query);
-    const keyMatch = k.toLowerCase().includes(query);
+    const name = s.Name?.toLowerCase().replace(/\s+/g, '') || '';
+    const city = s.City?.toLowerCase().replace(/\s+/g, '') || '';
+    const state = s.State?.toLowerCase().replace(/\s+/g, '') || '';
+    const type = s.Type?.toLowerCase().replace(/\s+/g, '') || '';
+    const desc = s.history_geo_political?.toLowerCase().replace(/\s+/g, '') || '';
+    const picnic = s.picnic_spots?.toLowerCase().replace(/\s+/g, '') || '';
+    const key = k.toLowerCase().replace(/\s+/g, '') || '';
 
-    return nameMatch || cityMatch || stateMatch || typeMatch || descMatch || picnicMatch || keyMatch;
+    return (
+      name.includes(query) || 
+      city.includes(query) || 
+      state.includes(query) || 
+      type.includes(query) || 
+      desc.includes(query) || 
+      picnic.includes(query) || 
+      key.includes(query)
+    );
   });
 
   return (
@@ -118,28 +125,28 @@ export default function App() {
               ) : (
                 filteredItems.map(([k, s]: [string, any]) => (
                   <div key={k} className="bg-slate-800/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-700/80 overflow-hidden hover:border-orange-500/50 transition-all duration-300 group">
-                    <div className="relative h-42 overflow-hidden">
+                    <div className="relative h-44 w-full overflow-hidden bg-slate-900">
                       <img src={s.image_url} alt={s.Name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
                       <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-orange-400 text-[10px] px-3 py-1 rounded-full font-bold border border-orange-500/30 shadow">
                         {s.Type}
                       </div>
                     </div>
-                    <div className="p-4.5 space-y-3">
+                    <div className="p-4 space-y-3">
                       <div>
-                        <h3 className="font-bold text-base text-slate-100 group-hover:text-orange-400 transition">{s.Name}</h3>
-                        <p className="text-xs text-slate-400 mt-0.5">📍 {s.City}, {s.State}</p>
+                        <h3 className="font-bold text-base text-slate-100 group-hover:text-orange-400 transition leading-snug">{s.Name}</h3>
+                        <p className="text-xs text-slate-400 mt-1">📍 {s.City}, {s.State}</p>
                       </div>
                       
                       {/* Key Attribute Pills */}
-                      <div className="flex flex-wrap gap-2 pt-0.5">
+                      <div className="flex flex-wrap gap-2">
                         <span className="text-[10px] bg-slate-900/80 text-orange-300 px-2.5 py-1 rounded-lg font-medium border border-orange-500/20">🌡️ {s.weather}</span>
                         <span className="text-[10px] bg-slate-900/80 text-blue-300 px-2.5 py-1 rounded-lg font-medium border border-blue-500/20">💰 {s.budget}</span>
                       </div>
 
                       <button 
                         onClick={() => setSelectedKey(k)} 
-                        className="w-full mt-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-xs py-3 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2">
+                        className="w-full mt-1 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-xs py-3 rounded-xl font-bold shadow-md transition flex items-center justify-center gap-2">
                         <span>Explore Heritage & Services</span>
                         <span className="text-sm">→</span>
                       </button>
