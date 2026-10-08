@@ -6,7 +6,7 @@ export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
 
-  // Safe data initializer combining master directory and user local storage
+  // Master file aur LocalStorage dono ko combine karke saare spots load karna
   const [spots] = useState(() => {
     try {
       const savedSpots = localStorage.getItem("in_bharat_custom_spots");
@@ -20,11 +20,11 @@ export default function App() {
     return MASTER_INDIA_TOURISM_DIRECTORY;
   });
 
-  // Form state for adding custom spot
+  // Form state for adding custom spot (Added distance field here)
   const [form, setForm] = useState({
     id: '', Name: '', City: '', State: '', Type: 'Cultural Spot',
     weather: '26°C', bestTime: 'October to March', packing: 'Comfortable casual wear',
-    budget: '₹2,000 / day', history_geo_political: '', picnic_spots: '',
+    budget: '₹2,000 / day', distance: '5 km from city center', history_geo_political: '', picnic_spots: '',
     transport_roadmap: '', hotels_booking: '', markets_food: '', culture_helpline: ''
   });
 
@@ -46,13 +46,12 @@ export default function App() {
     setActiveTab('home');
   };
 
-  // Ultra-Robust Universal Search Filter (Works for all states, handles spaces & typos seamlessly)
+  // Ultra-Robust Universal Search Filter (Includes distance and all attributes)
   const filteredItems = Object.entries(spots).filter(([k, s]: [string, any]) => {
     if (!s) return false;
     const query = search.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
     if (!query) return true;
 
-    // Combine all fields into a single uniform string without spaces/symbols
     const targetString = [
       s.Name || '',
       s.City || '',
@@ -60,6 +59,7 @@ export default function App() {
       s.Type || '',
       s.history_geo_political || '',
       s.picnic_spots || '',
+      s.distance || '',
       k || ''
     ].join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -95,7 +95,7 @@ export default function App() {
               <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400 text-sm">🔍</span>
               <input 
                 type="text"
-                placeholder="Search states, cities, forts, temples..."
+                placeholder="Search states, cities, distance, temples..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-11 pr-4 py-3.5 bg-slate-800/90 rounded-2xl border border-slate-700 text-sm text-slate-100 placeholder-slate-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
@@ -136,6 +136,9 @@ export default function App() {
                       <div className="flex flex-wrap gap-2">
                         <span className="text-[10px] bg-slate-900/80 text-orange-300 px-2.5 py-1 rounded-lg font-medium border border-orange-500/20">🌡️ {s.weather}</span>
                         <span className="text-[10px] bg-slate-900/80 text-blue-300 px-2.5 py-1 rounded-lg font-medium border border-blue-500/20">💰 {s.budget}</span>
+                        {s.distance && (
+                          <span className="text-[10px] bg-slate-900/80 text-emerald-300 px-2.5 py-1 rounded-lg font-medium border border-emerald-500/20">🛣️ {s.distance}</span>
+                        )}
                       </div>
 
                       <button 
@@ -174,6 +177,10 @@ export default function App() {
                   <label className="font-semibold text-slate-300">State</label>
                   <input type="text" placeholder="Gujarat" value={form.State} onChange={e=>setForm({...form, State: e.target.value})} className="w-full mt-1.5 p-3 bg-slate-900 border border-slate-700 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" required />
                 </div>
+              </div>
+              <div>
+                <label className="font-semibold text-slate-300">Distance / Proximity</label>
+                <input type="text" placeholder="e.g. 12 km from station" value={form.distance} onChange={e=>setForm({...form, distance: e.target.value})} className="w-full mt-1.5 p-3 bg-slate-900 border border-slate-700 rounded-xl text-slate-100 focus:ring-2 focus:ring-orange-500 focus:outline-none" />
               </div>
               <div>
                 <label className="font-semibold text-slate-300">History & Significance</label>
@@ -254,15 +261,19 @@ export default function App() {
                 <p className="text-slate-400 mt-0.5">📍 {spots[selectedKey].City}, {spots[selectedKey].State}</p>
               </div>
 
-              {/* Grid Pillars */}
-              <div className="grid grid-cols-2 gap-2.5">
-                <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-                  <p className="font-bold text-orange-400">🌤️ Weather</p>
-                  <p className="text-slate-300 mt-1">{spots[selectedKey].weather}</p>
+              {/* 3-Column Grid Pillars (Weather, Budget, Distance) */}
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
+                  <p className="font-bold text-orange-400 text-[10px]">🌤️ Weather</p>
+                  <p className="text-slate-300 mt-1 text-[11px]">{spots[selectedKey].weather}</p>
                 </div>
-                <div className="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-                  <p className="font-bold text-blue-400">💰 Budget</p>
-                  <p className="text-slate-300 mt-1">{spots[selectedKey].budget}</p>
+                <div className="bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
+                  <p className="font-bold text-blue-400 text-[10px]">💰 Budget</p>
+                  <p className="text-slate-300 mt-1 text-[11px]">{spots[selectedKey].budget}</p>
+                </div>
+                <div className="bg-slate-800/80 p-2.5 rounded-xl border border-slate-700">
+                  <p className="font-bold text-emerald-400 text-[10px]">🛣️ Distance</p>
+                  <p className="text-slate-300 mt-1 text-[11px]">{spots[selectedKey].distance || "City Center"}</p>
                 </div>
               </div>
 
