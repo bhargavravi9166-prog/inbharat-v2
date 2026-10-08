@@ -709,6 +709,71 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rann Utsav Tent City Dhordo | Regenta Resort Bhuj",
     markets_food: "Bhujodi Village & Mandvi Beach markets | Kutchi Dabeli, Pakwan, Kutchi Thali",
     culture_helpline: "Kutch handicraft heritage | Police: 100 | SOS: 112"
+  },  "gujarat_modhera_sun_temple": {
+    Name: "Modhera Sun Temple & Rani ki Vav",
+    City: "Modhera & Patan", State: "Gujarat", Type: "🛕 Ancient Sun Shrine & UNESCO Stepwell",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 26°C to 41°C", bestTime: "October to March",
+    packing: "Light cottons, sunglasses, comfortable walking shoes.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "Architectural marvels built in the 11th century by the Solanki dynasty. Modhera is dedicated to the Sun God, and Rani ki Vav is an underground stepwell masterpiece.",
+    picnic_spots: "🛕 Modhera Sun Temple & Surya Kund step tank\n🏛️ Rani ki Vav (UNESCO World Heritage Stepwell in Patan)\n🌿 Sahastralinga Talav historic water tank\n🏞️ Patan Patola heritage weaving centers",
+    transport_roadmap: "Connected via state highways. Mehsana Railway Station (25 km) & Ahmedabad Airport (100 km).",
+    hotels_booking: "Hotel Tulsi Modhera | The Fern Mehsana",
+    markets_food: "Patan Local Bazaar | Patan ni Ghari sweets, Gujarati Thali, Fafda",
+    culture_helpline: "Solanki architecture | Police: 100 | SOS: 112"
+  },"gujarat_becharaji": {
+    Name: "Bahuchara Mata Temple Becharaji",
+    City: "Becharaji", State: "Gujarat", Type: "🛕 Sacred Shakti Peeth Shrine",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C to 40°C", bestTime: "October to March",
+    packing: "Traditional temple clothing, comfortable footwear.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "One of the most revered Shakti shrines in Gujarat, dedicated to Goddess Bahuchara Mata, drawing lakhs of devotees every year.",
+    picnic_spots: "🛕 Bahuchara Mata Main Temple & Sanctum\n🏛️ Shankhalapur Vada Mandir nearby\n🌿 Local town gardens and heritage spots\n🏞️ Becharaji Town Market",
+    transport_roadmap: "Becharaji Railway Station & Ahmedabad Airport (90 km). Accessible via Kadi-Becharaji road.",
+    hotels_booking: "Dharamshalas & Local Pilgrim Guest Houses",
+    markets_food: "Becharaji Market | Traditional Prasad, Gujarati Snacks, Fafda Jalebi",
+    culture_helpline: "Devotional traditions | Police: 100 | SOS: 112"
+  },  "gujarat_junagadh_girnar": {
+    Name: "Junagadh Girnar Mountain & Historic Forts",
+    City: "Junagadh", State: "Gujarat", Type: "🛕 Sacred Mountain & Ancient Fort",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 24°C to 38°C", bestTime: "October to March (Girnar Parikrama)",
+    packing: "Comfortable trekking shoes, walking stick, light woolens for early morning.",
+    budget: "₹1,500 - ₹4,000 / day",
+    history_geo_political: "Historic city nestled at the foothills of Mount Girnar. Sacred to both Hindus and Jains, featuring ancient rock-cut edicts of Emperor Ashoka.",
+    picnic_spots: "🛕 Girnar Jain Temples & Ambaji Temple (Hilltop peaks via Ropeway/Steps)\n🏛️ Uparkot Fort & Buddhist Caves (Ancient Mahals)\n🌿 Damodar Kund (Sacred bathing ghat)\n🏞️ Mahabat Maqbara (Architectural masterpiece mausoleum)",
+    transport_roadmap: "Junagadh Junction Railway Station & Rajkot Airport (100 km).",
+    hotels_booking: "Hotel Harmony Junagadh | Bellevue Sarovar Portico",
+    markets_food: "Diwan Chowk Market | Gujarati Thali, Ganthiya, Puran Poli",
+    culture_helpline: "Saurashtra history | Police: 100 | SOS: 112"
+  },"gujarat_porbandar": {
+    Name: "Porbandar Kirti Mandir & Coastal Shrines",
+    City: "Porbandar", State: "Gujarat", Type: "🏛️ Mahatma Gandhi Birthplace & Beach",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C to 35°C (Coastal)", bestTime: "October to March",
+    packing: "Light cottons, sunglasses, beach wear.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "Birthplace of Mahatma Gandhi (Father of the Nation) and Sudama (friend of Lord Krishna), featuring historic memorials and clean sea beaches.",
+    picnic_spots: "🏛️ Kirti Mandir (Gandhi's ancestral home memorial)\n🛕 Sudama Temple (Dedicated to Lord Krishna's friend)\n🌿 Porbandar Chowpatty Beach & Bird Sanctuary\n🏞️ Huzoor Palace (Royal seaside palace)",
+    transport_roadmap: "Porbandar Airport (PBD) & Porbandar Railway Station.",
+    hotels_booking: "Lords Inn Porbandar | Hotel Manish Palace",
+    markets_food: "MG Road Bazaar | Porbandar Dabeli, Khaman, Fresh Seafood",
+    culture_helpline: "Coastal heritage | Police: 100 | SOS: 112"
+  },"gujarat_palitana": {
+    Name: "Palitana Shatrunjaya Jain Temples Hill",
+    City: "Palitana", State: "Gujarat", Type: "🛕 World's Largest Jain Temple City",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 25°C to 38°C", bestTime: "October to March",
+    packing: "Comfortable walking shoes, modest white/cotton clothes, water bottle.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "The world's only mountain with more than 800 marble temples, beautifully carved and perched on top of Shatrunjaya hill.",
+    picnic_spots: "🛕 Shatrunjaya Hill Temple Complex (Over 800 marble Jain temples)\n🏛️ Adinath Temple (Main shrine)\n🌿 Taleti garden area at hill base\n🏞️ Shetrunjaya River banks",
+    transport_roadmap: "Bhavnagar Airport (50 km) & Palitana Railway Station.",
+    hotels_booking: "Vijay Mahgiri Hotel | Shreyas Hotel Palitana",
+    markets_food: "Palitana Town Bazaar | Gujarati Shuddh Shakahari Thali, Fafda",
+    culture_helpline: "Jain pilgrimage | Police: 100 | SOS: 112"
   }
 };
 
