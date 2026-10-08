@@ -114,7 +114,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 pb-28 font-sans selection:bg-orange-500 selection:text-white">
       
-      {/* Header */}
       <div className="bg-slate-900/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-blue-900 p-0.5 shadow-md flex items-center justify-center overflow-hidden border border-orange-500/30">
