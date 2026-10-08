@@ -774,6 +774,61 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Vijay Mahgiri Hotel | Shreyas Hotel Palitana",
     markets_food: "Palitana Town Bazaar | Gujarati Shuddh Shakahari Thali, Fafda",
     culture_helpline: "Jain pilgrimage | Police: 100 | SOS: 112"
+  },  "gujarat_surat": {
+    Name: "Surat Diamond City, Fort & Coastal Beaches",
+    City: "Surat", State: "Gujarat", Type: "🏙️ Commercial City, Fort & Beaches",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 28°C to 38°C (Humid coastal)", bestTime: "October to March",
+    packing: "Light breathable cotton clothes, sunglasses.",
+    budget: "₹2,000 - ₹4,500 / day",
+    history_geo_political: "Famous globally as the Diamond and Textile Hub of India, situated on the banks of Tapi river with rich maritime and royal history.",
+    picnic_spots: "🛕 Ambika Niketan Temple & ISKCON Temple Surat\n🏛️ Surat Castle (Old Fort) & Dutch Garden\n🌿 Dumas Beach & Suvali Beach\n🏞️ Sarthana Nature Park & Zoo",
+    transport_roadmap: "Surat Airport (STV) & Surat Railway Station. Well connected via NH-48.",
+    hotels_booking: "The Oberoi / Surat Marriott Hotel | Hotel Taj Gateway",
+    markets_food: "Ring Road & Chowpati Market | Surti Locho, Undhiyu, Ghari Sweets",
+    culture_helpline: "Surti culture | Police: 100 | SOS: 112"
+  },
+  "gujarat_vadodara": {
+    Name: "Vadodara Laxmi Vilas Palace & Gardens",
+    City: "Vadodara", State: "Gujarat", Type: "🏰 Royal Palaces & Cultural Hub",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 26°C to 40°C", bestTime: "October to March",
+    packing: "Light cottons, comfortable walking shoes.",
+    budget: "₹1,800 - ₹4,000 / day",
+    history_geo_political: "Cultural capital of Gujarat, formerly known as Baroda, ruled by the Gaekwad dynasty. Famous for grand palaces and art galleries.",
+    picnic_spots: "🛕 EME Temple (Unique geodesic dome temple) & Kirti Mandir\n🏛️ Laxmi Vilas Palace (Four times the size of Buckingham Palace - Royal Mahal)\n🌿 Sayaji Gardens & Zoo (Kamati Baug)\n🏞️ Sursagar Lake (Floating Shiva Statue)",
+    transport_roadmap: "Vadodara Airport (BDQ) & Vadodara Junction Railway Station.",
+    hotels_booking: "WelcomHotel Vadodara | Surya Palace",
+    markets_food: "Mandvi Market | Sev Usal, Gujarati Thali, Bhakharwadi",
+    culture_helpline: "Gaekwad heritage | Police: 100 | SOS: 112"
+  },
+  "gujarat_rajkot": {
+    Name: "Rajkot Mahatma Gandhi Museum & Palaces",
+    City: "Rajkot", State: "Gujarat", Type: "🏛️ Saurashtra Cultural Hub & Memorials",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 25°C to 41°C", bestTime: "October to March",
+    packing: "Light cotton clothing, sunglasses.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "Heart of Saurashtra region, historically significant as the childhood residence and schooling place of Mahatma Gandhi.",
+    picnic_spots: "🛕 Ramakrishna Ashram & Swaminarayan Temple Rajkot\n🏛️ Kaba Gandhi No Delo (Gandhi's childhood home museum)\n🌿 Watson Museum & Alfred High School\n🏞️ Aji Dam & Jubilee Garden",
+    transport_roadmap: "Rajkot International Airport (Hirasar) & Rajkot Junction.",
+    hotels_booking: "Fortune Hotel Park | The Imperial Palace Rajkot",
+    markets_food: "Yagnik Road Market | Rajkot Chwanu, Ganthiya, Kathiyawadi Thali",
+    culture_helpline: "Saurashtra spirit | Police: 100 | SOS: 112"
+  },
+  "gujarat_gandhinagar": {
+    Name: "Gandhinagar Akshardham & Capital Gardens",
+    City: "Gandhinagar", State: "Gujarat", Type: "🛕 Grand Spiritual Architecture & Parks",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 26°C to 40°C", bestTime: "October to March",
+    packing: "Modest comfortable clothes for temple, walking shoes.",
+    budget: "₹1,800 - ₹4,000 / day",
+    history_geo_political: "Planned green capital city of Gujarat, located on the banks of Sabarmati river, named after Mahatma Gandhi.",
+    picnic_spots: "🛕 Swaminarayan Akshardham Temple Complex & Water Show\n🏛️ Sarita Udyan & Indroda Nature Park (Dinosaur & Fossil Park)\n🌿 Punit Van (Botanical garden)\n🏞️ Sabarmati Riverfront promenade stretches",
+    transport_roadmap: "Sardar Vallabhbhai Patel International Airport Ahmedabad (15 km away) & Gandhinagar Capital Station.",
+    hotels_booking: "Gift City Club - The Club | The Leela Gandhinagar",
+    markets_food: "Sector 21 Market | Gujarati Fast Food, Fafda Jalebi, Thali",
+    culture_helpline: "Capital administration | Police: 100 | SOS: 112"
   }
 };
 
