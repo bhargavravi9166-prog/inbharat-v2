@@ -829,6 +829,47 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Gift City Club - The Club | The Leela Gandhinagar",
     markets_food: "Sector 21 Market | Gujarati Fast Food, Fafda Jalebi, Thali",
     culture_helpline: "Capital administration | Police: 100 | SOS: 112"
+  },  "gujarat_shamlaji": {
+    Name: "Shamlaji Ancient Temple & Tribal Heritage",
+    City: "Shamlaji (Aravalli)", State: "Gujarat", Type: "🛕 Ancient Vaishnavite Shrine & Art",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 24°C to 38°C", bestTime: "October to March (Kartik Purnima Fair)",
+    packing: "Traditional or comfortable clothes, walking shoes.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "Renowned 11th-century architectural temple dedicated to Lord Krishna (Shamlaji), nestled on the Meshwo river banks surrounded by Aravalli hills.",
+    picnic_spots: "🛕 Shamlaji Vishnu Temple (Black stone architecture)\n🏛️ Meshwo Reservoir and Dam site\n🌿 Devani Mori Buddhist archaeological site nearby\n🏞️ Aravalli forest nature trails",
+    transport_roadmap: "Connected via NH-8. Himmatnagar Railway Station (45 km) & Ahmedabad Airport (125 km).",
+    hotels_booking: "Local Pilgrim Guest Houses | Hotels in Himmatnagar",
+    markets_food: "Shamlaji Bazaar | Traditional Prasad, Gujarati Thali, Snacks",
+    culture_helpline: "Tribal heritage | Police: 100 | SOS: 112"
+  },
+  "gujarat_dakor": {
+    Name: "Dakor Ranchhodraiji Maharaj Temple",
+    City: "Dakor", State: "Gujarat", Type: "🛕 Famous Krishna Pilgrimage",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "☀️ 26°C to 40°C", bestTime: "October to March (Poonam festivals)",
+    packing: "Traditional temple attire, comfortable footwear.",
+    budget: "₹1,200 - ₹3,000 / day",
+    history_geo_political: "One of the most prominent pilgrimage centers in Gujarat dedicated to Lord Krishna as Ranchhodraiji, attracting lakhs of devotees every full moon.",
+    picnic_spots: "🛕 Ranchhodraiji Main Temple Complex\n🏛️ Gomti Lake Ghats and temples around water\n🌿 Dakor town heritage walks\n🏞️ Local Gota and Prasad stalls area",
+    transport_roadmap: "Dakor Railway Station & Vadodara Airport (55 km). Connected via state highways.",
+    hotels_booking: "Dakor Temple Trust Guest House | Local Lodges",
+    markets_food: "Temple Road Market | Dakor Gota, Sev Mamra, Peda Prasad",
+    culture_helpline: "Bhakti traditions | Police: 100 | SOS: 112"
+  },
+  "gujarat_taranga_hill": {
+    Name: "Taranga Hill Jain Temples & Sanctuary",
+    City: "Taranga (Mehsana)", State: "Gujarat", Type: "🛕 Hilltop Jain Architecture",
+    image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
+    weather: "🌤️ 22°C to 36°C", bestTime: "October to March",
+    packing: "Comfortable trekking or walking shoes, light woolens for winter mornings.",
+    budget: "₹1,500 - ₹3,500 / day",
+    history_geo_political: "A historic hilltop pilgrimage center featuring magnificent 12th-century Jain temples built by King Kumarapala, showcasing supreme marble artistry.",
+    picnic_spots: "🛕 Taranga Jain Temple Complex (Hilltop white marble architecture)\n🏛️ Ajitnath Temple\n🌿 Jogida Caves and surrounding hill viewpoints\n🏞️ Taranga forest wildlife range",
+    transport_roadmap: "Taranga Hill Railway Station & Ahmedabad Airport (110 km).",
+    hotels_booking: "Taranga Jain Dharamshala | Resorts near Visnagar",
+    markets_food: "Temple Base Stalls | Shuddh Shakahari Snacks, Thali, Chai",
+    culture_helpline: "Solanki architecture | Police: 100 | SOS: 112"
   }
 };
 
