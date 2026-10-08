@@ -390,7 +390,7 @@ export default function App() {
       )}
 
       {/* 6-Tab Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 py-2 px-2 flex justify-around items-center z-40 shadow-2xl">
+      <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 py-2 px-1 flex justify-around items-center z-40 shadow-2xl">
         <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-0.5 ${activeTab === 'home' ? 'text-orange-400 font-bold scale-105' : 'text-slate-400'}`}>
           <span className="text-base">🏠</span>
           <span className="text-[8px]">Home</span>
