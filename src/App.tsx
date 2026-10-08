@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const SAMPLE_DIRECTORY = {
-  somnath: { Name: "Somnath Temple", City: "Veraval", State: "Gujarat", Type: "Jyotirlinga", weather: "28°C", budget: "₹2,000", distance: "5 km", history_geo_political: "First among the twelve jyotirlinga shrines of Shiva." },
-  varanasi: { Name: "Kashi Vishwanath Temple", City: "Varanasi", State: "Uttar Pradesh", Type: "Jyotirlinga", weather: "30°C", budget: "₹1,500", distance: "2 km", history_geo_political: "One of the most famous Hindu temples dedicated to Lord Shiva." }
+  somnath: { Name: "Somnath Temple", City: "Veraval", State: "Gujarat", Type: "Jyotirlinga" },
+  varanasi: { Name: "Kashi Vishwanath Temple", City: "Varanasi", State: "Uttar Pradesh", Type: "Jyotirlinga" }
 };
 
 export default function App() {
@@ -37,21 +37,20 @@ export default function App() {
           </div>
         )}
 
-        {activeTab === 'reels' && <div className="text-center py-20 text-slate-400 text-xs">🎬 Reels Feed Active</div>}
-        {activeTab === 'add' && <div className="text-center py-20 text-slate-400 text-xs">➕ Add Spot & Reels Form</div>}
-        {activeTab === 'planner' && <div className="text-center py-20 text-slate-400 text-xs">🗺️ AI Trip Planner Active</div>}
-        {activeTab === 'business' && <div className="text-center py-20 text-slate-400 text-xs">💼 Business Dashboard (₹14,800)</div>}
-        {activeTab === 'profile' && <div className="text-center py-20 text-slate-400 text-xs">👤 Ravi Bharggav Profile</div>}
+        {activeTab === 'reels' && <div className="text-center py-20 text-slate-400 text-xs">Reels Feed Active</div>}
+        {activeTab === 'add' && <div className="text-center py-20 text-slate-400 text-xs">Add Spot & Reels Form</div>}
+        {activeTab === 'planner' && <div className="text-center py-20 text-slate-400 text-xs">AI Trip Planner Active</div>}
+        {activeTab === 'business' && <div className="text-center py-20 text-slate-400 text-xs">Business Dashboard</div>}
+        {activeTab === 'profile' && <div className="text-center py-20 text-slate-400 text-xs">Ravi Bharggav Profile</div>}
       </div>
 
-      {/* 6-Tab Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 py-3 flex justify-around items-center z-40">
-        <button onClick={() => setActiveTab('home')} className={`text-xs ${activeTab === 'home' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>🏠 Home</button>
-        <button onClick={() => setActiveTab('reels')} className={`text-xs ${activeTab === 'reels' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>🎬 Reels</button>
-        <button onClick={() => setActiveTab('add')} className={`text-xs ${activeTab === 'add' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>➕ Add</button>
-        <button onClick={() => setActiveTab('planner')} className={`text-xs ${activeTab === 'planner' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>🗺️ Planner</button>
-        <button onClick={() => setActiveTab('business')} className={`text-xs ${activeTab === 'business' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>💼 Business</button>
-        <button onClick={() => setActiveTab('profile')} className={`text-xs ${activeTab === 'profile' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>👤 Profile</button>
+        <button onClick={() => setActiveTab('home')} className={`text-xs ${activeTab === 'home' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Home</button>
+        <button onClick={() => setActiveTab('reels')} className={`text-xs ${activeTab === 'reels' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Reels</button>
+        <button onClick={() => setActiveTab('add')} className={`text-xs ${activeTab === 'add' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Add</button>
+        <button onClick={() => setActiveTab('planner')} className={`text-xs ${activeTab === 'planner' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Planner</button>
+        <button onClick={() => setActiveTab('business')} className={`text-xs ${activeTab === 'business' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Business</button>
+        <button onClick={() => setActiveTab('profile')} className={`text-xs ${activeTab === 'profile' ? 'text-orange-400 font-bold' : 'text-slate-400'}`}>Profile</button>
       </div>
     </div>
   );
