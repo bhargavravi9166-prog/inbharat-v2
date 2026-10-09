@@ -1,74 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-// MASTER ECOSYSTEM DATABASE: Tourism, Temples, Local Food, & Shopping Markets
-const TOURISM_ECOSYSTEM: Record<string, any> = {
-  varanasi: {
-    name: "Varanasi (Kashi)",
-    state: "Uttar Pradesh",
-    tagline: "The Spiritual Capital of India",
-    image: "https://images.unsplash.com/photo-1561640494-eb9b26e5e22e?auto=format&fit=crop&w=1200&q=80",
-    weather: "30°C",
-    bestTime: "October to March",
-    description: "One of the oldest living cities in the world, famous for its sacred ghats, evening Ganga Aarti, and ancient temples.",
-    temples: [
-      { name: "Kashi Vishwanath Temple", significance: "One of the 12 sacred Jyotirlingas of Lord Shiva." },
-      { name: "Sankat Mochan Hanuman Temple", significance: "Historic shrine built by poet-saint Tulsidas." },
-      { name: "Kaal Bhairav Temple", significance: "Dedicated to the fierce guardian deity of Varanasi." }
-    ],
-    foods: [
-      { dish: "Banarasi Kachori Jalebi", spot: "Thatheri Bazaar", price: "₹60" },
-      { dish: "Malaiyyo (Winter Cream Sweet)", spot: "Godowla Chowk", price: "₹80" },
-      { dish: "Authentic Banarasi Paan", spot: "Aksar Gali", price: "₹50" }
-    ],
-    markets: [
-      { market: "Banarasi Silk Saree Market", specialty: "Handwoven pure silk brocades and sarees", location: "Chowk" },
-      { market: "Vishwanath Galli", specialty: "Brass artifacts, rudraksha beads, and wooden toys", location: "Near Temple Gate" }
-    ]
-  },
-  jaipur: {
-    name: "Jaipur",
-    state: "Rajasthan",
-    tagline: "The Pink City of Royal Heritage",
-    image: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
-    weather: "32°C",
-    bestTime: "September to March",
-    description: "Famous for majestic forts, royal palaces, vibrant pink-hued architecture, and rich Rajasthani culture.",
-    temples: [
-      { name: "Govind Dev Ji Temple", significance: "Most revered temple located inside City Palace complex." },
-      { name: "Birla Mandir", significance: "Stunning modern white marble temple dedicated to Lord Vishnu & Laxmi." },
-      { name: "Galtaji Monkey Temple", significance: "Ancient pilgrimage site featuring natural spring water tanks." }
-    ],
-    foods: [
-      { dish: "Dal Baati Churma", spot: "Chokhi Dhani / MI Road", price: "₹350" },
-      { dish: "Pyaaz Kachori", spot: "Rawat Mishtan Bhandar", price: "₹45" },
-      { dish: "Traditional Ghevar", spot: "Laxmi Misthan Bhandar (LMB)", price: "₹200" }
-    ],
-    markets: [
-      { market: "Johri Bazaar", specialty: "Traditional Kundan, Polki jewelry, and precious gemstones", location: "Old City" },
-      { market: "Bapu Bazaar", specialty: "Jaipuri quilts, block-print textiles, and traditional mojris", location: "Bapu Bazaar Road" }
-    ]
-  },
-  somnath: {
-    name: "Somnath",
-    state: "Gujarat",
-    tagline: "The Eternal Shrine by the Arabian Sea",
-    image: "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=1200&q=80",
-    weather: "29°C",
-    bestTime: "November to February",
-    description: "Home to the first among the twelve Jyotirlinga shrines of Lord Shiva, overlooking the majestic ocean waves.",
-    temples: [
-      { name: "Somnath Jyotirlinga Temple", significance: "First and foremost Jyotirlinga shrine with breathtaking architecture." },
-      { name: "Bhalka Tirth", significance: "Sacred spot where Lord Krishna took his last earthly journey." }
-    ],
-    foods: [
-      { dish: "Gujarati Thali", spot: "Local Heritage Restaurants", price: "₹250" },
-      { dish: "Khaman Dhokla & Fafda", spot: "Veraval Chowpatty", price: "₹60" }
-    ],
-    markets: [
-      { market: "Somnath Souvenir Market", specialty: "Shell crafts, handloom items, and religious artifacts", location: "Near Temple Promenade" }
-    ]
-  }
-};
+import { TOURISM_ECOSYSTEM } from './tourismdata';
 
 export default function App() {
   const [tab, setTab] = useState<'home' | 'planner' | 'reels' | 'travel' | 'profile'>('home');
@@ -82,8 +13,8 @@ export default function App() {
 
   // Reels Engagement State
   const [reelsList, setReelsList] = useState([
-    { id: 1, user: "incredible_india", caption: "Ganga Aarti Grand View at Dashashwamedh Ghat ✨", likes: 4210, video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-41555-large.mp4", location: "Varanasi, UP", liked: false },
-    { id: 2, user: "rajasthan_tourism", caption: "Sunset reflection at Amer Fort walls 🏰", likes: 2150, video: "https://assets.mixkit.co/videos/preview/mixkit-traveller-walking-on-a-mountain-ridge-41627-large.mp4", location: "Jaipur, RJ", liked: false }
+    { id: 1, user: "incredible_india", caption: "Ganga Aarti Grand View at Dashashwamedh Ghat ✨", likes: 4210, video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-traffic-at-night-41555-large.mp4", location: "Varanasi, UP" },
+    { id: 2, user: "rajasthan_tourism", caption: "Sunset reflection at Amer Fort walls 🏰", likes: 2150, video: "https://assets.mixkit.co/videos/preview/mixkit-traveller-walking-on-a-mountain-ridge-41627-large.mp4", location: "Jaipur, RJ" }
   ]);
   const [newReelUrl, setNewReelUrl] = useState("");
   const [newReelCaption, setNewReelCaption] = useState("");
@@ -111,10 +42,10 @@ export default function App() {
     return () => clearInterval(timer);
   }, [gpsActive]);
 
-  const filteredDestinations = Object.entries(TOURISM_ECOSYSTEM).filter(([_, data]: [string, any]) =>
+  const filteredDestinations = Object.entries(TOURISM_ECOSYSTEM).filter(([_, data]) =>
     data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    data.state.toLowerCase().includes(search.toLowerCase()) ||
-    data.tagline.toLowerCase().includes(search.toLowerCase())
+    data.state.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    data.tagline.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -128,15 +59,14 @@ export default function App() {
           </h1>
           <p className="text-[9px] text-neutral-400">Tourism, Heritage, Food & Markets</p>
         </div>
-        <span className="text-[10px] bg-orange-500/20 text-orange-400 font-bold px-2.5 py-1 rounded-full border border-orange-500/30">Pro Live</span>
+        <span className="text-[10px] bg-orange-500/20 text-orange-400 font-bold px-2.5 py-1 rounded-full border border-orange-500/30">Modular Live</span>
       </div>
 
       <div className="max-w-md mx-auto p-3 space-y-4">
         
-        {/* TAB 1: HOME (Tourism Directory - Temples, Food & Markets) */}
+        {/* TAB 1: HOME (Tourism Directory fetched from tourismdata.ts) */}
         {tab === 'home' && (
           <div className="space-y-4">
-            {/* Search Input */}
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-400 text-xs">🔍</span>
               <input 
@@ -148,12 +78,11 @@ export default function App() {
               />
             </div>
 
-            {/* Destination Feed Cards */}
             <div className="space-y-4">
               {filteredDestinations.length === 0 ? (
                 <div className="text-center py-16 text-neutral-500 text-xs">No matching destinations found.</div>
               ) : (
-                filteredDestinations.map(([key, dest]: [string, any]) => (
+                filteredDestinations.map(([key, dest]) => (
                   <div key={key} className="bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden shadow-xl space-y-3 pb-3">
                     <div className="relative h-52 bg-neutral-950">
                       <img src={dest.image} alt="" className="w-full h-full object-cover" />
@@ -170,7 +99,6 @@ export default function App() {
                     <div className="px-3 space-y-3 text-xs">
                       <p className="text-neutral-300 text-[11px] leading-relaxed">{dest.description}</p>
                       
-                      {/* Highlights Pill Grid */}
                       <div className="grid grid-cols-2 gap-2">
                         <div className="bg-neutral-950 p-2.5 rounded-xl border border-neutral-800">
                           <p className="font-bold text-amber-400 mb-1">🍲 Famous Food</p>
@@ -202,7 +130,7 @@ export default function App() {
           <div className="space-y-4 text-xs">
             <div className="bg-neutral-900 p-4 rounded-2xl border border-neutral-800 space-y-3">
               <h2 className="font-bold text-sm text-orange-400">🗺️ Smart AI Tourism & Itinerary Planner</h2>
-              <p className="text-[11px] text-neutral-400">Generate a complete custom schedule covering heritage temples, famous local food spots, and shopping markets.</p>
+              <p className="text-[11px] text-neutral-400">Generate a custom schedule pulling data directly from our tourism ecosystem.</p>
               
               <div className="space-y-2">
                 <label className="text-[10px] text-neutral-400 font-bold">Select Destination</label>
@@ -210,9 +138,9 @@ export default function App() {
                   value={selectedDest} 
                   onChange={(e) => setSelectedDest(e.target.value)}
                   className="w-full p-2.5 bg-neutral-950 rounded-xl border border-neutral-800 text-white">
-                  <option value="varanasi">Varanasi (Spiritual Ghats & Street Food)</option>
-                  <option value="jaipur">Jaipur (Royal Forts & Jewelry Markets)</option>
-                  <option value="somnath">Somnath (Coastal Temples & Heritage)</option>
+                  {Object.entries(TOURISM_ECOSYSTEM).map(([k, d]) => (
+                    <option key={k} value={k}>{d.name} ({d.state})</option>
+                  ))}
                 </select>
               </div>
 
@@ -264,7 +192,7 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: REELS (Engagement Support) */}
+        {/* TAB 3: REELS (Retention Support) */}
         {tab === 'reels' && (
           <div className="space-y-4 text-xs">
             <div className="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-2">
@@ -286,7 +214,7 @@ export default function App() {
               <button 
                 onClick={() => {
                   if(!newReelUrl || !newReelCaption) return alert("Enter video link & caption!");
-                  setReelsList([{ id: Date.now(), user: "ravi_bharggav", caption: newReelCaption, likes: 1, video: newReelUrl, location: "In Bharat", liked: false }, ...reelsList]);
+                  setReelsList([{ id: Date.now(), user: "ravi_bharggav", caption: newReelCaption, likes: 1, video: newReelUrl, location: "In Bharat" }, ...reelsList]);
                   setNewReelUrl(""); setNewReelCaption("");
                   alert("Reel Published Successfully!");
                 }}
@@ -310,11 +238,9 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 4: TRAVEL TOOLS (Ixigo Bookings & GPS Tracker) */}
+        {/* TAB 4: TRAVEL TOOLS (Ixigo & Live GPS) */}
         {tab === 'travel' && (
           <div className="space-y-4 text-xs">
-            
-            {/* Train Booking Support */}
             <div className="bg-neutral-900 p-4 rounded-2xl border border-neutral-800 space-y-3">
               <h2 className="font-bold text-sm text-blue-400">🚂 Ixigo Style Train Booking</h2>
               <input 
@@ -358,7 +284,6 @@ export default function App() {
               )}
             </div>
 
-            {/* Live GPS Road Trip Tracker */}
             <div className="bg-neutral-900 p-4 rounded-2xl border border-neutral-800 space-y-3">
               <h2 className="font-bold text-sm text-emerald-400">🚗 Live Road Trip GPS Tracker</h2>
               <p className="text-[11px] text-neutral-400">Traveling by road? Track your live vehicle speed and distance covered in real-time.</p>
@@ -380,7 +305,6 @@ export default function App() {
                 {gpsActive ? '🛑 Stop GPS Tracker' : '▶️ Start Live Trip Tracker'}
               </button>
             </div>
-
           </div>
         )}
 
@@ -394,11 +318,6 @@ export default function App() {
               <div>
                 <h2 className="font-bold text-sm text-white">Ravi Bharggav</h2>
                 <p className="text-[11px] text-orange-400">Quality Engineer & Founder</p>
-              </div>
-              <div className="flex justify-center gap-6 pt-2 text-xs border-t border-neutral-800">
-                <div><strong className="block text-white">3</strong>Cities</div>
-                <div><strong className="block text-white">1.4K</strong>Travelers</div>
-                <div><strong className="block text-white">12</strong>Reels</div>
               </div>
             </div>
           </div>
@@ -418,21 +337,21 @@ export default function App() {
             <div className="space-y-3 text-neutral-300">
               <div>
                 <p className="font-bold text-orange-400 mb-1">🏛️ Heritage & Temples:</p>
-                {TOURISM_ECOSYSTEM[activeCityKey].temples.map((t: any, idx: number) => (
+                {TOURISM_ECOSYSTEM[activeCityKey].temples.map((t, idx) => (
                   <p key={idx} className="text-[11px] mb-1.5">• <strong>{t.name}:</strong> {t.significance}</p>
                 ))}
               </div>
 
               <div>
                 <p className="font-bold text-amber-400 mb-1">🍲 Famous Local Food & Cuisines:</p>
-                {TOURISM_ECOSYSTEM[activeCityKey].foods.map((f: any, idx: number) => (
+                {TOURISM_ECOSYSTEM[activeCityKey].foods.map((f, idx) => (
                   <p key={idx} className="text-[11px] mb-1.5">• {f.dish} at <strong>{f.spot}</strong> ({f.price})</p>
                 ))}
               </div>
 
               <div>
                 <p className="font-bold text-rose-400 mb-1">🛍️ Famous Shopping Markets:</p>
-                {TOURISM_ECOSYSTEM[activeCityKey].markets.map((m: any, idx: number) => (
+                {TOURISM_ECOSYSTEM[activeCityKey].markets.map((m, idx) => (
                   <p key={idx} className="text-[11px] mb-1.5">• <strong>{m.market}:</strong> {m.specialty} ({m.location})</p>
                 ))}
               </div>
