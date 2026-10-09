@@ -335,7 +335,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Suryagarh Jaisalmer | WelcomHeritage Mohangarh Fort",
     markets_food: "Fort Market | Gatte ki Sabzi, Ker Sangri, Pyaaz Kachori",
     culture_helpline: "Desert Thar heritage | Police: 100 | SOS: 112"
-  },  "rajasthan_khatushyam": {
+  },  
+  "rajasthan_khatushyam": {
     Name: "Khatu Shyam Ji - Abode of Shyam Baba",
     City: "Khatu", State: "Rajasthan", Type: "🛕 Devotional Shrine",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -432,7 +433,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Suryagarh Jaisalmer | WelcomHeritage Mohangarh Fort",
     markets_food: "Fort Market | Gatte ki Sabzi, Ker Sangri, Pyaaz Kachori",
     culture_helpline: "Desert Thar heritage | Police: 100 | SOS: 112"
-  },  "rajasthan_bikaner": {
+  },  
+  "rajasthan_bikaner": {
     Name: "Bikaner Junagarh Fort & Karni Mata Temple",
     City: "Bikaner", State: "Rajasthan", Type: "🏰 Desert Forts & Rat Temple",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -487,7 +489,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Neemrana Fort-Palace | Alwar Bagh by Aamod",
     markets_food: "Alwar City Bazaar | Alwar ka Mawa (Kalakand), Dal Baati",
     culture_helpline: "Aravalli history | Police: 100 | SOS: 112"
-  },  "rajasthan_bundi": {
+  },  
+  "rajasthan_bundi": {
     Name: "Bundi Palace, Stepwells & Taragarh Fort",
     City: "Bundi", State: "Rajasthan", Type: "🏰 Stepwells & Hill Forts",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -514,7 +517,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "WelcomHeritage Umed Bhawan Palace | Hotel Surya Prime",
     markets_food: "Kota Shopping Center | Kota Kachori, Pyaaz Kachori, Ghevar",
     culture_helpline: "Hadoti heritage | Police: 100 | SOS: 112"
-  },  "rajasthan_jaipur_complete": {
+  },  
+  "rajasthan_jaipur_complete": {
     Name: "Jaipur Comprehensive Heritage: Palaces, Temples & Picnic Spots",
     City: "Jaipur", State: "Rajasthan", Type: "🏰 Royal Mahals, Temples & Picnic Hub",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -527,7 +531,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace Jaipur | Fairmont Jaipur | Samode Haveli | Trident Jaipur",
     markets_food: "Johri Bazaar, Bapu Bazaar & Tripolia Bazaar | Dal Baati Churma, Pyaaz Kachori, Ghevar, Mirchi Bada",
     culture_helpline: "Rajputana royal heritage | Police: 100 | SOS: 112"
-  }, "jaipur_picnic_jal_mahal": {
+  }, 
+  "jaipur_picnic_jal_mahal": {
     Name: "Jal Mahal - The Water Palace",
     City: "Jaipur", State: "Rajasthan", Type: "🏞️ Scenic Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -540,7 +545,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Trident Jaipur | Hotel Clarks Amer",
     markets_food: "Lakeside food stalls | Local Chai, Chaat, Rajasthani Snacks",
     culture_helpline: "Pink City tourism | Police: 100 | SOS: 112"
-  }, "jaipur_picnic_ram_niwas": {
+  }, 
+  "jaipur_picnic_ram_niwas": {
     Name: "Ram Niwas Garden & Albert Hall",
     City: "Jaipur", State: "Rajasthan", Type: "🌿 Botanical Garden & Picnic Hub",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -553,7 +559,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace | Hotel Apex International",
     markets_food: "Nearby Johri Bazaar | Pyaaz Kachori, Local Sweets",
     culture_helpline: "Local heritage | Police: 100 | SOS: 112"
-  },"jaipur_picnic_sisodia_rani": {
+  },
+  "jaipur_picnic_sisodia_rani": {
     Name: "Sisodia Rani Garden & Palace",
     City: "Jaipur", State: "Rajasthan", Type: "🏰 Royal Garden Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -566,7 +573,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Fairmont Jaipur | Treehouse Hotel",
     markets_food: "Agra Road local eateries | Dal Baati, Samosa, Tea",
     culture_helpline: "Rajputana heritage | Police: 100 | SOS: 112"
-  },"jaipur_picnic_patrika_gate": {
+  },
+  "jaipur_picnic_patrika_gate": {
     Name: "Patrika Gate & Jawahar Circle Garden",
     City: "Jaipur", State: "Rajasthan", Type: "📸 Architectural Landmark & Garden",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -579,7 +587,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Marriott Jaipur | Hotel Clarks Amer",
     markets_food: "Malviya Nagar Markets | Street Food, Fast Food, South Indian",
     culture_helpline: "Modern Jaipur | Police: 100 | SOS: 112"
-    },  "jaipur_picnic_kanota_dam": {
+    },  
+  "jaipur_picnic_kanota_dam": {
     Name: "Kanota Dam & Lake Reservoir",
     City: "Jaipur", State: "Rajasthan", Type: "🌊 Lakeside Picnic & Sunset Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -592,7 +601,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Narain Niwas Palace | Heritage Resorts",
     markets_food: "Agra Road Highway dhabas | Desi Chai, Pakoda, Local Meals",
     culture_helpline: "Outskirts leisure | Police: 100 | SOS: 112"
-  },  "jaipur_picnic_smriti_van": {
+  },  
+  "jaipur_picnic_smriti_van": {
     Name: "Smriti Van - Biodiversity & Nature Park",
     City: "Jaipur", State: "Rajasthan", Type: "🌿 Nature & Ecological Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -605,7 +615,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Clarks Amer | Marriott Jaipur",
     markets_food: "Malviya Nagar local cafes | Healthy juices, Tea, Snacks",
     culture_helpline: "Eco tourism | Police: 100 | SOS: 112"
-  },"jaipur_picnic_central_park": {
+  },
+  "jaipur_picnic_central_park": {
     Name: "Central Park Jaipur & National Flag",
     City: "Jaipur", State: "Rajasthan", Type: "🌳 City Park & Picnic Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -618,7 +629,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rambagh Palace | Hotel Madhuban",
     markets_food: "C-Scheme food outlets | Coffee, Fast Food, Local Delicacies",
     culture_helpline: "Urban leisure | Police: 100 | SOS: 112"
-  },"jaipur_picnic_kanota_dam": {
+  },
+  "jaipur_picnic_kanota_dam": {
     Name: "Kanota Dam & Lake Reservoir",
     City: "Jaipur", State: "Rajasthan", Type: "🌊 Lakeside Picnic & Sunset Spot",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80",
@@ -631,7 +643,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Narain Niwas Palace | Heritage Resorts",
     markets_food: "Agra Road Highway dhabas | Desi Chai, Pakoda, Local Meals",
     culture_helpline: "Outskirts leisure | Police: 100 | SOS: 112"
-  }, "gujarat_dwarka_completes": {
+  }, 
+  "gujarat_dwarka_completes": {
     Name: "Dwarka Kingdom, Temples & Coastal Spots",
     City: "Dwarka", State: "Gujarat", Type: "🛕 Ancient Char Dham & Coastal Hub",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -644,7 +657,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Goverdhan Green Resort Dwarka | Hotel Lord's Inn Dwarka",
     markets_food: "Dwarka Market Chowk | Gujarati Thali, Dhokla, Fafda, Sweets",
     culture_helpline: "Coastal Saurashtra heritage | Police: 100 | SOS: 112"
-  },"gujarat_statue_of_unity": {
+  },
+  "gujarat_statue_of_unity": {
     Name: "Statue of Unity & Kevadia Complex",
     City: "Kevadia (Ekta Nagar)", State: "Gujarat", Type: "🗿 World's Tallest Statue & Picnic Hub",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -657,7 +671,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Tent City Narmada | Statue of Unity Kevadia Resorts",
     markets_food: "Ekta Food Court | Gujarati Thali, Kathiyawadi Food, Snacks",
     culture_helpline: "Unity heritage | Police: 100 | SOS: 112"
-  }, "gujarat_ambaji": {
+  }, 
+  "gujarat_ambaji": {
     Name: "Ambaji Shakti Peeth & Gabbar Hill",
     City: "Ambaji", State: "Gujarat", Type: "🛕 Sacred Shakti Peeth Shrine",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -670,7 +685,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Circuit House Ambaji | Hotel Ambaji International",
     markets_food: "Ambaji Temple Bazaar | Mohanthal Prasad, Gujarati Snacks, Thali",
     culture_helpline: "Devotional heritage | Police: 100 | SOS: 112"
-  },  "gujarat_gir_forest": {
+  }, 
+  "gujarat_gir_forest": {
     Name: "Gir National Park & Wildlife Sanctuary",
     City: "Sasangir", State: "Gujarat", Type: "🦁 Asiatic Lion Sanctuary & Nature Hub",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -683,7 +699,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "The Fern Gir Forest Resort | Woods at Sasan | Gir Birding Lodge",
     markets_food: "Sasangir Local Bazaar | Kathiyawadi Meals, Bajra Roti, Sev Tamatar",
     culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
-  },"gujarat_champaner_pavagadh": {
+  },
+  "gujarat_champaner_pavagadh": {
     Name: "Champaner-Pavagadh Archaeological Park",
     City: "Pavagadh", State: "Gujarat", Type: "🏰 UNESCO Forts & Shakti Peeth Temple",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -696,7 +713,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Champaner Heritage Resort | Hotel Pavagadh International",
     markets_food: "Pavagadh Hill base market | Gujarati Snacks, Fafda, Chai",
     culture_helpline: "UNESCO heritage | Police: 100 | SOS: 112"
-  },"gujarat_kutch_white_rann": {
+  },
+  "gujarat_kutch_white_rann": {
     Name: "Great Rann of Kutch & Cultural Hub",
     City: "Bhuj", State: "Gujarat", Type: "✨ White Salt Desert & Royal Palaces",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -709,7 +727,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Rann Utsav Tent City Dhordo | Regenta Resort Bhuj",
     markets_food: "Bhujodi Village & Mandvi Beach markets | Kutchi Dabeli, Pakwan, Kutchi Thali",
     culture_helpline: "Kutch handicraft heritage | Police: 100 | SOS: 112"
-  },  "gujarat_modhera_sun_temple": {
+  },  
+  "gujarat_modhera_sun_temple": {
     Name: "Modhera Sun Temple & Rani ki Vav",
     City: "Modhera & Patan", State: "Gujarat", Type: "🛕 Ancient Sun Shrine & UNESCO Stepwell",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -722,7 +741,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Tulsi Modhera | The Fern Mehsana",
     markets_food: "Patan Local Bazaar | Patan ni Ghari sweets, Gujarati Thali, Fafda",
     culture_helpline: "Solanki architecture | Police: 100 | SOS: 112"
-  },"gujarat_becharaji": {
+  },
+  "gujarat_becharaji": {
     Name: "Bahuchara Mata Temple Becharaji",
     City: "Becharaji", State: "Gujarat", Type: "🛕 Sacred Shakti Peeth Shrine",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -735,7 +755,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Dharamshalas & Local Pilgrim Guest Houses",
     markets_food: "Becharaji Market | Traditional Prasad, Gujarati Snacks, Fafda Jalebi",
     culture_helpline: "Devotional traditions | Police: 100 | SOS: 112"
-  },  "gujarat_junagadh_girnar": {
+  }, 
+  "gujarat_junagadh_girnar": {
     Name: "Junagadh Girnar Mountain & Historic Forts",
     City: "Junagadh", State: "Gujarat", Type: "🛕 Sacred Mountain & Ancient Fort",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -748,7 +769,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Harmony Junagadh | Bellevue Sarovar Portico",
     markets_food: "Diwan Chowk Market | Gujarati Thali, Ganthiya, Puran Poli",
     culture_helpline: "Saurashtra history | Police: 100 | SOS: 112"
-  },"gujarat_porbandar": {
+  },
+  "gujarat_porbandar": {
     Name: "Porbandar Kirti Mandir & Coastal Shrines",
     City: "Porbandar", State: "Gujarat", Type: "🏛️ Mahatma Gandhi Birthplace & Beach",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -761,7 +783,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Lords Inn Porbandar | Hotel Manish Palace",
     markets_food: "MG Road Bazaar | Porbandar Dabeli, Khaman, Fresh Seafood",
     culture_helpline: "Coastal heritage | Police: 100 | SOS: 112"
-  },"gujarat_palitana": {
+  },
+  "gujarat_palitana": {
     Name: "Palitana Shatrunjaya Jain Temples Hill",
     City: "Palitana", State: "Gujarat", Type: "🛕 World's Largest Jain Temple City",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -774,7 +797,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Vijay Mahgiri Hotel | Shreyas Hotel Palitana",
     markets_food: "Palitana Town Bazaar | Gujarati Shuddh Shakahari Thali, Fafda",
     culture_helpline: "Jain pilgrimage | Police: 100 | SOS: 112"
-  },  "gujarat_surat": {
+  },  
+  "gujarat_surat": {
     Name: "Surat Diamond City, Fort & Coastal Beaches",
     City: "Surat", State: "Gujarat", Type: "🏙️ Commercial City, Fort & Beaches",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -870,7 +894,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Taranga Jain Dharamshala | Resorts near Visnagar",
     markets_food: "Temple Base Stalls | Shuddh Shakahari Snacks, Thali, Chai",
     culture_helpline: "Solanki architecture | Police: 100 | SOS: 112"
-  },  "mp_ujjain": {
+  },  
+  "mp_ujjain": {
     Name: "Ujjain Mahakaleshwar Jyotirlinga & Temples",
     City: "Ujjain", State: "Madhya Pradesh", Type: "🛕 Sacred Jyotirlinga & Ancient City",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -925,7 +950,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Jehan Numa Palace Hotel | Courtyard by Marriott Bhopal",
     markets_food: "Chowk Bazaar | Bhopal Poha, Seekh Kebabs, Sulemani Chai",
     culture_helpline: "Nawabi heritage | Police: 100 | SOS: 112"
-  },  "mp_gwalior": {
+  }, 
+  "mp_gwalior": {
     Name: "Gwalior Hill Fort, Palaces & Sun Temple",
     City: "Gwalior", State: "Madhya Pradesh", Type: "🏰 Imposing Hill Fort & Royal Mahals",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -966,7 +992,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Satpura Retreat (MP Tourism) | Hotel Highland Pachmarhi",
     markets_food: "Pachmarhi Main Bazaar | Local Amla products, Bhutta, North Indian Thali",
     culture_helpline: "Satpura forest culture | Police: 100 | SOS: 112"
-  },  "mp_omkareshwar": {
+  },  
+  "mp_omkareshwar": {
     Name: "Omkareshwar Sacred Island & Jyotirlinga",
     City: "Omkareshwar", State: "Madhya Pradesh", Type: "🛕 Island Jyotirlinga Shrine",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -1007,7 +1034,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "MP Tourism Tourist Village Chitrakoot | Kamadgiri Hotels",
     markets_food: "Ramghat Bazaar | Pure Sattvic Food, Pedas, Local Thali",
     culture_helpline: "Ramayana heritage | Police: 100 | SOS: 112"
-  },  "mp_jabalpur_bhedaghat": {
+  },  
+  "mp_jabalpur_bhedaghat": {
     Name: "Jabalpur Marble Rocks & Dhuandhar Falls",
     City: "Jabalpur", State: "Madhya Pradesh", Type: "🌊 Scenic Waterfalls & Marble Canyons",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -1034,7 +1062,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "MP Tourism Gateway Retreat Sanchi | Hotels in Vidisha",
     markets_food: "Sanchi Town Bazaar | Madhya Pradesh Special Thali, Snacks, Tea",
     culture_helpline: "Mauryan heritage | Police: 100 | SOS: 112"
-  },  "mp_mandu": {
+  },  
+  "mp_mandu": {
     Name: "Mandu Ancient Forts, Palaces & Rupmati Pavilions",
     City: "Mandu (Dhar)", State: "Madhya Pradesh", Type: "🏰 Medieval Afghan Palaces & Forts",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -1061,7 +1090,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Kings Lodge Bandhavgarh | Kanha Earth Lodge | Taj Mahasu",
     markets_food: "Resort Dining & Local Village Markets | North Indian & Madhyapradeshi Thali",
     culture_helpline: "Wildlife sanctuary | Police: 100 | SOS: 112"
-  },  "mp_maheshwar": {
+  },  
+  "mp_maheshwar": {
     Name: "Maheshwar Narmada Ghats & Ahilya Fort",
     City: "Maheshwar (Khargone)", State: "Madhya Pradesh", Type: "🛕 Holy Ghats, Fort & Handloom Hub",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80",
@@ -1102,7 +1132,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Local Pilgrim Guest Houses | Hotels in Jhansi (25 km away)",
     markets_food: "Datia Main Bazaar | Bundelkhandi Sweets, Peda, Local Thali",
     culture_helpline: "Bundela spiritual heritage | Police: 100 | SOS: 112"
-  },  "up_varanasi": {
+  },  
+  "up_varanasi": {
     Name: "Varanasi Kashi Vishwanath & Holy Ghats",
     City: "Varanasi", State: "Uttar Pradesh", Type: "🛕 Ancient Spiritual City & Ghats",
     image_url: "https://images.unsplash.com/photo-1561359313-0639aad49186?auto=format&fit=crop&w=1200&q=80",
@@ -1157,7 +1188,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "The Oberoi Amarvilas Agra | ITC Mughal Agra | Radisson Hotel",
     markets_food: "Sadar Bazaar & Kinari Bazaar | Agra ka Petha, Bedmi Puri, Mughlai Food",
     culture_helpline: "Mughal heritage | Police: 100 | SOS: 112"
-  },  "up_mathura_janmabhoomi": {
+  },  
+  "up_mathura_janmabhoomi": {
     Name: "Shri Krishna Janmabhoomi Mathura",
     City: "Mathura", State: "Uttar Pradesh", Type: "🛕 Lord Krishna Birthplace Shrine",
     image_url: "https://images.unsplash.com/photo-1561359313-0639aad49186?auto=format&fit=crop&w=1200&q=80",
@@ -1212,7 +1244,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Govardhan Tourist Lodge | Local Dharamshalas",
     markets_food: "Parikrama Marg Stalls | Traditional Malpua, Lassi, Prasad sweets",
     culture_helpline: "Braj parikrama heritage | Police: 100 | SOS: 112"
-  },  "up_prayagraj": {
+  },  
+  "up_prayagraj": {
     Name: "Prayagraj Triveni Sangam & Fort",
     City: "Prayagraj", State: "Uttar Pradesh", Type: "🛕 Holy Sangam & Historic Fort",
     image_url: "https://images.unsplash.com/photo-1561359313-0639aad49186?auto=format&fit=crop&w=1200&q=80",
@@ -1253,7 +1286,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Sheesh Mahal | Radisson Hotel Jhansi",
     markets_food: "Sadar Bazar Jhansi | Bundelkhandi Thali, Samosa, Kachori, Sweets",
     culture_helpline: "Freedom fighter heritage | Police: 100 | SOS: 112"
-  },  "up_fatehpur_sikri": {
+  },  
+  "up_fatehpur_sikri": {
     Name: "Fatehpur Sikri Mughal City & Buland Darwaza",
     City: "Fatehpur Sikri (Agra)", State: "Uttar Pradesh", Type: "🏰 UNESCO World Heritage Mughal Capital",
     image_url: "https://images.unsplash.com/photo-1561359313-0639aad49186?auto=format&fit=crop&w=1200&q=80",
@@ -1321,7 +1355,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Lotus Hotel Kushinagar | Hotel The Royal Residency",
     markets_food: "Kushinagar Town Market | North Indian Thali, Buddhist Monastery Snacks, Tea",
     culture_helpline: "Buddhist pilgrimage | Police: 100 | SOS: 112"
-  },  "delhi_red_fort_chandni_chowk": {
+  },  
+  "delhi_red_fort_chandni_chowk": {
     Name: "Delhi Red Fort & Chandni Chowk Heritage",
     City: "New Delhi / Delhi", State: "Delhi", Type: "🏰 UNESCO Mughal Fort & Historic Market",
     image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
@@ -1360,7 +1395,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     picnic_spots: "🛕 Brahma Sarovar & Jyotisar (Birthplace of Bhagavad Gita banyan tree)\n🏛️ Sannihit Sarovar & Bhishma Kund at Narkati\n🌿 Kalpana Chawla Memorial Planetarium\n🏞️ Sheikh Chilli's Tomb (Mughal architectural complex)",
     transport_roadmap: "Kurukshetra Junction Railway Station & Chandigarh Airport (90 km away).",
     hotels_booking: "Haryana Tourism Neelkanth
- },  "delhi_akshardham_lotus": {
+ },  
+  "delhi_akshardham_lotus": {
     Name: "Akshardham Temple & Lotus Temple Delhi",
     City: "New Delhi", State: "Delhi", Type: "🛕 Grand Spiritual Architecture & Monuments",
     image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
@@ -1401,7 +1437,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotels in Gurugram / Cyber City | Haryana Tourism Teal Resort",
     markets_food: "Farrukhnagar Town Bazaar | Local Snacks, Haryana Dhabas, Chai",
     culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
-  },  "haryana_morni_hills": {
+  },  
+  "haryana_morni_hills": {
     Name: "Morni Hills & Tikkar Taal Lakes",
     City: "Morni (Panchkula)", State: "Haryana", Type: "⛰️ Shivalik Hill Station & Adventure Lakes",
     image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
@@ -1414,7 +1451,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Haryana Tourism Pinewood Resort Morni | Mountain Eco-Camps",
     markets_food: "Morni Hill Market Stalls | Maggi, Tea, Local North Indian Dhabas",
     culture_helpline: "Shivalik nature tourism | Police: 100 | SOS: 112"
-  },  "punjab_amritsar_golden_temple": {
+  },  
+  "punjab_amritsar_golden_temple": {
     Name: "Amritsar Golden Temple & Jallianwala Bagh",
     City: "Amritsar", State: "Punjab", Type: "🛕 Holiest Sikh Shrine & Historic Memorial",
     image_url: "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?auto=format&fit=crop&w=1200&q=80",
@@ -1441,7 +1479,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Punjab Tourism Tourist Complex | Local Sarai & Pilgrim Guest Houses",
     markets_food: "Anandpur Sahib Main Bazaar | Punjabi Thali, Jalebi, Kulcha, Chai",
     culture_helpline: "Khalsa heritage | Police: 100 | SOS: 112"
-  },  "punjab_patiala": {
+  },  
+  "punjab_patiala": {
     Name: "Patiala Royal Qila Mubarak & Heritage",
     City: "Patiala", State: "Punjab", Type: "🏰 Royal Sikh Architecture & Palaces",
     image_url: "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?auto=format&fit=crop&w=1200&q=80",
@@ -1468,7 +1507,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Radisson Blu Hotel Ludhiana | The Residency Hotel Jalandhar",
     markets_food: "Model Town Market Ludhiana & Civil Lines Jalandhar | Makki di Roti & Sarson ka Saag, Tandoori Snacks",
     culture_helpline: "Punjabi trade and culture | Police: 100 | SOS: 112"
-  },  "punjab_bathinda": {
+  },  
+  "punjab_bathinda": {
     Name: "Bathinda Ancient Qila Mubarak & Shrines",
     City: "Bathinda", State: "Punjab", Type: "🏰 Ancient Fort & Spiritual Hub",
     image_url: "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?auto=format&fit=crop&w=1200&q=80",
@@ -1495,7 +1535,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Local Hotels & Circuit House Firozpur",
     markets_food: "Firozpur Cantt Bazaar | Traditional Punjabi Dhabas, Sweets, Tea",
     culture_helpline: "Martyrdom heritage | Police: 100 | SOS: 112"
-  },  "chandigarh_city_beautiful": {
+  },  
+  "chandigarh_city_beautiful": {
     Name: "Chandigarh Rock Garden, Sukhna Lake & Architecture",
     City: "Chandigarh", State: "Chandigarh / Punjab & Haryana", Type: "🏙️ Planned Modern City, Gardens & Lakes",
     image_url: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=80",
@@ -1508,7 +1549,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "The Oberoi Sukhvilas | JW Marriott Hotel Chandigarh | Hyatt Regency",
     markets_food: "Sector 17 Plaza & Elante Mall | Chandigarh Kulcha, North Indian Thali, Cafes",
     culture_helpline: "Modern architectural heritage | Police: 100 | SOS: 112"
-  },  "hp_shimla_kufri": {
+  },  
+  "hp_shimla_kufri": {
     Name: "Shimla Colonial Heritage & Kufri Snow Hills",
     City: "Shimla", State: "Himachal Pradesh", Type: "⛰️ Hill Station, Mall Road & Snow Peaks",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1563,7 +1605,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Brijj Mohantal Dalhousie | Hotel Mount View | Grand View Hotel",
     markets_food: "Gandhi Chowk Dalhousie | Himachali Chha Gosht, Tibetan Snacks, Maggi",
     culture_helpline: "Colonial hill heritage | Police: 100 | SOS: 112"
-  },  "hp_kasol_parvati_valley": {
+  },  
+  "hp_kasol_parvati_valley": {
     Name: "Kasol & Parvati Valley Backpackers Paradise",
     City: "Kasol (Kullu)", State: "Himachal Pradesh", Type: "🌲 Riverside Pines, Treks & Cafes",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1604,7 +1647,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Colonel's Resort Bir | Zostel Bir | Camp Oak View",
     markets_food: "Bir Tibetan Colony Cafes | Laphing, Thukpa, Wood-fired Pizza, Organic Coffee",
     culture_helpline: "Aero-sports adventure hub | Police: 100 | SOS: 112"
-  },  "hp_kullu_naggar": {
+  },  
+  "hp_kullu_naggar": {
     Name: "Kullu Valley & Naggar Historic Castle",
     City: "Kullu / Naggar", State: "Himachal Pradesh", Type: "🏰 Historic Wooden Castle & River Valleys",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1631,7 +1675,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: " Norwood Green Palampur | The Taj Tea House & Cottages",
     markets_food: "Palampur Main Bazaar | Kangri Dham (Traditional feast), Tea, Local Snacks",
     culture_helpline: "Tea valley heritage | Police: 100 | SOS: 112"
-  },  "uk_rishikesh_haridwar": {
+  },  
+  "uk_rishikesh_haridwar": {
     Name: "Rishikesh Yoga Capital & Haridwar Ganga Aarti",
     City: "Rishikesh & Haridwar", State: "Uttarakhand", Type: "🛕 Yoga Capital, Holy Ghats & Suspension Bridges",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1672,7 +1717,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "GMVN Tourist Rest Houses (Kedarnath/Badrinath routes) | Local Pilgrim Lodges",
     markets_food: "Yatra Route Dhaba Stalls | Hot Maggi, Chai, Simple Vegetarian North Indian Thali",
     culture_helpline: "Char Dham Shrine Board | Police: 100 | SOS: 112"
-  },  "uk_mussoorie_kempty": {
+  },  
+  "uk_mussoorie_kempty": {
     Name: "Mussoorie Queen of Hills & Kempty Falls",
     City: "Mussoorie (Dehradun)", State: "Uttarakhand", Type: "⛰️ Colonial Hill Station, Waterfalls & Views",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1699,7 +1745,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Aahana The Corbett Wilderness | Taj Corbett Resort & Spa | Jim Corbett Jungle Camp",
     markets_food: "Ramnagar Market Stalls | Kumaoni Thali, Local Dhabas, North Indian Snacks",
     culture_helpline: "Wildlife conservation | Police: 100 | SOS: 112"
-  },  "uk_auli_skiing": {
+  },  
+  "uk_auli_skiing": {
     Name: "Auli Ski Resort & Himalayan Snow Slopes",
     City: "Auli (Chamoli)", State: "Uttarakhand", Type: "⛷️ Alpine Ski Slopes & Cable Car",
     image_url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80",
@@ -1726,7 +1773,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Snow View Lansdowne | Himalayan Eco Lodges Chakrata",
     markets_food: "Lansdowne Cantonment Bazaar | Pahadi Dal, Local Dhabas, Bakery Biscuits",
     culture_helpline: "Cantonment heritage | Police: 100 | SOS: 112"
-  },  "bihar_bodhgaya_mahabodhi": {
+  },  
+  "bihar_bodhgaya_mahabodhi": {
     Name: "Bodh Gaya Mahabodhi Temple & Bodhi Tree",
     City: "Bodh Gaya", State: "Bihar", Type: "🛕 UNESCO World Heritage Buddhist Shrine",
     image_url: "https://images.unsplash.com/photo-1590053541639-6ef07caef576?auto=format&fit=crop&w=1200&q=80",
@@ -1767,7 +1815,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Hotel Maurya Patna | Hotel Chanakya | Lemon Tree Premier Patna",
     markets_food: "Fraser Road & Boring Road | Authentic Bihari Litti Chokha, Sattu Paratha, Thekua sweets",
     culture_helpline: "Magadh heritage | Police: 100 | SOS: 112"
-  },  "rajasthan_jaisalmer_fort": {
+  },  
+  "rajasthan_jaisalmer_fort": {
     Name: "Jaisalmer Golden Fort & Thar Desert Safaris",
     City: "Jaisalmer", State: "Rajasthan", Type: "🏰 UNESCO Living Desert Fort & Sand Dunes",
     image_url: "https://images.unsplash.com/photo-1599661046289-e31898f46a41?auto=format&fit=crop&w=1200&q=80",
@@ -1808,7 +1857,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Taj Lake Palace | The Leela Palace Udaipur | Trident Udaipur",
     markets_food: "Hathi Pol & Jagdish Chowk Bazaar | Dal Baati Churma, Mirchi Bada, Rajasthani Thali",
     culture_helpline: "Mewar royal heritage | Police: 100 | SOS: 112"
-  },  "jk_jammu_vaishno_devi": {
+  },  
+  "jk_jammu_vaishno_devi": {
     Name: "Jammu City of Temples & Katra Vaishno Devi",
     City: "Jammu & Katra", State: "Jammu and Kashmir", Type: "🛕 Holy Cave Shrine & Temple City",
     image_url: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
@@ -1835,7 +1885,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "The Lalit Grand Palace Srinagar | Vivanta Dal View | Heritage Houseboats Dal Lake",
     markets_food: "Dal Lake Boulevard & Lal Chowk | Kashmiri Wazwan, Kahwa Tea, Nadru Yakhin",
     culture_helpline: "Kashmiri cultural heritage | Police: 100 | SOS: 112"
-  },  "jk_gulmarg_gondola": {
+  },  
+  "jk_gulmarg_gondola": {
     Name: "Gulmarg Meadows & World's Highest Gondola",
     City: "Gulmarg (Baramulla)", State: "Jammu and Kashmir", Type: "⛷️ Alpine Snow Slopes & Cable Car Ride",
     image_url: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
@@ -1862,7 +1913,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "WelcomHeritage Pine N Peak | Hotel Mount View Pahalgam",
     markets_food: "Pahalgam Main Bazaar | Kashmiri Wazwan, Rogan Josh, Local Bakarkhani bread",
     culture_helpline: "Shepherd valley heritage | Police: 100 | SOS: 112"
-  },  "ladakh_leh_pangong": {
+  },  
+  "ladakh_leh_pangong": {
     Name: "Ladakh Leh, Pangong Lake & Nubra Valley",
     City: "Leh & Ladakh", State: "Ladakh (UT)", Type: "🏔️ High Altitude Desert, Blue Lakes & Monasteries",
     image_url: "https://images.unsplash.com/photo-1581793745862-99fde7bb73d2?auto=format&fit=crop&w=1200&q=80",
@@ -1875,7 +1927,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "The Grand Dragon Ladakh | Stok Palace Heritage Hotel | Pangong Eco Camps",
     markets_food: "Leh Main Market & Changspa Road | Tibetan Thukpa, Tingmo, Skyu, Butter Tea, Yak cheese",
     culture_helpline: "Trans-Himalayan Buddhist culture | Police: 100 | SOS: 112"
-  },  "ladakh_zanskar_tsomoriri": {
+  },  
+  "ladakh_zanskar_tsomoriri": {
     Name: "Zanskar Valley & Tso Moriri High Altitude Lake",
     City: "Zanskar & Changthang (Ladakh)", State: "Ladakh (UT)", Type: "🏔️ Remote Valleys, Glaciers & High-Altitude Wetlands",
     image_url: "https://images.unsplash.com/photo-1581793745862-99fde7bb73d2?auto=format&fit=crop&w=1200&q=80",
@@ -1888,7 +1941,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "Korzok Nomad Luxury Camps Tso Moriri | Local Homestays in Padum Zanskar",
     markets_food: "Padum Main Bazaar & Korzok Village Stalls | Local Ladakhi Thukpa, Barley Tsampa, Butter Tea",
     culture_helpline: "Zanskar Buddhist heritage | Police: 100 | SOS: 112"
-  },  "jk_sonamarg_thajiwas": {
+  },  
+  "jk_sonamarg_thajiwas": {
     Name: "Sonamarg Meadow of Gold & Thajiwas Glacier",
     City: "Sonamarg (Ganderbal)", State: "Jammu and Kashmir", Type: "🏔️ Glaciers, Snow Slopes & Sindh River",
     image_url: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
@@ -1915,7 +1969,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     hotels_booking: "JK TDC Tourist Hut Yusmarg | Local Guest Houses",
     markets_food: "Yusmarg Development Authority Stalls | Local Tea, Simple Dhabas, Snacks",
     culture_helpline: "Meadow heritage | Police: 100 | SOS: 112"
-  },  maharashtra_pune: {
+  },  
+  maharashtra_pune: {
     id: "maharashtra_pune",
     Name: "Shaniwar Wada & Dagdusheth Temple",
     City: "Pune",
@@ -1986,7 +2041,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Nashik Chiwda | Misal Pav (ambat-god style) | Local Vineyards tasting",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_shirdi: {
+  },  
+  maharashtra_shirdi: {
     id: "maharashtra_shirdi",
     Name: "Shri Saibaba Sansthan Temple",
     City: "Shirdi",
@@ -2057,7 +2113,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local Konkani-Maratha Thali | Pithla Bhakri",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_nagpur: {
+  }, 
+  maharashtra_nagpur: {
     id: "maharashtra_nagpur",
     Name: "Deekshabhoomi & Ramtek Temple",
     City: "Nagpur",
@@ -2128,7 +2185,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local highway dhabas | Fresh fish curry",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_pandharpur: {
+  },  
+  maharashtra_pandharpur: {
     id: "maharashtra_pandharpur",
     Name: "Shri Vitthal-Rukmini Temple",
     City: "Pandharpur",
@@ -2199,7 +2257,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local Varadi Cuisine | Jungle Lodge Dinners",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_toranmal: {
+  },  
+  maharashtra_toranmal: {
     id: "maharashtra_toranmal",
     Name: "Toranmal Hill Station & Yashwant Lake",
     City: "Nandurbar",
@@ -2270,7 +2329,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Authentic Konkani Seafood | Solkadhi | Coconut Ladoo",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_malshej: {
+  },  
+  maharashtra_malshej: {
     id: "maharashtra_malshej",
     Name: "Malshej Ghat Waterfalls & Hills",
     City: "Malshej Ghat (Junnar/Kalyan belt)",
@@ -2341,7 +2401,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Sansthan Mahaprasad | Local Shegaon Snacks",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1588534571932-d820b7842e12?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_pratapgad: {
+  },  
+  maharashtra_pratapgad: {
     id: "maharashtra_pratapgad",
     Name: "Pratapgad Historic Fort",
     City: "Satara",
@@ -2412,7 +2473,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local Village Thali | Fresh Lake Fish Fry",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_panhala: {
+  },  
+  maharashtra_panhala: {
     id: "maharashtra_panhala",
     Name: "Panhala Historic Mountain Fort",
     City: "Panhala (Kolhapur)",
@@ -2483,7 +2545,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local Vidarbha Cuisine | Forest Lodge Meals",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_amboli: {
+  },  
+  maharashtra_amboli: {
     id: "maharashtra_amboli",
     Name: "Amboli Waterfalls & Misty Hills",
     City: "Amboli (Sindhudurg dist)",
@@ -2554,7 +2617,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Hot Pithla Bhakri at Fort top | Kanda Bhajji | Raw Mango slices with salt and chilly",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_lohagad: {
+  },  
+  maharashtra_lohagad: {
     id: "maharashtra_lohagad",
     Name: "Lohagad Iron Fort & Trek",
     City: "Malavli (Lonavala belt)",
@@ -2625,7 +2689,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Temple Maha Prasad | Local Maharashtrian Thali",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1609761332997-6a1005b63795?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_jejuri: {
+  },  
+  maharashtra_jejuri: {
     id: "maharashtra_jejuri",
     Name: "Shri Khandoba Temple (Jejuri)",
     City: "Jejuri (Pune Dist)",
@@ -2696,7 +2761,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Authentic Tribal Warli Cuisine | Local Farm produce",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_ratangad: {
+  },  
+  maharashtra_ratangad: {
     id: "maharashtra_ratangad",
     Name: "Ratangad Historic Fort & Needle Hole",
     City: "Ratanwadi (Ahmednagar Dist)",
@@ -2767,7 +2833,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Local Tribal Forest Food | Simple Thali",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_parli_vaijnath: {
+  }, 
+  maharashtra_parli_vaijnath: {
     id: "maharashtra_parli_vaijnath",
     Name: "Parli Vaijnath Jyotirlinga Temple",
     City: "Parli Vaijnath (Beed Dist)",
@@ -2838,7 +2905,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Konkani Seafood | Solkadhi | Local Bakery items",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_torna: {
+  }, 
+  maharashtra_torna: {
     id: "maharashtra_torna",
     Name: "Torna Fort (Prachandgad)",
     City: "Pune Dist",
@@ -2909,7 +2977,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Nashik Misal Pav | Temple Prasad Sweets",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1605648916361-9bc12ad6a569?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_visapur: {
+  },  
+  maharashtra_visapur: {
     id: "maharashtra_visapur",
     Name: "Visapur Hill Fort & Waterfall Trek",
     City: "Malavli (Lonavala belt)",
@@ -2980,7 +3049,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Vidarbha Local Cuisine | Saoji Delicacies",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1609137144813-772c7554fbb6?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_tikona: {
+  },  
+  maharashtra_tikona: {
     id: "maharashtra_tikona",
     Name: "Tikona Hill Fort (Vitandgad)",
     City: "Pawna Dam area (Pune Dist)",
@@ -3051,7 +3121,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Traditional Vidarbha Food | Local Sweets",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1609137144813-772c7554fbb6?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_mandangad: {
+  },  
+  maharashtra_mandangad: {
     id: "maharashtra_mandangad",
     Name: "Mandangad Fort & Konkan Hills",
     City: "Mandangad (Ratnagiri)",
@@ -3122,7 +3193,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Authentic Konkani Seafood | Fresh Coconut Water | Ukdiche Modak",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_vasai_fort: {
+  }, 
+  maharashtra_vasai_fort: {
     id: "maharashtra_vasai_fort",
     Name: "Vasai (Bassein) Historic Sea Fort",
     City: "Vasai (Palghar / Mumbai belt)",
@@ -3193,7 +3265,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Malvani Fish Thali | Solkadhi | Fried Bombil",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_poladpur: {
+  }, 
+  maharashtra_poladpur: {
     id: "maharashtra_poladpur",
     Name: "Poladpur Ghat & Savitri River Valley",
     City: "Raigad Dist",
@@ -3264,7 +3337,8 @@ export const MASTER_INDIA_TOURISM_DIRECTORY: Record<string, {
     markets_food: "Organic Farm Produce | Satvik Ashram Meals",
     culture_helpline: "Maharashtra Tourism: 022-22791850 | Police: 112",
     image_url: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=80"
-  },  maharashtra_kalavantin_durg: {
+  }, 
+  maharashtra_kalavantin_durg: {
     id: "maharashtra_kalavantin_durg",
     Name: "Kalavantin Durg & Prabalmachi Trek",
     City: "Panvel (Raigad Dist)",
